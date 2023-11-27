@@ -37,4 +37,4 @@
 ehthumbs.db
 Thumbs.db
 
-include/db-connect.inc.php
+local-include/db-connect.inc.php

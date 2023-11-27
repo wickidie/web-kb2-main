@@ -18,7 +18,7 @@
 <body data-bs-theme="dark">
     <main class="h-100">
         <div class="d-flex flex-column justify-content-center align-items-center h-100" style="z-index: 999">
-            <form class="needs-validation" action="users-add.php" method="post" novalidate>
+            <form class="needs-validation" action="../users-add.php" method="post" novalidate>
                 <h2><b>Register</b></h2>
                 <p>This form is used to add new user!</p>
                 <div class="form-floating mb-3">

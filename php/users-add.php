@@ -15,7 +15,7 @@
         
         if (isset($_POST['userID']) && isset($_POST['password'])&& isset($_POST['confirm_password'])) {
             if ($_POST['password'] != $_POST['confirm_password']) {
-                header('location: regist-form.php');
+                header('location: ../php/form/regist-form.php');
             } else {
                 if ($_POST['userID'] != "" || $_POST['password'] != "" ) {
                     $userID = $_POST['userID'];
@@ -28,7 +28,7 @@
                         echo "              
                         <script type='text/javascript'>
                         alert('Your account has been created');
-                        location='login-form.php';
+                        location='../php/form/login-form.php';
                         </script>";
                     } else {
                         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -39,7 +39,7 @@
                     echo "              
                     <script type='text/javascript'>
                     alert('Failed to create record!');
-                    location='regist-form.php';
+                    location='../php/form/regist-form.php';
                     </script>";
                 }
             }
@@ -47,7 +47,7 @@
             echo "              
             <script type='text/javascript'>
             alert('Failed to create record!');
-            location='regist-form.php';
+            location='../php/form/regist-form.php';
             </script>";
         }
 
