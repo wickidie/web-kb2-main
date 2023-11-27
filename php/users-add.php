@@ -21,7 +21,7 @@
                     $userID = $_POST['userID'];
                     $password = md5($_POST['password']);
                     
-                    $sql = "INSERT INTO Users (userID, passcode, avatar)
+                    $sql = "INSERT INTO users (userID, passcode, avatar)
                     VALUES ('$userID', '$password', 'img_avatar1.png')";
 
                     if (mysqli_query($conn, $sql)) {

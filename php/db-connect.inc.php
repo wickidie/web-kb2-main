@@ -1,7 +1,7 @@
 <?php
     $servername = "localhost";
     $username = "root";
-    $password = "";
+    $password = "Admin@123";
     $dbname = "web_kb2";
 
     // Create connection
