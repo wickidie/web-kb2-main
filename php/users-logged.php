@@ -133,7 +133,7 @@
                                 $result = mysqli_query($conn, $sql);
 
                                 $rows = mysqli_num_rows($result);
-
+        include_once 'local-include/db';
                                 $items_per_page = 5;
 
                                 $total_page=ceil($rows/$items_per_page);
