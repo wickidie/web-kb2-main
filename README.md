@@ -30,3 +30,4 @@ Tabel : users
 - Tabel Product
 - 2 Tabel Transaksi (transaksi(nota), pembeli)
 - test edit mas
+- test edit2 mas
