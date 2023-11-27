@@ -1,0 +1,8 @@
+html {
+  scroll-behavior: smooth;
+}
+
+a,
+a.nav-link {
+  color: white;
+}
