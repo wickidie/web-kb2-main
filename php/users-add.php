@@ -11,7 +11,7 @@
 
 <body>
     <?php
-        include_once '../local-include/db-connect.inc.php';
+        include_once 'db-connect.inc.php';
         
         if (isset($_POST['userID']) && isset($_POST['password'])&& isset($_POST['confirm_password'])) {
             if ($_POST['password'] != $_POST['confirm_password']) {
@@ -21,14 +21,14 @@
                     $userID = $_POST['userID'];
                     $password = md5($_POST['password']);
                     
-                    $sql = "INSERT INTO users (userid, passcode, avatar)
-                    VALUES ('$userID', '$password', 'img_avatar3.png')";
+                    $sql = "INSERT INTO Users (userID, passcode, avatar)
+                    VALUES ('$userID', '$password', 'img_avatar1.png')";
 
                     if (mysqli_query($conn, $sql)) {
                         echo "              
                         <script type='text/javascript'>
                         alert('Your account has been created');
-                        location='../php/form/login-form.php';
+                        location='login-form.php';
                         </script>";
                     } else {
                         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -39,7 +39,7 @@
                     echo "              
                     <script type='text/javascript'>
                     alert('Failed to create record!');
-                    location='../php/form/regist-form.php';
+                    location='regist-form.php';
                     </script>";
                 }
             }
@@ -47,7 +47,7 @@
             echo "              
             <script type='text/javascript'>
             alert('Failed to create record!');
-            location='../php/form/regist-form.php';
+            location='regist-form.php';
             </script>";
         }
 
