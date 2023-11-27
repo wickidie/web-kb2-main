@@ -89,11 +89,7 @@
                     </ul>
                 </div>
                 <hr>
-<<<<<<< HEAD
                 <div class="dropup">
-=======
-                <div class="dropdown">
->>>>>>> b063f2b10433a251a14f9987c2623e7c41b356f3
                     <a href="#"
                         class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
                         data-bs-toggle="dropdown" aria-expanded="false">
