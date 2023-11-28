@@ -109,11 +109,11 @@
             </div>
             <div class="col-auto col-md-8 col-lg-9 col-xl-10 min-vh-100 justify-content-center p-3">
                 <div class="container">
-                    <form>
+                    <form method="GET">
                         <div class="my-2">
                             <!-- onkeyup="Search()" -->
                             <input type="text" class="form-control form-control-sm" id="myInput"
-                                placeholder="Search for user">
+                                placeholder="Search for user" name='search'>
                             <label for=""><i class="bi bi-search"></i></label>
 
                         </div>
@@ -131,23 +131,38 @@
                             </tr>
                             </thead>
                             <?php
+                                $items_per_page = 3;
+                                $search_value = $_GET['search'];
                                 $sql = "SELECT username, password, email, first_name, last_name, address, phone_number FROM users";
                                 $result = mysqli_query($conn, $sql);
-
                                 $rows = mysqli_num_rows($result);
 
-                                $items_per_page = 5;
-
-                                $total_page=ceil($rows/$items_per_page);
-
                                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                $offset = ($current_page - 1) * $items_per_page;
+                                
+                                if (isset($_GET['search'])) {
+                                    if (!empty($_GET['search'])) {
+                                        $sql = "SELECT * FROM users where username like '%$search_value%' LIMIT $offset, $items_per_page";
+                                        $result = mysqli_query($conn, $sql);
+                                        $sql = "SELECT * FROM users where username like '%$search_value%'";
+                                        $result_total = mysqli_query($conn, $sql);
+                                        $rows = mysqli_num_rows($result_total);
+                                    }else{
+                                        echo "Empty ";
+                                        $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users WHERE 1 LIMIT $offset, $items_per_page";
+                                        $result = mysqli_query($conn, $sql);
+                                    }
+                                }
+                                
+                                $total_page=ceil($rows/$items_per_page);
+                                echo "Search for : $search_value <br>";
+                                echo "Showing : $total_page pages <br>";
+                                echo "With total : $rows result<br>";
+                                
                                 $previous = $current_page - 1;
                                 $next = $current_page + 1;
-                                $offset = ($current_page - 1) * $items_per_page;
-
-                                $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users LIMIT $offset, $items_per_page";
-
-                                $result = mysqli_query($conn, $sql);
+                                // $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users LIMIT $offset, $items_per_page";
+                                // $result = mysqli_query($conn, $sql);
 
                                 if (mysqli_num_rows($result) > 0) {
                                     $c = $offset + 1;
@@ -181,23 +196,23 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
                             <li class="page-item">
-                                <a class="page-link" <?php if($current_page > 1){ echo "href='?page=$previous'"; } ?>>
+                                <a class="page-link" <?php if($current_page > 1){ echo "href='search=$search_value&?page=$previous'"; } ?>>
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
                             <?php 
                                 for($x=1;$x<=$total_page;$x++){
                                     ?>
-                            <li class="page-item">
-                                <a class="page-link" href="?page=<?php echo $x ?>"><?php echo $x; ?>
-                                </a>
-                            </li>
+                                <li class="page-item">
+                                    <a class="page-link" <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                                    </a>
+                                </li>
                             <?php
                                 }
                             ?>
                             <li class="page-item">
                                 <a class="page-link"
-                                    <?php if($current_page < $total_page) { echo "href='?page=$next'"; } ?>>
+                                    <?php if($current_page < $total_page) { echo "href='?search=$search_value&page=$next'"; } ?>>
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
