@@ -2,7 +2,7 @@
     session_start();
     include_once 'db-connect.inc.php';
     $userID = $_SESSION['userID'];
-    if (isset($userID)&& !empty($userID)) {
+    if (isset($userID) && !empty($userID)) {
     } else {
         echo "              
         <script type='text/javascript'>
@@ -132,8 +132,8 @@
                             </thead>
                             <?php
                                 $items_per_page = 3;
-                                $search_value = $_GET['search'];
-                                $sql = "SELECT username, password, email, first_name, last_name, address, phone_number FROM users";
+                                $search_value = '';
+                                $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users";
                                 $result = mysqli_query($conn, $sql);
                                 $rows = mysqli_num_rows($result);
 
@@ -141,6 +141,7 @@
                                 $offset = ($current_page - 1) * $items_per_page;
                                 
                                 if (isset($_GET['search'])) {
+                                    $search_value = $_GET['search'];
                                     if (!empty($_GET['search'])) {
                                         $sql = "SELECT * FROM users where username like '%$search_value%' LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);
@@ -152,6 +153,10 @@
                                         $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users WHERE 1 LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);
                                     }
+                                }else{
+                                    // echo "Start ";
+                                    $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users WHERE 1 LIMIT $offset, $items_per_page";
+                                    $result = mysqli_query($conn, $sql);
                                 }
                                 
                                 $total_page=ceil($rows/$items_per_page);
