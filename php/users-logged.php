@@ -196,8 +196,8 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
                             <li class="page-item">
-                                <a class="page-link" <?php if($current_page > 1){ echo "href='search=$search_value&?page=$previous'"; } ?>>
-                                    <span aria-hidden="true">&laquo;</span>
+                                <a class="page-link" <?php if($current_page > 1){ echo "href='users-logged.php?search=$search_value&?page=1'"; } ?>>
+                                    <span aria-hidden="true">&laquo First</span>
                                 </a>
                             </li>
                             <?php 
@@ -212,8 +212,8 @@
                             ?>
                             <li class="page-item">
                                 <a class="page-link"
-                                    <?php if($current_page < $total_page) { echo "href='?search=$search_value&page=$next'"; } ?>>
-                                    <span aria-hidden="true">&raquo;</span>
+                                    <?php if($current_page < $total_page) { echo "href='users-logged.php??search=$search_value&page=$total_page'"; } ?>>
+                                    <span aria-hidden="true">&raquo Last</span>
                                 </a>
                             </li>
                         </ul>

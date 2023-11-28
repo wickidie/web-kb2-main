@@ -22,12 +22,13 @@ Tabel : users
 
 # TODO
 
-- Search Function
-- Pagination
+- Search Function (v)
+- Pagination (v)
 - Session all page
 - CRUD
-- Tabel Users
+- Tabel Users (v)
 - Tabel Product
 - 2 Tabel Transaksi (transaksi(nota), pembeli)
-- test edit mas
-- test edit2 mas
+- Add product
+- Add transaction
+- 
