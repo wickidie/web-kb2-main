@@ -121,15 +121,17 @@
                     <table class="table table-hover table-striped" id="myTable">
                         <thead">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Avatar</th>
-                                <th scope="col">userID</th>
-                                <th scope="col">passcode</th>
+                                <th scope="col">User ID</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Phone Number</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <?php
-                                $sql = "SELECT userID, passcode, avatar FROM users";
+                                $sql = "SELECT username, password, email, first_name, last_name, address, phone_number FROM users";
                                 $result = mysqli_query($conn, $sql);
 
                                 $rows = mysqli_num_rows($result);
@@ -143,7 +145,7 @@
                                 $next = $current_page + 1;
                                 $offset = ($current_page - 1) * $items_per_page;
 
-                                $sql = "SELECT userID, avatar, passcode FROM users LIMIT $offset, $items_per_page";
+                                $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users LIMIT $offset, $items_per_page";
 
                                 $result = mysqli_query($conn, $sql);
 
@@ -151,16 +153,20 @@
                                     $c = $offset + 1;
                                     while($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
-                                        echo "<td>" . $c++. "</td>";
-                                        echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
-                                        echo "<td>" . $row['userID'] . "</td>";
-                                        echo "<td>" . $row['passcode'] . "</td>";
+                                        $c++;
+                                        echo "<td>" . $row['user_id'] . "</td>";
+                                        // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
+                                        echo "<td>" . $row['username'] . "</td>";
+                                        echo "<td>" . $row['password'] . "</td>";
+                                        echo "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
+                                        echo "<td>" . $row['address'] . "</td>";
+                                        echo "<td>" . $row['phone_number'] . "</td>";
                                         echo "<td> 
-                                        <a href='users-detail.php?userID=" . $row["userID"] . "'>
+                                        <a href='users-detail.php?username=" . $row["username"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='edit-form.php?userID=" . $row["userID"] . "'>
+                                        <a href='edit-form.php?username=" . $row["username"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='users-delete.php?userID=" . $row['userID'] . "'>
+                                        <a href='users-delete.php?username=" . $row['username'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
                                     }

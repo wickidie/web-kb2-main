@@ -43,10 +43,10 @@
                     </div>
                 </div>
                 <?php
-                    $userID= $_GET['userID'];
+                    $username= $_GET['username'];
                     echo"
                     <div class='text-center btn-group w-100'>
-                    <button type='submit' class='btn btn-primary' name='pastUser' value='$userID'>Update</button>
+                    <button type='submit' class='btn btn-primary' name='pastUser' value='$username'>Update</button>
                     <button type='submit' class='btn btn-danger' onclick='history.back()'>Close</button>
                     </div>
                     ";

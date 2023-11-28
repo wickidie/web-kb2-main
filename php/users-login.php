@@ -1,13 +1,13 @@
 <?php
     include_once 'db-connect.inc.php';
-    $userID = $_POST['userID'];
+    $username = $_POST['username'];
     $password = md5($_POST['password']);
-    if (isset($userID) && isset($password)) {
-    if (!empty($userID) && !empty($password)) {
-        $sql = "SELECT * FROM users WHERE userID = '$userID' && passcode = '$password'";
+    if (isset($username) && isset($password)) {
+    if (!empty($username) && !empty($password)) {
+        $sql = "SELECT * FROM users WHERE username = '$username' && password = '$password'";
         if (mysqli_num_rows(mysqli_query($conn, $sql)) > 0) {
             session_start();
-            $_SESSION['userID'] = $userID;
+            $_SESSION['userID'] = $username;
             header('Location: users-logged.php');
         } else {
             echo "              

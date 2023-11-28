@@ -22,9 +22,9 @@
                 <h2><b>Register</b></h2>
                 <p>This form is used to add new user!</p>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="user_input" name="userID" placeholder="name@example.com"
+                    <input type="text" class="form-control" id="user_input" name="username" placeholder="name@example.com"
                         required>
-                    <label for="user_input"><strong>User ID</strong></label>
+                    <label for="user_input"><strong>Username</strong></label>
                 </div>
 
                 <div class="form-floating mb-3">
