@@ -15,7 +15,7 @@
         <p><a class="link" onclick="history.back()"><b>Chara</b></a> / <b>Chara Detail</b></p>
         <?php
             include_once 'db-connect.inc.php';
-            $user = $_GET['userID'];
+            // $username = $_GET['username'];
 
             // $sql = "DELETE FROM users WHERE userID = '$user'";
             $sql = "SELECT * FROM users";            
@@ -24,10 +24,14 @@
             
             echo "<div class='container p-4 mx-5' style='max-width: 960px'>";
             echo "<div class='card' style='width: 18rem;'>";
-            echo "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class='rounded-5 card-img-top'";
+            // echo "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class='rounded-5 card-img-top'";
             echo "<div class='card-body'>";
-            echo "<h5 class='card-title'>" . $row['userID'] . "</h5>";
-            echo "<p class='card-text'>" . $row['passcode'] . "</p>";
+            echo "<h5 class='card-title'>" . $row['username'] . "</h5>";
+            echo "<p class='card-text'>" . $row['password'] . "</p>";
+            echo "<p class='card-text'>" . $row['email'] . "</p>";
+            echo "<p class='card-text'>" . $row['first_name'] . " " . $row['last_name']. "</p>";
+            echo "<p class='card-text'>" . $row['address'] . "</p>";
+            echo "<p class='card-text'>" . $row['phone_number'] . "</p>";
             echo "</div>";
             echo "</div>";
             ?>

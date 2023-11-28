@@ -15,9 +15,9 @@
         include_once 'db-connect.inc.php';
 
         $pastUser = $_POST['pastUser'];
-        $passcode = $_POST['password'];
+        $password = $_POST['password'];
 
-        $sql = "UPDATE users SET passcode = md5('$passcode') WHERE userID = '$pastUser';";
+        $sql = "UPDATE users SET password = md5('$password') WHERE username = '$pastUser';";
 
         if (mysqli_query($conn, $sql)) {
             echo "              

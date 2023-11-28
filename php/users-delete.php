@@ -13,15 +13,15 @@
 <body>
     <?php
         include_once 'db-connect.inc.php';
-        $user = $_GET['userID'];
+        $username = $_GET['username'];
 
 
-        $sql = "DELETE FROM users WHERE userID = '$user'";
+        $sql = "DELETE FROM users WHERE username = '$username'";
 
         if (mysqli_query($conn, $sql)) {
             echo "              
             <script type='text/javascript'>
-            alert('$user was deleted');
+            alert('$username was deleted');
             location='users-logged.php';
             </script>";
         } else {
