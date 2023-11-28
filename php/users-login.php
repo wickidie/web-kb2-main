@@ -10,25 +10,18 @@
             $_SESSION['userID'] = $username;
             header('Location: users-logged.php');
         } else {
-            echo "              
-            <script type='text/javascript'>
-            alert('Failed');
-            location='login-form.php';
-            </script>";
+                echo "              
+                <script type='text/javascript'>
+                alert('Failed2');
+                location='login-form.php';
+                </script>";
         }
-    } else {
-        echo "              
-        <script type='text/javascript'>
-        alert('Failed');
-        location='login-form.php';
-        </script>";
-    }
-    } else {
-        echo "              
-        <script type='text/javascript'>
-        alert('Failed');
-        location='login-form.php';
-        </script>";
+        } else {
+                echo "              
+                <script type='text/javascript'>
+                alert('Failed3');
+                location='login-form.php';
+                </script>";
     }
     mysqli_close($conn);
 ?>
