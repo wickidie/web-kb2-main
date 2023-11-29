@@ -22,7 +22,7 @@
             echo "              
             <script type='text/javascript'>
             alert('$username was deleted');
-            location='users-logged.php';
+            location='users.php';
             </script>";
         } else {
         echo "Error deleting record: " . mysqli_error($conn);

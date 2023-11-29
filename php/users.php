@@ -1,8 +1,8 @@
 <?php
     session_start();
     include_once 'db-connect.inc.php';
-    $userID = $_SESSION['userID'];
-    if (isset($userID) && !empty($userID)) {
+    $username = $_SESSION['username'];
+    if (isset($username) && !empty($username)) {
     } else {
         echo "              
         <script type='text/javascript'>
@@ -44,7 +44,7 @@
                     <ul
                         class="nav nav-pills flex-column justify-content-center align-items-sm-stretch align-items-center">
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="#" class="nav-link" aria-current="page">
+                            <a href="#" class="nav-link">
                                 <i class="bi bi-house"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
                                     Home
@@ -52,7 +52,7 @@
                             </a>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="#" class="nav-link active">
+                            <a href="#" class="nav-link">
                                 <i class="bi bi-speedometer2"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
                                     Dashboard
@@ -60,15 +60,15 @@
                             </a>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="#" class="nav-link">
+                            <a href="transactions.php" class="nav-link">
                                 <i class="bi bi-table"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
-                                    Orders
+                                    Transactions
                                 </span>
                             </a>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="#" class="nav-link">
+                            <a href="products.php" class="nav-link">
                                 <i class="bi bi-grid"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
                                     Products
@@ -76,16 +76,13 @@
                             </a>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link active" aria-current="page">
                                 <i class="bi bi-person-circle"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
-                                    Customers
+                                    Users
                                 </span>
                             </a>
                         </li>
-                        <!-- <li class="nav-item disabled">
-                            <a href="#" class="nav-link">Disabled</a>
-                        </li> -->
                     </ul>
                 </div>
                 <hr>
@@ -103,19 +100,19 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        <li><a class="dropdown-item" href="users-logout.php">Sign out</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-auto col-md-8 col-lg-9 col-xl-10 min-vh-100 justify-content-center p-3">
                 <div class="container">
                     <form method="GET">
-                        <div class="my-2">
-                            <!-- onkeyup="Search()" -->
-                            <input type="text" class="form-control form-control-sm" id="myInput"
-                                placeholder="Search for user" name='search'>
-                            <label for=""><i class="bi bi-search"></i></label>
-
+                        <div class="input-group my-2">
+                            <input type="text" class="form-control form-control-sm" id="myInput" name="search"
+                                placeholder="Search for user" aria-label="Search" aria-describedby="searchph">
+                            <span class="input-group-text" id="searchph">
+                                <i class="bi bi-search"></i>
+                            </span>
                         </div>
                     </form>
                     <table class="table table-hover table-striped" id="myTable">
@@ -131,7 +128,7 @@
                             </tr>
                             </thead>
                             <?php
-                                $items_per_page = 3;
+                                $items_per_page = 10;
                                 $search_value = '';
                                 $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users";
                                 $result = mysqli_query($conn, $sql);
@@ -201,17 +198,19 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
                             <li class="page-item">
-                                <a class="page-link" <?php if($current_page > 1){ echo "href='users-logged.php?search=$search_value&?page=1'"; } ?>>
+                                <a class="page-link"
+                                    <?php if($current_page > 1){ echo "href='users-logged.php?search=$search_value&?page=1'"; } ?>>
                                     <span aria-hidden="true">&laquo First</span>
                                 </a>
                             </li>
                             <?php 
                                 for($x=1;$x<=$total_page;$x++){
                                     ?>
-                                <li class="page-item">
-                                    <a class="page-link" <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
-                                    </a>
-                                </li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                                </a>
+                            </li>
                             <?php
                                 }
                             ?>
@@ -223,9 +222,6 @@
                             </li>
                         </ul>
                     </nav>
-                    <a class="btn btn-outline-success" href="users-logout.php">
-                        Back to login
-                    </a>
                 </div>
             </div>
         </div>
