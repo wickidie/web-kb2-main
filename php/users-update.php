@@ -23,7 +23,7 @@
             echo "              
             <script type='text/javascript'>
             alert('$pastUser password was updated.');
-            location='users-logged.php';
+            location='users.php';
             </script>";
         } else {
         echo "Error updating record: " . mysqli_error($conn);

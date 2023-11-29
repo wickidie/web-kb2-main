@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users form</title>
+    <title>Login - Ecommerce</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
@@ -18,27 +19,32 @@
 <body data-bs-theme="dark">
     <main class="h-100">
         <div class="d-flex flex-column justify-content-center align-items-center h-100" style="z-index: 999">
-            <form class="needs-validation" action="users-login.php" method="post" novalidate>
+            <form class="needs-validation w-25" action="users-login.php" method="post" novalidate>
                 <h2><b>Login</b></h2>
-                <p>Please, Register or Login to our site first!</p>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="user_input" name="username" placeholder="name@example.com"
-                        required>
-                    <label for="user_input"><strong>Username</strong></label>
+                <p>Login for instant access to exclusive perks!</p>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="usernameph">
+                        <i class="bi bi-person-circle"></i>
+                    </span>
+                    <input type="text" class="form-control" id="user_input" name="username" placeholder="Username"
+                        aria-label="Username" aria-describedby="usernameph" required>
                 </div>
-                <div class="form-floating mb-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="passwordph">
+                        <i class="bi bi-key-fill"></i>
+                    </span>
                     <input type="password" class="form-control" id="password_input" name="password"
-                        placeholder="Password" required pattern=".{5,}" title="Password must be at least 5 characters">
-                    <label for="password_input"><strong>Password</strong></label>
+                        aria-label="Password" aria-describedby="passwordph" placeholder="Password" required
+                        pattern=".{5,}" title="Password must be at least 5 characters">
                     <div class="invalid-feedback">
-                        Please enter a valid password (at least 5 characters).
+                        <p class="m-0">Please enter a valid password (at least 5 characters).</sp>
                     </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary text-center w-100 mb-2">Log in</button>
 
                 <div class="text-center mb-2">
-                    <a href="regist-form.php" class="text-light">Register</a>
+                    <a href="regist-form.php" class="text-light"><small>Create account</small></a>
                 </div>
             </form>
         </div>
