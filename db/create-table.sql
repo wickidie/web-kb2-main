@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    user_id int,
+    user_id int PRIMARY KEY,
     username VARCHAR(255),
     password CHAR(32),
     email VARCHAR(255),
@@ -10,7 +10,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE products (
-    product_id int,
+    product_id int PRIMARY KEY,
     product_name VARCHAR(255),
     product_description VARCHAR(255),
     product_price DECIMAL(10, 2),
@@ -19,31 +19,19 @@ CREATE TABLE products (
 );
 
 CREATE TABLE transactions (
-    transaction_id int,
+    transaction_id int PRIMARY KEY,
     user_id int,
     transaction_date DATE,
     transaction_total DECIMAL(10, 2)
 );
 
 CREATE TABLE transaction_details (
-    transaction_detail_id int,
+    transaction_detail_id int PRIMARY KEY,
     transaction_id int,
     product_id int,
     quantity int,
     product_price DECIMAL(10, 2)
 );
-
-ALTER TABLE users
-    ADD PRIMARY KEY (user_id);
-
-ALTER TABLE products
-    ADD PRIMARY KEY (product_id);
-
-ALTER TABLE transactions
-    ADD PRIMARY KEY (transaction_id);
-
-ALTER TABLE transaction_details
-    ADD PRIMARY KEY (transaction_detail_id);
 
 ALTER TABLE users
     MODIFY user_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
