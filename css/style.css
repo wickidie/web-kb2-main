@@ -4,5 +4,20 @@ html {
 
 a,
 a.nav-link {
-  color: white;
+  color: currentColor;
+  text-decoration: none;
+}
+
+.btn-ghost-light {
+  color: #f8f9fa;
+  background-color: transparent;
+}
+
+.btn.btn-ghost-light:active,
+.btn.btn-ghost-light:hover,
+.btn-ghost-light:focus {
+  color: #f8f9fa;
+  box-shadow: none;
+  border-color: transparent;
+  background-color: #f8f9fa15;
 }
