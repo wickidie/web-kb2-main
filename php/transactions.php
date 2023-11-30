@@ -27,8 +27,7 @@
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div
-                class="d-flex flex-column bg-body-tertiary col-auto col-md-4 col-lg-3 col-xl-2 min-vh-100 justify-content-center p-3">
+            <div class="d-flex flex-column bg-body-tertiary col-auto min-vh-100 justify-content-center p-3">
                 <div class="pt-3 mb-auto">
                     <div class="d-flex text-decoration-none justify-content-center align-items-center">
                         <span class="fs-4 d-sm-inline">
@@ -44,7 +43,7 @@
                     <ul
                         class="nav nav-pills flex-column justify-content-center align-items-sm-stretch align-items-center">
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="#" class="nav-link">
+                            <a href="home.php" class="nav-link">
                                 <i class="bi bi-house"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
                                     Home
@@ -68,7 +67,7 @@
                             </a>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="products.php" class="nav-link">
+                            <a href="products.php" class="nav-link active" aria-current="page">
                                 <i class="bi bi-grid"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
                                     Products
@@ -76,7 +75,7 @@
                             </a>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="#" class="nav-link active" aria-current="page">
+                            <a href="users.php" class="nav-link">
                                 <i class="bi bi-person-circle"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
                                     Users
@@ -86,48 +85,61 @@
                     </ul>
                 </div>
                 <hr>
-                <div class="dropup">
-                    <a href="#"
-                        class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                        <strong>mdo</strong>
-                    </a>
-                    <ul class="dropdown-menu text-small shadow">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="users-logout.php">Sign out</a></li>
-                    </ul>
+                <div class="px-xl-2 p-1">
+                    <div class="dropup">
+                        <a href="#"
+                            class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+                                class="rounded-circle me-2">
+                            <span class="d-none d-sm-inline"><strong>User</strong></span>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow">
+                            <li><a class="dropdown-item" href="#">New project...</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="col-auto col-md-8 col-lg-9 col-xl-10 min-vh-100 justify-content-center p-3">
                 <div class="container">
-                    <form method="GET">
-                        <div class="input-group my-2">
-                            <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                                placeholder="Search for user" aria-label="Search" aria-describedby="searchph">
-                            <span class="input-group-text" id="searchph">
-                                <i class="bi bi-search"></i>
-                            </span>
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-2">
+                            <a href="product-form.php" class="btn btn-secondary">Add product</a>
                         </div>
-                    </form>
+                        <div class="col-2">
+                            <form method="GET">
+                                <div class="input-group my-2">
+                                    <input type="text" class="form-control form-control-sm" id="myInput" name="search"
+                                        placeholder="Search for user" aria-label="Search" aria-describedby="searchph">
+                                    <span class="input-group-text btn btn-secondary rounded-end-1" id="searchph">
+                                        <i class="bi bi-search"></i>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <table class="table table-hover table-striped" id="myTable">
                         <thead">
                             <tr>
-                                <th scope="col">transaction_id</th>
-                                <th scope="col">user_id</th>
-                                <th scope="col">transaction_date</th>
-                                <th scope="col">transaction_total</th>
+                                <th scope="col">Product ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <?php
                                 $items_per_page = 10;
                                 $search_value = '';
-                                $sql = "SELECT transaction_id, user_id, transaction_date, transaction_total FROM transactions";
+                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products";
                                 $result = mysqli_query($conn, $sql);
                                 $rows = mysqli_num_rows($result);
 
@@ -137,26 +149,26 @@
                                 if (isset($_GET['search'])) {
                                     $search_value = $_GET['search'];
                                     if (!empty($_GET['search'])) {
-                                        $sql = "SELECT * FROM transactions where transaction_id like '%$search_value%' LIMIT $offset, $items_per_page";
+                                        $sql = "SELECT * FROM products where product_name like '%$search_value%' LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);
-                                        $sql = "SELECT * FROM transactions where transaction_id like '%$search_value%'";
+                                        $sql = "SELECT * FROM products where product_name like '%$search_value%'";
                                         $result_total = mysqli_query($conn, $sql);
                                         $rows = mysqli_num_rows($result_total);
                                     }else{
-                                        echo "Empty ";
-                                        $sql = "SELECT transaction_id, user_id, transaction_date, transaction_total FROM transactions WHERE 1 LIMIT $offset, $items_per_page";
+                                        // echo "Empty ";
+                                        $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);
                                     }
                                 }else{
                                     // echo "Start ";
-                                    $sql = "SELECT transaction_id, user_id, transaction_date, transaction_total FROM transactions WHERE 1 LIMIT $offset, $items_per_page";
+                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
                                     $result = mysqli_query($conn, $sql);
                                 }
                                 
                                 $total_page=ceil($rows/$items_per_page);
-                                echo "Search for : $search_value <br>";
-                                echo "Showing : $total_page pages <br>";
-                                echo "With total : $rows result<br>";
+                                // echo "Search for : $search_value <br>";
+                                // echo "Showing : $total_page pages <br>";
+                                // echo "With total : $rows result<br>";
                                 
                                 $previous = $current_page - 1;
                                 $next = $current_page + 1;
@@ -168,22 +180,26 @@
                                     while($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
                                         $c++;
-                                        echo "<td>" . $row['transaction_id'] . "</td>";
+                                        echo "<td>" . $row['product_id'] . "</td>";
                                         // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
-                                        echo "<td>" . $row['user_id'] . "</td>";
-                                        echo "<td>" . $row['transaction_date'] . "</td>";
-                                        echo "<td>" . $row['transaction_total'] . "</td>";
+                                        echo "<td>" . $row['product_name'] . "</td>";
+                                        echo "<td>" . $row['product_description'] . "</td>";
+                                        echo "<td>" . $row['product_price'] . "</td>";
+                                        echo "<td>" . $row['product_img'] . "</td>";
+                                        echo "<td>" . $row['product_category'] . "</td>";
                                         echo "<td> 
-                                        <a href='users-detail.php?username=" . $row["transaction_id"] . "'>
+                                        <a href='product-detail.php?product_name=" . $row["product_name"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='edit-form.php?username=" . $row["transaction_id"] . "'>
+                                        <a href='productEdit-form.php?product_name=" . $row["product_name"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='users-delete.php?username=" . $row['transaction_id'] . "'>
+                                        <a href='product-delete.php?product_name=" . $row['product_name'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
                                     }
                                 } else {
-                                echo "0 results";
+                                echo "<tr>";
+                                echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
+                                echo "<tr>";
                                 }
 
                                 mysqli_close($conn);
@@ -194,8 +210,8 @@
                         <ul class="pagination justify-content-center">
                             <li class="page-item">
                                 <a class="page-link"
-                                    <?php if($current_page > 1){ echo "href='users-logged.php?search=$search_value&?page=1'"; } ?>>
-                                    <span aria-hidden="true">&laquo First</span>
+                                    <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
+                                    <span aria-hidden="true">&laquo</span>
                                 </a>
                             </li>
                             <?php 
@@ -211,8 +227,8 @@
                             ?>
                             <li class="page-item">
                                 <a class="page-link"
-                                    <?php if($current_page < $total_page) { echo "href='users-logged.php??search=$search_value&page=$total_page'"; } ?>>
-                                    <span aria-hidden="true">&raquo Last</span>
+                                    <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
+                                    <span aria-hidden="true">&raquo</span>
                                 </a>
                             </li>
                         </ul>
@@ -221,27 +237,6 @@
             </div>
         </div>
     </div>
-    <script>
-    function Search() {
-        var input, filter, table, tr, td, i;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[2];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>

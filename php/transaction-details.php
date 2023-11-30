@@ -183,11 +183,11 @@
                                         echo "<td>" . $row['quantity'] . "</td>";
                                         echo "<td>" . $row['product_price'] . "</td>";
                                         echo "<td> 
-                                        <a href='users-detail.php?username=" . $row["username"] . "'>
+                                        <a href='users-detail.php?username=" . $row["transaction_detail_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='edit-form.php?username=" . $row["username"] . "'>
+                                        <a href='edit-form.php?username=" . $row["transaction_detail_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='users-delete.php?username=" . $row['username'] . "'>
+                                        <a href='users-delete.php?username=" . $row['transaction_detail_id'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
                                     }
