@@ -43,22 +43,14 @@
                     <ul
                         class="nav nav-pills flex-column justify-content-center align-items-sm-stretch align-items-center">
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="#" class="nav-link  active" aria-current="page">
-                                <i class="bi bi-house"></i>
-                                <span class="d-none fs-5 ms-2 d-sm-inline">
-                                    Home
-                                </span>
-                            </a>
-                        </li>
-                        <li class="nav-item py-2 py-sm-0 disabled">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link active" aria-current="page">
                                 <i class="bi bi-speedometer2"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
                                     Dashboard
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item py-2 py-sm-0 disabled">
+                        <li class="nav-item py-2 py-sm-0">
                             <a href="transactions.php" class="nav-link">
                                 <i class="bi bi-table"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
@@ -66,7 +58,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item py-2 py-sm-0 disabled">
+                        <li class="nav-item py-2 py-sm-0">
                             <a href="products.php" class="nav-link">
                                 <i class="bi bi-grid"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
@@ -99,12 +91,12 @@
                             </span>
                         </a>
                         <ul class="dropdown-menu text-small shadow">
-                            <li><a class="dropdown-item" href="#">New project...</a></li>
+                            <!-- <li><a class="dropdown-item" href="#">New project...</a></li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li> -->
+                            <!-- <li>
                                 <hr class="dropdown-divider">
-                            </li>
+                            </li> -->
                             <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
                         </ul>
                     </div>
