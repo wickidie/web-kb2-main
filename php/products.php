@@ -177,11 +177,14 @@
                                         echo "<tr>";
                                         $c++;
                                         echo "<td>" . $row['product_id'] . "</td>";
-                                        // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
                                         echo "<td>" . $row['product_name'] . "</td>";
                                         echo "<td>" . $row['product_description'] . "</td>";
                                         echo "<td>" . $row['product_price'] . "</td>";
-                                        echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/louis/asset/" . $row['product_img'] . "'</td>";
+                                        // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
+                                        // echo "<td>" . $row['product_img'] . "</td>";
+                                        // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/" . $row['product_img'] . "' class='rounded' wdith='30px' height='30px'</td>";
+                                        // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/prod01.jpg' class='rounded' wdith='30px' height='30px'</td>";
+                                        echo "<td>" . "<img src='https://raw.githubusercontent.com/wickidie/web-kb2-main/imgProd/asset/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
                                         echo "<td>" . $row['product_category'] . "</td>";
                                         echo "<td> 
                                         <a href='product-detail.php?product_id=" . $row["product_id"] . "'>
@@ -191,7 +194,7 @@
                                         <a href='product-delete.php?product_id=" . $row['product_id'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
-                                    }
+                                    } 
                                 } else {
                                 echo "<tr>";
                                 echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
