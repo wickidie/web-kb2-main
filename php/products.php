@@ -181,7 +181,7 @@
                                         echo "<td>" . $row['product_name'] . "</td>";
                                         echo "<td>" . $row['product_description'] . "</td>";
                                         echo "<td>" . $row['product_price'] . "</td>";
-                                        echo "<td>" . $row['product_img'] . "</td>";
+                                        echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/louis/asset/" . $row['product_img'] . "'</td>";
                                         echo "<td>" . $row['product_category'] . "</td>";
                                         echo "<td> 
                                         <a href='product-detail.php?product_id=" . $row["product_id"] . "'>
