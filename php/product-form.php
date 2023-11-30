@@ -20,7 +20,7 @@
 <body data-bs-theme="dark">
     <main class="h-100">
         <div class="d-flex flex-column justify-content-center align-items-center h-100" style="z-index: 999">
-            <form class="needs-validation" action="users-update.php" method="post" novalidate>
+            <form class="needs-validation" action="products-add.php" method="post" novalidate>
                 <h2 class="mb-3"><b>Add Product</b></h2>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
@@ -33,7 +33,7 @@
                             <small class="text-secondary">(optional)</small>
                         </label>
                         <input type="text" class="form-control form-control-sm" id="Category" name="category"
-                            placeholder="Enter category" aria-label="Name" aria-describedby="nameph" required>
+                            placeholder="Enter category" aria-label="Name" aria-describedby="nameph">
                     </div>
 
                     <div class="col mb-3">
@@ -57,8 +57,10 @@
                 </div>
                 <div class="justify-content-center justify-content-sm-end">
                     <div class="text-end">
-                        <a href="#" type="button" class="btn btn-ghost-light" onclick="history.back()">Discard</a>
-                        <a href="#" class="btn btn-primary" type="submit">Save</a>
+                        <!-- <a href="#" type="button" class="btn btn-ghost-light" onclick="history.back()">Discard</a> -->
+                        <!-- <a href="#" class="btn btn-primary" type="submit">Save</a> -->
+                        <button class="btn btn-danger" onclick="history.back()">Discard</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </form>

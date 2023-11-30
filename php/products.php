@@ -184,11 +184,11 @@
                                         echo "<td>" . $row['product_img'] . "</td>";
                                         echo "<td>" . $row['product_category'] . "</td>";
                                         echo "<td> 
-                                        <a href='product-detail.php?product_name=" . $row["product_name"] . "'>
+                                        <a href='product-detail.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='productEdit-form.php?product_name=" . $row["product_name"] . "'>
+                                        <a href='product-update-form.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='product-delete.php?product_name=" . $row['product_name'] . "'>
+                                        <a href='product-delete.php?product_id=" . $row['product_id'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
                                     }
