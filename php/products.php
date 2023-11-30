@@ -191,7 +191,7 @@
                                         echo "<td>" . $row['product_price'] . "</td>";
                                         echo "<td>" . $row['product_img'] . "</td>";
                                         echo "<td>" . $row['product_category'] . "</td>";
-                                        echo "<td> 
+                                        echo "<td>
                                         <a href='product-detail.php?product_name=" . $row["product_name"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
                                         <a href='productEdit-form.php?product_name=" . $row["product_name"] . "'>
