@@ -17,7 +17,7 @@
 
 
         // $sql = "DELETE FROM products WHERE product_id = '$product_id';SET foreign_key_checks = 1;";
-        $sql = "SET foreign_key_checks = 0; DELETE FROM products WHERE product_id = '$product_id';";
+        $sql = "SET foreign_key_checks = 0;";
         
         if (mysqli_query($conn, $sql)) {
             echo "              
