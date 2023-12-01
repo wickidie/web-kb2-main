@@ -127,19 +127,17 @@
                     <table class="table table-hover table-striped" id="myTable">
                         <thead">
                             <tr>
-                                <th scope="col">Product ID</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Category</th>
+                                <th scope="col">Transaction ID</th>
+                                <th scope="col">Transaction Date</th>
+                                <th scope="col">Transaction Total</th>
+                                <th scope="col">User ID</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <?php
                                 $items_per_page = 10;
                                 $search_value = '';
-                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products";
+                                $sql = "SELECT transaction_id, transaction_date, transaction_total, user_id FROM transactions";
                                 $result = mysqli_query($conn, $sql);
                                 $rows = mysqli_num_rows($result);
 
@@ -149,19 +147,19 @@
                                 if (isset($_GET['search'])) {
                                     $search_value = $_GET['search'];
                                     if (!empty($_GET['search'])) {
-                                        $sql = "SELECT * FROM products where product_name like '%$search_value%' LIMIT $offset, $items_per_page";
+                                        $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);
-                                        $sql = "SELECT * FROM products where product_name like '%$search_value%'";
+                                        $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%'";
                                         $result_total = mysqli_query($conn, $sql);
                                         $rows = mysqli_num_rows($result_total);
                                     }else{
                                         // echo "Empty ";
-                                        $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                                        $sql = "SELECT transaction_id, transaction_date, transaction_total, user_id FROM transactions WHERE 1 LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);
                                     }
                                 }else{
                                     // echo "Start ";
-                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                                    $sql = "SELECT transaction_id, transaction_date, transaction_total, user_id FROM transactions WHERE 1 LIMIT $offset, $items_per_page";
                                     $result = mysqli_query($conn, $sql);
                                 }
                                 
@@ -180,19 +178,17 @@
                                     while($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
                                         $c++;
-                                        echo "<td>" . $row['product_id'] . "</td>";
+                                        echo "<td>" . $row['transaction_id'] . "</td>";
                                         // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
-                                        echo "<td>" . $row['product_name'] . "</td>";
-                                        echo "<td>" . $row['product_description'] . "</td>";
-                                        echo "<td>" . $row['product_price'] . "</td>";
-                                        echo "<td>" . $row['product_img'] . "</td>";
-                                        echo "<td>" . $row['product_category'] . "</td>";
+                                        echo "<td>" . $row['transaction_date'] . "</td>";
+                                        echo "<td>" . $row['transaction_total'] . "</td>";
+                                        echo "<td>" . $row['user_id'] . "</td>";
                                         echo "<td> 
-                                        <a href='product-detail.php?product_name=" . $row["product_name"] . "'>
+                                        <a href='product-detail.php?transaction_id=" . $row["transaction_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='productEdit-form.php?product_name=" . $row["product_name"] . "'>
+                                        <a href='productEdit-form.php?transaction_id=" . $row["transaction_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='product-delete.php?product_name=" . $row['product_name'] . "'>
+                                        <a href='product-delete.php?transaction_id=" . $row['transaction_id'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
                                     }
