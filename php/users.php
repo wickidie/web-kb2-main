@@ -1,8 +1,9 @@
 <?php
     session_start();
     include_once 'db-connect.inc.php';
-    $username = $_SESSION['username'];
-    if (isset($username) && !empty($username)) {
+    $user_id = $_SESSION['user_id'];
+    // $username = $_SESSION['username'];
+    if (isset($user_id) && !empty($user_id)) {
     } else {
         echo "              
         <script type='text/javascript'>
@@ -86,7 +87,12 @@
                                 class="rounded-circle me-2">
                             <span class="d-none d-sm-inline">
                                 <?php 
-                                echo"<strong>$username</strong>";
+
+                                    $getUsername = "SELECT username FROM users WHERE user_id = '$user_id'";
+                                    $username = mysqli_query($conn, $getUsername);
+                                    $row = mysqli_fetch_assoc($username);
+
+                                    echo"<strong>". $row['username'] . "</strong>";
                                 ?>
                             </span>
                         </a>
@@ -177,14 +183,16 @@
                                         echo "<td>" . $row['address'] . "</td>";
                                         echo "<td>" . $row['phone_number'] . "</td>";
                                         echo "<td> 
-                                        <a href='users-detail.php?username=" . $row["username"] . "'>
+                                        <a href='users-detail.php?user_id=" . $row["user_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='users-update-form.php?username=" . $row["username"] . "'>
+                                        <a href='users-update-form.php?user_id=" . $row["user_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='users-delete.php?username=" . $row['username'] . "'>
+                                        <a href='users-delete.php?user_id=" . $row['user_id'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
-                                    }
+                                    } 
+                                    // $str = (string)$user_id;
+                                    // echo $str;
                                 } else {
                                 echo "<tr>";
                                 echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";

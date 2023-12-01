@@ -15,10 +15,10 @@
         <p><a class="link" onclick="history.back()"><b>Chara</b></a> / <b>Chara Detail</b></p>
         <?php
             include_once 'db-connect.inc.php';
-            // $username = $_GET['username'];
+            $user_id= $_GET['user_id'];
 
             // $sql = "DELETE FROM users WHERE userID = '$user'";
-            $sql = "SELECT * FROM users";            
+            $sql = "SELECT * FROM users WHERE user_id = '$user_id'";            
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_assoc($result);
             

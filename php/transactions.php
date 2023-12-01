@@ -1,8 +1,9 @@
 <?php
     session_start();
     include_once 'db-connect.inc.php';
-    $username = $_SESSION['username'];
-    if (isset($username) && !empty($username)) {
+    $user_id = $_SESSION['user_id'];
+    // $username = $_SESSION['username'];
+    if (isset($user_id) && !empty($user_id)) {
     } else {
         echo "              
         <script type='text/javascript'>
@@ -59,7 +60,7 @@
                             </a>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="transactions.php" class="nav-link">
+                            <a href="transactions.php" class="nav-link active">
                                 <i class="bi bi-table"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
                                     Transactions
@@ -67,7 +68,7 @@
                             </a>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="products.php" class="nav-link active" aria-current="page">
+                            <a href="products.php" class="nav-link" aria-current="page">
                                 <i class="bi bi-grid"></i>
                                 <span class="d-none fs-5 ms-2 d-sm-inline">
                                     Products
@@ -92,7 +93,16 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://github.com/mdo.png" alt="" width="32" height="32"
                                 class="rounded-circle me-2">
-                            <span class="d-none d-sm-inline"><strong>User</strong></span>
+                            <span class="d-none d-sm-inline"><strong>
+                            <?php 
+
+                            $getUsername = "SELECT username FROM users WHERE user_id = '$user_id'";
+                            $username = mysqli_query($conn, $getUsername);
+                            $row = mysqli_fetch_assoc($username);
+
+                            echo"<strong>". $row['username'] . "</strong>";
+                            ?>
+                            </strong></span>
                         </a>
                         <ul class="dropdown-menu text-small shadow">
                             <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -188,7 +198,7 @@
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
                                         <a href='productEdit-form.php?transaction_id=" . $row["transaction_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='product-delete.php?transaction_id=" . $row['transaction_id'] . "'>
+                                        <a href='transactions-delete.php?transaction_id=" . $row['transaction_id'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
                                     }
