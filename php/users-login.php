@@ -8,7 +8,7 @@
             if (mysqli_num_rows(mysqli_query($conn, $sql)) > 0) {
                 session_start();
                 $_SESSION['username'] = $username;
-                header('Location: home.php');
+                header('Location: dashboard.php');
             } else {
                     echo "              
                     <script type='text/javascript'>

@@ -40,14 +40,14 @@
                 echo "              
                 <script type='text/javascript'>
                 alert('Failed to add product!');
-                location='products-form.php';
+                location='products.php';
                 </script>";
             }
         } else {
             echo "              
             <script type='text/javascript'>
             alert('Failed to add product!');
-            location='products-form.php';
+            location='products.php';
             </script>";
         }
 
