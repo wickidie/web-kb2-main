@@ -184,11 +184,13 @@
                                         // echo "<td>" . $row['product_img'] . "</td>";
                                         // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/" . $row['product_img'] . "' class='rounded' wdith='30px' height='30px'</td>";
                                         // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/prod01.jpg' class='rounded' wdith='30px' height='30px'</td>";
-                                        echo "<td>" . "<img src='https://raw.githubusercontent.com/wickidie/web-kb2-main/imgProd/asset/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
+                                        echo "<td>" . "<img src='https://raw.githubusercontent.com/wickidie/web-kb2-main/master/asset/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
                                         echo "<td>" . $row['product_category'] . "</td>";
                                         echo "<td> 
                                         <a href='product-detail.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
+                                        <a href='transactions-add.php?product_id=" . $row["product_id"] . "'>
+                                        <i class='bi bi-cart'></i></a> &nbsp;
                                         <a href='product-update-form.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
                                         <a href='product-delete.php?product_id=" . $row['product_id'] . "'>
