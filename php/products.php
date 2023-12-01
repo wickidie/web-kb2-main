@@ -184,11 +184,11 @@
                                         echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/louis/asset/" . $row['product_img'] . "'</td>";
                                         echo "<td>" . $row['product_category'] . "</td>";
                                         echo "<td> 
-                                        <a href='product-detail.php?product_id=" . $row["product_id"] . "'>
+                                        <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='product-update-form.php?product_id=" . $row["product_id"] . "'>
+                                        <a href='products-update-form.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='product-delete.php?product_id=" . $row['product_id'] . "'>
+                                        <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
                                     }
