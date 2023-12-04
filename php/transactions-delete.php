@@ -15,33 +15,7 @@
         include_once 'db-connect.inc.php';
         $transaction_id = $_GET['transaction_id'];
 
-
-        // $sql = "DELETE FROM products WHERE transaction_id = '$transaction';SET foreign_key_checks = 1;";
-        $sql = "SET foreign_key_checks = 0;";
-        
-        if (mysqli_query($conn, $sql)) {
-            echo "              
-            <script type='text/javascript'>
-            alert('Transaction ID $transaction_id has been deleted');
-            location='transactions.php';
-            </script>";
-        } else {
-            echo "Error deleting record: " . mysqli_error($conn);
-        }
-        
         $sql = "DELETE FROM transactions WHERE transaction_id = '$transaction_id';";
-        
-        if (mysqli_query($conn, $sql)) {
-            echo "              
-            <script type='text/javascript'>
-            alert('Transaction ID $transaction_id has been deleted');
-            location='transactions.php';
-            </script>";
-        } else {
-            echo "Error deleting record: " . mysqli_error($conn);
-        }
-
-        $sql = "SET foreign_key_checks = 1;";
         
         if (mysqli_query($conn, $sql)) {
             echo "              
