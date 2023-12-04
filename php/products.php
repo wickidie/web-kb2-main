@@ -281,17 +281,22 @@
                                         echo "<td>" . "<img src='https://raw.githubusercontent.com/wickidie/web-kb2-main/master/asset/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
                                         echo "<td>" . $row['product_category'] . "</td>";
                                         echo "<td> 
-                                        <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
-                                        <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='transactions-add.php?product_id=" . $row["product_id"] . "'>
-                                        <i class='bi bi-cart'></i></a> &nbsp;
-                                        <a href='products-update-form.php?product_id=" . $row["product_id"] . "'>
-                                        <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
-                                        <i class='bi bi-trash-fill'></i></a></td>";
+                                        <form action='transactions-add.php?product_id=" . $row["product_id"] . "method='POST'>
+                                            <a href='product-detail.php?product_id=" . $row["product_id"] . "'>
+                                            <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
+                                            <button type='submit'> 
+                                                <a href='transactions-add.php?product_id=" . $row["product_id"] . "'>
+                                                    <i class='bi bi-cart'></i>
+                                                </a>
+                                            </button>
+                                            <input type='number' class='form-control-sm' id='quantity' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph'>
+                                            <a href='product-update-form.php?product_id=" . $row["product_id"] . "'>
+                                            <i class='bi bi-pencil-square'></i></a> &nbsp;
+                                            <a href='product-delete.php?product_id=" . $row['product_id'] . "'>
+                                            <i class='bi bi-trash-fill'></i></a></td> .
+                                        </form>";
                                         echo "<tr>";
-                                    } 
-                                    // echo $username;
+                                    }
                                 } else {
                                 echo "<tr>";
                                 echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";

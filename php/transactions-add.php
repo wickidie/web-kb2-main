@@ -32,10 +32,11 @@
     <?php
         include_once 'db-connect.inc.php';
 
-        $transaction_total = 12.12;
-        // $user_id = $_GET['user_id'];
+        $quantity = $_REQUEST['quantity'];
+        $product_id = $_REQUEST['product_id'];
+        $transaction_total = 11.11;
 
-        $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `user_id`) VALUES (CURRENT_DATE(), '$transaction_total', '$user_id');";
+        $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `user_id`) VALUES (CURRENT_DATE(), $quantity, (SELECT user_id from users WHERE user_id = 8));";
 
         if (mysqli_query($conn, $sql)) {
             echo "              
