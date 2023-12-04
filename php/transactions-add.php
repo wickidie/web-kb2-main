@@ -6,7 +6,7 @@
         echo "              
         <script type='text/javascript'>
         alert('$user_id');
-        location='transactions.php';
+        location='products.php';
         </script>";
     } else {
         echo "              
@@ -36,29 +36,33 @@
         $product_id = $_GET['product_id'];
         $transaction_total = 11.11;
 
-        $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `user_id`) VALUES (CURRENT_DATE(), (SELECT product_price from products WHERE product_id = $product_id) * $quantity, (SELECT user_id from users WHERE user_id = 8));";
+        $sql = "SET foreign_key_checks = 0;";
+        
+        if (mysqli_query($conn, $sql)) {
+        } else {
+            echo "Error deleting record: " . mysqli_error($conn);
+        }
+
+        $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `user_id`) VALUES (CURRENT_DATE(), (SELECT product_price from products WHERE product_id = $product_id) * $quantity, $user_id);";
 
         if (mysqli_query($conn, $sql)) {
-            // echo "              
-            // <script type='text/javascript'>
-            // alert('Added to Transaction!');
-            // location='products.php';
-            // </script>";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
 
-        // $sql = "INSERT INTO `transaction_details`(`transaction_id`, `product_id`, 'quantity', 'product_price') VALUES (, $product_id, $quantity, (SELECT product_price from products WHERE product_id = $product_id));";
+        $sql = "INSERT INTO `transaction_details`(`transaction_id`, `product_id`, `quantity`, `product_price`) VALUES ((LAST_INSERT_ID()), $product_id, $quantity, (SELECT product_price from products WHERE product_id = $product_id));";
 
-        // if (mysqli_query($conn, $sql)) {
-        //     echo "              
-        //     <script type='text/javascript'>
-        //     alert('Added to Transaction!');
-        //     location='products.php';
-        //     </script>";
-        // } else {
-        //     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        // }
+        if (mysqli_query($conn, $sql)) {
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+
+        $sql = "SET foreign_key_checks = 1;";
+        
+        if (mysqli_query($conn, $sql)) {
+        } else {
+            echo "Error deleting record: " . mysqli_error($conn);
+        }
 
         mysqli_close($conn) ;
     ?>

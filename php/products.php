@@ -285,9 +285,7 @@
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
                                         <form action='transactions-add.php?product_id=" . $row["product_id"] . "'method='POST'>
                                             <button type='submit'> 
-                                                <a href=''>
-                                                    <i class='bi bi-cart'></i>
-                                                </a>
+                                                <i class='bi bi-cart'></i>
                                             </button>
                                             <input type='number' class='form-control-sm' id='quantity' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph'>
                                         </form>
