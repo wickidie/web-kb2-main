@@ -285,7 +285,7 @@
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
                                         <a href='transactions-add.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-cart'></i></a> &nbsp;
-                                        <a href='product-update-form.php?product_id=" . $row["product_id"] . "'>
+                                        <a href='products-update-form.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
                                         <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";

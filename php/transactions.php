@@ -176,7 +176,7 @@
                             <form method="GET">
                                 <div class="input-group my-2">
                                     <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                                        placeholder="Search for user" aria-label="Search" aria-describedby="searchph">
+                                        placeholder="Search by date" aria-label="Search" aria-describedby="searchph">
                                     <span class="input-group-text btn btn-secondary rounded-end-1" id="searchph">
                                         <i class="bi bi-search"></i>
                                     </span>
@@ -186,12 +186,10 @@
                                 <table class="table table-hover table-striped" id="myTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Product ID</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Category</th>
+                                            <th scope="col">Transaction ID</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Transaction Total</th>
+                                            <th scope="col">User ID</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -246,9 +244,9 @@
                                         echo "<td>" . $row['transaction_total'] . "</td>";
                                         echo "<td>" . $row['user_id'] . "</td>";
                                         echo "<td> 
-                                        <a href='product-detail.php?transaction_id=" . $row["transaction_id"] . "'>
+                                        <a href='transactions-details.php?transaction_id=" . $row["transaction_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='productEdit-form.php?transaction_id=" . $row["transaction_id"] . "'>
+                                        <a href='transaction-update-form.php?transaction_id=" . $row["transaction_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
                                         <a href='transactions-delete.php?transaction_id=" . $row['transaction_id'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
