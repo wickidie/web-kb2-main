@@ -1,8 +1,9 @@
 <?php
     session_start();
     include_once 'db-connect.inc.php';
-    $username = $_SESSION['username'];
-    if (isset($username) && !empty($username)) {
+    $user_id = $_SESSION['user_id'];
+    // $username = $_SESSION['username'];
+    if (isset($user_id) && !empty($user_id)) {
     } else {
         echo "              
         <script type='text/javascript'>
@@ -45,8 +46,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item py-2 py-sm-0 align-items-center dropend" id="dropend">
-                            <a class="nav-link active">
+                        <li class="nav-item py-2 py-sm-0">
+                            <a href="transactions.php" class="nav-link active">
                                 <i class="bi bi-table"></i>
                                 <span class="d-none fs-6 ms-2 collapsed mobile" id="transactions"
                                     data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
@@ -198,7 +199,7 @@
                                         <?php
                                 $items_per_page = 10;
                                 $search_value = '';
-                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products";
+                                $sql = "SELECT transaction_id, transaction_date, transaction_total, user_id FROM transactions";
                                 $result = mysqli_query($conn, $sql);
                                 $rows = mysqli_num_rows($result);
 
@@ -208,19 +209,19 @@
                                 if (isset($_GET['search'])) {
                                     $search_value = $_GET['search'];
                                     if (!empty($_GET['search'])) {
-                                        $sql = "SELECT * FROM products where product_name like '%$search_value%' LIMIT $offset, $items_per_page";
+                                        $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);
-                                        $sql = "SELECT * FROM products where product_name like '%$search_value%'";
+                                        $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%'";
                                         $result_total = mysqli_query($conn, $sql);
                                         $rows = mysqli_num_rows($result_total);
                                     }else{
                                         // echo "Empty ";
-                                        $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                                        $sql = "SELECT transaction_id, transaction_date, transaction_total, user_id FROM transactions WHERE 1 LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);
                                     }
                                 }else{
                                     // echo "Start ";
-                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                                    $sql = "SELECT transaction_id, transaction_date, transaction_total, user_id FROM transactions WHERE 1 LIMIT $offset, $items_per_page";
                                     $result = mysqli_query($conn, $sql);
                                 }
                                 
@@ -239,19 +240,17 @@
                                     while($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
                                         $c++;
-                                        echo "<td>" . $row['product_id'] . "</td>";
+                                        echo "<td>" . $row['transaction_id'] . "</td>";
                                         // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
-                                        echo "<td>" . $row['product_name'] . "</td>";
-                                        echo "<td>" . $row['product_description'] . "</td>";
-                                        echo "<td>" . $row['product_price'] . "</td>";
-                                        echo "<td>" . $row['product_img'] . "</td>";
-                                        echo "<td>" . $row['product_category'] . "</td>";
+                                        echo "<td>" . $row['transaction_date'] . "</td>";
+                                        echo "<td>" . $row['transaction_total'] . "</td>";
+                                        echo "<td>" . $row['user_id'] . "</td>";
                                         echo "<td> 
-                                        <a href='product-detail.php?product_name=" . $row["product_name"] . "'>
+                                        <a href='product-detail.php?transaction_id=" . $row["transaction_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='productEdit-form.php?product_name=" . $row["product_name"] . "'>
+                                        <a href='productEdit-form.php?transaction_id=" . $row["transaction_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='product-delete.php?product_name=" . $row['product_name'] . "'>
+                                        <a href='transactions-delete.php?transaction_id=" . $row['transaction_id'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
                                     }

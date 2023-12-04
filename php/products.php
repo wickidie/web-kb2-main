@@ -1,8 +1,11 @@
 <?php
     session_start();
     include_once 'db-connect.inc.php';
-    $username = $_SESSION['username'];
-    if (isset($username)&& !empty($username)) {
+
+    $user_id = $_SESSION['user_id'];
+    // $username = $_SESSION['username'];
+    if (isset($user_id) && !empty($user_id)) {
+
     } else {
         echo "              
         <script type='text/javascript'>
@@ -100,16 +103,35 @@
                         </li>
                     </ul>
                 </div>
-                <div class="pb-2">
-                    <div class="nav flex-column justify-content-center align-items-center" id="sidebar2">
-                        <div class="nav-item py-2 py-sm-0">
-                            <a class="nav-link" href="logout.php">
-                                <i class="bi bi-box-arrow-left"></i>
-                                <span class="d-none fs-6 ms-2 mobile" id="logout">
-                                    Log out
-                                </span>
-                            </a>
-                        </div>
+
+                <hr>
+                <div class="px-xl-2 p-1">
+                    <div class="dropup">
+                        <a href="#"
+                            class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle show"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+                                class="rounded-circle me-2">
+                            <span class="d-none d-sm-inline">
+                                <?php 
+
+                                    $getUsername = "SELECT username FROM users WHERE user_id = '$user_id'";
+                                    $username = mysqli_query($conn, $getUsername);
+                                    $row = mysqli_fetch_assoc($username);
+
+                                    echo"<strong>". $row['username'] . "</strong>";
+                                ?>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow">
+                            <!-- <li><a class="dropdown-item" href="#">New project...</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li> -->
+                            <!-- <li>
+                                <hr class="dropdown-divider">
+                            </li> -->
+                            <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -249,21 +271,27 @@
                                         echo "<tr>";
                                         $c++;
                                         echo "<td>" . $row['product_id'] . "</td>";
-                                        // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
                                         echo "<td>" . $row['product_name'] . "</td>";
                                         echo "<td>" . $row['product_description'] . "</td>";
                                         echo "<td>" . $row['product_price'] . "</td>";
-                                        echo "<td>" . $row['product_img'] . "</td>";
+                                        // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
+                                        // echo "<td>" . $row['product_img'] . "</td>";
+                                        // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/" . $row['product_img'] . "' class='rounded' wdith='30px' height='30px'</td>";
+                                        // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/prod01.jpg' class='rounded' wdith='30px' height='30px'</td>";
+                                        echo "<td>" . "<img src='https://raw.githubusercontent.com/wickidie/web-kb2-main/master/asset/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
                                         echo "<td>" . $row['product_category'] . "</td>";
                                         echo "<td> 
                                         <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='producst-update-form.php?product_id=" . $row["product_id"] . "'>
+                                        <a href='transactions-add.php?product_id=" . $row["product_id"] . "'>
+                                        <i class='bi bi-cart'></i></a> &nbsp;
+                                        <a href='product-update-form.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
                                         <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
-                                    }
+                                    } 
+                                    // echo $username;
                                 } else {
                                 echo "<tr>";
                                 echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
