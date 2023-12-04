@@ -1,8 +1,9 @@
 <?php
     session_start();
     include_once 'db-connect.inc.php';
-    $username = $_SESSION['username'];
-    if (isset($username) && !empty($username)) {
+    $user_id = $_SESSION['user_id'];
+    // $username = $_SESSION['username'];
+    if (isset($user_id) && !empty($user_id)) {
     } else {
         echo "              
         <script type='text/javascript'>
@@ -80,22 +81,27 @@
                 <div class="px-xl-2 p-1">
                     <div class="dropup">
                         <a href="#"
-                            class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+                            class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle show"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://github.com/mdo.png" alt="" width="32" height="32"
                                 class="rounded-circle me-2">
                             <span class="d-none d-sm-inline">
                                 <?php 
-                                echo"<strong>$username</strong>";
+
+                                    $getUsername = "SELECT username FROM users WHERE user_id = '$user_id'";
+                                    $username = mysqli_query($conn, $getUsername);
+                                    $row = mysqli_fetch_assoc($username);
+
+                                    echo"<strong>". $row['username'] . "</strong>";
                                 ?>
                             </span>
                         </a>
                         <ul class="dropdown-menu text-small shadow">
                             <!-- <li><a class="dropdown-item" href="#">New project...</a></li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li>
-                            <hr class="dropdown-divider">
+                            <li><a class="dropdown-item" href="#">Profile</a></li> -->
+                            <!-- <li>
+                                <hr class="dropdown-divider">
                             </li> -->
                             <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
                         </ul>
@@ -197,6 +203,7 @@
                                         <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
                                     } 
+                                    // echo $username;
                                 } else {
                                 echo "<tr>";
                                 echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";

@@ -1,3 +1,22 @@
+<?php
+    session_start();
+    include_once 'db-connect.inc.php';
+    $user_id = $_SESSION['user_id'];
+    if (isset($user_id) && !empty($user_id)) {
+        echo "              
+        <script type='text/javascript'>
+        alert('$user_id');
+        location='transactions.php';
+        </script>";
+    } else {
+        echo "              
+        <script type='text/javascript'>
+        alert('You must login first');
+        location='login-form.php';
+        </script>";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,15 +32,16 @@
     <?php
         include_once 'db-connect.inc.php';
 
-        $transaction_total = 11.11;
+        $transaction_total = 12.12;
+        // $user_id = $_GET['user_id'];
 
-        $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `user_id`) VALUES (CURRENT_DATE(), '$transaction_total', (SELECT user_id from users WHERE user_id = 8));";
+        $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `user_id`) VALUES (CURRENT_DATE(), '$transaction_total', '$user_id');";
 
         if (mysqli_query($conn, $sql)) {
             echo "              
             <script type='text/javascript'>
-            alert('Your account has been created');
-            location='login-form.php';
+            alert('Added to Transaction!');
+            location='products.php';
             </script>";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);

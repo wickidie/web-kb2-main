@@ -7,8 +7,12 @@
             $sql = "SELECT * FROM users WHERE username = '$username' && password = '$password'";
             if (mysqli_num_rows(mysqli_query($conn, $sql)) > 0) {
                 session_start();
-                $_SESSION['username'] = $username;
-                header('Location: home.php');
+                $getUserId = "SELECT user_id FROM users WHERE username = '$username'";
+                $user_id = mysqli_query($conn, $getUserId);
+                $row = mysqli_fetch_assoc($user_id);
+                $_SESSION['user_id'] = $row['user_id'];
+                // $_SESSION['username'] = $username;
+                header('Location: users.php');
             } else {
                     echo "              
                     <script type='text/javascript'>
