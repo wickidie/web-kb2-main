@@ -1,9 +1,12 @@
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
 }
 
 a,
-a.nav-link {
+a.nav-link,
+a.nav-item,
+a.nav-link:focus,
+a.nav-link:active {
   color: currentColor;
   text-decoration: none;
 }
@@ -20,4 +23,36 @@ a.nav-link {
   box-shadow: none;
   border-color: transparent;
   background-color: #f8f9fa15;
+}
+
+.bi.logo {
+  font-size: 1.3rem;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.bi.bi-list,
+.bi.bi-x {
+  font-size: 1.3rem;
+}
+
+.bi {
+  color: currentColor;
+  font-size: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  span.mobile {
+    display: none;
+  }
+}
+
+.dropend:hover > .dropdown-menu {
+  display: block;
+  position: absolute;
+  inset: 0px auto auto 0px;
+  margin: 0px;
+  transform: translate3d(49.7778px, 0px, 0px) !important;
 }
