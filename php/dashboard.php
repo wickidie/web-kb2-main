@@ -1,8 +1,8 @@
 <?php
     session_start();
     include_once 'db-connect.inc.php';
-    $username = $_SESSION['username'];
-    if (isset($username)&& !empty($username)) {
+    $user_id = $_SESSION['user_id'];
+    if (isset($user_id)&& !empty($user_id)) {
     } else {
         echo "              
         <script type='text/javascript'>
