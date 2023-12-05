@@ -46,8 +46,8 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item py-2 py-sm-0">
-                            <a href="transactions.php" class="nav-link active">
+                        <li class="nav-item py-2 py-sm-0 align-items-center dropend" id="dropend">
+                            <a class="nav-link active">
                                 <i class="bi bi-table"></i>
                                 <span class="d-none fs-6 ms-2 collapsed mobile" id="transactions"
                                     data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
@@ -57,7 +57,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item active" href="transactions.php"><small>Transactions</small>
+                                    <a class="dropdown-item active" href="#"><small>Transactions</small>
                                     </a>
                                 </li>
                                 <li>
@@ -68,8 +68,8 @@
                             </ul>
                             <div class="collapse" id="dashboard-collapse">
                                 <ul class="btn-toggle-nav list-unstyled align-items-center">
-                                    <li class="py-2 ms-3">
-                                        <a href="transactions.php" class="active">
+                                    <li class="py-2 ms-3 ">
+                                        <a href="#" class="active">
                                             <i class="bi bi-card-text"></i>
                                             <small>Transactions</small>
                                         </a>
