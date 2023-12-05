@@ -1,4 +1,14 @@
 <?php
+    session_start();
+    $user_id = $_SESSION['user_id'];
+    if (isset($user_id) && !empty($user_id)) {
+    } else {
+        echo "              
+        <script type='text/javascript'>
+        alert('You must login first');
+        location='login-form.php';
+        </script>";
+    }
     $product_id = $_GET['product_id'];
 ?>
 

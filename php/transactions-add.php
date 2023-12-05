@@ -1,4 +1,7 @@
-<?php
+
+<!-- UNUSED -->
+
+<!-- <?php
     session_start();
     include_once 'db-connect.inc.php';
     $user_id = $_SESSION['user_id'];
@@ -71,4 +74,4 @@
     </script>
 </body>
 
-</html>
+</html> -->
