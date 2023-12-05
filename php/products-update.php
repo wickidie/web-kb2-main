@@ -8,11 +8,11 @@
     $image_file = $_FILES['image'];
     $category = $_POST['category'];
 
-    $file_name = $_FILES['image']['name'];
-    $file_temp = $_FILES['image']['tmp_name'];
-    $file_size = $_FILES['image']['size'];
-    $file_error = $_FILES['image']['error'];
-    $file_type = $_FILES['image']['type'];
+    $file_name = $image_file['name'];
+    $file_temp = $image_file['tmp_name'];
+    $file_size = $image_file['size'];
+    $file_error = $image_file['error'];
+    $file_type = $image_file['type'];
 
     $file_ext = explode('.', $file_name);
     $file_ext = strtolower(end($file_ext));
@@ -20,12 +20,12 @@
     $upload_location = "../asset/";
 
     $allowed_ext = array('jpg', 'jpeg', 'png');
-    $max_size = 10000;
+    $max_size = 10000000; // In Byte
 
     if (in_array($file_ext, $allowed_ext)) {
         if ($file_error === 0) {
             if ($file_size < $max_size) {
-                $new_file = $upload_location . $img_file;
+                $new_file = $upload_location . $file_name;
                 move_uploaded_file($file_temp, $new_file);
             }else{
                 echo "File too chongky";
