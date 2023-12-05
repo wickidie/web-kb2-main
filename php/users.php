@@ -144,8 +144,24 @@
                                                     height="35" alt="Image Description">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
-                                                <p class="mb-0 fw-bold"><small>Mark Williams</small></p>
-                                                <small class="card-text text-body">mark@site.com</small>
+                                                <p class="mb-0 fw-bold"><small>
+                                                        <?php 
+                                                            $getUsername = "SELECT username FROM users WHERE user_id = '$user_id'";
+                                                            $username = mysqli_query($conn, $getUsername);
+                                                            $row = mysqli_fetch_assoc($username);
+
+                                                            echo"<strong>". $row['username'] . "</strong>";
+                                                        ?>
+                                                    </small></p>
+                                                <small class="card-text text-body">
+                                                    <?php 
+                                                            $getEmail = "SELECT email FROM users WHERE user_id = '$user_id'";
+                                                            $email = mysqli_query($conn, $getEmail);
+                                                            $row = mysqli_fetch_assoc($email);
+
+                                                            echo"<strong>". $row['email'] . "</strong>";
+                                                        ?>
+                                                </small>
                                             </div>
                                         </div>
                                     </li>
@@ -161,10 +177,10 @@
                                             <small>Settings</small>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li>
+                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li> -->
                                 </ul>
                             </li>
                         </ul>
@@ -177,9 +193,10 @@
                                 <div class="input-group my-2">
                                     <input type="text" class="form-control form-control-sm" id="myInput" name="search"
                                         placeholder="Search for user" aria-label="Search" aria-describedby="searchph">
-                                    <span class="input-group-text" id="searchph">
+                                    <button class="input-group-text btn btn-secondary rounded-end-1" type="submit"
+                                        id="searchph">
                                         <i class="bi bi-search"></i>
-                                    </span>
+                                    </button>
                                 </div>
                             </form>
                             <div class="table-responsive">

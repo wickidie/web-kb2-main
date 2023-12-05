@@ -86,7 +86,7 @@
                             </div>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="products.php" class="nav-link active">
+                            <a href="#" class="nav-link active">
                                 <i class="bi bi-grid"></i>
                                 <span class="d-none fs-6 ms-2 mobile" id="products">
                                     Products
@@ -103,35 +103,16 @@
                         </li>
                     </ul>
                 </div>
-
-                <hr>
-                <div class="px-xl-2 p-1">
-                    <div class="dropup">
-                        <a href="#"
-                            class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle show"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="" width="32" height="32"
-                                class="rounded-circle me-2">
-                            <span class="d-none d-sm-inline">
-                                <?php 
-
-                                    $getUsername = "SELECT username FROM users WHERE user_id = '$user_id'";
-                                    $username = mysqli_query($conn, $getUsername);
-                                    $row = mysqli_fetch_assoc($username);
-
-                                    echo"<strong>". $row['username'] . "</strong>";
-                                ?>
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu text-small shadow">
-                            <!-- <li><a class="dropdown-item" href="#">New project...</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li> -->
-                            <!-- <li>
-                                <hr class="dropdown-divider">
-                            </li> -->
-                            <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
-                        </ul>
+                <div class="pb-2">
+                    <div class="nav flex-column justify-content-center align-items-center" id="sidebar2">
+                        <div class="nav-item py-2 py-sm-0">
+                            <a class="nav-link" href="logout.php">
+                                <i class="bi bi-box-arrow-left"></i>
+                                <span class="d-none fs-6 ms-2 mobile" id="logout">
+                                    Log out
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -165,8 +146,24 @@
                                                     height="35" alt="Image Description">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
-                                                <p class="mb-0 fw-bold"><small>Mark Williams</small></p>
-                                                <small class="card-text text-body">mark@site.com</small>
+                                                <p class="mb-0 fw-bold"><small>
+                                                        <?php 
+                                                            $getUsername = "SELECT username FROM users WHERE user_id = '$user_id'";
+                                                            $username = mysqli_query($conn, $getUsername);
+                                                            $row = mysqli_fetch_assoc($username);
+
+                                                            echo"<strong>". $row['username'] . "</strong>";
+                                                        ?>
+                                                    </small></p>
+                                                <small class="card-text text-body">
+                                                    <?php 
+                                                            $getEmail = "SELECT email FROM users WHERE user_id = '$user_id'";
+                                                            $email = mysqli_query($conn, $getEmail);
+                                                            $row = mysqli_fetch_assoc($email);
+
+                                                            echo"<strong>". $row['email'] . "</strong>";
+                                                        ?>
+                                                </small>
                                             </div>
                                         </div>
                                     </li>
@@ -182,10 +179,10 @@
                                             <small>Settings</small>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li>
+                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li> -->
                                 </ul>
                             </li>
                         </ul>
@@ -204,10 +201,10 @@
                                             <input type="text" class="form-control form-control-sm" id="myInput"
                                                 name="search" placeholder="Search for user" aria-label="Search"
                                                 aria-describedby="searchph">
-                                            <span class="input-group-text btn btn-secondary rounded-end-1"
-                                                id="searchph">
+                                            <button class="input-group-text btn btn-secondary rounded-end-1"
+                                                type="submit" id="searchph">
                                                 <i class="bi bi-search"></i>
-                                            </span>
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
