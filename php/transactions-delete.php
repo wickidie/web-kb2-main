@@ -1,34 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+    session_start();
+    include_once 'db-connect.inc.php';
+    $user_id = $_SESSION['user_id'];
+    if (isset($user_id) && !empty($user_id)) {
+        echo "              
+        <script type='text/javascript'>
+        alert('$user_id');
+        location='transacntions.php';
+        </script>";
+    } else {
+        echo "              
+        <script type='text/javascript'>
+        alert('You must login first');
+        location='login-form.php';
+        </script>";
+    }
+    $transaction_id = $_GET['transaction_id'];
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 5 | User Logged</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
+    $sql = "DELETE FROM transactions WHERE transaction_id = '$transaction_id';";
+    
+    if (mysqli_query($conn, $sql)) {
+        echo "              
+        <script type='text/javascript'>
+        alert('Transaction ID $transaction_id has been deleted');
+        location='transactions.php';
+        </script>";
+    } else {
+        echo "Error deleting record: " . mysqli_error($conn);
+    }
 
-<body>
-    <?php
-        include_once 'db-connect.inc.php';
-        $transaction_id = $_GET['transaction_id'];
-
-        $sql = "DELETE FROM transactions WHERE transaction_id = '$transaction_id';";
-        
-        if (mysqli_query($conn, $sql)) {
-            echo "              
-            <script type='text/javascript'>
-            alert('Transaction ID $transaction_id has been deleted');
-            location='transactions.php';
-            </script>";
-        } else {
-            echo "Error deleting record: " . mysqli_error($conn);
-        }
-
-        mysqli_close($conn);
-    ?>
-</body>
-
-</html>
+    mysqli_close($conn);
+?>
