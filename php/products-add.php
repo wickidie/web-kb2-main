@@ -3,11 +3,6 @@
     include_once 'db-connect.inc.php';
     $user_id = $_SESSION['user_id'];
     if (isset($user_id) && !empty($user_id)) {
-        echo "              
-        <script type='text/javascript'>
-        alert('$user_id');
-        location='products.php';
-        </script>";
     } else {
         echo "              
         <script type='text/javascript'>
@@ -15,18 +10,47 @@
         location='login-form.php';
         </script>";
     }
-    
-    if (isset($_POST['name']) && isset($_POST['price']) && isset($_POST['img'])) {
 
-        if ($_POST['name'] != "" || $_POST['price'] != "" || $_POST['img']) {
+    $image_file = $_FILES['image'];
+
+    $file_name = $image_file['name'];
+    $file_temp = $image_file['tmp_name'];
+    $file_size = $image_file['size'];
+    $file_error = $image_file['error'];
+    $file_type = $image_file['type'];
+
+    $file_ext = explode('.', $file_name);
+    $file_ext = strtolower(end($file_ext));
+    echo $file_ext;
+    $upload_location = "../asset/";
+
+    $allowed_ext = array('jpg', 'jpeg', 'png');
+    $max_size = 10000000; // In Byte
+
+    if (in_array($file_ext, $allowed_ext)) {
+        if ($file_error === 0) {
+            if ($file_size < $max_size) {
+                $new_file = $upload_location . $file_name;
+                move_uploaded_file($file_temp, $new_file);
+            }else{
+                echo "File too chongky";
+            }
+        }
+    }else{
+        echo "Your filetype is blacklisted";
+    }
+    
+    if (isset($_POST['name']) && isset($_POST['price'])) {
+
+        if ($_POST['name'] != "" || $_POST['price'] != "") {
             $name = $_POST['name'];
             $desc = $_POST['description'];
             $price = $_POST['price'];
-            $img = $_POST['img'];
+            // $img = $_POST['image'];
             $cat = $_POST['category'];
             
             $sql = "INSERT INTO products (product_name, product_description, product_price, product_img, product_category)
-            VALUES ('$name', '$desc', '$price', '$img', '$cat')";
+            VALUES ('$name', '$desc', '$price', '$file_name', '$cat')";
 
             if (mysqli_query($conn, $sql)) {
                 echo "              
