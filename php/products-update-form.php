@@ -25,7 +25,7 @@
 <body data-bs-theme="dark">
     <main class="h-100">
         <div class="d-flex flex-column justify-content-center align-items-center h-100" style="z-index: 999">
-            <form class="needs-validation" action="products-update.php" method="post" novalidate>
+            <form class="needs-validation" action="products-update.php" method="post" enctype="multipart/form-data" novalidate>
                 <h2><b>Product ID <?php echo $product_id ?> Update</b></h2>
                 <p>This form is used to update user data!</p>
                 <div class="form-floating mb-3">
@@ -44,12 +44,12 @@
                     <label for="password_input"><strong>Price</strong></label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="image" name="image"
+                    <input type="file" class="form-control" id="image" name="image"
                         placeholder="img_avatar1.png" required>
                     <label for="confirm_password"><strong>Image</strong></label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="category" name="category"
+                    <input type="text" class="form-control" id="category" name="category"   
                         placeholder="category1" required>
                     <label for="confirm_password"><strong>Category</strong></label>
                 </div>
