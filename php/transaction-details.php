@@ -192,9 +192,10 @@
                                 <div class="input-group my-2">
                                     <input type="text" class="form-control form-control-sm" id="myInput" name="search"
                                         placeholder="Search for user" aria-label="Search" aria-describedby="searchph">
-                                    <span class="input-group-text" id="searchph">
+                                    <button class="input-group-text btn btn-secondary rounded-end-1" type="submit"
+                                        id="searchph">
                                         <i class="bi bi-search"></i>
-                                    </span>
+                                    </button>
                                 </div>
                             </form>
                             <div class="table-responsive">
