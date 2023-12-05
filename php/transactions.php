@@ -261,7 +261,7 @@
                                         echo "<td>" . $row['transaction_total'] . "</td>";
                                         echo "<td>" . $row['user_id'] . "</td>";
                                         echo "<td> 
-                                        <a href='transactions-details.php?transaction_id=" . $row["transaction_id"] . "'>
+                                        <a href='transaction-details.php?search=" . $row["transaction_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
                                         <a href='transaction-update-form.php?transaction_id=" . $row["transaction_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;

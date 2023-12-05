@@ -191,7 +191,7 @@
                             <form method="GET">
                                 <div class="input-group my-2">
                                     <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                                        placeholder="Search for user" aria-label="Search" aria-describedby="searchph">
+                                        placeholder="Search for transaction ID" aria-label="Search" aria-describedby="searchph">
                                     <button class="input-group-text btn btn-secondary rounded-end-1" type="submit"
                                         id="searchph">
                                         <i class="bi bi-search"></i>
