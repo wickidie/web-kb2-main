@@ -1,36 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+    session_start();
+    include_once 'db-connect.inc.php';
+    $user_id = $_SESSION['user_id'];
+    if (isset($user_id) && !empty($user_id)) {
+    } else {
+        echo "              
+        <script type='text/javascript'>
+        alert('You must login first');
+        location='login-form.php';
+        </script>";
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 5 | User Logged</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
+    $pastUser = $_POST['pastUser'];
+    $password = $_POST['password'];
 
-<body>
-    <?php
-        include_once 'db-connect.inc.php';
+    $sql = "UPDATE users SET password = md5('$password') WHERE user_id = '$pastUser';";
 
-        $pastUser = $_POST['pastUser'];
-        $password = $_POST['password'];
+    if (mysqli_query($conn, $sql)) {
+        echo "              
+        <script type='text/javascript'>
+        alert('$pastUser password was updated.');
+        location='users.php';
+        </script>";
+    } else {
+    echo "Error updating record: " . mysqli_error($conn);
+    }
 
-        $sql = "UPDATE users SET password = md5('$password') WHERE user_id = '$pastUser';";
-
-        if (mysqli_query($conn, $sql)) {
-            echo "              
-            <script type='text/javascript'>
-            alert('$pastUser password was updated.');
-            location='users.php';
-            </script>";
-        } else {
-        echo "Error updating record: " . mysqli_error($conn);
-        }
-
-        mysqli_close($conn);
-        ?>
-</body>
-
-</html>
+    mysqli_close($conn);
+?>

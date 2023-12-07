@@ -1,11 +1,9 @@
 <?php
     session_start();
     include_once 'db-connect.inc.php';
-
     $user_id = $_SESSION['user_id'];
     // $username = $_SESSION['username'];
     if (isset($user_id) && !empty($user_id)) {
-
     } else {
         echo "              
         <script type='text/javascript'>
@@ -191,7 +189,7 @@
                 <main class="p-3">
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="container">
-                            <div class="row justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <div class="col-6 col-md-2">
                                     <a href="products-form.php" class="btn btn-secondary">Add product</a>
                                 </div>
@@ -199,7 +197,7 @@
                                     <form method="GET">
                                         <div class="input-group my-2">
                                             <input type="text" class="form-control form-control-sm" id="myInput"
-                                                name="search" placeholder="Search for user" aria-label="Search"
+                                                name="search" placeholder="Search for product name" aria-label="Search"
                                                 aria-describedby="searchph">
                                             <button class="input-group-text btn btn-secondary rounded-end-1"
                                                 type="submit" id="searchph">
@@ -275,20 +273,23 @@
                                         // echo "<td>" . $row['product_img'] . "</td>";
                                         // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/" . $row['product_img'] . "' class='rounded' wdith='30px' height='30px'</td>";
                                         // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/prod01.jpg' class='rounded' wdith='30px' height='30px'</td>";
-                                        echo "<td>" . "<img src='../asset/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
+                                        echo "<td>" . "<img src='../asset/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
                                         echo "<td>" . $row['product_category'] . "</td>";
                                         echo "<td> 
                                         <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='transactions-add.php?product_id=" . $row["product_id"] . "'>
-                                        <i class='bi bi-cart'></i></a> &nbsp;
                                         <a href='products-update-form.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
                                         <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
-                                        <i class='bi bi-trash-fill'></i></a></td>";
+                                        <i class='bi bi-trash-fill'></i></a>
+                                        <form action='transactions-add.php?product_id=" . $row["product_id"] . "'method='POST'>
+                                            <button type='submit'> 
+                                                <i class='bi bi-cart'></i>
+                                            </button>
+                                            <input type='number' class='form-control-sm' id='quantity' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph'>
+                                        </form></td>";
                                         echo "<tr>";
-                                    } 
-                                    // echo $username;
+                                    }
                                 } else {
                                 echo "<tr>";
                                 echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";

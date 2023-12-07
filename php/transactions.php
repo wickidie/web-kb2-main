@@ -261,7 +261,7 @@
                                         echo "<td>" . $row['transaction_total'] . "</td>";
                                         echo "<td>" . $row['user_id'] . "</td>";
                                         echo "<td> 
-                                        <a href='transactions-details.php?transaction_id=" . $row["transaction_id"] . "'>
+                                        <a href='transaction-details.php?search=" . $row["transaction_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
                                         <a href='transaction-update-form.php?transaction_id=" . $row["transaction_id"] . "'>
                                         <i class='bi bi-pencil-square'></i></a> &nbsp;
@@ -286,7 +286,7 @@
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
-                                            <span aria-hidden="true">&laquo</span>
+                                            <span aria-hidden="true">&laquo First</span>
                                         </a>
                                     </li>
                                     <?php 
@@ -303,7 +303,7 @@
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
-                                            <span aria-hidden="true">&raquo</span>
+                                            <span aria-hidden="true">Last &raquo</span>
                                         </a>
                                     </li>
                                 </ul>

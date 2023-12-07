@@ -191,7 +191,7 @@
                             <form method="GET">
                                 <div class="input-group my-2">
                                     <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                                        placeholder="Search for user" aria-label="Search" aria-describedby="searchph">
+                                        placeholder="Search for transaction ID" aria-label="Search" aria-describedby="searchph">
                                     <button class="input-group-text btn btn-secondary rounded-end-1" type="submit"
                                         id="searchph">
                                         <i class="bi bi-search"></i>
@@ -265,7 +265,9 @@
                                         echo "<tr>";
                                     }
                                 } else {
-                                echo "0 results";
+                                    echo "<tr>";
+                                    echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
+                                    echo "<tr>";
                                 }
 
                                 mysqli_close($conn);
@@ -297,7 +299,7 @@
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page < $total_page) { echo "href='users-logged.php??search=$search_value&page=$total_page'"; } ?>>
-                                            <span aria-hidden="true">&raquo</span>
+                                            <span aria-hidden="true">Last &raquo</span>
                                         </a>
                                     </li>
                                 </ul>

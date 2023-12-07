@@ -14,7 +14,17 @@
     <div class="container p-4 mx-5" style="max-width: 720px">
         <p><a class="link" onclick="history.back()"><b>Chara</b></a> / <b>Chara Detail</b></p>
         <?php
+            session_start();
             include_once 'db-connect.inc.php';
+            $user_id = $_SESSION['user_id'];
+            if (isset($user_id) && !empty($user_id)) {
+            } else {
+                echo "              
+                <script type='text/javascript'>
+                alert('You must login first');
+                location='login-form.php';
+                </script>";
+            }
             $user_id= $_GET['user_id'];
 
             // $sql = "DELETE FROM users WHERE userID = '$user'";

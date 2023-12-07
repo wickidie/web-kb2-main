@@ -1,48 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+    session_start();
+    include_once 'db-connect.inc.php';
+    $user_id = $_SESSION['user_id'];
+    if (isset($user_id) && !empty($user_id)) {
+    } else {
+        echo "              
+        <script type='text/javascript'>
+        alert('You must login first');
+        location='login-form.php';
+        </script>";
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
+    $image_file = $_FILES['image'];
+    $file_name = $image_file['name'];
+    $file_temp = $image_file['tmp_name'];
+    $file_size = $image_file['size'];
+    $file_error = $image_file['error'];
+    $file_type = $image_file['type'];
 
-<body>
-    <?php
-        include_once 'db-connect.inc.php';
-        
-        if (isset($_POST['name']) && isset($_POST['price']) && isset($_POST['img'])) {
+    $file_ext = explode('.', $file_name);
+    $file_ext = strtolower(end($file_ext));
+    echo $file_ext;
+    $upload_location = "../asset/";
 
-            if ($_POST['name'] != "" || $_POST['price'] != "" || $_POST['img']) {
-                $name = $_POST['name'];
-                $desc = $_POST['description'];
-                $price = $_POST['price'];
-                $img = $_POST['img'];
-                $cat = $_POST['category'];
-                
-                $sql = "INSERT INTO products (product_name, product_description, product_price, product_img, product_category)
-                VALUES ('$name', '$desc', '$price', '$img', '$cat')";
+    $allowed_ext = array('jpg', 'jpeg', 'png');
+    $max_size = 10000000; // In Byte
 
-                if (mysqli_query($conn, $sql)) {
-                    echo "              
-                    <script type='text/javascript'>
-                    alert('Your product has been added!');
-                    location='products.php';
-                    </script>";
-                } else {
-                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-                }
-                
-                
-            } else {
+    if (in_array($file_ext, $allowed_ext)) {
+        if ($file_error === 0) {
+            if ($file_size < $max_size) {
+                $new_file = $upload_location . $file_name;
+                move_uploaded_file($file_temp, $new_file);
+            }else{
+                echo "File too chongky";
+            }
+        }
+    }else{
+        echo "Your filetype is blacklisted";
+    }
+    
+    if (isset($_POST['name']) && isset($_POST['price'])) {
+
+        if ($_POST['name'] != "" || $_POST['price'] != "") {
+            $name = $_POST['name'];
+            $desc = $_POST['description'];
+            $price = $_POST['price'];
+            // $img = $_POST['image'];
+            $cat = $_POST['category'];
+            
+            $sql = "INSERT INTO products (product_name, product_description, product_price, product_img, product_category)
+            VALUES ('$name', '$desc', '$price', '$file_name', '$cat')";
+
+            if (mysqli_query($conn, $sql)) {
                 echo "              
                 <script type='text/javascript'>
-                alert('Failed to add product!');
+                alert('Your product has been added!');
                 location='products.php';
                 </script>";
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
+            
+            
         } else {
             echo "              
             <script type='text/javascript'>
@@ -50,12 +69,13 @@
             location='products.php';
             </script>";
         }
+    } else {
+        echo "              
+        <script type='text/javascript'>
+        alert('Failed to add product!');
+        location='products.php';
+        </script>";
+    }
 
-        mysqli_close($conn) ;
-    ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+    mysqli_close($conn) ;
+?>

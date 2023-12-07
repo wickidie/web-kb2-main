@@ -18,22 +18,28 @@ CREATE TABLE products (
     product_category VARCHAR(255)
 );
 
-CREATE TABLE transactions (
+CREATE TABLE transactions ( 
     transaction_id int PRIMARY KEY,
     transaction_date DATE,
     transaction_total DECIMAL(10, 2),
-    user_id int NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    user_id int,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) 
+        ON UPDATE CASCADE 
+        ON DELETE SET NULL
 );
 
 CREATE TABLE transaction_details (
     transaction_detail_id int PRIMARY KEY,
     quantity int,
     product_price DECIMAL(10, 2),
-    transaction_id int NOT NULL,
-    product_id int NOT NULL,
-    FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    transaction_id int,
+    product_id int,
+    FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) 
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
 );
 
 ALTER TABLE users

@@ -292,7 +292,7 @@
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page > 1){ echo "href='users.php?search=$search_value&?page=1'"; } ?>>
-                                            <span aria-hidden="true">&laquo</span>
+                                            <span aria-hidden="true">&laquo First</span>
                                         </a>
                                     </li>
                                     <?php 
@@ -309,7 +309,7 @@
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page < $total_page) { echo "href='users.php??search=$search_value&page=$total_page'"; } ?>>
-                                            <span aria-hidden="true">&raquo</span>
+                                            <span aria-hidden="true">Last &raquo</span>
                                         </a>
                                     </li>
                                 </ul>
