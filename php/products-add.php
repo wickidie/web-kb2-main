@@ -12,7 +12,6 @@
     }
 
     $image_file = $_FILES['image'];
-
     $file_name = $image_file['name'];
     $file_temp = $image_file['tmp_name'];
     $file_size = $image_file['size'];

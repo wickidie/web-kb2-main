@@ -15,6 +15,6 @@ INSERT INTO users (username, password, email, first_name, last_name, address, ph
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
 ('admundur', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('admencr3t', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('admenjes', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('admont0k', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('admongol', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');

@@ -265,7 +265,9 @@
                                         echo "<tr>";
                                     }
                                 } else {
-                                echo "0 results";
+                                    echo "<tr>";
+                                    echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
+                                    echo "<tr>";
                                 }
 
                                 mysqli_close($conn);
@@ -297,7 +299,7 @@
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page < $total_page) { echo "href='users-logged.php??search=$search_value&page=$total_page'"; } ?>>
-                                            <span aria-hidden="true">&raquo Last</span>
+                                            <span aria-hidden="true">Last &raquo</span>
                                         </a>
                                     </li>
                                 </ul>
