@@ -22,6 +22,7 @@ CREATE TABLE transactions (
     transaction_id int PRIMARY KEY,
     transaction_date DATE,
     transaction_total DECIMAL(10, 2),
+    status VARCHAR(255),
     user_id int,
     FOREIGN KEY (user_id) REFERENCES users(user_id) 
         ON UPDATE CASCADE 
