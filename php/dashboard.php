@@ -189,7 +189,7 @@
                     <div class="h-100">
                         <div class="d-flex flex-column justify-content-center align-items-center h-100">
                             <div class="container">
-                                <h1>Cover your page.</h1>
+                                <h1>Dashboard</h1>
                                 <p class="lead">Cover is a one-page template for building simple and beautiful home
                                     pages.
                                     Download,
