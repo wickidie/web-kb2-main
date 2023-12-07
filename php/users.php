@@ -205,7 +205,7 @@
                                         <tr>
                                             <th scope="col">User ID</th>
                                             <th scope="col">Username</th>
-                                            <!-- <th scope="col">Password</th> -->
+                                            <th scope="col">Password</th>
                                             <th scope="col">Full Name</th>
                                             <th scope="col">Address</th>
                                             <th scope="col">Phone Number</th>
@@ -260,7 +260,7 @@
                                         echo "<td>" . $row['user_id'] . "</td>";
                                         // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
                                         echo "<td>" . $row['username'] . "</td>";
-                                        // echo "<td>" . $row['password'] . "</td>";
+                                        echo "<td>" . $row['password'] . "</td>";
                                         echo "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
                                         echo "<td>" . $row['address'] . "</td>";
                                         echo "<td>" . $row['phone_number'] . "</td>";
