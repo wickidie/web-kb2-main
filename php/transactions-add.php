@@ -22,7 +22,7 @@
         echo "Error deleting record: " . mysqli_error($conn);
     }
 
-    $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `user_id`) VALUES (CURRENT_DATE(), (SELECT product_price from products WHERE product_id = $product_id) * $quantity, $user_id);";
+    $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `status`,`user_id`) VALUES (CURRENT_DATE(), (SELECT product_price from products WHERE product_id = $product_id) * $quantity, 'Pending', $user_id);";
 
     if (mysqli_query($conn, $sql)) {
     } else {
