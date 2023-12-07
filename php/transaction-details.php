@@ -280,7 +280,7 @@
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page > 1){ echo "href='users-logged.php?search=$search_value&?page=1'"; } ?>>
-                                            <span aria-hidden="true">&laquo First</span>
+                                            <span aria-hidden="true">&laquo</span>
                                         </a>
                                     </li>
                                     <?php 
@@ -297,7 +297,7 @@
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page < $total_page) { echo "href='users-logged.php??search=$search_value&page=$total_page'"; } ?>>
-                                            <span aria-hidden="true">&raquo Last</span>
+                                            <span aria-hidden="true">&raquo</span>
                                         </a>
                                     </li>
                                 </ul>

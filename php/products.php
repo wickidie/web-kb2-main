@@ -275,7 +275,7 @@
                                         // echo "<td>" . $row['product_img'] . "</td>";
                                         // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/" . $row['product_img'] . "' class='rounded' wdith='30px' height='30px'</td>";
                                         // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/prod01.jpg' class='rounded' wdith='30px' height='30px'</td>";
-                                        echo "<td>" . "<img src='https://raw.githubusercontent.com/wickidie/web-kb2-main/master/asset/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
+                                        echo "<td>" . "<img src='../asset/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
                                         echo "<td>" . $row['product_category'] . "</td>";
                                         echo "<td> 
                                         <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
