@@ -206,15 +206,15 @@
                                             <th scope="col">Transaction ID</th>
                                             <th scope="col">Date</th>
                                             <th scope="col">Transaction Total</th>
-                                            <th scope="col">User ID</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                 $items_per_page = 10;
                                 $search_value = '';
-                                $sql = "SELECT transaction_id, transaction_date, transaction_total, user_id FROM transactions";
+                                $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id";
                                 $result = mysqli_query($conn, $sql);
                                 $rows = mysqli_num_rows($result);
 
@@ -236,7 +236,7 @@
                                     }
                                 }else{
                                     // echo "Start ";
-                                    $sql = "SELECT transaction_id, transaction_date, transaction_total, user_id FROM transactions WHERE 1 LIMIT $offset, $items_per_page";
+                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
                                     $result = mysqli_query($conn, $sql);
                                 }
                                 
@@ -259,14 +259,40 @@
                                         // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
                                         echo "<td>" . $row['transaction_date'] . "</td>";
                                         echo "<td>" . $row['transaction_total'] . "</td>";
-                                        echo "<td>" . $row['user_id'] . "</td>";
-                                        echo "<td> 
-                                        <a href='transaction-details.php?search=" . $row["transaction_id"] . "'>
-                                        <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='transaction-update-form.php?transaction_id=" . $row["transaction_id"] . "'>
-                                        <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='transactions-delete.php?transaction_id=" . $row['transaction_id'] . "'>
-                                        <i class='bi bi-trash-fill'></i></a></td>";
+                                        // echo "<td>" . $row['user_id'] . "</td>";
+                                        echo "<td>" . $row['username'] . "</td>";
+                                        echo "<td>";
+                                        echo "
+                                        <form action='transaction-upd-status.php' method=post>
+                                        <select name='status'>
+                                            <option value='Status'>" . $row['status'] . "</option>
+                                            <option value='Pending'>Pending</option>
+                                            <option value='Paid'>Paid</option>
+                                            <option value='Delivery'>Delivery</option>
+                                            <option value='Delivered'>Delivered</option>
+                                        </select>
+                                        <input type='hidden' name='transaction_id' value='" . $row['transaction_id'] . "'/>
+                                        <button class='btn btn-primary btn-sm' type='submit'>Update status</button>
+                                        </form>";
+                                        // echo "
+                                        // <div class='dropdown'>
+                                        // <button class='btn btn-secondary dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                        //   Status
+                                        // </button>
+                                        // <ul class='dropdown-menu'>
+                                        // <li><button class='dropdown-item' type='button' data-value='Pending'>Pending</button></li>
+                                        // <li><button class='dropdown-item' type='button' data-value='Paid'>Paid</button></li>
+                                        // <li><button class='dropdown-item' type='button' data-value='Delivery'>Delivery</button></li>
+                                        // <li><button class='dropdown-item' type='button' data-value='Delivered'>Delivered</button></li>
+                                        // </ul>
+                                        // </div>";
+                                        // <a href='transaction-details.php?search=" . $row["transaction_id"] . "'>
+                                        // <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
+                                        // <a href='transaction-update-form.php?transaction_id=" . $row["transaction_id"] . "'>
+                                        // <i class='bi bi-pencil-square'></i></a> &nbsp;
+                                        // <a href='transactions-delete.php?transaction_id=" . $row['transaction_id'] . "'>
+                                        // <i class='bi bi-trash-fill'></i></a>";
+                                        echo "</td>";
                                         echo "<tr>";
                                     }
                                 } else {
@@ -281,6 +307,9 @@
                                     </tbody>
                                 </table>
                             </div>
+
+
+
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item">
