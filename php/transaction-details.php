@@ -207,7 +207,7 @@
                                             <th scope="col">product_id</th>
                                             <th scope="col">quantity</th>
                                             <th scope="col">product_price</th>
-                                            <th scope="col">Action</th>
+                                            <!-- <th scope="col">Action</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -259,9 +259,9 @@
                                         echo "<td>" . $row['product_id'] . "</td>";
                                         echo "<td>" . $row['quantity'] . "</td>";
                                         echo "<td>" . $row['product_price'] . "</td>";
-                                        echo "<td> 
-                                        <a href='transaction-details-delete.php?transaction_detail_id=" . $row['transaction_detail_id'] . "'>
-                                        <i class='bi bi-trash-fill'></i></a></td>";
+                                        // echo "<td> 
+                                        // <a href='transaction-details-delete.php?transaction_detail_id=" . $row['transaction_detail_id'] . "'>
+                                        // <i class='bi bi-trash-fill'></i></a></td>";
                                         echo "<tr>";
                                     }
                                 } else {
