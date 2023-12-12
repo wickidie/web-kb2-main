@@ -18,7 +18,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Products</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -47,7 +47,7 @@
                             </a>
                         </li>
                         <li class="nav-item py-2 py-sm-0 align-items-center dropend" id="dropend">
-                            <a href="#" class="nav-link">
+                            <a class="nav-link active">
                                 <i class="bi bi-table"></i>
                                 <span class="d-none fs-6 ms-2 collapsed mobile" id="transactions"
                                     data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
@@ -57,7 +57,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="transactions.php"><small>Transactions</small>
+                                    <a class="dropdown-item active" href="#"><small>Transactions</small>
                                     </a>
                                 </li>
                                 <li>
@@ -68,8 +68,8 @@
                             </ul>
                             <div class="collapse" id="dashboard-collapse">
                                 <ul class="btn-toggle-nav list-unstyled align-items-center">
-                                    <li class="py-2 ms-3">
-                                        <a href="transactions.php">
+                                    <li class="py-2 ms-3 ">
+                                        <a href="#" class="active">
                                             <i class="bi bi-card-text"></i>
                                             <small>Transactions</small>
                                         </a>
@@ -84,7 +84,7 @@
                             </div>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="#" class="nav-link active">
+                            <a href="products.php" class="nav-link">
                                 <i class="bi bi-grid"></i>
                                 <span class="d-none fs-6 ms-2 mobile" id="products">
                                     Products
@@ -189,42 +189,38 @@
                 <main class="p-3">
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="container">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="col-6 col-md-2">
-                                    <a href="products-form.php" class="btn btn-secondary">Add product</a>
+                            <form method="GET">
+                                <div class="input-group my-2">
+                                    <input type="text" class="form-control form-control-sm" id="myInput" name="search"
+                                        placeholder="Search by date" aria-label="Search" aria-describedby="searchph">
+                                    <button class="input-group-text btn btn-secondary rounded-end-1" type="submit"
+                                        id="searchph">
+                                        <i class="bi bi-search"></i>
+                                    </button>
                                 </div>
-                                <div class="col-6 col-md-2">
-                                    <form method="GET">
-                                        <div class="input-group my-2">
-                                            <input type="text" class="form-control form-control-sm" id="myInput"
-                                                name="search" placeholder="Search for product name" aria-label="Search"
-                                                aria-describedby="searchph">
-                                            <button class="input-group-text btn btn-secondary rounded-end-1"
-                                                type="submit" id="searchph">
-                                                <i class="bi bi-search"></i>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            </form>
                             <div class="table-responsive">
                                 <table class="table table-hover table-striped" id="myTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Product ID</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col">Cart ID</th>
+                                            <th scope="col">User ID</th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Product Price</th>
+                                            <th scope="col">Created At</th> 
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                 $items_per_page = 10;
                                 $search_value = '';
-                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products";
+                                $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
+                                        JOIN users u ON c.user_id = u.user_id
+                                        JOIN products p ON c.product_id = p.product_id
+                                        -- ORDER BY c.cart_id
+                                        WHERE c.user_id = $user_id;";
                                 $result = mysqli_query($conn, $sql);
                                 $rows = mysqli_num_rows($result);
 
@@ -234,19 +230,22 @@
                                 if (isset($_GET['search'])) {
                                     $search_value = $_GET['search'];
                                     if (!empty($_GET['search'])) {
-                                        $sql = "SELECT * FROM products where product_name like '%$search_value%' LIMIT $offset, $items_per_page";
+                                        $sql = "SELECT * FROM cart where cart_id like '%$search_value%' LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);
-                                        $sql = "SELECT * FROM products where product_name like '%$search_value%'";
+                                        $sql = "SELECT * FROM cart where cart_id like '%$search_value%'";
                                         $result_total = mysqli_query($conn, $sql);
                                         $rows = mysqli_num_rows($result_total);
                                     }else{
                                         // echo "Empty ";
-                                        $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                                        $sql = "SELECT * FROM cart WHERE 1 LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);
                                     }
                                 }else{
                                     // echo "Start ";
-                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                                    $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
+                                    JOIN users u ON c.user_id = u.user_id
+                                    JOIN products p ON c.product_id = p.product_id
+                                    WHERE c.user_id = $user_id LIMIT $offset, $items_per_page";
                                     $result = mysqli_query($conn, $sql);
                                 }
                                 
@@ -265,29 +264,33 @@
                                     while($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
                                         $c++;
-                                        echo "<td>" . $row['product_id'] . "</td>";
+                                        echo "<td>" . $row['cart_id'] . "</td>";
+                                        // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
+                                        echo "<td>" . $row['user_id'] . "</td>";
+                                        echo "<td>" . $row['username'] . "</td>";
+                                        // echo "<td>" . $row['user_id'] . "</td>";
                                         echo "<td>" . $row['product_name'] . "</td>";
-                                        echo "<td>" . $row['product_description'] . "</td>";
+                                        echo "<td>" . $row['quantity'] . "</td>";
                                         echo "<td>" . $row['product_price'] . "</td>";
-                                        // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
-                                        // echo "<td>" . $row['product_img'] . "</td>";
-                                        // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/" . $row['product_img'] . "' class='rounded' wdith='30px' height='30px'</td>";
-                                        // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/prod01.jpg' class='rounded' wdith='30px' height='30px'</td>";
-                                        echo "<td>" . "<img src='../asset/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
-                                        echo "<td>" . $row['product_category'] . "</td>";
-                                        echo "<td> 
-                                        <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
-                                        <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='products-update-form.php?product_id=" . $row["product_id"] . "'>
-                                        <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
-                                        <i class='bi bi-trash-fill'></i></a>
-                                        <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
-                                            <button type='submit'> 
-                                                <i class='bi bi-cart'></i>
-                                            </button>
-                                            <input type='number' class='form-control-sm' id='quantity' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph'>
-                                        </form></td>";
+                                        echo "<td>" . $row['created_at'] . "</td>";
+                                        // echo "
+                                        // <div class='dropdown'>
+                                        // <button class='btn btn-secondary dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                        //   Status
+                                        // </button>
+                                        // <ul class='dropdown-menu'>
+                                        // <li><button class='dropdown-item' type='button' data-value='Pending'>Pending</button></li>
+                                        // <li><button class='dropdown-item' type='button' data-value='Paid'>Paid</button></li>
+                                        // <li><button class='dropdown-item' type='button' data-value='Delivery'>Delivery</button></li>
+                                        // <li><button class='dropdown-item' type='button' data-value='Delivered'>Delivered</button></li>
+                                        // </ul>
+                                        // </div>";
+                                        // <a href='transaction-details.php?search=" . $row["transaction_id"] . "'>
+                                        // <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
+                                        // <a href='transaction-update-form.php?transaction_id=" . $row["transaction_id"] . "'>
+                                        // <i class='bi bi-pencil-square'></i></a> &nbsp;
+                                        // <a href='transactions-delete.php?transaction_id=" . $row['transaction_id'] . "'>
+                                        // <i class='bi bi-trash-fill'></i></a>";
                                         echo "<tr>";
                                     }
                                 } else {
@@ -302,12 +305,15 @@
                                     </tbody>
                                 </table>
                             </div>
+
+
+
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
-                                            <span aria-hidden="true">&laquo</span>
+                                            <span aria-hidden="true">&laquo First</span>
                                         </a>
                                     </li>
                                     <?php 
@@ -324,21 +330,23 @@
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
-                                            <span aria-hidden="true">&raquo</span>
+                                            <span aria-hidden="true">Last &raquo</span>
                                         </a>
                                     </li>
                                 </ul>
                             </nav>
+                            <form action="transactions-add.php" method="POST">
+                                <button class="btn btn-primary btn-sm" type="submit">Checkout</button>
+                            </form>
                         </div>
                     </div>
                 </main>
             </div>
         </div>
-    </div>
-    <script type="text/javascript" src="../js/sidebar.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+        <script type="text/javascript" src="../js/sidebar.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
 </body>
 
 </html>
