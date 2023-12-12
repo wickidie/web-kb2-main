@@ -13,29 +13,7 @@
 
     $quantity = $_POST['quantity'];
     $product_id = $_GET['product_id'];
-
-    // $sql = "SET foreign_key_checks = 0;";
-    
-    // if (mysqli_query($conn, $sql)) {
-    // } else {
-    //     echo "Error deleting record: " . mysqli_error($conn);
-    // }
-
     $sql = "INSERT INTO `cart`(`created_at`, `user_id`, `quantity`, `product_id`) VALUES (CURRENT_TIMESTAMP, $user_id, $quantity, $product_id);";
-
-    // if (mysqli_query($conn, $sql)) {
-    // } else {
-    //     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    // }
-
-    // $sql = "INSERT INTO `transaction_details`(`transaction_id`, `product_id`, `quantity`, `product_price`) VALUES ((LAST_INSERT_ID()), $product_id, $quantity, (SELECT product_price from products WHERE product_id = $product_id));";
-
-    // if (mysqli_query($conn, $sql)) {
-    // } else {
-    //     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    // }
-
-    // $sql = "SET foreign_key_checks = 1;";
     
     if (mysqli_query($conn, $sql)) {
         echo "              

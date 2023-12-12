@@ -11,7 +11,6 @@
                 $user_id = mysqli_query($conn, $getUserId);
                 $row = mysqli_fetch_assoc($user_id);
                 $_SESSION['user_id'] = $row['user_id'];
-                // $_SESSION['username'] = $username;
                 header('Location: users.php');
             } else {
                     echo "              

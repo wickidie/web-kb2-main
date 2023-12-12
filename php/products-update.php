@@ -25,7 +25,7 @@
     $allowed_ext = array('jpg', 'jpeg', 'png');
     $max_size = 10000000; // In Byte
     $product_img = mysqli_fetch_assoc(mysqli_query($conn, "SELECT product_img FROM products WHERE product_id = '$product_id';"));
-    $img_location = "../asset/";
+    $img_location = "../asset/product/";
     $old_image = $img_location . $product_img['product_img'];
 
     if (unlink($old_image)) {

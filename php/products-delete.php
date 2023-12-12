@@ -13,7 +13,7 @@
     $product_id = $_GET['product_id'];
     
     $product_img = mysqli_fetch_assoc(mysqli_query($conn, "SELECT product_img FROM products WHERE product_id = '$product_id';"));
-    $img_path = "../asset/" . $product_img['product_img'];
+    $img_path = "../asset/product/" . $product_img['product_img'];
     $sql = "DELETE FROM products WHERE product_id = '$product_id';";
     
     if (mysqli_query($conn, $sql)) {

@@ -16,7 +16,6 @@
     }
     </style>
 </head>
-
 <body data-bs-theme="dark">
     <main class="h-100">
         <div class="d-flex flex-column justify-content-center align-items-center h-100" style="z-index: 999">
@@ -45,7 +44,7 @@
                 <button type="submit" class="btn btn-primary text-center w-100 mb-2">Log in</button>
 
                 <div class="text-center mb-2">
-                    <a href="regist-form.php" class="text-light"><small>Create account</small></a>
+                    <a href="regist-form.php" class="text-light"><small>Create new account</small></a>
                 </div>
             </form>
         </div>

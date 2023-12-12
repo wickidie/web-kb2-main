@@ -11,19 +11,8 @@
         </script>";
     }
 
-    // $quantity = $_POST['quantity'];
-    // $product_id = $_GET['product_id'];
-
-    // $sql = "SET foreign_key_checks = 0;";
-    
-    // if (mysqli_query($conn, $sql)) {
-    // } else {
-    //     echo "Error deleting record: " . mysqli_error($conn);
-    // }
-
-    $getCartId = "SELECT c.cart_id, c.created_at, c.user_id, c.quantity, c.product_id, p.product_price FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id";
-
-    $result = mysqli_query($conn, $getCartId);
+    $sql = "SELECT c.cart_id, c.created_at, c.user_id, c.quantity, c.product_id, p.product_price FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id";
+    $result = mysqli_query($conn, $sql);
     $transaction_total = 0;
 
     if (mysqli_num_rows($result) > 0) {
@@ -34,20 +23,6 @@
 
     $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `status`,`user_id`) VALUES (CURRENT_DATE(), $transaction_total, 'Pending', $user_id);";
 
-    // if (mysqli_query($conn, $sql)) {
-    // } else {
-    //     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    // }
-
-    // $sql = "INSERT INTO `transaction_details`(`transaction_id`, `product_id`, `quantity`, `product_price`) VALUES ((LAST_INSERT_ID()), $product_id, $quantity, (SELECT product_price from products WHERE product_id = $product_id));";
-
-    // if (mysqli_query($conn, $sql)) {
-    // } else {
-    //     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    // }
-
-    // $sql = "SET foreign_key_checks = 1;";
-    
     if (mysqli_query($conn, $sql)) {
         echo "              
         <script type='text/javascript'>

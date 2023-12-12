@@ -17,7 +17,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Dashboard</title>
+    <link rel="icon" href="../asset/icon/tokaku_logo.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -31,7 +32,7 @@
                 id="sidebar">
                 <div class="pt-2">
                     <div class="d-flex justify-content-center align-items-center mb-3">
-                        <i class="bi bi-exclude logo"></i>
+                        <img src="../asset/icon/tokaku_logo.svg" alt="">
                         <span class="d-none fs-5 ms-2 mobile" id="logo">
                             Kuis besar
                         </span>
@@ -176,10 +177,10 @@
                                             <small>Settings</small>
                                         </a>
                                     </li>
-                                    <!-- <li>
+                                    <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li> -->
+                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li>
                                 </ul>
                             </li>
                         </ul>

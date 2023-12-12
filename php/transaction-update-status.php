@@ -2,14 +2,9 @@
     session_start();
     include_once 'db-connect.inc.php';
     $user_id = $_SESSION['user_id'];
-    // $username = $_SESSION['username'];
     if (isset($user_id) && !empty($user_id)) {
-
-        // Get form data
         $transaction_id = $_POST['transaction_id'];
         $status = $_POST['status'];
-
-        // Update transaction status in database
         $sql = "UPDATE transactions SET status='$status' WHERE transaction_id='$transaction_id'";
         $result = mysqli_query($conn, $sql);
 

@@ -11,9 +11,9 @@
         </script>";
     }
 
-    $sql = "SELECT category_name FROM product_category";
+    $sql = "SELECT * FROM product_category";
     $result = mysqli_query($conn, $sql);
-    // $row = mysqli_fetch_assoc($result);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product</title>
+    <title>Add Product Form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -52,7 +52,7 @@
                             <?php
                                 echo "<select class='col mb-3' name='category'>";
                                 while($row = mysqli_fetch_assoc($result)) {
-                                    echo "<option value=" .  $row['category_name'] . ">" . $row['category_name'] . "</option>";
+                                    echo "<option value=" .  $row['category_id'] . ">" . $row['category_name'] . "</option>";
                                 }
                                 echo "</select>";
                             ?>
@@ -79,8 +79,6 @@
                 </div>
                 <div class="justify-content-center justify-content-sm-end">
                     <div class="text-end">
-                        <!-- <a href="#" type="button" class="btn btn-ghost-light" onclick="history.back()">Discard</a> -->
-                        <!-- <a href="#" class="btn btn-primary" type="submit">Save</a> -->
                         <button class="btn btn-danger" onclick="history.back()">Discard</button>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>

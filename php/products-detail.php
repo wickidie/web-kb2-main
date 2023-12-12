@@ -209,7 +209,7 @@
                                         <div class='row g-0'>
                                         
                                             <div class='col-md-4'>
-                                                <img src='../asset/". $row['product_img'] . "' class='img-fluid rounded-start'
+                                                <img src='../asset/product/". $row['product_img'] . "' class='img-fluid rounded-start'
                                                     alt='". $row['product_img'] . "'>
                                             </div>
                                             <div class='col-md-8'>

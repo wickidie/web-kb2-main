@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Ecommerce</title>
+    <title>Sign Up - TOKAKU</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -26,18 +26,6 @@
             <form class="needs-validation w-25" action="users-add.php" method="post" novalidate>
                 <h2><b>Create your Account</b></h2>
                 <p>Join us today for exclusive deals and offers!</p>
-                <!-- <div class="input-group mb-3">
-                    <span class="input-group-text" id="fnameph">
-                        Firstname
-                    </span>
-                    <input type="text" class="form-control" id="user_input" name="email" placeholder="Firstname"
-                        aria-label="Firstname" aria-describedby="fnameph" required>
-                    <span class="input-group-text" id="lnameph">
-                        Lastname
-                    </span>
-                    <input type="text" class="form-control" id="user_input" name="email" placeholder="Lastname"
-                        aria-label="Lastname" aria-describedby="lnameph" required>
-                </div> -->
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="emailph">
                         <i class="bi bi-envelope-fill"></i>
