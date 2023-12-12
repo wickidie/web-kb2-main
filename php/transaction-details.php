@@ -10,6 +10,9 @@
         location='login-form.php';
         </script>";
     }
+
+    $search_value = $_GET['search'] ?? null;
+
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
@@ -191,7 +194,8 @@
                             <form method="GET">
                                 <div class="input-group my-2">
                                     <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                                        placeholder="Search for transaction ID" aria-label="Search" aria-describedby="searchph">
+                                        placeholder="Search for transaction ID" aria-label="Search"
+                                        aria-describedby="searchph" <?php echo "value = $search_value" ?>>
                                     <button class="input-group-text btn btn-secondary rounded-end-1" type="submit"
                                         id="searchph">
                                         <i class="bi bi-search"></i>
@@ -213,7 +217,6 @@
                                     <tbody>
                                         <?php
                                 $items_per_page = 10;
-                                $search_value = '';
                                 $sql = "SELECT transaction_detail_id, transaction_id, product_id, quantity, product_price FROM transaction_details";
                                 $result = mysqli_query($conn, $sql);
                                 $rows = mysqli_num_rows($result);
@@ -222,7 +225,6 @@
                                 $offset = ($current_page - 1) * $items_per_page;
                                 
                                 if (isset($_GET['search'])) {
-                                    $search_value = $_GET['search'];
                                     if (!empty($_GET['search'])) {
                                         $sql = "SELECT * FROM transaction_details where transaction_detail_id like '%$search_value%' LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);

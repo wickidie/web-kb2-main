@@ -11,6 +11,16 @@
         location='login-form.php';
         </script>";
     }
+
+    
+    try {
+        $search_value = $_GET['search'] ?? null;
+    } catch (Exception $e) {
+        $search_value = "";
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }    
+    
+
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
@@ -189,16 +199,24 @@
                 <main class="p-3">
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="container">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="col-6 col-md-2">
-                                    <a href="products-form.php" class="btn btn-secondary">Add product</a>
+                            <div class="d-flex justify-content-between align-items-between">
+                                <div class="d-flex row">
+                                    <div class="row-6 col-md-2">
+                                        <a href="products-form.php" class="btn btn-success">Add product</a>
+                                    </div>
+                                    <div class="row-6 col-md-2">
+                                        <a href="products-form.php" class="btn btn-secondary">Add Category</a>
+                                    </div>
+                                    <div class="row-6 col-md-2">
+                                        <a href="products-form.php" class="btn btn-danger">Delete Category</a>
+                                    </div>
                                 </div>
                                 <div class="col-6 col-md-2">
                                     <form method="GET">
                                         <div class="input-group my-2">
                                             <input type="text" class="form-control form-control-sm" id="myInput"
                                                 name="search" placeholder="Search for product name" aria-label="Search"
-                                                aria-describedby="searchph">
+                                                aria-describedby="searchph" <?php echo "value = $search_value" ?>>
                                             <button class="input-group-text btn btn-secondary rounded-end-1"
                                                 type="submit" id="searchph">
                                                 <i class="bi bi-search"></i>
@@ -223,8 +241,7 @@
                                     <tbody>
                                         <?php
                                 $items_per_page = 10;
-                                $search_value = '';
-                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products";
+                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, category_id FROM products";
                                 $result = mysqli_query($conn, $sql);
                                 $rows = mysqli_num_rows($result);
 
@@ -241,12 +258,12 @@
                                         $rows = mysqli_num_rows($result_total);
                                     }else{
                                         // echo "Empty ";
-                                        $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                                        $sql = "SELECT product_id, product_name, product_description, product_price, product_img, category_id FROM products WHERE 1 LIMIT $offset, $items_per_page";
                                         $result = mysqli_query($conn, $sql);
                                     }
                                 }else{
                                     // echo "Start ";
-                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, category_id FROM products WHERE 1 LIMIT $offset, $items_per_page";
                                     $result = mysqli_query($conn, $sql);
                                 }
                                 
@@ -268,13 +285,13 @@
                                         echo "<td>" . $row['product_id'] . "</td>";
                                         echo "<td>" . $row['product_name'] . "</td>";
                                         echo "<td>" . $row['product_description'] . "</td>";
-                                        echo "<td>" . $row['product_price'] . "</td>";
+                                        echo "<td> Rp. " . $row['product_price'] . "</td>";
                                         // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
                                         // echo "<td>" . $row['product_img'] . "</td>";
                                         // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/" . $row['product_img'] . "' class='rounded' wdith='30px' height='30px'</td>";
                                         // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/prod01.jpg' class='rounded' wdith='30px' height='30px'</td>";
                                         echo "<td>" . "<img src='../asset/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
-                                        echo "<td>" . $row['product_category'] . "</td>";
+                                        echo "<td>" . $row['category_id'] . "</td>";
                                         echo "<td> 
                                         <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
                                         <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
@@ -286,7 +303,6 @@
                                             <button type='submit'> 
                                                 <i class='bi bi-cart'></i>
                                             </button>
-                                            <input type='number' class='form-control-sm' id='quantity' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph'>
                                         </form></td>";
                                         echo "<tr>";
                                     }

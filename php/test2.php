@@ -1,449 +1,291 @@
+<?php
+    session_start();
+    include_once 'db-connect.inc.php';
+    $user_id = $_SESSION['user_id'];
+    if (isset($user_id)&& !empty($user_id)) {
+    } else {
+        echo "              
+        <script type='text/javascript'>
+        alert('You must login first');
+        location='login-form.php';
+        </script>";
+    }
+?>
 <!DOCTYPE html>
-<html>
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Snippet - BBBootstrap</title>
-    <style>
-    @font-face {
-        font-family: Arial !important;
-        font-display: swap !important;
-    }
-    </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <style>
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    /* Track */
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
-
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-        background: #888;
-    }
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-
-    @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
-
-    :root {
-        --header-height: 3rem;
-        --nav-width: 68px;
-        --first-color: #4723D9;
-        --first-color-light: #AFA5D9;
-        --white-color: #F7F6FB;
-        --body-font: 'Nunito', sans-serif;
-        --normal-font-size: 1rem;
-        --z-fixed: 100
-    }
-
-    *,
-    ::before,
-    ::after {
-        box-sizing: border-box
-    }
-
-    body {
-        position: relative;
-        margin: var(--header-height) 0 0 0;
-        padding: 0 1rem;
-        font-family: var(--body-font);
-        font-size: var(--normal-font-size);
-        transition: .5s
-    }
-
-    a {
-        text-decoration: none
-    }
-
-    .header {
-        width: 100%;
-        height: var(--header-height);
-        position: fixed;
-        top: 0;
-        left: 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 1rem;
-        background-color: var(--white-color);
-        z-index: var(--z-fixed);
-        transition: .5s
-    }
-
-    .header_toggle {
-        color: var(--first-color);
-        font-size: 1.5rem;
-        cursor: pointer
-    }
-
-    .header_img {
-        width: 35px;
-        height: 35px;
-        display: flex;
-        justify-content: center;
-        border-radius: 50%;
-        overflow: hidden
-    }
-
-    .header_img img {
-        width: 40px
-    }
-
-    .l-navbar {
-        position: fixed;
-        top: 0;
-        left: -30%;
-        width: var(--nav-width);
-        height: 100vh;
-        background-color: var(--first-color);
-        padding: .5rem 1rem 0 0;
-        transition: .5s;
-        z-index: var(--z-fixed)
-    }
-
-    .nav {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        overflow: hidden
-    }
-
-    .nav_logo,
-    .nav_link {
-        display: grid;
-        grid-template-columns: max-content max-content;
-        align-items: center;
-        column-gap: 1rem;
-        padding: .5rem 0 .5rem 1.5rem
-    }
-
-    .nav_logo {
-        margin-bottom: 2rem
-    }
-
-    .nav_logo-icon {
-        font-size: 1.25rem;
-        color: var(--white-color)
-    }
-
-    .nav_logo-name {
-        color: var(--white-color);
-        font-weight: 700
-    }
-
-    .nav_link {
-        position: relative;
-        color: var(--first-color-light);
-        margin-bottom: 1.5rem;
-        transition: .3s
-    }
-
-    .nav_link:hover {
-        color: var(--white-color)
-    }
-
-    .nav_icon {
-        font-size: 1.25rem
-    }
-
-    .show {
-        left: 0
-    }
-
-    .body-pd {
-        padding-left: calc(var(--nav-width) + 1rem)
-    }
-
-    .active {
-        color: var(--white-color)
-    }
-
-    .active::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        width: 2px;
-        height: 32px;
-        background-color: var(--white-color)
-    }
-
-    .height-100 {
-        height: 100vh;
-    }
-
-    @media screen and (min-width: 768px) {
-        body {
-            margin: calc(var(--header-height) + 1rem) 0 0 0;
-            padding-left: calc(var(--nav-width) + 2rem)
-        }
-
-        .header {
-            height: calc(var(--header-height) + 1rem);
-            padding: 0 2rem 0 calc(var(--nav-width) + 2rem)
-        }
-
-        .header_img {
-            width: 40px;
-            height: 40px
-        }
-
-        .header_img img {
-            width: 45px
-        }
-
-        .l-navbar {
-            left: 0;
-            padding: 1rem 1rem 0 0
-        }
-
-        .show {
-            width: calc(var(--nav-width) + 156px)
-        }
-
-        .body-pd {
-            padding-left: calc(var(--nav-width) + 188px)
-        }
-    }
-    </style>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body classname="snippet-body" id="body-pd">
-
-    <header class="header" id="header">
-        <div class="header_toggle"> <i class="bx bx-menu" id="header-toggle"></i> </div>
-        <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
-    </header>
-    <div class="l-navbar" id="nav-bar">
-        <nav class="nav">
-            <div> <a href="#" class="nav_logo"> <i class="bx bx-layer nav_logo-icon"></i> <span
-                        class="nav_logo-name">BBBootstrap</span> </a>
-                <div class="nav_list">
-                    <a href="test.php" class="nav_link active">
-                        <i class="bx bx-grid-alt nav_icon"></i>
-                        <span class="nav_name">Dashboard</span>
-                    </a>
-                    <a href="#" class="nav_link">
-                        <i class="bx bx-user nav_icon"></i>
-                        <span class="nav_name">Users</span>
-                    </a>
-                    <a href="#" class="nav_link">
-                        <i class="bx bx-message-square-detail nav_icon"></i>
-                        <span class="nav_name">Messages</span>
-                    </a>
-                    <a href="#" class="nav_link">
-                        <i class="bx bx-bookmark nav_icon"></i>
-                        <span class="nav_name">Bookmark</span> </a>
-                    <a href="#" class="nav_link">
-                        <i class="bx bx-folder nav_icon"></i>
-                        <span class="nav_name">Files</span> </a>
-                    <a href="#" class="nav_link">
-                        <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
-                        <span class="nav_name">Stats</span> </a>
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <nav class="d-none d-md-flex flex-column bg-body-tertiary col-auto justify-content-between min-vh-100 p-xl-2 p-1"
+                id="sidebar">
+                <div class="pt-2">
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <i class="bi bi-exclude logo"></i>
+                        <span class="d-none fs-5 ms-2 mobile" id="logo">
+                            Kuis besar
+                        </span>
+                    </div>
+                    <ul class="nav nav-pills flex-column justify-content-center align-items-center" id="sidebar1">
+                        <li class="nav-item py-2 py-sm-0">
+                            <a href="#" class="nav-link active">
+                                <i class="bi bi-house"></i>
+                                <span class="d-none fs-6 ms-2 mobile" id="dashboard">
+                                    Dashboard
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item py-2 py-sm-0 align-items-center dropend" id="dropend">
+                            <a href="#" class="nav-link">
+                                <i class="bi bi-table"></i>
+                                <span class="d-none fs-6 ms-2 collapsed mobile" id="transactions"
+                                    data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
+                                    aria-expanded="false">
+                                    Transactions
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="transactions.php"><small>Transactions</small>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="transaction-details.php">
+                                        <small>Transactions details</small>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="collapse" id="dashboard-collapse">
+                                <ul class="btn-toggle-nav list-unstyled align-items-center">
+                                    <li class="py-2 ms-3">
+                                        <a href="transactions.php">
+                                            <i class="bi bi-card-text"></i>
+                                            <small>Transactions</small>
+                                        </a>
+                                    </li>
+                                    <li class="py-2 ms-3">
+                                        <a href="transaction-details.php">
+                                            <i class="bi bi-card-list"></i>
+                                            <small>Transactions details</small>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item py-2 py-sm-0">
+                            <a href="products.php" class="nav-link">
+                                <i class="bi bi-grid"></i>
+                                <span class="d-none fs-6 ms-2 mobile" id="products">
+                                    Products
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item py-2 py-sm-0">
+                            <a href="users.php" class="nav-link">
+                                <i class="bi bi-person-circle"></i>
+                                <span class="d-none fs-6 ms-2 mobile" id="users">
+                                    Users
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+                <div class="pb-2">
+                    <div class="nav flex-column justify-content-center align-items-center" id="sidebar2">
+                        <div class="nav-item py-2 py-sm-0">
+                            <a class="nav-link" href="logout.php">
+                                <i class="bi bi-box-arrow-left"></i>
+                                <span class="d-none fs-6 ms-2 mobile" id="logout">
+                                    Log out
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="col justify-content-center p-0">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between px-md-4 px-3">
+                    <div class="navbar-brand">
+                        <span><i class="bi bi-list cursor" id="icon-toggle"></i></span>
+                    </div>
+                    <div>
+                        <ul class="nav align-items-center">
+                            <li class="nav-item mx-2">
+                                <a class="">
+                                    <i class="bi cursor" id="themeToggle"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a href="#" class="">
+                                    <i class="bi bi-bell"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown mx-2">
+                                <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="https://github.com/mdo.png" alt="" width="35" height="35"
+                                        class="rounded-circle">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end text-small shadow">
+                                    <li>
+                                        <div class="d-flex align-items-center px-3">
+                                            <div class="">
+                                                <img class="rounded-circle" src="https://github.com/mdo.png" width="35"
+                                                    height="35" alt="Image Description">
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="mb-0 fw-bold"><small>
+                                                        <?php 
+                                                            $getUsername = "SELECT username FROM users WHERE user_id = '$user_id'";
+                                                            $username = mysqli_query($conn, $getUsername);
+                                                            $row = mysqli_fetch_assoc($username);
+
+                                                            echo"<strong>". $row['username'] . "</strong>";
+                                                        ?>
+                                                    </small></p>
+                                                <small class="card-text text-body">
+                                                    <?php 
+                                                            $getEmail = "SELECT email FROM users WHERE user_id = '$user_id'";
+                                                            $email = mysqli_query($conn, $getEmail);
+                                                            $row = mysqli_fetch_assoc($email);
+
+                                                            echo"<strong>". $row['email'] . "</strong>";
+                                                        ?>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#"><small>Profile</small>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <small>Settings</small>
+                                        </a>
+                                    </li>
+                                    <!-- <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li> -->
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <main class="container-fluid p-3 align-items-center h-75">
+                    <div class="h-100">
+                        <div class="d-flex flex-column h-100">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#" onclick="history.back()">Page?</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Details</li>
+                                </ol>
+                            </nav>
+
+                            <div class="container justify-content-center align-items-center">
+                                <div class="card mb-3" style="max-width: 1200px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="../asset/prod01.jpg" class="img-fluid rounded-start" alt="...">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+
+                                                <div class="d-flex justify-content-between align-items-between">
+                                                    <div class="col-6 col-md-5">
+                                                        <h2 class="card-title"><strong>Product Name</strong>
+                                                            <span><small class="fs-5">$price</small></span>
+                                                        </h2>
+                                                        <span class="card-subtitle">category</span>
+                                                    </div>
+                                                    <div class="col-6 col-md-3 text-end">
+                                                        <button class="btn btn-outline-secondary">Edit</button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="card-text mt-3">Lorem ipsum dolor sit amet consectetur
+                                                    adipisicing
+                                                    elit. Vel, explicabo? Repellendus amet fugit ipsa labore, quo
+                                                    mollitia laudantium quam nostrum iste unde totam illo quidem est,
+                                                    cumque eos numquam quasi ex recusandae. Earum, repudiandae? Cumque
+                                                    architecto voluptatem, deserunt quam dolores dolorum vel sit
+                                                    laboriosam numquam molestiae, suscipit consequatur illum deleniti.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container justify-content-center align-items-center">
+                                <div class="card mb-3" style="max-width: 1200px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="../asset/prod01.jpg" class="img-fluid rounded-start" alt="...">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-between">
+                                                    <div class="col-6 col-md-3">
+                                                        <h2>User Details</h2>
+                                                    </div>
+                                                    <div class="col-6 col-md-3 text-end">
+                                                        <button class="btn btn-outline-secondary">Edit</button>
+                                                    </div>
+                                                </div>
+                                                <ul class="row row-cols-2 g-2 g-lg-3 list-unstyled mt-3">
+                                                    <li class="col">
+                                                        <h4 class="card-text">Fullname:</h4>
+                                                    </li>
+                                                    <li class="col">
+                                                        <h4 class="card-text">Email:</h4>
+                                                    </li>
+                                                    <li class="col">
+                                                        <h4 class="card-text">Username:</h4>
+                                                    </li>
+                                                    <li class="col">
+                                                        <h4 class="card-title">Number:</h4>
+                                                    </li>
+                                                    <li class="col">
+                                                        <h4 class="card-text">Adresses:</h4>
+                                                    </li>
+                                                </ul>
+                                                <!-- <hr> -->
+                                                <!-- <ul class="row row-cols-2 g-2 g-lg-3 list-unstyled">
+                                                    <li class="col">
+                                                        <span class="card-text">Status:</span>
+                                                    </li>
+                                                    <li class="col">
+                                                        <p class="card-text">Role:</p>
+                                                    </li>
+                                                </ul> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
             </div>
-            <a href="#" class="nav_link">
-                <i class="bx bx-log-out nav_icon"></i>
-                <span class="nav_name">SignOut</span>
-            </a>
-        </nav>
-    </div>
-    <!--Container Main start-->
-    <div class="height bg-light">
-        <div class="col-2">
-            <a href="product-form.php" class="btn btn-secondary">Add product</a>
-        </div>
-        <div class="col-2">
-            <form method="GET">
-                <div class="input-group my-2">
-                    <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                        placeholder="Search for user" aria-label="Search" aria-describedby="searchph">
-                    <span class="input-group-text btn btn-secondary rounded-end-1" id="searchph">
-                        <i class="bi bi-search"></i>
-                    </span>
-                </div>
-            </form>
         </div>
     </div>
-    <div class="table-responsive">
-        <table class="table table-hover table-striped" id="myTable">
-            <thead">
-                <tr>
-                    <th scope="col">Product ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <?php
-                                $items_per_page = 10;
-                                $search_value = '';
-                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products";
-                                $result = mysqli_query($conn, $sql);
-                                $rows = mysqli_num_rows($result);
-
-                                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-                                $offset = ($current_page - 1) * $items_per_page;
-                                
-                                if (isset($_GET['search'])) {
-                                    $search_value = $_GET['search'];
-                                    if (!empty($_GET['search'])) {
-                                        $sql = "SELECT * FROM products where product_name like '%$search_value%' LIMIT $offset, $items_per_page";
-                                        $result = mysqli_query($conn, $sql);
-                                        $sql = "SELECT * FROM products where product_name like '%$search_value%'";
-                                        $result_total = mysqli_query($conn, $sql);
-                                        $rows = mysqli_num_rows($result_total);
-                                    }else{
-                                        // echo "Empty ";
-                                        $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
-                                        $result = mysqli_query($conn, $sql);
-                                    }
-                                }else{
-                                    // echo "Start ";
-                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE 1 LIMIT $offset, $items_per_page";
-                                    $result = mysqli_query($conn, $sql);
-                                }
-                                
-                                $total_page=ceil($rows/$items_per_page);
-                                // echo "Search for : $search_value <br>";
-                                // echo "Showing : $total_page pages <br>";
-                                // echo "With total : $rows result<br>";
-                                
-                                $previous = $current_page - 1;
-                                $next = $current_page + 1;
-                                // $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users LIMIT $offset, $items_per_page";
-                                // $result = mysqli_query($conn, $sql);
-
-                                if (mysqli_num_rows($result) > 0) {
-                                    $c = $offset + 1;
-                                    while($row = mysqli_fetch_assoc($result)) {
-                                        echo "<tr>";
-                                        $c++;
-                                        echo "<td>" . $row['product_id'] . "</td>";
-                                        // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
-                                        echo "<td>" . $row['product_name'] . "</td>";
-                                        echo "<td>" . $row['product_description'] . "</td>";
-                                        echo "<td>" . $row['product_price'] . "</td>";
-                                        echo "<td>" . $row['product_img'] . "</td>";
-                                        echo "<td>" . $row['product_category'] . "</td>";
-                                        echo "<td> 
-                                        <a href='producst-detail.php?product_id=" . $row["product_id"] . "'>
-                                        <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='producst-update-form.php?product_id=" . $row["product_id"] . "'>
-                                        <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
-                                        <i class='bi bi-trash-fill'></i></a></td>";
-                                        echo "<tr>";
-                                    }
-                                } else {
-                                echo "<tr>";
-                                echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
-                                echo "<tr>";
-                                }
-
-                                mysqli_close($conn);
-
-                                ?>
-                </tbody>
-        </table>
-    </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link"
-                    <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
-                    <span aria-hidden="true">&laquo</span>
-                </a>
-            </li>
-            <?php 
-                                for($x=1;$x<=$total_page;$x++){
-                                    ?>
-            <li class="page-item">
-                <a class="page-link" <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
-                </a>
-            </li>
-            <?php
-                                }
-                            ?>
-            <li class="page-item">
-                <a class="page-link"
-                    <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
-                    <span aria-hidden="true">&raquo</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    </div>
-    <!--Container Main end-->
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="#"></script>
-    <script type="text/javascript" src="#"></script>
-    <script type="text/javascript" src="#"></script>
-    <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(event) {
-
-        const showNavbar = (toggleId, navId, bodyId, headerId) => {
-            const toggle = document.getElementById(toggleId),
-                nav = document.getElementById(navId),
-                bodypd = document.getElementById(bodyId),
-                headerpd = document.getElementById(headerId)
-
-            // Validate that all variables exist
-            if (toggle && nav && bodypd && headerpd) {
-                toggle.addEventListener('click', () => {
-                    // show navbar
-                    nav.classList.toggle('show')
-                    // change icon
-                    toggle.classList.toggle('bx-x')
-                    // add padding to body
-                    bodypd.classList.toggle('body-pd')
-                    // add padding to header
-                    headerpd.classList.toggle('body-pd')
-                })
-            }
-        }
-
-        showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
-
-        /*===== LINK ACTIVE =====*/
-        const linkColor = document.querySelectorAll('.nav_link')
-
-        function colorLink() {
-            if (linkColor) {
-                linkColor.forEach(l => l.classList.remove('active'))
-                this.classList.add('active')
-            }
-        }
-        linkColor.forEach(l => l.addEventListener('click', colorLink))
-
-        // Your code to run since DOM is loaded and ready
-    });
+    <script type="text/javascript" src="../js/sidebar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
-    <script type="text/javascript">
-    var myLink = document.querySelectorAll('a[href="#"]');
-    myLink.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-        });
-    });
-    </script>
-
 </body>
 
 </html>

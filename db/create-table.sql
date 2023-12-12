@@ -9,13 +9,21 @@ CREATE TABLE users (
     phone_number VARCHAR(255)
 );
 
+CREATE TABLE product_category (
+    category_id int PRIMARY KEY,
+    category_name VARCHAR(255)
+);
+
 CREATE TABLE products (
     product_id int PRIMARY KEY,
     product_name VARCHAR(255),
     product_description VARCHAR(255),
     product_price DECIMAL(10, 2),
     product_img VARCHAR(255),
-    product_category VARCHAR(255)
+    category_id int,
+    FOREIGN KEY (category_id) REFERENCES product_category(category_id) 
+        ON UPDATE CASCADE 
+        ON DELETE SET NULL
 );
 
 CREATE TABLE transactions ( 
@@ -71,3 +79,6 @@ ALTER TABLE transaction_details
 
 ALTER TABLE cart
     MODIFY cart_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+    
+ALTER TABLE product_category
+    MODIFY category_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
