@@ -11,14 +11,16 @@
         </script>";
     }
     $product_id = $_GET['product_id'];
-    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, product_category FROM products WHERE product_id = $product_id";
-    $rows = mysqli_fetch_assoc(mysqli_query($conn, $sql));
-    $name = $rows['product_name'];
-    $description = $rows['product_description'];
-    $price = $rows['product_price'];
-    $image = $rows['product_img'];
-    $category = $rows['product_category'];
+    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, p.category_id, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE product_id = $product_id";
+    $row = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+    $name = $row['product_name'];
+    $description = $row['product_description'];
+    $price = $row['product_price'];
+    $image = $row['product_img'];
+    $category = $row['category_id'];
 
+    $sql = "SELECT category_name FROM product_category";
+    $result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -67,11 +69,27 @@
                         placeholder="img_avatar1.png" required>
                     <label for="confirm_password"><strong>Current image : <?php echo $image ?></strong></label>
                 </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="category" name="category" <?php echo "value='$category'" ?>
-                        placeholder="category1" required>
-                    <label for="confirm_password"><strong>Category</strong></label>
-                </div>
+                <div class="col">
+                        <div>
+                            <label for="name" class="col form-label">Category</label>
+                        </div>
+                            <?php
+                                echo "<select class='col mb-3' name='category'>"; 
+                                while($category_row = mysqli_fetch_assoc($result)) {
+                                    if ($category_row['category_name'] == $row['category_name']) {
+                                        echo "<option value=" .  $row['category_name'] . ">" . $row['category_name'] . "</option>";
+                                    }
+                                }
+                                $sql = "SELECT category_name FROM product_category";
+                                $result = mysqli_query($conn, $sql);
+                                while($category_row = mysqli_fetch_assoc($result)) {
+                                    if ($category_row['category_name'] != $row['category_name']) {
+                                        echo "<option value=" .  $category_row['category_name'] . ">" . $category_row['category_name'] . "</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
+                    </div>
                 <?php
                     echo"
                     <div class='text-center btn-group w-100'>
