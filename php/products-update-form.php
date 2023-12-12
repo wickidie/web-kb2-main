@@ -46,7 +46,8 @@
 <body data-bs-theme="dark">
     <main class="h-100">
         <div class="d-flex flex-column justify-content-center align-items-center h-100" style="z-index: 999">
-            <form class="needs-validation" action="products-update.php" method="post" enctype="multipart/form-data" novalidate>
+            <form class="needs-validation" action="products-update.php" method="post" enctype="multipart/form-data"
+                novalidate>
                 <h2><b>Product ID <?php echo $product_id ?> Update</b></h2>
                 <p>This form is used to update user data!</p>
                 <div class="form-floating mb-3">
@@ -55,8 +56,8 @@
                     <label for="password_input"><strong>Name</strong></label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="description" name="description" <?php echo "value='$description'" ?>
-                        placeholder="description" required>
+                    <input type="text" class="form-control" id="description" name="description"
+                        <?php echo "value='$description'" ?> placeholder="description" required>
                     <label for="confirm_password"><strong>Description</strong></label>
                 </div>
                 <div class="form-floating mb-3">
@@ -65,15 +66,15 @@
                     <label for="password_input"><strong>Price</strong></label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="file" class="form-control" id="image" name="image"
-                        placeholder="img_avatar1.png" required>
+                    <input type="file" class="form-control" id="image" name="image" placeholder="img_avatar1.png"
+                        required>
                     <label for="confirm_password"><strong>Current image : <?php echo $image ?></strong></label>
                 </div>
                 <div class="col">
-                        <div>
-                            <label for="name" class="col form-label">Category</label>
-                        </div>
-                            <?php
+                    <div>
+                        <label for="name" class="col form-label">Category</label>
+                    </div>
+                    <?php
                                 echo "<select class='col mb-3' name='category'>"; 
                                 while($category_row = mysqli_fetch_assoc($result)) {
                                     if ($category_row['category_name'] == $row['category_name']) {
@@ -89,15 +90,11 @@
                                 }
                                 echo "</select>";
                             ?>
-                    </div>
-                <?php
-                    echo"
-                    <div class='text-center btn-group w-100'>
+                </div>
+                <div class='text-center btn-group w-100'>
                     <button type='submit' class='btn btn-primary' name='product_id' value='$product_id'>Update</button>
                     <button type='submit' class='btn btn-danger' onclick='history.back()'>Close</button>
-                    </div>
-                    ";
-                ?>
+                </div>
             </form>
         </div>
     </main>

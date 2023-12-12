@@ -11,7 +11,7 @@
         </script>";
     }
 
-    $search_value = $_GET['search'];
+    $search_value = $_GET['search'] ?? null;
 
 ?>
 <!DOCTYPE html>
@@ -194,7 +194,8 @@
                             <form method="GET">
                                 <div class="input-group my-2">
                                     <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                                        placeholder="Search for transaction ID" aria-label="Search" aria-describedby="searchph" <?php echo "value = $search_value" ?>>
+                                        placeholder="Search for transaction ID" aria-label="Search"
+                                        aria-describedby="searchph" <?php echo "value = $search_value" ?>>
                                     <button class="input-group-text btn btn-secondary rounded-end-1" type="submit"
                                         id="searchph">
                                         <i class="bi bi-search"></i>

@@ -12,7 +12,14 @@
         </script>";
     }
 
-    $search_value = $_GET['search'];
+    
+    try {
+        $search_value = $_GET['search'] ?? null;
+    } catch (Exception $e) {
+        $search_value = "";
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }    
+    
 
 ?>
 <!DOCTYPE html>
