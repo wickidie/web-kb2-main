@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include_once 'db-connect.inc.php';
     $user_id = $_SESSION['user_id'];
     if (isset($user_id) && !empty($user_id)) {
     } else {
@@ -9,6 +10,10 @@
         location='login-form.php';
         </script>";
     }
+
+    $sql = "SELECT category_name FROM product_category";
+    $result = mysqli_query($conn, $sql);
+    // $row = mysqli_fetch_assoc($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,12 +45,17 @@
                         placeholder="Shirt, t-shirt, etc." aria-label="Name" aria-describedby="nameph" required>
                 </div>
                 <div class="row">
-                    <div class="col mb-3">
-                        <label for="name" class="form-label">Category
-                            <small class="text-secondary">(optional)</small>
-                        </label>
-                        <input type="text" class="form-control form-control-sm" id="Category" name="category"
-                            placeholder="Enter category" aria-label="Name" aria-describedby="nameph">
+                    <div class="col">
+                        <div>
+                            <label for="name" class="col form-label">Category</label>
+                        </div>
+                            <?php
+                                echo "<select class='col mb-3' name='category'>";
+                                while($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option value=" .  $row['category_name'] . ">" . $row['category_name'] . "</option>";
+                                }
+                                echo "</select>";
+                            ?>
                     </div>
 
                     <div class="col mb-3">
