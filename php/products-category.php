@@ -20,7 +20,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Products</title>
+    <title>Product Category</title>
     <link rel="icon" href="../asset/icon/tokaku_logo.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -195,14 +195,14 @@
                             <div class="d-flex justify-content-between align-items-between">
                                 <div class="d-flex row">
                                     <div class="row-6 col-md-2">
-                                        <a href="products-form.php" class="btn btn-success">Add product</a>
+                                        <a href="category-form.php" class="btn btn-success">Add product Category</a>
                                     </div>
                                 </div>
                                 <div class="col-6 col-md-2">
                                     <form method="GET">
                                         <div class="input-group my-2">
                                             <input type="text" class="form-control form-control-sm" id="myInput"
-                                                name="search" placeholder="Search for product name" aria-label="Search"
+                                                name="search" placeholder="Search for category name" aria-label="Search"
                                                 aria-describedby="searchph" <?php echo "value = $search_value" ?>>
                                             <button class="input-group-text btn btn-secondary rounded-end-1"
                                                 type="submit" id="searchph">
@@ -216,19 +216,15 @@
                                 <table class="table table-hover table-striped" id="myTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Product ID</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Category</th>
+                                            <th scope="col">Product Category ID</th>
+                                            <th scope="col">Product Category Name</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                             $items_per_page = 10;
-                                            $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id";
+                                            $sql = "SELECT * FROM product_category";
                                             $result = mysqli_query($conn, $sql);
                                             $rows = mysqli_num_rows($result);
 
@@ -238,17 +234,17 @@
                                             if (isset($_GET['search'])) {
                                                 $search_value = $_GET['search'];
                                                 if (!empty($_GET['search'])) {
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%' LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT * FROM product_category";
                                                     $result = mysqli_query($conn, $sql);
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%'";
+                                                    $sql = "SELECT * FROM product_category";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT * FROM product_category";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
-                                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 LIMIT $offset, $items_per_page";
+                                                $sql = "SELECT * FROM product_category";
                                                 $result = mysqli_query($conn, $sql);
                                             }
                                             
@@ -261,34 +257,22 @@
                                                 while($row = mysqli_fetch_assoc($result)) {
                                                     echo "<tr>";
                                                     $c++;
-                                                    echo "<td>" . $row['product_id'] . "</td>";
-                                                    echo "<td>" . "<img src='../asset/product/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
-                                                    echo "<td>" . $row['product_name'] . "</td>";
-                                                    echo "<td>" . $row['product_description'] . "</td>";
-                                                    echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";
+                                                    echo "<td>" . $row['category_id'] . "</td>";
                                                     echo "<td>" . $row['category_name'] . "</td>";
                                                     echo "<td> 
-                                                    <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
-                                                    <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                                    <a href='products-update-form.php?product_id=" . $row["product_id"] . "'>
+                                                    <a href='category-update-form.php?category_id=" . $row["category_id"] . "'>
                                                     <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                                    <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
-                                                    <i class='bi bi-trash-fill'></i></a>
-                                                    <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
-                                                        <input type='number' class='form-control-sm' id='quantity' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph'>
-                                                        <button type='submit'> 
-                                                            <i class='bi bi-cart'></i>
-                                                        </button>
-                                                    </form></td>";
+                                                    <a href='category-delete.php?category_id=" . $row['category_id'] . "'>
+                                                    <i class='bi bi-trash-fill'></i></a>";
                                                     echo "<tr>";
                                                 }
                                             } else {
-                                            echo "<tr>";
-                                            echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
-                                            echo "<tr>";
+                                                echo "<tr>";
+                                                echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
+                                                echo "<tr>";
                                             }
 
-                                            mysqli_close($conn);
+                                                mysqli_close($conn);
 
                                             ?>
                                     </tbody>
@@ -298,7 +282,7 @@
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item">
                                         <a class="page-link"
-                                            <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
+                                            <?php if($current_page > 1){ echo "href='category.php?search=$search_value&?page=1'"; } ?>>
                                             <span aria-hidden="true">&laquo</span>
                                         </a>
                                     </li>
@@ -315,7 +299,7 @@
                                     ?>
                                     <li class="page-item">
                                         <a class="page-link"
-                                            <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
+                                            <?php if($current_page < $total_page) { echo "href='category.php??search=$search_value&page=$total_page'"; } ?>>
                                             <span aria-hidden="true">&raquo</span>
                                         </a>
                                     </li>

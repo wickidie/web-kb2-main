@@ -18,6 +18,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Users Detail</title>
+    <link rel="icon" href="../asset/icon/tokaku_logo.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -31,7 +32,7 @@
                 id="sidebar">
                 <div class="pt-2">
                     <div class="d-flex justify-content-center align-items-center mb-3">
-                        <i class="bi bi-exclude logo"></i>
+                        <img src="../asset/icon/tokaku_logo.svg" alt="">
                         <span class="d-none fs-5 ms-2 mobile" id="logo">
                             Kuis besar
                         </span>
@@ -200,17 +201,13 @@
                                         
                                         $user_id= $_GET['user_id'];
 
-                                        // $sql = "DELETE FROM users WHERE userID = '$user'";
                                         $sql = "SELECT * FROM users WHERE user_id = '$user_id'";            
                                         $result = mysqli_query($conn, $sql);
                                         $row = mysqli_fetch_assoc($result);
                                         
                                         echo"<div class='card mb-3' style='max-width: 1200px;'>
                                         <div class='row g-0'>
-                                            <div class='col-md-4'>
-                                                <img src='../asset/user/pepe_fancy.png' class='img-fluid rounded-start' alt='...'>
-                                            </div>
-                                            <div class='col-md-8'>
+                                            <div class='col-md-12'>
                                                 <div class='card-body'>
                                                     <div class='d-flex justify-content-between align-items-between'>
                                                         <div class='col-6 col-md-3'>
