@@ -250,7 +250,7 @@
                                                     $c++;
                                                     echo "<td>" . $row['transaction_id'] . "</td>";
                                                     echo "<td>" . $row['transaction_date'] . "</td>";
-                                                    echo "<td>" . $row['transaction_total'] . "</td>";
+                                                    echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
                                                     echo "<td>" . $row['username'] . "</td>";
                                                     echo "<td>";
                                                     echo "

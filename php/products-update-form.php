@@ -78,23 +78,23 @@
                         echo "<select class='col mb-3' name='category'>"; 
                         while($category_row = mysqli_fetch_assoc($result)) {
                             if ($category_row['category_name'] == $row['category_name']) {
-                                echo "<option value=" .  $row['category_name'] . ">" . $row['category_name'] . "</option>";
+                                echo "<option value=" .  $row['category_id'] . ">" . $row['category_name'] . "</option>";
                             }
                         }
 
-                        $sql = "SELECT category_name FROM product_category";
+                        $sql = "SELECT category_id, category_name FROM product_category";
                         $result = mysqli_query($conn, $sql);
                         
                         while($category_row = mysqli_fetch_assoc($result)) {
                             if ($category_row['category_name'] != $row['category_name']) {
-                                echo "<option value=" .  $category_row['category_name'] . ">" . $category_row['category_name'] . "</option>";
+                                echo "<option value=" .  $category_row['category_id'] . ">" . $category_row['category_name'] . "</option>";
                             }
                         }
                         echo "</select>";
                     ?>
                 </div>
                 <div class='text-center btn-group w-100'>
-                    <button type='submit' class='btn btn-primary' name='product_id' value='$product_id'>Update</button>
+                    <button type='submit' class='btn btn-primary' name='product_id' <?php echo "value='$product_id'"?> >Update</button>
                     <button type='submit' class='btn btn-danger' onclick='history.back()'>Close</button>
                 </div>
             </form>

@@ -200,7 +200,7 @@
                                         
                                         $product_id = $_GET['product_id'];
 
-                                        $sql = "SELECT * FROM products WHERE product_id = '$product_id'";            
+                                        $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE product_id = '$product_id'";            
                                         $result = mysqli_query($conn, $sql);
                                         $row = mysqli_fetch_assoc($result);
                                         
@@ -218,9 +218,9 @@
                                                     <div class='d-flex justify-content-between align-items-between'>
                                                         <div class='col-6 col-md-5'>
                                                             <h2 class='card-title'><strong>". $row['product_name'] . "</strong>
-                                                                <span><small class='fs-5'>" . $row['product_price'] ."</small></span>
+                                                                <span><small class='fs-5'>IDR " . number_format($row['product_price'], 2, ',' ,'.') ."</small></span>
                                                             </h2>
-                                                            <span class='card-subtitle'>". $row['category_id'] . "</span>
+                                                            <span class='card-subtitle'>". $row['category_name'] . "</span>
                                                         </div>
                                                         <div class='col-6 col-md-3 text-end'>
                                                             <a href='products-update-form.php?product_id=". $row['product_id'] . "' class='btn btn-outline-secondary'>Edit</a>
