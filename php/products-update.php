@@ -24,11 +24,15 @@
     $file_ext = strtolower(end($file_ext));
     $allowed_ext = array('jpg', 'jpeg', 'png');
     $max_size = 10000000; // In Byte
-    $product_img = mysqli_fetch_assoc(mysqli_query($conn, "SELECT product_img FROM products WHERE product_id = '$product_id';"));
-    $img_location = "../asset/";
+    $sql = "SELECT product_img FROM products WHERE product_id = '$product_id';";
+    $result = mysqli_query($conn, $sql);
+    $product_img = mysqli_fetch_assoc($result);
+    
+    $img_location = "../asset/product/";
     $old_image = $img_location . $product_img['product_img'];
 
     if (unlink($old_image)) {
+
     }else{
         echo "No Image Found";
     }
@@ -47,11 +51,11 @@
     }
 
     $sql = "UPDATE products SET 
-            product_name = '$name',
+            product_name = '$name', 
             product_description = '$description',
             product_price = '$price',
             product_img = '$file_name',
-            product_category = '$category'
+            category_id = '$category'
             WHERE product_id = '$product_id';";
 
     if (mysqli_query($conn, $sql)) {

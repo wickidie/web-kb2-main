@@ -32,8 +32,6 @@
                 } else {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                 }
-                
-                
             } else {
                 echo "              
                 <script type='text/javascript'>

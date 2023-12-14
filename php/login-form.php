@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Ecommerce</title>
+    <title>Login - Tokaku</title>
+    <link rel="icon" href="../asset/icon/tokaku_logo.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -15,13 +16,12 @@
     }
     </style>
 </head>
-
 <body data-bs-theme="dark">
     <main class="h-100">
         <div class="d-flex flex-column justify-content-center align-items-center h-100" style="z-index: 999">
+            <img src="../asset/icon/tokaku_logo.svg" class="" alt="">
+            <h2><b>Login</b></h2>
             <form class="needs-validation w-25" action="users-login.php" method="post" novalidate>
-                <h2><b>Login</b></h2>
-                <p>Login for instant access to exclusive perks!</p>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="usernameph">
                         <i class="bi bi-person-circle"></i>
@@ -44,7 +44,7 @@
                 <button type="submit" class="btn btn-primary text-center w-100 mb-2">Log in</button>
 
                 <div class="text-center mb-2">
-                    <a href="regist-form.php" class="text-light"><small>Create account</small></a>
+                    <a href="regist-form.php" class="text-light"><small>Create new account</small></a>
                 </div>
             </form>
         </div>

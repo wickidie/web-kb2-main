@@ -17,7 +17,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Users Detail</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -206,51 +206,51 @@
                                         $row = mysqli_fetch_assoc($result);
                                         
                                         echo"<div class='card mb-3' style='max-width: 1200px;'>
-            <div class='row g-0'>
-                <div class='col-md-4'>
-                    <img src='../asset/prod01.jpg' class='img-fluid rounded-start' alt='...'>
-                </div>
-                <div class='col-md-8'>
-                    <div class='card-body'>
-                        <div class='d-flex justify-content-between align-items-between'>
-                            <div class='col-6 col-md-3'>
-                                <h2>User Details</h2>
-                            </div>
-                            <div class='col-6 col-md-3 text-end'>
-                                <a href='users-update-form.php?user_id=". $row['user_id'] . " ' class='btn btn-outline-secondary'>Edit</a>
-                            </div>
-                        </div>
-                        <div class='p-3'>
-                        <ul class='row row-cols-2 g-3 g-lg-4 list-unstyled mt-3'>
-                            <li class='col'>
-                                <h4 class='card-text'>Username: <small class='fw-normal'> ". $row['username'] . "</small></h4>
-                            </li>
-                            <li class='col'>
-                                <h4 class='card-text'>Email: <small class='fw-normal'> ". $row['email'] . "</small></h4>
-                            </li>
-                            <li class='col'>
-                                <h4 class='card-text'>Fullname: <small class='fw-normal'> ". $row['first_name'] . " ". $row['last_name'] . "</small></h4>
-                            </li>
-                                <h4 class='card-title'>Number: <small class='fw-normal'> ". $row['phone_number'] . "</small></h4>
-                            </li>
-                            <li class='col'>
-                                <h4 class='card-text'>Adresses: <small class='fw-normal'> ". $row['address'] . "</small></h4>
-                            </li>
-                        </ul>
-                        </div>
-                        <!-- <hr> -->
-                        <!-- <ul class='row row-cols-2 g-2 g-lg-3 list-unstyled'>
-                            <li class='col'>
-                                <span class='card-text'>Status:</span>
-                            </li>
-                            <li class='col'>
-                                <p class='card-text'>Role:</p>
-                            </li>
-                        </ul> -->
-                    </div>
-                </div>
-            </div>
-        </div>"
+                                        <div class='row g-0'>
+                                            <div class='col-md-4'>
+                                                <img src='../asset/user/pepe_fancy.png' class='img-fluid rounded-start' alt='...'>
+                                            </div>
+                                            <div class='col-md-8'>
+                                                <div class='card-body'>
+                                                    <div class='d-flex justify-content-between align-items-between'>
+                                                        <div class='col-6 col-md-3'>
+                                                            <h2>User Details</h2>
+                                                        </div>
+                                                        <div class='col-6 col-md-3 text-end'>
+                                                            <a href='users-update-form.php?user_id=". $row['user_id'] . " ' class='btn btn-outline-secondary'>Edit</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class='p-3'>
+                                                    <ul class='row row-cols-2 g-3 g-lg-4 list-unstyled mt-3'>
+                                                        <li class='col'>
+                                                            <h4 class='card-text'>Username: <small class='fw-normal'> ". $row['username'] . "</small></h4>
+                                                        </li>
+                                                        <li class='col'>
+                                                            <h4 class='card-text'>Email: <small class='fw-normal'> ". $row['email'] . "</small></h4>
+                                                        </li>
+                                                        <li class='col'>
+                                                            <h4 class='card-text'>Fullname: <small class='fw-normal'> ". $row['first_name'] . " ". $row['last_name'] . "</small></h4>
+                                                        </li>
+                                                            <h4 class='card-title'>Number: <small class='fw-normal'> ". $row['phone_number'] . "</small></h4>
+                                                        </li>
+                                                        <li class='col'>
+                                                            <h4 class='card-text'>Adresses: <small class='fw-normal'> ". $row['address'] . "</small></h4>
+                                                        </li>
+                                                    </ul>
+                                                    </div>
+                                                    <!-- <hr> -->
+                                                    <!-- <ul class='row row-cols-2 g-2 g-lg-3 list-unstyled'>
+                                                        <li class='col'>
+                                                            <span class='card-text'>Status:</span>
+                                                        </li>
+                                                        <li class='col'>
+                                                            <p class='card-text'>Role:</p>
+                                                        </li>
+                                                    </ul> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>"
                                  ?>
 
                             </div>

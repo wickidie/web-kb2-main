@@ -2,7 +2,6 @@
     session_start();
     include_once 'db-connect.inc.php';
     $user_id = $_SESSION['user_id'];
-    // $username = $_SESSION['username'];
     if (isset($user_id) && !empty($user_id)) {
     } else {
         echo "              
@@ -12,14 +11,7 @@
         </script>";
     }
 
-    
-    try {
-        $search_value = $_GET['search'] ?? null;
-    } catch (Exception $e) {
-        $search_value = "";
-        echo 'Caught exception: ',  $e->getMessage(), "\n";
-    }    
-    
+    $search_value = $_GET['search'] ?? null;
 
 ?>
 <!DOCTYPE html>
@@ -29,6 +21,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Products</title>
+    <link rel="icon" href="../asset/icon/tokaku_logo.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -42,7 +35,7 @@
                 id="sidebar">
                 <div class="pt-2">
                     <div class="d-flex justify-content-center align-items-center mb-3">
-                        <i class="bi bi-exclude logo"></i>
+                        <img src="../asset/icon/tokaku_logo.svg" alt="">
                         <span class="d-none fs-5 ms-2 mobile" id="logo">
                             Kuis besar
                         </span>
@@ -187,10 +180,10 @@
                                             <small>Settings</small>
                                         </a>
                                     </li>
-                                    <!-- <li>
+                                    <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li> -->
+                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -240,82 +233,70 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                $items_per_page = 10;
-                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, category_id FROM products";
-                                $result = mysqli_query($conn, $sql);
-                                $rows = mysqli_num_rows($result);
+                                            $items_per_page = 10;
+                                            $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id";
+                                            $result = mysqli_query($conn, $sql);
+                                            $rows = mysqli_num_rows($result);
 
-                                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-                                $offset = ($current_page - 1) * $items_per_page;
-                                
-                                if (isset($_GET['search'])) {
-                                    $search_value = $_GET['search'];
-                                    if (!empty($_GET['search'])) {
-                                        $sql = "SELECT * FROM products where product_name like '%$search_value%' LIMIT $offset, $items_per_page";
-                                        $result = mysqli_query($conn, $sql);
-                                        $sql = "SELECT * FROM products where product_name like '%$search_value%'";
-                                        $result_total = mysqli_query($conn, $sql);
-                                        $rows = mysqli_num_rows($result_total);
-                                    }else{
-                                        // echo "Empty ";
-                                        $sql = "SELECT product_id, product_name, product_description, product_price, product_img, category_id FROM products WHERE 1 LIMIT $offset, $items_per_page";
-                                        $result = mysqli_query($conn, $sql);
-                                    }
-                                }else{
-                                    // echo "Start ";
-                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, category_id FROM products WHERE 1 LIMIT $offset, $items_per_page";
-                                    $result = mysqli_query($conn, $sql);
-                                }
-                                
-                                $total_page=ceil($rows/$items_per_page);
-                                // echo "Search for : $search_value <br>";
-                                // echo "Showing : $total_page pages <br>";
-                                // echo "With total : $rows result<br>";
-                                
-                                $previous = $current_page - 1;
-                                $next = $current_page + 1;
-                                // $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users LIMIT $offset, $items_per_page";
-                                // $result = mysqli_query($conn, $sql);
+                                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                            $offset = ($current_page - 1) * $items_per_page;
+                                            
+                                            if (isset($_GET['search'])) {
+                                                $search_value = $_GET['search'];
+                                                if (!empty($_GET['search'])) {
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%' LIMIT $offset, $items_per_page";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%'";
+                                                    $result_total = mysqli_query($conn, $sql);
+                                                    $rows = mysqli_num_rows($result_total);
+                                                }else{
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 LIMIT $offset, $items_per_page";
+                                                    $result = mysqli_query($conn, $sql);
+                                                }
+                                            }else{
+                                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 LIMIT $offset, $items_per_page";
+                                                $result = mysqli_query($conn, $sql);
+                                            }
+                                            
+                                            $total_page = ceil($rows/$items_per_page);
+                                            $previous = $current_page - 1;
+                                            $next = $current_page + 1;
 
-                                if (mysqli_num_rows($result) > 0) {
-                                    $c = $offset + 1;
-                                    while($row = mysqli_fetch_assoc($result)) {
-                                        echo "<tr>";
-                                        $c++;
-                                        echo "<td>" . $row['product_id'] . "</td>";
-                                        echo "<td>" . $row['product_name'] . "</td>";
-                                        echo "<td>" . $row['product_description'] . "</td>";
-                                        echo "<td> Rp. " . $row['product_price'] . "</td>";
-                                        // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['product_img'] . "' class=' rounded' width='30px' height='30px'". "</td>";
-                                        // echo "<td>" . $row['product_img'] . "</td>";
-                                        // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/" . $row['product_img'] . "' class='rounded' wdith='30px' height='30px'</td>";
-                                        // echo "<td>" . "<img src='https://github.com/wickidie/web-kb2-main/blob/imgProd/asset/prod01.jpg' class='rounded' wdith='30px' height='30px'</td>";
-                                        echo "<td>" . "<img src='../asset/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
-                                        echo "<td>" . $row['category_id'] . "</td>";
-                                        echo "<td> 
-                                        <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
-                                        <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
-                                        <a href='products-update-form.php?product_id=" . $row["product_id"] . "'>
-                                        <i class='bi bi-pencil-square'></i></a> &nbsp;
-                                        <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
-                                        <i class='bi bi-trash-fill'></i></a>
-                                        <form action='transactions-add.php?product_id=" . $row["product_id"] . "'method='POST'>
-                                            <input type='number' class='form-control-sm' id='quantity' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph'>
-                                            <button type='submit'> 
-                                                <i class='bi bi-cart'></i>
-                                            </button>
-                                        </form></td>";
-                                        echo "<tr>";
-                                    }
-                                } else {
-                                echo "<tr>";
-                                echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
-                                echo "<tr>";
-                                }
+                                            if (mysqli_num_rows($result) > 0) {
+                                                $c = $offset + 1;
+                                                while($row = mysqli_fetch_assoc($result)) {
+                                                    echo "<tr>";
+                                                    $c++;
+                                                    echo "<td>" . $row['product_id'] . "</td>";
+                                                    echo "<td>" . $row['product_name'] . "</td>";
+                                                    echo "<td>" . $row['product_description'] . "</td>";
+                                                    echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";
+                                                    echo "<td>" . "<img src='../asset/product/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
+                                                    echo "<td>" . $row['category_name'] . "</td>";
+                                                    echo "<td> 
+                                                    <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
+                                                    <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
+                                                    <a href='products-update-form.php?product_id=" . $row["product_id"] . "'>
+                                                    <i class='bi bi-pencil-square'></i></a> &nbsp;
+                                                    <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
+                                                    <i class='bi bi-trash-fill'></i></a>
+                                                    <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
+                                                        <input type='number' class='form-control-sm' id='quantity' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph'>
+                                                        <button type='submit'> 
+                                                            <i class='bi bi-cart'></i>
+                                                        </button>
+                                                    </form></td>";
+                                                    echo "<tr>";
+                                                }
+                                            } else {
+                                            echo "<tr>";
+                                            echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
+                                            echo "<tr>";
+                                            }
 
-                                mysqli_close($conn);
+                                            mysqli_close($conn);
 
-                                ?>
+                                            ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -328,16 +309,16 @@
                                         </a>
                                     </li>
                                     <?php 
-                                for($x=1;$x<=$total_page;$x++){
+                                        for($x=1;$x<=$total_page;$x++){
+                                            ?>
+                                            <li class="page-item">
+                                                <a class="page-link"
+                                                    <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                                                </a>
+                                            </li>
+                                            <?php
+                                        }
                                     ?>
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                            <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
-                                        </a>
-                                    </li>
-                                    <?php
-                                }
-                            ?>
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>

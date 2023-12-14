@@ -3,11 +3,6 @@
     include_once 'db-connect.inc.php';
     $user_id = $_SESSION['user_id'];
     if (isset($user_id) && !empty($user_id)) {
-        echo "              
-        <script type='text/javascript'>
-        alert('$user_id');
-        location='transacntions.php';
-        </script>";
     } else {
         echo "              
         <script type='text/javascript'>
@@ -16,7 +11,6 @@
         </script>";
     }
     $transaction_id = $_GET['transaction_id'];
-
     $sql = "DELETE FROM transactions WHERE transaction_id = '$transaction_id';";
     
     if (mysqli_query($conn, $sql)) {

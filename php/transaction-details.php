@@ -20,7 +20,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Template</title>
+    <title>Transanctions Detail</title>
+    <link rel="icon" href="../asset/icon/tokaku_logo.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -34,7 +35,7 @@
                 id="sidebar">
                 <div class="pt-2">
                     <div class="d-flex justify-content-center align-items-center mb-3">
-                        <i class="bi bi-exclude logo"></i>
+                        <img src="../asset/icon/tokaku_logo.svg" alt="">
                         <span class="d-none fs-5 ms-2 mobile" id="logo">
                             Kuis besar
                         </span>
@@ -179,10 +180,10 @@
                                             <small>Settings</small>
                                         </a>
                                     </li>
-                                    <!-- <li>
+                                    <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li> -->
+                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -206,75 +207,65 @@
                                 <table class="table table-hover table-striped" id="myTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">transaction_detail_id</th>
-                                            <th scope="col">transaction_id</th>
-                                            <th scope="col">product_id</th>
-                                            <th scope="col">quantity</th>
-                                            <th scope="col">product_price</th>
+                                            <th scope="col">Transaction Detail ID</th>
+                                            <th scope="col">Transaction ID</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Product Price</th>
                                             <!-- <th scope="col">Action</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                $items_per_page = 10;
-                                $sql = "SELECT transaction_detail_id, transaction_id, product_id, quantity, product_price FROM transaction_details";
-                                $result = mysqli_query($conn, $sql);
-                                $rows = mysqli_num_rows($result);
+                                            $items_per_page = 10;
+                                            $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
+                                                    JOIN products p ON td.product_id = p.product_id";
+                                            $result = mysqli_query($conn, $sql);
+                                            $rows = mysqli_num_rows($result);
 
-                                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-                                $offset = ($current_page - 1) * $items_per_page;
-                                
-                                if (isset($_GET['search'])) {
-                                    if (!empty($_GET['search'])) {
-                                        $sql = "SELECT * FROM transaction_details where transaction_detail_id like '%$search_value%' LIMIT $offset, $items_per_page";
-                                        $result = mysqli_query($conn, $sql);
-                                        $sql = "SELECT * FROM transaction_details where transaction_detail_id like '%$search_value%'";
-                                        $result_total = mysqli_query($conn, $sql);
-                                        $rows = mysqli_num_rows($result_total);
-                                    }else{
-                                        echo "Empty ";
-                                        $sql = "SELECT transaction_detail_id, transaction_id, product_id, quantity, product_price FROM transaction_details WHERE 1 LIMIT $offset, $items_per_page";
-                                        $result = mysqli_query($conn, $sql);
-                                    }
-                                }else{
-                                    // echo "Start ";
-                                    $sql = "SELECT transaction_detail_id, transaction_id, product_id, quantity, product_price FROM transaction_details WHERE 1 LIMIT $offset, $items_per_page";
-                                    $result = mysqli_query($conn, $sql);
-                                }
-                                
-                                $total_page = ceil($rows/$items_per_page);
-                                // echo "Search for : $search_value <br>";
-                                // echo "Showing : $total_page pages <br>";
-                                // echo "With total : $rows result<br>";
-                                
-                                $previous = $current_page - 1;
-                                $next = $current_page + 1;
-                                // $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users LIMIT $offset, $items_per_page";
-                                // $result = mysqli_query($conn, $sql);
+                                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                            $offset = ($current_page - 1) * $items_per_page;
+                                            
+                                            if (isset($_GET['search'])) {
+                                                if (!empty($_GET['search'])) {
+                                                    $sql = "SELECT * FROM transaction_details where transaction_detail_id like '%$search_value%' LIMIT $offset, $items_per_page";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    $sql = "SELECT * FROM transaction_details where transaction_detail_id like '%$search_value%'";
+                                                    $result_total = mysqli_query($conn, $sql);
+                                                    $rows = mysqli_num_rows($result_total);
+                                                }else{
+                                                    $sql = "SELECT transaction_detail_id, transaction_id, product_id, quantity, product_price FROM transaction_details WHERE 1 LIMIT $offset, $items_per_page";
+                                                    $result = mysqli_query($conn, $sql);
+                                                }
+                                            }else{
+                                                $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
+                                                JOIN products p ON td.product_id = p.product_id WHERE 1 LIMIT $offset, $items_per_page";
+                                                $result = mysqli_query($conn, $sql);
+                                            }
+                                            
+                                            $total_page = ceil($rows/$items_per_page);
+                                            $previous = $current_page - 1;
+                                            $next = $current_page + 1;
 
-                                if (mysqli_num_rows($result) > 0) {
-                                    while($row = mysqli_fetch_assoc($result)) {
-                                        echo "<tr>";
-                                        echo "<td>" . $row['transaction_detail_id'] . "</td>";
-                                        // echo "<td>" . "<img src='https://www.w3schools.com/w3css/" . $row['avatar'] . "' class=' rounded' width='30px' height='30px'". "</td>";
-                                        echo "<td>" . $row['transaction_id'] . "</td>";
-                                        echo "<td>" . $row['product_id'] . "</td>";
-                                        echo "<td>" . $row['quantity'] . "</td>";
-                                        echo "<td>" . $row['product_price'] . "</td>";
-                                        // echo "<td> 
-                                        // <a href='transaction-details-delete.php?transaction_detail_id=" . $row['transaction_detail_id'] . "'>
-                                        // <i class='bi bi-trash-fill'></i></a></td>";
-                                        echo "<tr>";
-                                    }
-                                } else {
-                                    echo "<tr>";
-                                    echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
-                                    echo "<tr>";
-                                }
+                                            if (mysqli_num_rows($result) > 0) {
+                                                while($row = mysqli_fetch_assoc($result)) {
+                                                    echo "<tr>";
+                                                    echo "<td>" . $row['transaction_detail_id'] . "</td>";
+                                                    echo "<td>" . $row['transaction_id'] . "</td>";
+                                                    echo "<td>" . $row['product_id'] . "</td>";
+                                                    echo "<td>" . number_format($row['quantity'], 0, ',', '.') . "</td>";
+                                                    echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";
+                                                    echo "<tr>";
+                                                }
+                                            } else {
+                                                echo "<tr>";
+                                                echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
+                                                echo "<tr>";
+                                            }
 
-                                mysqli_close($conn);
+                                            mysqli_close($conn);
 
-                                ?>
+                                        ?>
                                     </tbody>
                                 </table>
 
@@ -288,16 +279,16 @@
                                         </a>
                                     </li>
                                     <?php 
-                                for($x=1;$x<=$total_page;$x++){
+                                        for($x=1;$x<=$total_page;$x++){
+                                            ?>
+                                            <li class="page-item">
+                                                <a class="page-link"
+                                                    <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                                                </a>
+                                            </li>
+                                            <?php
+                                        }
                                     ?>
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                            <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
-                                        </a>
-                                    </li>
-                                    <?php
-                                }
-                            ?>
                                     <li class="page-item">
                                         <a class="page-link"
                                             <?php if($current_page < $total_page) { echo "href='users-logged.php??search=$search_value&page=$total_page'"; } ?>>

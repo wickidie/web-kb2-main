@@ -51,6 +51,20 @@ CREATE TABLE transaction_details (
         ON DELETE SET NULL
 );
 
+CREATE TABLE cart (
+    cart_id int PRIMARY KEY,
+    created_at DATE,
+    user_id int,
+    quantity int,
+    product_id int,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) 
+        ON UPDATE CASCADE 
+        ON DELETE SET NULL,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) 
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+);
+
 ALTER TABLE users
     MODIFY user_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
@@ -63,5 +77,8 @@ ALTER TABLE transactions
 ALTER TABLE transaction_details
     MODIFY transaction_detail_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+ALTER TABLE cart
+    MODIFY cart_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+    
 ALTER TABLE product_category
     MODIFY category_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
