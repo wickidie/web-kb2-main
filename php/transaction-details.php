@@ -207,18 +207,19 @@
                                 <table class="table table-hover table-striped" id="myTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">transaction_detail_id</th>
-                                            <th scope="col">transaction_id</th>
-                                            <th scope="col">product_id</th>
-                                            <th scope="col">quantity</th>
-                                            <th scope="col">product_price</th>
+                                            <th scope="col">Transaction Detail ID</th>
+                                            <th scope="col">Transaction ID</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Product Price</th>
                                             <!-- <th scope="col">Action</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                             $items_per_page = 10;
-                                            $sql = "SELECT transaction_detail_id, transaction_id, product_id, quantity, product_price FROM transaction_details";
+                                            $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
+                                                    JOIN products p ON td.product_id = p.product_id";
                                             $result = mysqli_query($conn, $sql);
                                             $rows = mysqli_num_rows($result);
 
@@ -237,7 +238,8 @@
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
-                                                $sql = "SELECT transaction_detail_id, transaction_id, product_id, quantity, product_price FROM transaction_details WHERE 1 LIMIT $offset, $items_per_page";
+                                                $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
+                                                JOIN products p ON td.product_id = p.product_id WHERE 1 LIMIT $offset, $items_per_page";
                                                 $result = mysqli_query($conn, $sql);
                                             }
                                             

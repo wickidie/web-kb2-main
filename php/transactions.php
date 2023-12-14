@@ -246,6 +246,7 @@
                                             if (mysqli_num_rows($result) > 0) {
                                                 $c = $offset + 1;
                                                 while($row = mysqli_fetch_assoc($result)) {
+                                                    $formattedDate = date('d-m-Y', strtotime($row['transaction_date']));
                                                     echo "<tr>";
                                                     $c++;
                                                     echo "<td>" . $row['transaction_id'] . "</td>";
