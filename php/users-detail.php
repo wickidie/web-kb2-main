@@ -188,12 +188,12 @@
                 <main class="container-fluid p-3 align-items-center h-75">
                     <div class="h-100">
                         <div class="d-flex flex-column h-100">
-                            <nav aria-label="breadcrumb">
+                            <span aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#" onclick="history.back()">Users</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">User details</li>
                                 </ol>
-                            </nav>
+                            </span>
                             <div class="container justify-content-center align-items-center">
                                 <?php
                                         include_once 'db-connect.inc.php';
