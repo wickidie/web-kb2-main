@@ -254,6 +254,7 @@
                                             if (mysqli_num_rows($result) > 0) {
                                                 $c = $offset + 1;
                                                 while($row = mysqli_fetch_assoc($result)) {
+                                                    $formattedDate = date('d-m-Y', strtotime($row['created_at']));
                                                     echo "<tr>";
                                                     $c++;
                                                     echo "<td>" . $row['cart_id'] . "</td>";
@@ -262,7 +263,7 @@
                                                     echo "<td>" . $row['product_name'] . "</td>";
                                                     echo "<td>" . $row['quantity'] . "</td>";
                                                     echo "<td>" . $row['product_price'] . "</td>";
-                                                    echo "<td>" . $row['created_at'] . "</td>";
+                                                    echo "<td>" . $formattedDate . "</td>";
                                                     echo "<tr>";
                                                 }
                                             } else {

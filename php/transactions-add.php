@@ -33,5 +33,28 @@
         echo "Error deleting record: " . mysqli_error($conn);
     }
 
+    $sqlTransactionId = "SELECT transaction_id FROM transactions;";
+    $result = mysqli_query($conn, $sqlTransactionId);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $transaction_id = $row['transaction_id'];
+        }
+    }
+
+    $sql = "SELECT c.cart_id, c.created_at, c.user_id, c.quantity, c.product_id, p.product_price FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id;";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $quantity = $row['quantity'];
+            $product_price = $row['product_price'];
+            $product_id = $row['product_id'];
+
+            $sql_insert = "INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES ('$quantity', '$product_price', '$transaction_id', '$product_id')";
+            mysqli_query($conn, $sql_insert);
+        }
+    }
+
+    
+
     mysqli_close($conn) ;
 ?>
