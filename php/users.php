@@ -12,7 +12,6 @@
     }
 
     $search_value = $_GET['search'] ?? null;
-
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
