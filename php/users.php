@@ -13,7 +13,6 @@
     }
 
     $search_value = $_GET['search'] ?? null;
-
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
@@ -180,10 +179,10 @@
                                             <small>Settings</small>
                                         </a>
                                     </li>
-                                    <!-- <li>
+                                    <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li> -->
+                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li>
                                 </ul>
                             </li>
                         </ul>

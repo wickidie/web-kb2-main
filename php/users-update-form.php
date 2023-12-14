@@ -10,6 +10,10 @@
         location='login-form.php';
         </script>";
     }
+    $pastUser = $_GET['user_id'];
+    $sql = "SELECT username, password FROM users WHERE user_id = '$pastUser'";            
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +21,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 8 | Edit form</title>
+    <title>Edit form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -33,21 +37,44 @@
     <main class="h-100">
         <div class="d-flex flex-column justify-content-center align-items-center h-100" style="z-index: 999">
             <form class="needs-validation" action="users-update.php" method="post" novalidate>
-                <h2><b>User Data Update</b></h2>
+                <?php                    
+                    echo"
+                    <h2>
+                        <b>". $row['username'] ." Update</b>
+                    </h2>";
+                ?>
+
                 <p>This form is used to update user data!</p>
-                <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="password_input" name="password"
-                        placeholder="Password" required pattern=".{5,}" title="Password must be at least 5 characters">
-                    <label for="password_input"><strong>Password</strong></label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="oldpassword">
+                        <i class="bi bi-key"></i>
+                    </span>
+                    <input type="password" class="form-control" id="oldPassword" name="oldPassword"
+                        aria-label="Old password" aria-describedby="oldpassword" placeholder="Old password" required
+                        pattern=".{5,}" title="Password must be at least 5 characters">
                     <div class="invalid-feedback">
-                        Please enter a valid password (at least 5 characters).
+                        <p class="m-0">Please enter a valid password (at least 5 characters).</sp>
                     </div>
                 </div>
 
-                <div class="form-floating mb-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="newpasswordph">
+                        <i class="bi bi-key-fill"></i>
+                    </span>
+                    <input type="password" class="form-control" id="newPassword" name="newPassword"
+                        aria-label="New password" aria-describedby="newpassword" placeholder="New password" required
+                        pattern=".{5,}" title="Password must be at least 5 characters">
+                    <div class="invalid-feedback">
+                        <p class="m-0">Please enter a valid password (at least 5 characters).</sp>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="newpasswordph">
+                        <i class="bi bi-check2"></i>
+                    </span>
                     <input type="password" class="form-control" id="confirm_password" name="confirm_password"
                         placeholder="Password" required>
-                    <label for="confirm_password"><strong>Confirm Password</strong></label>
                     <div class="valid-feedback">
                         <p>Passwords match</p>
                     </div>
@@ -60,7 +87,7 @@
                     echo"
                     <div class='text-center btn-group w-100'>
                     <button type='submit' class='btn btn-primary' name='pastUser' value='$user_id'>Update</button>
-                    <button type='submit' class='btn btn-danger' onclick='history.back()'>Close</button>
+                    <a href='users.php' type='submit' class='btn btn-danger'>Close</a>
                     </div>
                     ";
                 ?>

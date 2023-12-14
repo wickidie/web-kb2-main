@@ -12,9 +12,9 @@
     }
 
     $pastUser = $_POST['pastUser'];
-    $password = $_POST['password'];
-
-    $sql = "UPDATE users SET password = md5('$password') WHERE user_id = '$pastUser';";
+    $newPassword = md5($_POST['newPassword']);
+    
+    $sql = "UPDATE users SET password = $newPassword WHERE user_id = '$pastUser';";
 
     if (mysqli_query($conn, $sql)) {
         echo "              
