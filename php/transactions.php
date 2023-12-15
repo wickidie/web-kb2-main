@@ -291,6 +291,8 @@
                                                     <form action='transaction-update-status.php' method=post>
                                                     <select name='status'>
                                                         <option value='Status'>" . $row['status'] . "</option>
+                                                        <option value='Valid'>Valid</option>
+                                                        <option value='Invalid'>Invalid</option>
                                                         <option value='Pending'>Pending</option>
                                                         <option value='Paid'>Paid</option>
                                                         <option value='Delivery'>Delivery</option>

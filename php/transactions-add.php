@@ -33,6 +33,15 @@
         echo "Error deleting record: " . mysqli_error($conn);
     }
 
+    $sql = "SELECT * FROM cart WHERE user_id = $user_id;";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $truncate = "DELETE FROM `cart` WHERE user_id = $user_id;";
+        mysqli_query($conn, $truncate);
+    }
+
+
+
     $sqlTransactionId = "SELECT transaction_id FROM transactions;";
     $result = mysqli_query($conn, $sqlTransactionId);
     if (mysqli_num_rows($result) > 0) {
@@ -53,6 +62,7 @@
             mysqli_query($conn, $sql_insert);
         }
     }
+
 
     
 
