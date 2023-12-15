@@ -1,15 +1,5 @@
 <?php
-    session_start();
-    include_once 'db-connect.inc.php';
-    $user_id = $_SESSION['user_id'];
-    if (isset($user_id) && !empty($user_id)) {
-    } else {
-        echo "              
-        <script type='text/javascript'>
-        alert('You must login first');
-        location='login-form.php';
-        </script>";
-    }
+    require 'session-admin.inc.php';
 
     $sql = "SELECT c.cart_id, c.created_at, c.user_id, c.quantity, c.product_id, p.product_price FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id";
     $result = mysqli_query($conn, $sql);
@@ -39,8 +29,6 @@
         $truncate = "DELETE FROM `cart` WHERE user_id = $user_id;";
         mysqli_query($conn, $truncate);
     }
-
-
 
     $sqlTransactionId = "SELECT transaction_id FROM transactions;";
     $result = mysqli_query($conn, $sqlTransactionId);

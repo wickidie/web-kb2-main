@@ -1,15 +1,6 @@
 <?php
-    session_start();
-    include_once 'db-connect.inc.php';
-    $user_id = $_SESSION['user_id'];
-    if (isset($user_id) && !empty($user_id)) {
-    } else {
-        echo "              
-        <script type='text/javascript'>
-        alert('You must login first');
-        location='login-form.php';
-        </script>";
-    }
+    require 'session-admin.inc.php';
+
     $product_id = $_GET['product_id'];
     $sql = "SELECT product_id, product_name, product_description, product_price, product_img, p.category_id, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE product_id = $product_id";
     $row = mysqli_fetch_assoc(mysqli_query($conn, $sql));

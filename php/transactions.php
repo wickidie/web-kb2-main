@@ -1,6 +1,5 @@
 <?php
-    session_start();
-    include_once 'session-admin.php';
+    require 'session-admin.inc.php';
 
     $search_value = $_GET['search'] ?? null;
 ?>
