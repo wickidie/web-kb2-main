@@ -1,3 +1,9 @@
+CREATE TABLE admin (
+    admin_id int PRIMARY KEY,
+    username VARCHAR(255),
+    password CHAR(32)
+);
+
 CREATE TABLE users (
     user_id int PRIMARY KEY,
     username VARCHAR(255),
@@ -64,6 +70,9 @@ CREATE TABLE cart (
         ON UPDATE CASCADE
         ON DELETE SET NULL
 );
+
+ALTER TABLE admin
+    MODIFY admin_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 ALTER TABLE users
     MODIFY user_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
