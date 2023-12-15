@@ -2,7 +2,7 @@
     session_start();
     include_once 'db-connect.inc.php';
     $user_id = $_SESSION['user_id'];
-    if (isset($user_id)&& !empty($user_id)) {
+    if (isset($user_id) && !empty($user_id)) {
     } else {
         echo "              
         <script type='text/javascript'>
@@ -10,6 +10,9 @@
         location='login-form.php';
         </script>";
     }
+
+    $search_value = $_GET['search'] ?? null;
+
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
@@ -17,7 +20,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Users Detail</title>
+    <title>Product Category</title>
     <link rel="icon" href="../asset/icon/tokaku_logo.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -39,7 +42,7 @@
                     </div>
                     <ul class="nav nav-pills flex-column justify-content-center align-items-center" id="sidebar1">
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="#" class="nav-link">
+                            <a href="dashboard.php" class="nav-link">
                                 <i class="bi bi-house"></i>
                                 <span class="d-none fs-6 ms-2 mobile" id="dashboard">
                                     Dashboard
@@ -84,7 +87,7 @@
                             </div>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="products.php" class="nav-link">
+                            <a href="#" class="nav-link active">
                                 <i class="bi bi-grid"></i>
                                 <span class="d-none fs-6 ms-2 mobile" id="products">
                                     Products
@@ -92,7 +95,7 @@
                             </a>
                         </li>
                         <li class="nav-item py-2 py-sm-0">
-                            <a href="users.php" class="nav-link active">
+                            <a href="users.php" class="nav-link">
                                 <i class="bi bi-person-circle"></i>
                                 <span class="d-none fs-6 ms-2 mobile" id="users">
                                     Users
@@ -186,77 +189,127 @@
                         </ul>
                     </div>
                 </nav>
-                <main class="container-fluid p-3 align-items-center h-75">
-                    <div class="h-100">
-                        <div class="d-flex flex-column h-100">
-                            <span aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#" onclick="history.back()">Users</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">User details</li>
-                                </ol>
-                            </span>
-                            <div class="container justify-content-center align-items-center">
-                                <?php
-                                        include_once 'db-connect.inc.php';
-                                        
-                                        $user_id= $_GET['user_id'];
-
-                                        $sql = "SELECT * FROM users WHERE user_id = '$user_id'";            
-                                        $result = mysqli_query($conn, $sql);
-                                        $row = mysqli_fetch_assoc($result);
-                                        
-                                        echo"<div class='card mb-3' style='max-width: 1200px;'>
-                                        <div class='row g-0'>
-                                            <div class='col-md-12'>
-                                                <div class='card-body'>
-                                                    <div class='d-flex justify-content-between align-items-between'>
-                                                        <div class='col-6 col-md-3'>
-                                                            <h2>User Details</h2>
-                                                        </div>
-                                                        <div class='col-6 col-md-3 text-end'>
-                                                            <a href='users-update-form.php?user_id=". $row['user_id'] . " ' class='btn btn-outline-secondary'>Edit</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class='p-3'>
-                                                    <ul class='row row-cols-2 g-3 g-lg-4 list-unstyled mt-3'>
-                                                        <li class='col'>
-                                                            <h4 class='card-text'>Username: <small class='fw-normal'> ". $row['username'] . "</small></h4>
-                                                        </li>
-                                                        <li class='col'>
-                                                            <h4 class='card-text'>Email: <small class='fw-normal'> ". $row['email'] . "</small></h4>
-                                                        </li>
-                                                        <li class='col'>
-                                                            <h4 class='card-text'>Fullname: <small class='fw-normal'> ". $row['first_name'] . " ". $row['last_name'] . "</small></h4>
-                                                        </li>
-                                                            <h4 class='card-title'>Number: <small class='fw-normal'> ". $row['phone_number'] . "</small></h4>
-                                                        </li>
-                                                        <li class='col'>
-                                                            <h4 class='card-text'>Adresses: <small class='fw-normal'> ". $row['address'] . "</small></h4>
-                                                        </li>
-                                                    </ul>
-                                                    </div>
-                                                    <!-- <hr> -->
-                                                    <!-- <ul class='row row-cols-2 g-2 g-lg-3 list-unstyled'>
-                                                        <li class='col'>
-                                                            <span class='card-text'>Status:</span>
-                                                        </li>
-                                                        <li class='col'>
-                                                            <p class='card-text'>Role:</p>
-                                                        </li>
-                                                    </ul> -->
-                                                </div>
-                                            </div>
+                <main class="p-3">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="container">
+                            <div class="d-flex justify-content-between align-items-between">
+                                <div class="d-flex row">
+                                    <div class="row-6 col-md-2">
+                                        <a href="category-form.php" class="btn btn-success">Add product Category</a>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-2">
+                                    <form method="GET">
+                                        <div class="input-group my-2">
+                                            <input type="text" class="form-control form-control-sm" id="myInput"
+                                                name="search" placeholder="Search for category name" aria-label="Search"
+                                                aria-describedby="searchph" <?php echo "value = $search_value" ?>>
+                                            <button class="input-group-text btn btn-secondary rounded-end-1"
+                                                type="submit" id="searchph">
+                                                <i class="bi bi-search"></i>
+                                            </button>
                                         </div>
-                                    </div>"
-                                 ?>
-
+                                    </form>
+                                </div>
                             </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Product Category ID</th>
+                                            <th scope="col">Product Category Name</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            $items_per_page = 10;
+                                            $sql = "SELECT * FROM product_category";
+                                            $result = mysqli_query($conn, $sql);
+                                            $rows = mysqli_num_rows($result);
+
+                                            $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                            $offset = ($current_page - 1) * $items_per_page;
+                                            
+                                            if (isset($_GET['search'])) {
+                                                $search_value = $_GET['search'];
+                                                if (!empty($_GET['search'])) {
+                                                    $sql = "SELECT * FROM product_category";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    $sql = "SELECT * FROM product_category";
+                                                    $result_total = mysqli_query($conn, $sql);
+                                                    $rows = mysqli_num_rows($result_total);
+                                                }else{
+                                                    $sql = "SELECT * FROM product_category";
+                                                    $result = mysqli_query($conn, $sql);
+                                                }
+                                            }else{
+                                                $sql = "SELECT * FROM product_category";
+                                                $result = mysqli_query($conn, $sql);
+                                            }
+                                            
+                                            $total_page = ceil($rows/$items_per_page);
+                                            $previous = $current_page - 1;
+                                            $next = $current_page + 1;
+
+                                            if (mysqli_num_rows($result) > 0) {
+                                                $c = $offset + 1;
+                                                while($row = mysqli_fetch_assoc($result)) {
+                                                    echo "<tr>";
+                                                    $c++;
+                                                    echo "<td>" . $row['category_id'] . "</td>";
+                                                    echo "<td>" . $row['category_name'] . "</td>";
+                                                    echo "<td> 
+                                                    <a href='category-update-form.php?category_id=" . $row["category_id"] . "'>
+                                                    <i class='bi bi-pencil-square'></i></a> &nbsp;
+                                                    <a href='category-delete.php?category_id=" . $row['category_id'] . "'>
+                                                    <i class='bi bi-trash-fill'></i></a>";
+                                                    echo "<tr>";
+                                                }
+                                            } else {
+                                                echo "<tr>";
+                                                echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
+                                                echo "<tr>";
+                                            }
+
+                                                mysqli_close($conn);
+
+                                            ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            <?php if($current_page > 1){ echo "href='category.php?search=$search_value&?page=1'"; } ?>>
+                                            <span aria-hidden="true">&laquo</span>
+                                        </a>
+                                    </li>
+                                    <?php 
+                                        for($x=1;$x<=$total_page;$x++){
+                                            ?>
+                                            <li class="page-item">
+                                                <a class="page-link"
+                                                    <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                                                </a>
+                                            </li>
+                                            <?php
+                                        }
+                                    ?>
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            <?php if($current_page < $total_page) { echo "href='category.php??search=$search_value&page=$total_page'"; } ?>>
+                                            <span aria-hidden="true">&raquo</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
+                </main>
             </div>
         </div>
-        </main>
-    </div>
     </div>
     <script type="text/javascript" src="../js/sidebar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

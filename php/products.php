@@ -293,10 +293,10 @@
                                                     echo "<tr>";
                                                     $c++;
                                                     echo "<td>" . $row['product_id'] . "</td>";
+                                                    echo "<td>" . "<img src='../asset/product/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
                                                     echo "<td>" . $row['product_name'] . "</td>";
                                                     echo "<td>" . $row['product_description'] . "</td>";
                                                     echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";
-                                                    echo "<td>" . "<img src='../asset/product/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
                                                     echo "<td>" . $row['category_name'] . "</td>";
                                                     echo "<td> 
                                                     <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
