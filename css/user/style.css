@@ -52,7 +52,7 @@ footer {
   /* background: url(https://images.pexels.com/photos/688660/pexels-photo-688660.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) 5%; */
   background-size: cover;
   max-height: 100%;
-  overflow: hidden;
+  overflow: auto;
   z-index: -900;
 }
 
