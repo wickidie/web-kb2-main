@@ -1,20 +1,20 @@
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('admin', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('user', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789');
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('adman', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('user1', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789');
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('admun', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('user2', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789');
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('admen', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('user3', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789');
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('admon', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('user4', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789');
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('adamin', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('user5', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789');
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('admandi', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('user6', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789');
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('admundur', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('user7', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789');
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('admenjes', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('user8', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789');
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number) VALUES
-('admongol', md5('admin'), 'admin@gmail.com', 'adminFname', 'adminLname', 'adminAddress', '08123456789');
+('user9', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789');
