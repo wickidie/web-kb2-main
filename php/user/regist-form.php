@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Tokaku</title>
+    <title>Create account - Tokaku</title>
     <link rel="icon" href="../../asset/img/logo/tokaku_logo.svg" type="image/x-icon" />
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
@@ -24,8 +24,13 @@
         height: 100%;
         overflow: hidden;
       }
+
+      .invalid-feedback {
+        font-size: small;
+      }
     </style>
   </head>
+
   <body>
     <main class="h-100 background">
       <header>
@@ -38,10 +43,10 @@
                   <span class="visually-hidden">Home</span>
                 </a>
               </li>
-              <!-- <li class="breadcrumb-item active">
-                                      <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Cart</a>
-                                    </li> -->
-              <li class="breadcrumb-item active" aria-current="page">Login</li>
+              <!-- <li class="breadcrumb-item">
+                <a class="link-body-emphasis fw-semibold text-decoration-none" href="login-form.html">Login</a>
+              </li> -->
+              <li class="breadcrumb-item active" aria-current="page">Create account</li>
             </ol>
           </div>
 
@@ -52,20 +57,46 @@
       </header>
       <div class="d-flex flex-column justify-content-center align-items-center h-75">
         <img src="../../asset/img/logo/tokaku_logo.svg" class="mb-3" alt="" />
-        <h2><b>Login</b></h2>
-        <form class="needs-validation w-25" action="users-login.php" method="post" novalidate>
+        <form class="needs-validation w-25" action="users-add.php" method="post" novalidate>
+          <h2><b>Create your Account</b></h2>
+          <p>Join us today for exclusive deals and offers!</p>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="emailph">
+              <i class="bi bi-envelope-fill"></i>
+            </span>
+            <input type="text" class="form-control" id="user_input" name="email" placeholder="Email" aria-label="Email" aria-describedby="emailph" required />
+          </div>
           <div class="input-group mb-3">
             <span class="input-group-text" id="usernameph">
               <i class="bi bi-person-circle"></i>
             </span>
-            <input type="text" class="form-control" id="user_input" name="username" placeholder="Username" aria-label="Username" aria-describedby="usernameph" required />
+            <input type="text" class="form-control" id="user_input" name="username" placeholder="username" aria-label="username" aria-describedby="usernameph" required />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="firstnameph">
+              <i class="bi bi-person-circle"></i>
+            </span>
+            <input type="text" class="form-control" id="user_input" name="first_name" placeholder="firstname" aria-label="firstname" aria-describedby="firstnameph" required />
+            <input type="text" class="form-control" id="user_input" name="last_name" placeholder="lastname" aria-label="lastname" aria-describedby="lastnameph" required />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="addressph">
+              <i class="bi bi-person-circle"></i>
+            </span>
+            <input type="text" class="form-control" id="user_input" name="address" placeholder="address" aria-label="address" aria-describedby="addressph" required />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="phone_numberph">
+              <i class="bi bi-person-circle"></i>
+            </span>
+            <input type="number" class="form-control" id="user_input" name="phone_number" placeholder="phone_number" aria-label="phone_number" aria-describedby="phone_numberph" required />
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text" id="passwordph">
               <i class="bi bi-key-fill"></i>
             </span>
             <input
-              type="password"
+            type="password"
               class="form-control"
               id="password_input"
               name="password"
@@ -75,15 +106,29 @@
               required
               pattern=".{5,}"
               title="Password must be at least 5 characters" />
-            <div class="invalid-feedback">
+              <div class="invalid-feedback">
               <p class="m-0">Please enter a valid password (at least 5 characters).</p>
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary text-center w-100 mb-2">Log in</button>
-
-          <div class="text-center mb-2">
-            <a href="regist-form.php" class=""><small>Create new account</small></a>
+          <div class="input-group mb-2">
+            <span class="input-group-text" id="cpasswordph">
+              <i class="bi bi-patch-check"></i>
+            </span>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" aria-label="Confirm your password" aria-describedby="cpasswordph" placeholder="Please confirm your password" required />
+            <div class="valid-feedback">
+              <p class="m-0">Passwords match.</p>
+            </div>
+            <div class="invalid-feedback">
+              <p class="m-0">Passwords do not match.</p>
+            </div>
+          </div>
+          <div class="text-center btn-group w-100 my-3">
+            <button type="submit" class="btn btn-primary">Create account</button>
+            <button class="btn btn-danger" onclick="history.back()">Close</button>
+          </div>
+          <div class="text-center">
+            <a href="login-form.php" class=""><small>Already have an account? Sign in</small></a>
           </div>
         </form>
       </div>
@@ -417,6 +462,7 @@
         const form = document.querySelector(".needs-validation");
         const userIdInput = document.getElementById("user_input");
         const passwordInput = document.getElementById("password_input");
+        const confirmPasswordInput = document.getElementById("confirm_password");
 
         function checkUserId() {
           const userId = userIdInput.value;
@@ -430,21 +476,22 @@
           form.classList.add("was-validated");
         }
 
-        function checkPassword() {
+        function checkPasswordMatch() {
           const password = passwordInput.value;
+          const confirmPassword = confirmPasswordInput.value;
 
-          if (password.length < 5) {
-            passwordInput.setCustomValidity("Password must be at least 5     characters.");
+          if (password != confirmPassword) {
+            confirmPasswordInput.setCustomValidity("Passwords do not match.");
           } else {
-            passwordInput.setCustomValidity("");
+            confirmPasswordInput.setCustomValidity("");
           }
 
           form.classList.add("was-validated");
         }
 
-        // Add event listeners for input event on user ID and password fields
-        userIdInput.addEventListener("input", checkUserId);
-        passwordInput.addEventListener("input", checkPassword);
+        // Add event listeners for input event on password fields
+        passwordInput.addEventListener("input", checkPasswordMatch);
+        confirmPasswordInput.addEventListener("input", checkPasswordMatch);
 
         form.addEventListener("submit", function (event) {
           if (!form.checkValidity()) {
@@ -452,8 +499,8 @@
             event.stopPropagation();
           }
 
-          checkUserId(); // Check User ID before form submission
-          checkPassword(); // Check password before form submission
+          checkUserId();
+          checkPasswordMatch(); // Check password match before form submission
         });
       });
     </script>
