@@ -147,7 +147,7 @@
         </form>
           <div class="row justify-content-center align-items-center">
             <?php
-              $items_per_page = 10;
+              $items_per_page = 2;
               $sql = "SELECT * FROM products";
               $result = mysqli_query($conn, $sql);
               $rows = mysqli_num_rows($result);
@@ -217,7 +217,33 @@
 
             ?>
           </div>
-
+          <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center m-0">
+                <li class="page-item">
+                    <a class="page-link"
+                        <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
+                        <span aria-hidden="true">&laquo</span>
+                    </a>
+                </li>
+                <?php 
+            for($x=1;$x<=$total_page;$x++){
+                ?>
+                <li class="page-item">
+                    <a class="page-link"
+                        <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                    </a>
+                </li>
+                <?php
+            }
+        ?>
+                <li class="page-item">
+                    <a class="page-link"
+                        <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
+                        <span aria-hidden="true">&raquo</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
         </section>
       </article>
       <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
