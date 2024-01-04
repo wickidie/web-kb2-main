@@ -122,7 +122,7 @@
                                                     echo "<tr>";
                                                     echo "<td>" . $row['transaction_detail_id'] . "</td>";
                                                     echo "<td>" . $row['transaction_id'] . "</td>";
-                                                    echo "<td>" . $row['product_id'] . "</td>";
+                                                    echo "<td>" . $row['product_name'] . "</td>";
                                                     echo "<td>" . number_format($row['quantity'], 0, ',', '.') . "</td>";
                                                     echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";
                                                     echo "<tr>";
