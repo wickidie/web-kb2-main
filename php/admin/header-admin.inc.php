@@ -1,6 +1,6 @@
 <?php
     include_once 'db-connect.inc.php';
-    $user_id = $_SESSION['user_id'];
+    $admin_id = $_SESSION['admin_id'];
 
     $getUsername = "SELECT username FROM admin WHERE admin_id = '$admin_id'";
     $username = mysqli_query($conn, $getUsername);

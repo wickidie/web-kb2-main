@@ -1,3 +1,11 @@
+<?php
+    // require 'session-users.inc.php';
+    include_once 'db-connect.inc.php';
+    include_once 'web-kb2.inc.php';
+    $user_id = 1;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-target="dark">
   <head>
@@ -144,11 +152,89 @@
                 <li class="col d-none d-xl-inline-block"><span class="visually-hidden">action</span></li>
               </ul>
             </div>
-            <div class="card-body">
+
+            <?php
+
+              $items_per_page = 10;
+              // $search_value = '';
+              $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
+                      JOIN users u ON c.user_id = u.user_id
+                      JOIN products p ON c.product_id = p.product_id
+                      -- ORDER BY c.cart_id
+                      WHERE c.user_id = $user_id;";
+              $result = mysqli_query($conn, $sql);
+              $rows = mysqli_num_rows($result);
+
+              $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+              $offset = ($current_page - 1) * $items_per_page;
+
+              // if (isset($_GET['search'])) {
+              //     $search_value = $_GET['search'];
+              //     if (!empty($_GET['search'])) {
+              //         $sql = "SELECT * FROM cart where cart_id like '%$search_value%' LIMIT $offset, $items_per_page";
+              //         $result = mysqli_query($conn, $sql);
+              //         $sql = "SELECT * FROM cart where cart_id like '%$search_value%'";
+              //         $result_total = mysqli_query($conn, $sql);
+              //         $rows = mysqli_num_rows($result_total);
+              //     }else{
+              //         $sql = "SELECT * FROM cart WHERE 1 LIMIT $offset, $items_per_page";
+              //         $result = mysqli_query($conn, $sql);
+              //     }
+              // }else{
+                $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
+                JOIN users u ON c.user_id = u.user_id
+                JOIN products p ON c.product_id = p.product_id
+                -- ORDER BY c.cart_id
+                WHERE c.user_id = $user_id LIMIT $offset, $items_per_page";
+                $result = mysqli_query($conn, $sql);
+              // }
+
+              $total_page=ceil($rows/$items_per_page);
+              $previous = $current_page - 1;
+              $next = $current_page + 1;
+
+              $total = 0;
+
+              if (mysqli_num_rows($result) > 0) {
+                $c = $offset + 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+
+                  echo "<div class='card-body'>";
+                  echo "<ul class='row justify-content-between list-unstyled m-0'>";
+                  echo "<li class='col-auto order-1 text-center p-0 me-3'><img src='../../asset/img/product/prod01.jpg' alt='product01' class='img-fluid rounded-start' height='100px' width='100px' /></li>";
+                  echo "<li class='col order-2 text-start text-wrap p-0'>";
+
+                  echo "<p class='mt-3'>" . $row['product_name'] . "</p>";
+                  echo "<small>IDR " . number_format($row['product_price'], 2, ',', '.') . "</small>";
+                  echo "</li>";
+                  echo "<li class='col order-4 order-sm-3 text-start text-md-end text-xl-center'>";
+                  echo "<form class='' action='cart-update.php' method='post'>";
+                  echo     "<input type='number' class='form-control-sm mt-3' id='quantity' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph' value='" . $row['quantity'] . "' min='1' />";
+                  echo "</form>";
+                  echo  "</li>";
+                  echo  "<li class='col order-3 order-sm-4 text-center'>";
+                  echo    "<p class='col mt-3'><span>" . number_format((countTotalPerItem($row['product_price'], $row['quantity'])), 2, ',', '.') . "</span></p>";
+                  $total += ($row['product_price'] * $row['quantity']);
+                  echo  "</li>";
+                  echo  "<li class='col order-5 text-center d-none d-xl-inline-block'>";
+                  echo    "<a type='button' class='mt-3' href='cart-delete.php?cart_id=" . $row['cart_id'] . "'><i class='bi bi-trash'></i></a>";
+                  echo  "</li>";
+                  echo "</ul>";
+                  echo "<div class=''>";
+                  echo  "<a type='button' class='btn btn-danger w-100 d-inline-block d-xl-none mt-3'> Remove <i class='bi bi-trash'></i></a>";
+                  echo "</div>";
+                  echo  "</div>";
+                  echo "<hr />";
+                }
+              }
+
+            ?>
+
+            <!-- <div class="card-body">
               <ul class="row justify-content-between list-unstyled m-0">
                 <li class="col-auto order-1 text-center p-0 me-3"><img src="../../asset/img/product/prod01.jpg" alt="product01" class="img-fluid rounded-start" height="100px" width="100px" /></li>
                 <li class="col order-2 text-start text-wrap p-0">
-                  <p class="mt-3">Product 1</p>
+                  <p class="mt-3">Product 2</p>
                   <small>Rp15.000</small>
                 </li>
                 <li class="col order-4 order-sm-3 text-start text-md-end text-xl-center">
@@ -167,12 +253,13 @@
                 <a type="button" class="btn btn-danger w-100 d-inline-block d-xl-none mt-3"> Remove <i class="bi bi-trash"></i></a>
               </div>
             </div>
-            <hr />
-            <div class="card-body">
+            <hr /> -->
+
+            <!-- <div class="card-body">
               <ul class="row justify-content-between list-unstyled m-0">
                 <li class="col-auto order-1 text-center p-0 me-3"><img src="../../asset/img/product/prod01.jpg" alt="product01" class="img-fluid rounded-start" height="100px" width="100px" /></li>
                 <li class="col order-2 text-start text-wrap p-0">
-                  <p class="mt-3">Product 1</p>
+                  <p class="mt-3">Product 3</p>
                   <small>Rp15.000</small>
                 </li>
                 <li class="col order-4 order-sm-3 text-start text-md-end text-xl-center">
@@ -190,14 +277,19 @@
               <div class="">
                 <a type="button" class="btn btn-danger w-100 d-inline-block d-xl-none mt-3"> Remove <i class="bi bi-trash"></i></a>
               </div>
-            </div>
+            </div> -->
+
             <div class="card-footer text-center bg-transparent">
               <ul class="row justify-content-between align-items-center list-unstyled m-0">
                 <li class="col">
                   <h4>Subtotal</h4>
                 </li>
                 <li class="col">
-                  <h5>Rp15000</h5>
+                  <h5>
+                    <?php
+                    echo $total;
+                    ?>
+                    </h5>
                 </li>
               </ul>
               <a href="#" class="btn btn-primary w-100"> Checkout</a>
