@@ -6,15 +6,11 @@
     $sql = "DELETE FROM cart WHERE cart_id = '$cart_id';";
     
     if (mysqli_query($conn, $sql)) {
-        if (unlink($img_path)) {
-            echo "              
-            <script type='text/javascript'>
-            alert('Cart ID $cart_id has been deleted');
-            location='cart.php';
-            </script>";
-        }else{
-            echo "not found";
-        }
+        echo "              
+        <script type='text/javascript'>
+        alert('Cart ID $cart_id has been deleted');
+        location='cart.php';
+        </script>";
     } else {
         echo "Error deleting record: " . mysqli_error($conn);
     }
