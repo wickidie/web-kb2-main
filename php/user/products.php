@@ -1,10 +1,17 @@
+<?php
+    require 'session-users.inc.php';
+
+    $search_value = $_GET['search'] ?? null;
+    $sql = "SELECT * FROM product_category";
+    $result = mysqli_query($conn, $sql);
+?>
 <!DOCTYPE html>
 <html lang="en" data-bs-target="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Products</title>
-    <link rel="icon" href="../../asset/img/logo/tokaku_logo.svg" type="image/x-icon" />
+    <link rel="icon" href="../asset/img/icon/tokaku_logo.svg" type="image/x-icon" />
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -33,16 +40,16 @@
           </span>
         </div>
         <div class="d-flex py-1 px-2 align-items-center">
-          <img src="../../asset/img/logo/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
+          <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
           <span class="fs-4 ms-2 align-bottom logo d-none d-md-inline-block"> Tokaku </span>
         </div>
         <div class="d-none d-md-inline-block">
           <ul class="nav align-items-center">
             <li class="nav-item">
-              <a href="landing_page.html" class="nav-link active">Home</a>
+              <a href="landing_page.html" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">Products</a>
+              <a href="#" class="nav-link active">Products</a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">About</a>
@@ -75,6 +82,7 @@
                       <img class="rounded-circle" src="https://github.com/mdo.png" width="35" height="35" alt="Image Description" />
                     </div>
                     <div class="flex-grow-1 ms-3">
+
                       <p class="mb-0 fw-bold"><small> @user </small></p>
                       <small class="card-text text-body"> @email </small>
                     </div>
@@ -87,7 +95,7 @@
                   <a class="dropdown-item" href="#" id="themeToggle"><small>Change Theme</small></a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="login-form.html"><small>Profile</small> </a>
+                  <a class="dropdown-item" href="login-form.php"><small>Profile</small> </a>
                 </li>
                 <!-- <li>
                   <a class="dropdown-item" href="#">
@@ -98,7 +106,7 @@
                   <hr class="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="dropdown-item" href="logout.html"><small>Sign out</small></a>
+                  <a class="dropdown-item" href="logout.php"><small>Sign out</small></a>
                 </li>
               </ul>
             </li>
@@ -113,13 +121,6 @@
     </header>
 
     <main class="container p-3 mb-auto">
-      <form action='cart-add.php?product_id=2'method='GET'>
-        <button type='submit'>
-          <small class='w-50 text-center py-2'>
-            Add to cart
-          </small>
-        </button>
-      </form>
       <article class="rounded-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb breadcrumb-chevron p-3">
@@ -129,173 +130,101 @@
                 <span class="visually-hidden">Home</span>
               </a>
             </li>
-            <!-- <li class="breadcrumb-item active">
-              <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Cart</a>
-            </li> -->
             <li class="breadcrumb-item active" aria-current="page">Products</li>
           </ol>
         </nav>
         <section class="container">
-          <!-- <div class="row flex-lg-row-reverse">             -->
-          <!-- <div class="col-lg-9 col-xs-1 p-2 p-lg-5 pt-lg-3 justify-content-center align-content-center"> -->
+        <form method="GET" class="w-100">
+            <div class="input-group my-2">
+                <input type="text" class="form-control form-control-sm" id="myInput"
+                    name="search" placeholder="Search for user" aria-label="Search"
+                    aria-describedby="searchph" <?php echo "value = $search_value" ?>>
+                <button class="input-group-text btn btn-outline-secondary rounded-end-1"
+                    type="submit" id="searchph">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
           <div class="row justify-content-center align-items-center">
-            <div class="col-6 col-md-4 col-xl-3 p-2">
-              <div class="card">
-                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                <figure class="card-img m-0">
-                  <img src="../../asset/img/product/prod01.jpg" alt="product01" class="figure-img img-fluid rounded-2" />
-                </figure>
-                <div class="card-body text-center">
-                  <div class="card-title">
-                    <h4 class="card-title fw-semibold">Product 2</h4>
-                  </div>
-                  <div class="card-text">
-                    <small>
-                      <span class="text-muted text-decoration-line-through">Rp15.000</span>
-                      Rp20.000
-                    </small>
-                  </div>
-                </div>
-                <div class="d-flex border-top">
-                  <small class="w-50 text-center border-end py-2">
-                    <a class="text-body" href="#"><i class="bi bi-eye me-0 me-md-2"></i><span class="d-none d-md-inline-block">View details</span></a>
-                  </small>
-                  <small class="w-50 text-center py-2">
-                    <a class="text-body" href="#"><i class="bi bi-cart me-0 me-md-2"></i><span class="d-none d-md-inline-block">Add to cart</span></a>
-                  </small>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-4 col-xl-3 p-2">
-              <div class="card">
-                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                <figure class="card-img m-0">
-                  <img src="../../asset/img/product/prod01.jpg" alt="product01" class="figure-img img-fluid rounded-2" />
-                </figure>
-                <div class="card-body text-center">
-                  <div class="card-title">
-                    <h4 class="card-title fw-semibold">Product 2</h4>
-                  </div>
-                  <div class="card-text">
-                    <small>
-                      <span class="text-muted text-decoration-line-through">Rp15.000</span>
-                      Rp20.000
-                    </small>
-                  </div>
-                </div>
-                <div class="d-flex border-top">
-                  <small class="w-50 text-center border-end py-2">
-                    <a class="text-body" href="#"><i class="bi bi-eye me-0 me-md-2"></i><span class="d-none d-md-inline-block">View details</span></a>
-                  </small>
-                  <small class="w-50 text-center py-2">
-                    <a class="text-body" href="#"><i class="bi bi-cart me-0 me-md-2"></i><span class="d-none d-md-inline-block">Add to cart</span></a>
-                  </small>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-4 col-xl-3 p-2">
-              <div class="card">
-                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                <figure class="card-img m-0">
-                  <img src="../../asset/img/product/prod01.jpg" alt="product01" class="figure-img img-fluid rounded-2" />
-                </figure>
-                <div class="card-body text-center">
-                  <div class="card-title">
-                    <h4 class="card-title fw-semibold">Product 2</h4>
-                  </div>
-                  <div class="card-text">
-                    <small>
-                      <span class="text-muted text-decoration-line-through">Rp15.000</span>
-                      Rp20.000
-                    </small>
-                  </div>
-                </div>
-                <div class="d-flex border-top">
-                  <small class="w-50 text-center border-end py-2">
-                    <a class="text-body" href="#"><i class="bi bi-eye me-0 me-md-2"></i><span class="d-none d-md-inline-block">View details</span></a>
-                  </small>
-                  <small class="w-50 text-center py-2">
-                    <a class="text-body" href="#"><i class="bi bi-cart me-0 me-md-2"></i><span class="d-none d-md-inline-block">Add to cart</span></a>
-                  </small>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-4 col-xl-3 p-2">
-              <div class="card">
-                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                <figure class="card-img m-0">
-                  <img src="../../asset/img/product/prod01.jpg" alt="product01" class="figure-img img-fluid rounded-2" />
-                </figure>
-                <div class="card-body text-center">
-                  <div class="card-title">
-                    <h4 class="card-title fw-semibold">Product 2</h4>
-                  </div>
-                  <div class="card-text">
-                    <small>
-                      <span class="text-muted text-decoration-line-through">Rp15.000</span>
-                      Rp20.000
-                    </small>
-                  </div>
-                </div>
-                <div class="d-flex border-top">
-                  <small class="w-50 text-center border-end py-2">
-                    <a class="text-body" href="#"><i class="bi bi-eye me-0 me-md-2"></i><span class="d-none d-md-inline-block">View details</span></a>
-                  </small>
-                  <small class="w-50 text-center py-2">
-                    <a class="text-body" href="#"><i class="bi bi-cart me-0 me-md-2"></i><span class="d-none d-md-inline-block">Add to cart</span></a>
-                  </small>
-                </div>
-              </div>
-            </div>
+            <?php
+              $items_per_page = 10;
+              $sql = "SELECT * FROM products";
+              $result = mysqli_query($conn, $sql);
+              $rows = mysqli_num_rows($result);
+
+              $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+              $offset = ($current_page - 1) * $items_per_page;
+              
+              if (isset($_GET['search'])) {
+                  if (!empty($_GET['search'])) {
+                      $sql = "SELECT * FROM products WHERE product_name like '%$search_value%' LIMIT $offset, $items_per_page";
+                      $result = mysqli_query($conn, $sql);
+                      $sql = "SELECT * FROM products WHERE product_name like '%$search_value%'";
+                      $result_total = mysqli_query($conn, $sql);
+                      $rows = mysqli_num_rows($result_total);
+                  }else{
+                      $sql = "SELECT * FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                      $result = mysqli_query($conn, $sql);
+                  }
+              }else{
+                  $sql = "SELECT * FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                  $result = mysqli_query($conn, $sql);
+              }
+              
+              $total_page = ceil($rows/$items_per_page);
+              $previous = $current_page - 1;
+              $next = $current_page + 1;
+
+              if (mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)) {
+                  echo "<div class='col-6 col-md-4 col-xl-3 p-2'>
+                          <div class='card'>
+                            <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Sale</div>
+                            <figure class='card-img m-0'>
+                              <img src='../../asset/img/product/" . $row["product_img"] . "' alt='product01' class='figure-img img-fluid rounded-2' />
+                            </figure>
+                            <div class='card-body text-center'>
+                              <div class='card-title'>
+                                <h4 class='card-title fw-semibold'>" . $row["product_name"] . "</h4>
+                              </div>
+                              <div class='card-text'>
+                                <small>
+                                  <span class='text-muted text-decoration-line-through'>Rp" . number_format($row['product_price'], 2, ',', '.') . "</span>
+                                  Rp" . number_format($row['product_price'], 2, ',', '.') . "
+                                </small>
+                              </div>
+                            </div>
+                            <div class='d-flex border-top'>
+                              <small class='w-50 text-center border-end py-2'>
+                                <a class='text-body' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
+                              </small>
+                              <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
+                                <button type='submit'>
+                                  <small class='w-50 text-center py-2'>
+                                    Add to cart
+                                  </small>
+                                </button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>";
+                } 
+            } else {
+                echo "<tr>";
+                echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
+                echo "<tr>";
+            }
+
+            ?>
           </div>
-          <!-- </div> -->
-          <!-- <div class="col-lg-3 col-xs-1 p-1">
-              <div class="justify-content-start">
-                <h2>Filter:</h2>
-                <div class="">
-                  <button class="btn collapsed bg-transparent fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">filter1</button>
-                  <div class="collapse" id="collapseOne">
-                    <div class="card card-body bg-transparent">
-                      <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall
-                      appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-                      <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                  </div>
-                </div>
-                <div class="">
-                  <button class="btn collapsed bg-transparent fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">filter2</button>
-                  <div class="collapse" id="collapseTwo">
-                    <div class="card card-body bg-transparent">
-                      <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall
-                      appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-                      <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                  </div>
-                </div>
-                <div class="">
-                  <button class="btn collapsed bg-transparent fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">filter3</button>
-                  <div class="collapse" id="collapseThree">
-                    <div class="card card-body bg-transparent">
-                      <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall
-                      appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-                      <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-          <!-- </div> -->
-          <!-- <div class="row flex-lg-row-reverse align-items-center">
-            <div class="col-lg-8"></div>
-            <div class="col-lg-8"></div>
-          </div> -->
+
         </section>
       </article>
       <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header pt-4">
           <h5 class="offcanvas-title" id="offcanvasExampleLabel">
             <div class="d-flex ms-2 justify-content-center align-items-center">
-              <img src="../../asset/img/logo/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
+              <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
               <span class="fs-4 ms-2 align-bottom"> Tokaku </span>
             </div>
           </h5>

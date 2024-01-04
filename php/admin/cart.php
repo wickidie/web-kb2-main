@@ -146,22 +146,13 @@
                                             <div class="flex-grow-1 ms-3">
                                                 <p class="mb-0 fw-bold"><small>
                                                         <?php 
-                                                            $getUsername = "SELECT username FROM users WHERE user_id = '$user_id'";
+                                                            $getUsername = "SELECT username FROM admin WHERE admin_id = '$admin_id'";
                                                             $username = mysqli_query($conn, $getUsername);
                                                             $row = mysqli_fetch_assoc($username);
 
                                                             echo"<strong>". $row['username'] . "</strong>";
                                                         ?>
                                                     </small></p>
-                                                <small class="card-text text-body">
-                                                    <?php 
-                                                            $getEmail = "SELECT email FROM users WHERE user_id = '$user_id'";
-                                                            $email = mysqli_query($conn, $getEmail);
-                                                            $row = mysqli_fetch_assoc($email);
-
-                                                            echo"<strong>". $row['email'] . "</strong>";
-                                                        ?>
-                                                </small>
                                             </div>
                                         </div>
                                     </li>
@@ -192,7 +183,7 @@
                             <form method="GET">
                                 <div class="input-group my-2">
                                     <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                                        placeholder="Search by date" aria-label="Search" aria-describedby="searchph">
+                                        placeholder="Search by user_id" aria-label="Search" aria-describedby="searchph">
                                     <button class="input-group-text btn btn-secondary rounded-end-1" type="submit"
                                         id="searchph">
                                         <i class="bi bi-search"></i>
@@ -218,9 +209,7 @@
                                             $search_value = '';
                                             $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
                                                     JOIN users u ON c.user_id = u.user_id
-                                                    JOIN products p ON c.product_id = p.product_id
-                                                    -- ORDER BY c.cart_id
-                                                    WHERE c.user_id = $user_id;";
+                                                    JOIN products p ON c.product_id = p.product_id;";
                                             $result = mysqli_query($conn, $sql);
                                             $rows = mysqli_num_rows($result);
 
@@ -230,21 +219,25 @@
                                             if (isset($_GET['search'])) {
                                                 $search_value = $_GET['search'];
                                                 if (!empty($_GET['search'])) {
-                                                    $sql = "SELECT * FROM cart where cart_id like '%$search_value%' LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
+                                                    JOIN users u ON c.user_id = u.user_id
+                                                    JOIN products p ON c.product_id = p.product_id WHERE c.user_id like '%$search_value%' LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
-                                                    $sql = "SELECT * FROM cart where cart_id like '%$search_value%'";
+                                                    $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
+                                                    JOIN users u ON c.user_id = u.user_id
+                                                    JOIN products p ON c.product_id = p.product_id WHERE c.user_id like '%$search_value%'";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
-                                                    $sql = "SELECT * FROM cart WHERE 1 LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
+                                                    JOIN users u ON c.user_id = u.user_id
+                                                    JOIN products p ON c.product_id = p.product_id LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
                                                 $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
                                                 JOIN users u ON c.user_id = u.user_id
-                                                JOIN products p ON c.product_id = p.product_id
-                                                -- ORDER BY c.cart_id
-                                                WHERE c.user_id = $user_id LIMIT $offset, $items_per_page";
+                                                JOIN products p ON c.product_id = p.product_id;";
                                                 $result = mysqli_query($conn, $sql);
                                             }
                                             
@@ -301,7 +294,7 @@
                                     ?>
                                     <li class="page-item">
                                         <a class="page-link"
-                                            <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
+                                            <?php if($current_page < $total_page) { echo "href='products.php?search=$search_value&page=$total_page'"; } ?>>
                                             <span aria-hidden="true">Last &raquo</span>
                                         </a>
                                     </li>
