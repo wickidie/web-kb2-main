@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Transactions Details</title>
-    <link rel="icon" href="../asset/icon/tokaku_logo.svg" type="image/x-icon" />
+    <link rel="icon" href="../../asset/img/icon/tokaku_logo.svg" type="image/x-icon" />
 
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
@@ -25,15 +25,14 @@
         rel="stylesheet" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../../css/admin/style.css" />
 
     <!-- Javascript -->
-    <script defer type="text/javascript" src="../js/theme.js"></script>
-    <script defer type="text/javascript" src="../js/page.js"></script>
+    <script defer type="text/javascript" src="../../js/theme.js"></script>
+    <script defer type="text/javascript" src="../../js/page.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
-
 </head>
 
 <body>

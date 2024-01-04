@@ -5,11 +5,11 @@ body {
 .sidebar {
   width: 14rem;
 }
+
 a,
-a.nav-link,
-a.nav-item,
-a.nav-link,
-.nav-link:hover {
+.nav-link,
+.nav-link:focus,
+.nav-item {
   color: currentColor;
   text-decoration: none;
 }

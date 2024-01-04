@@ -1,0 +1,97 @@
+body {
+  font-family: "Jost", sans-serif;
+}
+
+.logo {
+  font-family: "Kalnia", serif;
+  font-weight: 500;
+}
+
+a,
+.nav-link,
+.nav-link:focus,
+.nav-item {
+  color: currentColor;
+  text-decoration: none;
+}
+
+a:hover,
+.nav-link:hover,
+.nav-link:active,
+.active {
+  color: currentColor;
+  text-decoration: underline !important;
+}
+
+.navbar-toggler {
+  font-size: 2rem;
+  box-shadow: none !important;
+  border: none;
+}
+
+/* .bg-img {
+  height: auto;
+  background-image: url("../../asset/img/parco-chan-BeNerxxCKLU-unsplash.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+} */
+main {
+  min-height: calc(100vh - 200px);
+}
+footer {
+  height: 100px;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  /* background: #8cccff; */
+  /* background: url(https://images.pexels.com/photos/688660/pexels-photo-688660.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) 5%; */
+  background-size: cover;
+  max-height: 100%;
+  overflow: hidden;
+  z-index: -900;
+}
+
+.bg-opacity {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  opacity: 0.5;
+}
+
+.flake path {
+  fill: #adb5bd;
+}
+
+.flake-wrapper {
+  position: absolute;
+  z-index: -999;
+}
+
+@keyframes falling {
+  0% {
+    top: -50px;
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.flake {
+  width: 100%;
+  height: 100%;
+}
