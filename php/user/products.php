@@ -39,33 +39,33 @@
     ?>
 
     <main class="container p-3 mb-auto">
-        <article class="rounded-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-chevron p-3">
-                    <li class="breadcrumb-item">
-                        <a class="link-body-emphasis" href="landing_page.html">
-                            <i class="bi bi-house-door-fill" width="16" height="16"></i>
-                            <span class="visually-hidden">Home</span>
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Products</li>
-                </ol>
-            </nav>
-            <section class="container">
-                <form method="GET" class="w-100">
-                    <div class="input-group my-2">
-                        <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                            placeholder="Search for user" aria-label="Search" aria-describedby="searchph"
-                            <?php echo "value = $search_value" ?>>
-                        <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
-                            id="searchph">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
-                </form>
-                <div class="row justify-content-center align-items-center">
-                    <?php
-              $items_per_page = 10;
+      <article class="rounded-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb breadcrumb-chevron p-3">
+            <li class="breadcrumb-item">
+              <a class="link-body-emphasis" href="landing_page.html">
+                <i class="bi bi-house-door-fill" width="16" height="16"></i>
+                <span class="visually-hidden">Home</span>
+              </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Products</li>
+          </ol>
+        </nav>
+        <section class="container">
+        <form method="GET" class="w-100">
+            <div class="input-group my-2">
+                <input type="text" class="form-control form-control-sm" id="myInput"
+                    name="search" placeholder="Search for user" aria-label="Search"
+                    aria-describedby="searchph" <?php echo "value = $search_value" ?>>
+                <button class="input-group-text btn btn-outline-secondary rounded-end-1"
+                    type="submit" id="searchph">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+          <div class="row justify-content-center align-items-center">
+            <?php
+              $items_per_page = 2;
               $sql = "SELECT * FROM products";
               $result = mysqli_query($conn, $sql);
               $rows = mysqli_num_rows($result);
@@ -134,38 +134,42 @@
             }
 
             ?>
-                </div>
-
-            </section>
-        </article>
-        <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample"
-            aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header pt-4">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                    <div class="d-flex ms-2 justify-content-center align-items-center">
-                        <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-                        <span class="fs-4 ms-2 align-bottom"> Tokaku </span>
-                    </div>
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <div>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a href="landing_page.html" class="nav-link">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="about.html" class="nav-link">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Contact us</a>
-                        </li>
-                    </ul>
-                </div>
+          </div>
+          <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center m-0">
+                <li class="page-item">
+                    <a class="page-link"
+                        <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
+                        <span aria-hidden="true">&laquo</span>
+                    </a>
+                </li>
+                <?php 
+            for($x=1;$x<=$total_page;$x++){
+                ?>
+                <li class="page-item">
+                    <a class="page-link"
+                        <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                    </a>
+                </li>
+                <?php
+            }
+        ?>
+                <li class="page-item">
+                    <a class="page-link"
+                        <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
+                        <span aria-hidden="true">&raquo</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        </section>
+      </article>
+      <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header pt-4">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+            <div class="d-flex ms-2 justify-content-center align-items-center">
+              <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
+              <span class="fs-4 ms-2 align-bottom"> Tokaku </span>
             </div>
         </div>
     </main>
