@@ -14,6 +14,7 @@
         </script>";
     }
 
-    
-
+    function countTotalPerItem($price, $quantity){
+        return $price * $quantity;
+    }
 ?>
