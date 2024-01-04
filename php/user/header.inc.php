@@ -1,5 +1,12 @@
 <?php
-    echo'    <header class="container-fluid p-3">
+    include_once 'db-connect.inc.php';
+    $admin_id = $_SESSION['admin_id'];
+
+    $getUsername = "SELECT * FROM users WHERE user_id = '$user_id'";
+    $username = mysqli_query($conn, $getUsername);
+    $row = mysqli_fetch_assoc($username);
+
+    echo '<header class="container-fluid p-3">
     <nav class="navbar navbar-expand-lg bg-transparant justify-content-between px-md-3 px-2 rounded-3">
       <!-- <div>
         <span class="d-xl-none navbar-brand ms-2 pe-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
@@ -18,13 +25,13 @@
       <div class="d-none d-md-inline-block">
         <ul class="nav align-items-center">
           <li class="nav-item">
-            <a href="#" class="nav-link active">Home</a>
+            <a href="#" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="products.html" class="nav-link">Products</a>
+            <a href="products.php" class="nav-link">Products</a>
           </li>
           <li class="nav-item">
-            <a href="about.html" class="nav-link">About</a>
+            <a href="#" class="nav-link">About</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">Contact us</a>
@@ -34,7 +41,7 @@
       <div>
         <ul class="nav align-items-center">
           <li class="nav-item">
-            <a href="#" class="nav-link pe-auto">
+            <a href="products.php" class="nav-link pe-auto">
               <i class="bi bi-search"></i>
               <div class="input-group d-none">
                 <form action="">
@@ -54,8 +61,8 @@
                     <img class="rounded-circle" src="https://github.com/mdo.png" width="35" height="35" alt="Image Description" />
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <p class="mb-0 fw-bold"><small> @user </small></p>
-                    <small class="card-text text-body"> @email </small>
+                    <p class="mb-0 fw-bold"><small>' . $row['username'] . '</small></p>
+                    <small class="card-text text-body">' . $row['email'] . '</small>
                   </div>
                 </div>
               </li>
@@ -66,7 +73,7 @@
                 <a class="dropdown-item" href="#" id="themeToggle"><small>Change Theme</small></a>
               </li>
               <li>
-                <a class="dropdown-item" href="login-form.html"><small>Profile</small> </a>
+                <a class="dropdown-item" href="login-form.php"><small>Profile</small> </a>
               </li>
               <!-- <li>
                 <a class="dropdown-item" href="#">
@@ -77,12 +84,12 @@
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <a class="dropdown-item" href="logout.html"><small>Sign out</small></a>
+                <a class="dropdown-item" href="logout.php"><small>Sign out</small></a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="cart.html" class="nav-link pe-auto">
+            <a href="cart.php" class="nav-link pe-auto">
               <i class="bi bi-cart"></i>
             </a>
           </li>
