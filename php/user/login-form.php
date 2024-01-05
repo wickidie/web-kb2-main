@@ -51,8 +51,8 @@
         </nav>
       </header>
       <div class="d-flex flex-column justify-content-center align-items-center h-75">
-        <img src="../../asset/img/logo/tokaku_logo.svg" class="mb-3" alt="" />
-        <h2><b>Login</b></h2>
+        <img src="../../asset/img/icon/tokaku_logo.svg" class="mb-3" alt="" />
+        <h2><b>Login User</b></h2>
         <form class="needs-validation w-25" action="users-login.php" method="post" novalidate>
           <div class="input-group mb-3">
             <span class="input-group-text" id="usernameph">

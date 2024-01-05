@@ -1,9 +1,5 @@
 <?php
-    // require 'session-users.inc.php';
-    include_once 'db-connect.inc.php';
-    include_once 'web-kb2.inc.php';
-    $user_id = 1;
-
+    require 'session-users.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +89,7 @@
               //         $result = mysqli_query($conn, $sql);
               //     }
               // }else{
-                $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
+                $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, p.product_img, c.quantity, p.product_price, c.created_at FROM cart c 
                 JOIN users u ON c.user_id = u.user_id
                 JOIN products p ON c.product_id = p.product_id
                 -- ORDER BY c.cart_id
@@ -113,7 +109,7 @@
 
                   echo "<div class='card-body'>";
                   echo "<ul class='row justify-content-between list-unstyled m-0'>";
-                  echo "<li class='col-auto order-1 text-center p-0 me-3'><img src='../../asset/img/product/prod01.jpg' alt='product01' class='img-fluid rounded-start' height='100px' width='100px' /></li>";
+                  echo "<li class='col-auto order-1 text-center p-0 me-3'><img src='../../asset/img/product/" . $row['product_img'] . "' alt='" . $row['product_img'] . "' class='img-fluid rounded-start' height='100px' width='100px' /></li>";
                   echo "<li class='col order-2 text-start text-wrap p-0'>";
 
                   echo "<p class='mt-3'>" . $row['product_name'] . "</p>";
