@@ -107,7 +107,6 @@
                               </div>
                               <div class='card-text'>
                                 <small>
-                                  <span class='text-muted text-decoration-line-through'>Rp" . number_format($row['product_price'], 2, ',', '.') . "</span>
                                   Rp" . number_format($row['product_price'], 2, ',', '.') . "
                                 </small>
                               </div>

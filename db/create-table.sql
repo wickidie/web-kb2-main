@@ -12,7 +12,8 @@ CREATE TABLE users (
     first_name VARCHAR(255),
     last_name VARCHAR(255),
     address VARCHAR(255),
-    phone_number VARCHAR(255)
+    phone_number VARCHAR(255),
+    purchase int
 );
 
 CREATE TABLE product_category (
@@ -27,6 +28,7 @@ CREATE TABLE products (
     product_price DECIMAL(10, 2),
     product_img VARCHAR(255),
     category_id int,
+    sold int,
     FOREIGN KEY (category_id) REFERENCES product_category(category_id) 
         ON UPDATE CASCADE 
         ON DELETE SET NULL
