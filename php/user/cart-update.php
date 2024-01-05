@@ -3,6 +3,7 @@
 
     $cart_id = $_GET['cart_id'];
     $product_id = $_POST['product_id'];
+    $quantity = $_GET['quantity'];
     
     $sql = "UPDATE `cart` SET `quantity`=";
     
