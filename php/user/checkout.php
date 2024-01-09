@@ -1,44 +1,21 @@
 <?php
     require 'session-users.inc.php';
-
+    
     $quantity = $_POST['quantity'];
-
-
+    
+    
     // cart update
     $sqlUpdateCart = "SELECT c.cart_id, c.quantity, p.product_id FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id";
     $result = mysqli_query($conn, $sqlUpdateCart);
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             $cart_id = $row['cart_id'];
-
+            
             $sql_update = "UPDATE `cart` SET `quantity`= $quantity";
             mysqli_query($conn, $sql_update);
         }
     }
-
-    // getting transaction_id to input to transaction details
-    $sqlTransactionId = "SELECT transaction_id FROM transactions;";
-    $result = mysqli_query($conn, $sqlTransactionId);
-    if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
-            $transaction_id = $row['transaction_id'];
-        }
-    }
-
-    // input data to transaction details
-    $sqlTransactionDetails = "SELECT c.cart_id, c.created_at, c.user_id, c.quantity, c.product_id, p.product_price FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id;";
-    $result = mysqli_query($conn, $sqlTransactionDetails);
-    if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
-            $quantity = $row['quantity'];
-            $product_price = $row['product_price'];
-            $product_id = $row['product_id'];
-
-            $sql_insert = "INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES ($quantity, $product_price, $transaction_id, $product_id)";
-            mysqli_query($conn, $sql_insert);
-        }
-    }
-
+    
     // getting transaction total value
     $sql = "SELECT c.cart_id, c.created_at, c.user_id, c.quantity, c.product_id, p.product_price FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id";
     $result = mysqli_query($conn, $sql);
@@ -52,7 +29,7 @@
 
     // buying, add to transactions or checking out
     $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `status`,`user_id`) VALUES (CURRENT_DATE(), $transaction_total, 'Pending', $user_id);";
-
+    
     if (mysqli_query($conn, $sql)) {
         echo "              
         <script type='text/javascript'>
@@ -61,6 +38,29 @@
         </script>";
     } else {
         echo "Error buying record: " . mysqli_error($conn);
+    }
+    
+    // getting transaction_id to input to transaction details
+    $sqlTransactionId = "SELECT transaction_id FROM transactions;";
+    $result = mysqli_query($conn, $sqlTransactionId);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $transaction_id = $row['transaction_id'];
+        }
+    }
+    
+    // input data to transaction details
+    $sqlTransactionDetails = "SELECT c.cart_id, c.created_at, c.user_id, c.quantity, c.product_id, p.product_price FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id;";
+    $result = mysqli_query($conn, $sqlTransactionDetails);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $quantity = $row['quantity'];
+            $product_price = $row['product_price'];
+            $product_id = $row['product_id'];
+
+            $sql_insert = "INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES ($quantity, $product_price, $transaction_id, $product_id)";
+            mysqli_query($conn, $sql_insert);
+        }
     }
 
     // empty the cart after checking out

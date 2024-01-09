@@ -48,7 +48,7 @@
 
         <section class="container">
           <div>
-            <p class="fs-2 fw-bold">Shopping cart <small class="fw-light">(1)</small></p>
+            <p class="fs-2 fw-bold">Shopping cart <small class="fw-light"></small></p>
           </div>
 
           
