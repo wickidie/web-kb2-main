@@ -1,4 +1,4 @@
-INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase, purchase) VALUES
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
 ('user', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
 ('user1', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);

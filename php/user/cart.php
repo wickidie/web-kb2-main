@@ -50,106 +50,113 @@
           <div>
             <p class="fs-2 fw-bold">Shopping cart <small class="fw-light">(1)</small></p>
           </div>
-          <div class="card shadow-lg border-0">
-            <div class="card-header bg-transparent">
-              <ul class="row justify-content-between align-items-center list-unstyled m-0">
-                <li class="col text-center"><span>Product</span></li>
-                <li class="col d-none d-md-inline-block"><span class="visually-hidden">Product Name</span></li>
-                <li class="col d-none d-sm-inline-block text-center text-md-start"><span>QTY</span></li>
-                <li class="col text-center text-md-start"><span>SubTotal</span></li>
-                <li class="col d-none d-xl-inline-block"><span class="visually-hidden">Action</span></li>
-              </ul>
-            </div>
 
-            <?php
+          
+          <form action="checkout.php" method="post">
+              <div class="card shadow-lg border-0">
 
-              $items_per_page = 10;
-              // $search_value = '';
-              $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
-                      JOIN users u ON c.user_id = u.user_id
-                      JOIN products p ON c.product_id = p.product_id
-                      -- ORDER BY c.cart_id
-                      WHERE c.user_id = $user_id;";
-              $result = mysqli_query($conn, $sql);
-              $rows = mysqli_num_rows($result);
-
-              $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-              $offset = ($current_page - 1) * $items_per_page;
-
-              // if (isset($_GET['search'])) {
-              //     $search_value = $_GET['search'];
-              //     if (!empty($_GET['search'])) {
-              //         $sql = "SELECT * FROM cart where cart_id like '%$search_value%' LIMIT $offset, $items_per_page";
-              //         $result = mysqli_query($conn, $sql);
-              //         $sql = "SELECT * FROM cart where cart_id like '%$search_value%'";
-              //         $result_total = mysqli_query($conn, $sql);
-              //         $rows = mysqli_num_rows($result_total);
-              //     }else{
-              //         $sql = "SELECT * FROM cart WHERE 1 LIMIT $offset, $items_per_page";
-              //         $result = mysqli_query($conn, $sql);
-              //     }
-              // }else{
-                $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, p.product_img, c.quantity, p.product_price, c.created_at FROM cart c 
-                JOIN users u ON c.user_id = u.user_id
-                JOIN products p ON c.product_id = p.product_id
-                -- ORDER BY c.cart_id
-                WHERE c.user_id = $user_id LIMIT $offset, $items_per_page";
+              <div class="card-header bg-transparent">
+                <ul class="row justify-content-between align-items-center list-unstyled m-0">
+                  <li class="col text-center"><span>Product</span></li>
+                  <li class="col d-none d-md-inline-block"><span class="visually-hidden">Product Name</span></li>
+                  <li class="col d-none d-sm-inline-block text-center text-md-start"><span>QTY</span></li>
+                  <li class="col text-center text-md-start"><span>SubTotal</span></li>
+                  <li class="col d-none d-xl-inline-block"><span class="visually-hidden">Action</span></li>
+                </ul>
+              </div>
+  
+              <?php
+  
+                $items_per_page = 10;
+                // $search_value = '';
+                $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
+                        JOIN users u ON c.user_id = u.user_id
+                        JOIN products p ON c.product_id = p.product_id
+                        -- ORDER BY c.cart_id
+                        WHERE c.user_id = $user_id;";
                 $result = mysqli_query($conn, $sql);
-              // }
-
-              $total_page=ceil($rows/$items_per_page);
-              $previous = $current_page - 1;
-              $next = $current_page + 1;
-
-              $total = 0;
-
-              if (mysqli_num_rows($result) > 0) {
-                $c = $offset + 1;
-                while ($row = mysqli_fetch_assoc($result)) {
-
-                  echo "<div class='card-body'>";
-                  echo "<ul class='row justify-content-between list-unstyled m-0'>";
-                  echo "<li class='col-auto order-1 text-center p-0 me-3'><img src='../../asset/img/product/" . $row['product_img'] . "' alt='" . $row['product_img'] . "' class='img-fluid rounded-start' height='100px' width='100px' /></li>";
-                  echo "<li class='col order-2 text-start text-wrap p-0'>";
-
-                  echo "<p class='mt-3'>" . $row['product_name'] . "</p>";
-                  echo "<small>IDR " . number_format($row['product_price'], 2, ',', '.') . "<input class='price' id='price' type=hidden value='" . $row['product_price'] . "'></small>";
-                  echo "</li>";
-                  echo "<li class='col order-4 order-sm-3 text-start text-md-end text-xl-center'>";
-                  echo "<form class='' action='cart-update.php' method='post'>";
-                  echo     "<input type='number' class='quantity form-control-sm mt-3' id='quantity' onchange='updateSubTotal()' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph' value='" . $row['quantity'] . "' min='1' />";
-                  echo "</form>";
-                  echo  "</li>";
-                  echo  "<li class='col order-3 order-sm-4 text-center'>";
-                  echo    "<p class='col mt-3'><span class='sub_total' id='sub_total'>IDR " . number_format($row['product_price'], 2, ',', '.') . "</span></p>";
-                  // $total += ($row['product_price'] * $row['quantity']);
-                  echo  "</li>";
-                  echo  "<li class='col order-5 text-center d-none d-xl-inline-block'>";
-                  echo    "<a type='button' class='mt-3' href='cart-delete.php?cart_id=" . $row['cart_id'] . "'><i class='bi bi-trash'></i></a>";
-                  echo  "</li>";
-                  echo "</ul>";
-                  echo "<div class=''>";
-                  echo  "<a type='button' class='btn btn-danger w-100 d-inline-block d-xl-none mt-3'> Remove <i class='bi bi-trash'></i></a>";
-                  echo "</div>";
-                  echo  "</div>";
-                  echo "<hr />";
+                $rows = mysqli_num_rows($result);
+  
+                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                $offset = ($current_page - 1) * $items_per_page;
+  
+                // if (isset($_GET['search'])) {
+                //     $search_value = $_GET['search'];
+                //     if (!empty($_GET['search'])) {
+                //         $sql = "SELECT * FROM cart where cart_id like '%$search_value%' LIMIT $offset, $items_per_page";
+                //         $result = mysqli_query($conn, $sql);
+                //         $sql = "SELECT * FROM cart where cart_id like '%$search_value%'";
+                //         $result_total = mysqli_query($conn, $sql);
+                //         $rows = mysqli_num_rows($result_total);
+                //     }else{
+                //         $sql = "SELECT * FROM cart WHERE 1 LIMIT $offset, $items_per_page";
+                //         $result = mysqli_query($conn, $sql);
+                //     }
+                // }else{
+                  $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, p.product_img, c.quantity, p.product_price, c.created_at FROM cart c 
+                  JOIN users u ON c.user_id = u.user_id
+                  JOIN products p ON c.product_id = p.product_id
+                  -- ORDER BY c.cart_id
+                  WHERE c.user_id = $user_id LIMIT $offset, $items_per_page";
+                  $result = mysqli_query($conn, $sql);
+                // }
+  
+                $total_page=ceil($rows/$items_per_page);
+                $previous = $current_page - 1;
+                $next = $current_page + 1;
+  
+                $total = 0;
+  
+                if (mysqli_num_rows($result) > 0) {
+                  $c = $offset + 1;
+                  while ($row = mysqli_fetch_assoc($result)) {
+  
+                    echo "<div class='card-body'>";
+                    echo "<ul class='row justify-content-between list-unstyled m-0'>";
+                    echo "<li class='col-auto order-1 text-center p-0 me-3'><img src='../../asset/img/product/" . $row['product_img'] . "' alt='" . $row['product_img'] . "' class='img-fluid rounded-start' height='100px' width='100px' /></li>";
+                    echo "<li class='col order-2 text-start text-wrap p-0'>";
+  
+                    echo "<p class='mt-3'>" . $row['product_name'] . "</p>";
+                    echo "<small>IDR " . number_format($row['product_price'], 2, ',', '.') . "<input class='price' id='price' type=hidden value='" . $row['product_price'] . "'></small>";
+                    echo "</li>";
+                    echo "<li class='col order-4 order-sm-3 text-start text-md-end text-xl-center'>";
+                    echo "<form class='' action='' method='post'>";
+                    echo     "<input type='number' class='quantity form-control-sm mt-3' id='quantity' onchange='updateSubTotal()' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph' value='" . $row['quantity'] . "' min='1' />";
+                    echo "</form>";
+                    echo  "</li>";
+                    echo  "<li class='col order-3 order-sm-4 text-center'>";
+                    echo    "<p class='col mt-3'><span class='sub_total' id='sub_total'>IDR " . number_format($row['product_price'], 2, ',', '.') . "</span></p>";
+                    // $total += ($row['product_price'] * $row['quantity']);
+                    echo  "</li>";
+                    echo  "<li class='col order-5 text-center d-none d-xl-inline-block'>";
+                    echo    "<a type='button' class='mt-3' href='cart-delete.php?cart_id=" . $row['cart_id'] . "'><i class='bi bi-trash'></i></a>";
+                    echo  "</li>";
+                    echo "</ul>";
+                    echo "<div class=''>";
+                    echo  "<a type='button' class='btn btn-danger w-100 d-inline-block d-xl-none mt-3'> Remove <i class='bi bi-trash'></i></a>";
+                    echo "</div>";
+                    echo  "</div>";
+                    echo "<hr />";
+                  }
                 }
-              }
-
-            ?>
-
-            <div class="card-footer text-center bg-transparent">
-              <ul class="row justify-content-between align-items-center list-unstyled m-0">
-                <li class="col">
-                  <h4 class='total'>Total</h4>
-                </li>
-                <li class="col">
-                  <h5 class='total' id="total"></h5>
-                </li>
-              </ul>
-              <a href="#" class="btn btn-primary w-100"> Checkout</a>
+  
+              ?>
+  
+              <div class="card-footer text-center bg-transparent">
+                <ul class="row justify-content-between align-items-center list-unstyled m-0">
+                  <li class="col">
+                    <h4 class='total'>Total</h4>
+                  </li>
+                  <li class="col">
+                    <h5 class='total' id="total"></h5>
+                  </li>
+                </ul>
+                <!-- CHECKOUT BTN -->
+                <button type="submit" class="btn btn-primary w-100"> Checkout</button>
+  
+              </div>
             </div>
-          </div>
+            </form>
 
           <!-- <div class="card shadow">
             <div class="card-body">
