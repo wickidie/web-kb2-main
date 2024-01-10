@@ -73,7 +73,8 @@
                 <a class="dropdown-item" href="#" id="themeToggle"><small>Change Theme</small></a>
               </li>
               <li>
-                <a class="dropdown-item" href="login-form.php"><small>Profile</small> </a>
+                <a class="dropdown-item" href="order-details.php"><small>Order Details</small> </a>
+                <a class="dropdown-item" href="order-status.php"><small>Order Status</small> </a>
               </li>
               <!-- <li>
                 <a class="dropdown-item" href="#">

@@ -79,6 +79,7 @@
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Transaction Total</th>
                                                     <th scope="col">Username</th>
+                                                    <th scope="col">Payment</th>
                                                     <th scope="col">Status</th>
                                                 </tr>
                                             </thead>
@@ -122,6 +123,9 @@
                                                     echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
                                                     echo "<td>" . $row['username'] . "</td>";
                                                     echo "<td>";
+                                                    echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>Payment</button>";
+                                                    echo "</td>";
+                                                    echo "<td>";
                                                     echo "
                                                     <form action='transaction-update-status.php' method=post>
                                                     <select name='status'>
@@ -129,8 +133,7 @@
                                                         <option value='Valid'>Valid</option>
                                                         <option value='Invalid'>Invalid</option>
                                                         <option value='Pending'>Pending</option>
-                                                        <option value='Paid'>Paid</option>
-                                                        <option value='Delivery'>Delivery</option>
+                                                        <option value='Delivering'>Delivering</option>
                                                         <option value='Delivered'>Delivered</option>
                                                     </select>
                                                     <input type='hidden' name='transaction_id' value='" . $row['transaction_id'] . "'/>
@@ -247,5 +250,42 @@
         </div>
     </div>
 </body>
+<!-- Payment modal -->
+<div class="modal modal-fade" id="PaymentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 0px;">
+        <div class="modal-content">
+        <div class="modal-body" id="exampleModalLabel">
+            <img src="../../asset/img/payment/Pepe_Business_flip.png" alt="">
+        </div>            
+        <button id="close" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close" type="submit"></button>
+        </div>
+    </div>
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById("PaymentModal");
 
+// Get the button that opens the modal
+var btn = document.getElementById("PaymentButton");
+
+// Get the <span> element that closes the modal
+var span = document.getElementById("close");
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 </html>
