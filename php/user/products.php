@@ -35,7 +35,7 @@
 
 <body class="bg-img background">
     <?php 
-    include_once 'header.inc.php';
+      include_once 'header.inc.php';
     ?>
 
     <main class="container p-3 mb-auto">

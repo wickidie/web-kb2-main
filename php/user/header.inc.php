@@ -25,16 +25,13 @@
       <div class="d-none d-md-inline-block">
         <ul class="nav align-items-center">
           <li class="nav-item">
-            <a href="#" class="nav-link">Home</a>
+            <a href="landing-page.php" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
             <a href="products.php" class="nav-link">Products</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Contact us</a>
           </li>
         </ul>
       </div>
