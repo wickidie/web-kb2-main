@@ -1,18 +1,32 @@
 <?php
     require 'session-users.inc.php';
     
+    $quantity_count = $_POST['quantity_count'];
     $quantity = $_POST['quantity'];
+    echo $quantity . "</p>";
+
+
+    for ($i=0; $i < $quantity_count; $i++) { 
+        $cart = $_POST['quantity'][$i];
+        echo $cart . "</p>";
+        echo "<p>asda" . $i  . "</p>";
+
+
+    }
     
+    echo $quantity_count;
     
     // cart update
     $sqlUpdateCart = "SELECT c.cart_id, c.quantity, p.product_id FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id";
     $result = mysqli_query($conn, $sqlUpdateCart);
     if (mysqli_num_rows($result) > 0) {
+        $c = 0;
         while($row = mysqli_fetch_assoc($result)) {
             $cart_id = $row['cart_id'];
             
-            $sql_update = "UPDATE `cart` SET `quantity`= $quantity";
+            $sql_update = "UPDATE `cart` SET `quantity`= $quantity[$c] WHERE cart_id = $cart_id";
             mysqli_query($conn, $sql_update);
+            $c++;
         }
     }
     
@@ -63,13 +77,13 @@
         }
     }
 
-    // empty the cart after checking out
-    $sql = "SELECT * FROM cart WHERE user_id = $user_id;";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        $truncate = "DELETE FROM `cart` WHERE user_id = $user_id;";
-        mysqli_query($conn, $truncate);
-    }
+    // // empty the cart after checking out
+    // $sql = "SELECT * FROM cart WHERE user_id = $user_id;";
+    // $result = mysqli_query($conn, $sql);
+    // if (mysqli_num_rows($result) > 0) {
+    //     $truncate = "DELETE FROM `cart` WHERE user_id = $user_id;";
+    //     mysqli_query($conn, $truncate);
+    // }
 
     mysqli_close($conn) ;
 ?>
