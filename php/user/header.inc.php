@@ -25,16 +25,13 @@
       <div class="d-none d-md-inline-block">
         <ul class="nav align-items-center">
           <li class="nav-item">
-            <a href="#" class="nav-link">Home</a>
+            <a href="landing-page.php" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
             <a href="products.php" class="nav-link">Products</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Contact us</a>
           </li>
         </ul>
       </div>
@@ -73,7 +70,8 @@
                 <a class="dropdown-item" href="#" id="themeToggle"><small>Change Theme</small></a>
               </li>
               <li>
-                <a class="dropdown-item" href="login-form.php"><small>Profile</small> </a>
+                <a class="dropdown-item" href="order-details.php"><small>Order Details</small> </a>
+                <a class="dropdown-item" href="order-status.php"><small>Order Status</small> </a>
               </li>
               <!-- <li>
                 <a class="dropdown-item" href="#">

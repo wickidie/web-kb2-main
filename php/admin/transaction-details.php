@@ -81,7 +81,6 @@
                                                     <th scope="col">Product Name</th>
                                                     <th scope="col">Quantity</th>
                                                     <th scope="col">Product Price</th>
-                                                    <!-- <th scope="col">Action</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>

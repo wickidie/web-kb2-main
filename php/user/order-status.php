@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Products</title>
+    <title>Order Status</title>
     <link rel="icon" href="../../asset/img/icon/tokaku_logo.svg" type="image/x-icon" />
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
@@ -35,7 +35,7 @@
 
 <body class="bg-img background">
     <?php 
-      include_once 'header.inc.php';
+    include_once 'header.inc.php';
     ?>
 
     <main class="container p-3 mb-auto">
@@ -55,7 +55,7 @@
         <form method="GET" class="w-100">
             <div class="input-group my-2">
                 <input type="text" class="form-control form-control-sm" id="myInput"
-                    name="search" placeholder="Search for user" aria-label="Search"
+                    name="search" placeholder="Search for transaction_id" aria-label="Search"
                     aria-describedby="searchph" <?php echo "value = $search_value" ?>>
                 <button class="input-group-text btn btn-outline-secondary rounded-end-1"
                     type="submit" id="searchph">
@@ -64,28 +64,38 @@
             </div>
         </form>
           <div class="row justify-content-center align-items-center">
+          <div class="table-responsive">
+                                        <table class="table table-hover table-striped" id="myTable">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Transaction Total</th>
+                                                    <th scope="col">Username</th>
+                                                    <th scope="col">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
             <?php
-              $items_per_page = 2;
-              $sql = "SELECT * FROM products";
+              $items_per_page = 10;
+              $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id";
               $result = mysqli_query($conn, $sql);
               $rows = mysqli_num_rows($result);
-
               $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
               $offset = ($current_page - 1) * $items_per_page;
               
               if (isset($_GET['search'])) {
                   if (!empty($_GET['search'])) {
-                      $sql = "SELECT * FROM products WHERE product_name like '%$search_value%' LIMIT $offset, $items_per_page";
+                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
-                      $sql = "SELECT * FROM products WHERE product_name like '%$search_value%'";
+                      $sql = "SELECT * FROM transactions where transaction_id like '%$search_value%'";
                       $result_total = mysqli_query($conn, $sql);
                       $rows = mysqli_num_rows($result_total);
                   }else{
-                      $sql = "SELECT * FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
                   }
               }else{
-                  $sql = "SELECT * FROM products WHERE 1 LIMIT $offset, $items_per_page";
+                  $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
                   $result = mysqli_query($conn, $sql);
               }
               
@@ -95,36 +105,14 @@
 
               if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
-                  echo "<div class='col-6 col-md-4 col-xl-3 p-2'>
-                          <div class='card'>
-                            <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Sale</div>
-                            <figure class='card-img m-0'>
-                              <img src='../../asset/img/product/" . $row["product_img"] . "' alt='product01' class='figure-img img-fluid rounded-2' />
-                            </figure>
-                            <div class='card-body text-center'>
-                              <div class='card-title'>
-                                <h4 class='card-title fw-semibold'>" . $row["product_name"] . "</h4>
-                              </div>
-                              <div class='card-text'>
-                                <small>
-                                  Rp" . number_format($row['product_price'], 2, ',', '.') . "
-                                </small>
-                              </div>
-                            </div>
-                            <div class='d-flex border-top'>
-                              <small class='w-50 text-center border-end py-2'>
-                                <a class='text-body' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
-                              </small>
-                              <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
-                                <button type='submit'>
-                                  <small class='w-50 text-center py-2'>
-                                    Add to cart
-                                  </small>
-                                </button>
-                              </form>
-                            </div>
-                          </div>
-                        </div>";
+                  $formattedDate = date('d-m-Y', strtotime($row['transaction_date']));
+                                                    echo "<tr>";
+                                                    $c++;
+                                                    echo "<td>" . $formattedDate . "</td>";
+                                                    echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
+                                                    echo "<td>" . $row['username'] . "</td>";
+                                                    echo "<td>" . $row['status'] . "</td>";
+                                                    echo "<tr>";
                 } 
             } else {
                 echo "<tr>";
@@ -133,6 +121,8 @@
             }
 
             ?>
+              </tbody>
+            </table>
           </div>
           <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center m-0">

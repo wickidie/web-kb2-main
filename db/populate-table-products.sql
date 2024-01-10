@@ -12,3 +12,11 @@ INSERT INTO products (product_name, product_description, product_price, product_
 ('prod03', 'prod03Desc', 150000, 'prod03.jpg', 2, 0);
 INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
 ('prod04', 'prod04Desc', 1500, 'prod04.jpg', 3, 0);
+INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
+('prod05', 'prod05Desc', 13000, 'prod01.jpg', 3, 0);
+INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
+('prod06', 'prod06Desc', 110000, 'prod02.jpg', 2, 0);
+INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
+('prod07', 'prod07Desc', 140000, 'prod03.jpg', 2, 0);
+INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
+('prod08', 'prod08Desc', 15800, 'prod04.jpg', 3, 0);
