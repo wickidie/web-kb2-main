@@ -33,39 +33,39 @@
     </script>
 </head>
 
-<body class="bg-img background">
+<body class="">
     <?php 
       include_once 'header.inc.php';
     ?>
 
     <main class="container p-3 mb-auto">
-      <article class="rounded-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb breadcrumb-chevron p-3">
-            <li class="breadcrumb-item">
-              <a class="link-body-emphasis" href="landing_page.html">
-                <i class="bi bi-house-door-fill" width="16" height="16"></i>
-                <span class="visually-hidden">Home</span>
-              </a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">Products</li>
-          </ol>
-        </nav>
-        <section class="container">
-        <form method="GET" class="w-100">
-            <div class="input-group my-2">
-                <input type="text" class="form-control form-control-sm" id="myInput"
-                    name="search" placeholder="Search for user" aria-label="Search"
-                    aria-describedby="searchph" <?php echo "value = $search_value" ?>>
-                <button class="input-group-text btn btn-outline-secondary rounded-end-1"
-                    type="submit" id="searchph">
-                    <i class="bi bi-search"></i>
-                </button>
-            </div>
-        </form>
-          <div class="row justify-content-center align-items-center">
-            <?php
-              $items_per_page = 4;
+        <article class="rounded-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-chevron p-3">
+                    <li class="breadcrumb-item">
+                        <a class="link-body-emphasis" href="landing-page.php">
+                            <i class="bi bi-house-door-fill" width="16" height="16"></i>
+                            <span class="visually-hidden">Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Products</li>
+                </ol>
+            </nav>
+            <section class="container">
+                <form method="GET" class="w-100">
+                    <div class="input-group my-2">
+                        <input type="text" class="form-control form-control-sm" id="myInput" name="search"
+                            placeholder="Search for user" aria-label="Search" aria-describedby="searchph"
+                            <?php echo "value = $search_value" ?>>
+                        <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
+                            id="searchph">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="row justify-content-center align-items-center">
+                    <?php
+              $items_per_page = 2;
               $sql = "SELECT * FROM products";
               $result = mysqli_query($conn, $sql);
               $rows = mysqli_num_rows($result);
@@ -97,7 +97,7 @@
                 while($row = mysqli_fetch_assoc($result)) {
                   echo "<div class='col-6 col-md-4 col-xl-3 p-2'>
                           <div class='card'>
-                            <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Sale</div>
+                          <!-- <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Sale</div> -->
                             <figure class='card-img m-0'>
                               <img src='../../asset/img/product/" . $row["product_img"] . "' alt='product01' class='figure-img img-fluid rounded-2' />
                             </figure>
@@ -113,15 +113,16 @@
                             </div>
                             <div class='d-flex border-top'>
                               <small class='w-50 text-center border-end py-2'>
-                                <a class='text-body' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
+                                <a class='btn btn-sm text-center' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
                               </small>
+                              <small class='w-50 text-center py-2'>
                               <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
-                                <button type='submit'>
-                                  <small class='w-50 text-center py-2'>
-                                    Add to cart
-                                  </small>
+                                <button class='btn btn-sm text-center ' type='submit'>                                
+                                  <i class='bi bi-cart me-0 me-md-2'></i>
+                                  <span class='d-none d-md-inline-block'>Add to cart</span>
                                 </button>
                               </form>
+                              </small>
                             </div>
                           </div>
                         </div>";
@@ -133,45 +134,49 @@
             }
 
             ?>
-          </div>
-          <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center m-0">
-                <li class="page-item">
-                    <a class="page-link"
-                        <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
-                        <span aria-hidden="true">&laquo</span>
-                    </a>
-                </li>
-                <?php 
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center m-0">
+                        <li class="page-item">
+                            <a class="page-link"
+                                <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
+                                <span aria-hidden="true">&laquo</span>
+                            </a>
+                        </li>
+                        <?php 
             for($x=1;$x<=$total_page;$x++){
                 ?>
-                <li class="page-item">
-                    <a class="page-link"
-                        <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
-                    </a>
-                </li>
-                <?php
+                        <li class="page-item">
+                            <a class="page-link" <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                            </a>
+                        </li>
+                        <?php
             }
         ?>
-                <li class="page-item">
-                    <a class="page-link"
-                        <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
-                        <span aria-hidden="true">&raquo</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        </section>
-      </article>
-      <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header pt-4">
-          <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-            <div class="d-flex ms-2 justify-content-center align-items-center">
-              <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-              <span class="fs-4 ms-2 align-bottom"> Tokaku </span>
+                        <li class="page-item">
+                            <a class="page-link"
+                                <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
+                                <span aria-hidden="true">&raquo</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+        </article>
+        <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header pt-4">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                    <div class="d-flex ms-2 justify-content-center align-items-center">
+                        <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
+                        <span class="fs-4 ms-2 align-bottom"> Tokaku </span>
+                    </div>
             </div>
-        </div>
     </main>
+
+    <?php 
+    include_once 'offcanvas.inc.php';
+    ?>
 
     <?php 
     include_once 'footer.inc.php';

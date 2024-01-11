@@ -11,7 +11,7 @@
                 $user_id = mysqli_query($conn, $getUserId);
                 $row = mysqli_fetch_assoc($user_id);
                 $_SESSION['user_id'] = $row['user_id'];
-                header('Location: products.php');
+                header('Location: landing-page.php');
             } else {
                     echo "              
                     <script type='text/javascript'>

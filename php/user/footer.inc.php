@@ -16,10 +16,7 @@
                 <!-- Links -->
                 <div class="col-12 col-md-6">
                     <nav class="nav nav-footer justify-content-center justify-content-md-end">
-                        <a class="nav-link" href="#">Privacy</a>
-                        <a class="nav-link" href="#">Terms </a>
-                        <a class="nav-link" href="#">Feedback</a>
-                        <a class="nav-link" href="#">Support</a>
+                        <a class="nav-link" href="#">Contact us</a>
                     </nav>
                 </div>
             </div>
