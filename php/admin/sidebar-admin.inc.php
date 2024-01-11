@@ -34,6 +34,12 @@
                                 <span>Transactions Details</span>
                             </a>
                         </li>
+                        <li class=''>
+                            <a href='cart.php' class='nav-link'>
+                                <i class='bi bi-dot icon'></i>
+                                <span>Cart</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

@@ -83,9 +83,9 @@
                                                 <tr>
                                                     <th scope="col">Product ID</th>
                                                     <th scope="col">Name</th>
+                                                    <th scope="col">Image</th>
                                                     <th scope="col">Description</th>
                                                     <th scope="col">Price</th>
-                                                    <th scope="col">Image</th>
                                                     <th scope="col">Category</th>
                                                     <th scope="col">Sold</th>
                                                     <th scope="col">Action</th>

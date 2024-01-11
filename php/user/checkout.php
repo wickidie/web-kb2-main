@@ -102,6 +102,8 @@
         }
     }
 
+    
+
     // // empty the cart after checking out
     // $sql = "SELECT * FROM cart WHERE user_id = $user_id;";
     // $result = mysqli_query($conn, $sql);
