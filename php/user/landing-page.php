@@ -26,7 +26,7 @@
     </script>
 </head>
 
-<body class="background">
+<body class="">
     <?php 
       include_once 'header.inc.php';
     ?>
@@ -86,7 +86,7 @@
                     <div class="col col-equal-height-e col-lg-3 p-1">
                         <h1>Check Out <br />Latest Product</h1>
                         <div>
-                            <a class="btn btn-lg btn-outline-secondary" href="product.html">View All</a>
+                            <a class="btn btn-lg btn-outline-secondary" href="products.php">View All</a>
                         </div>
                     </div>
                     <?php
@@ -125,15 +125,16 @@
                             </div>
                             <div class='d-flex border-top'>
                               <small class='w-50 text-center border-end py-2'>
-                                <a class='text-body' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
+                                <a class='btn btn-sm text-center' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
                               </small>
+                              <small class='w-50 text-center py-2'>
                               <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
-                                <button type='submit'>
-                                  <small class='w-50 text-center py-2'>
-                                    Add to cart
-                                  </small>
+                                <button class='btn btn-sm text-center ' type='submit'>                                
+                                  <i class='bi bi-cart me-0 me-md-2'></i>
+                                  <span class='d-none d-md-inline-block'>Add to cart</span>
                                 </button>
                               </form>
+                              </small>
                             </div>
                           </div>
                         </div>";
@@ -224,15 +225,16 @@
                                                 </div>
                                                 <div class='d-flex border-top'>
                                                 <small class='w-50 text-center border-end py-2'>
-                                                    <a class='text-body' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
+                                                    <a class='btn btn-sm text-center' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
                                                 </small>
+                                                <small class='w-50 text-center py-2'>
                                                 <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
-                                                    <button type='submit'>
-                                                    <small class='w-50 text-center py-2'>
-                                                        Add to cart
-                                                    </small>
+                                                    <button class='btn btn-sm text-center ' type='submit'>                                
+                                                    <i class='bi bi-cart me-0 me-md-2'></i>
+                                                    <span class='d-none d-md-inline-block'>Add to cart</span>
                                                     </button>
                                                 </form>
+                                                </small>
                                                 </div>
                                             </div>
                                             </div>";
@@ -248,66 +250,18 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <a href="product.html" class="btn btn-outline-secondary w-50" type="submit">View All</a>
+                    <a href="products.php" class="btn btn-outline-secondary w-50" type="submit">View All</a>
                 </div>
             </section>
         </article>
     </main>
+    <?php 
+    include_once 'offcanvas.inc.php';
+    ?>
 
-    <!-- offcanvas menu -->
-    <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample"
-        aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header pt-4">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                <div class="d-flex ms-2 justify-content-center align-items-center">
-                    <img src="../../asset/img/logo/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-                    <span class="fs-4 ms-2 align-bottom"> Tokaku </span>
-                </div>
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="products.html" class="nav-link">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link">About</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="row align-items-center g-0 border-top py-2">
-                <!-- Desc -->
-                <div class="col-md-6 col-12 text-center text-md-start">
-                    <span>©
-                        <span id="copyright">
-                            <script>
-                            document.getElementById("copyright").appendChild(document.createTextNode(new Date()
-                                .getFullYear()));
-                            </script>
-                        </span>Tokaku. All Rights Reserved.</span>
-                </div>
-                <!-- Links -->
-                <div class="col-12 col-md-6">
-                    <nav class="nav nav-footer justify-content-center justify-content-md-end">
-                        <a class="nav-link" href="#">Privacy</a>
-                        <a class="nav-link" href="#">Terms </a>
-                        <a class="nav-link" href="#">Feedback</a>
-                        <a class="nav-link" href="#">Support</a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?php 
+    include_once 'footer.inc.php';
+    ?>
 </body>
 
 </html>
