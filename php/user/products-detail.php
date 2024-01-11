@@ -90,7 +90,7 @@
                                             <form action="cart-add.php?product_id=' . $product_id .  '"method="POST">' . 
                                                 // <input class="form-control form-control-sm text-center me-3" id="inputQuantity" min="1"
                                                 //     type="number" value="1" style="max-width: 5rem" />
-                                                '<button type="submit" class="btn btn-outline-secondary flex-shrink-0" type="button" location>
+                                                '<button type="submit" class="btn btn-success flex-shrink-0" type="button" location>
                                                     <i class="bi-cart me-1"></i>
                                                     Add to cart
                                                 </button>
