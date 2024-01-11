@@ -98,6 +98,19 @@
               if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
                   $formattedDate = date('d-m-Y', strtotime($row['transaction_date']));
+                                                    $id =  $row['transaction_id'];
+                                                    $time = $row['transaction_date'];
+                                                    $timeVal = "SELECT TIMEDIFF(CURRENT_TIMESTAMP, '$time') AS time_diff";
+                                                    $res = mysqli_query($conn, $timeVal);
+                                                    $a = "";
+                                                    while($x = mysqli_fetch_assoc($res)) {
+                                                        $a = $x['time_diff'];
+                                                        if ((int)substr($a, 0, 2) >= 48) {
+                                                            $updateStatus = "UPDATE `transactions` SET `status`='Invalid' WHERE transaction_id = $id";
+                                                            mysqli_query($conn, $updateStatus);
+                                                        }
+                                                    };
+
                                                     echo "<tr>";
                                                     echo "<td>" . $row['transaction_id'] . "</td>";
                                                     echo "<td>" . $formattedDate . "</td>";
