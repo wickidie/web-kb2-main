@@ -24,8 +24,8 @@ CREATE TABLE product_category (
 CREATE TABLE products (
     product_id int PRIMARY KEY,
     product_name VARCHAR(255),
-    product_description VARCHAR(255),
-    product_price DECIMAL(10, 2),
+    product_description VARCHAR(1024),
+    product_price DECIMAL(16, 2),
     product_img VARCHAR(255),
     category_id int,
     sold int,
@@ -36,8 +36,8 @@ CREATE TABLE products (
 
 CREATE TABLE transactions ( 
     transaction_id int PRIMARY KEY,
-    transaction_date DATETIME,
-    transaction_total DECIMAL(10, 2),
+    transaction_date DATE,
+    transaction_total DECIMAL(16, 2),
     status VARCHAR(255),
     payment VARCHAR(255),
     user_id int,
@@ -49,7 +49,7 @@ CREATE TABLE transactions (
 CREATE TABLE transaction_details (
     transaction_detail_id int PRIMARY KEY,
     quantity int,
-    product_price DECIMAL(10, 2),
+    product_price DECIMAL(16, 2),
     transaction_id int,
     product_id int,
     FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id)
@@ -93,4 +93,4 @@ ALTER TABLE cart
     MODIFY cart_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
     
 ALTER TABLE product_category
-    MODIFY category_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+    MODIFY category_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;

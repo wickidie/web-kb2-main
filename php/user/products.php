@@ -55,7 +55,7 @@
         <form method="GET" class="w-100">
             <div class="input-group my-2">
                 <input type="text" class="form-control form-control-sm" id="myInput"
-                    name="search" placeholder="Search for user" aria-label="Search"
+                    name="search" placeholder="Search for product name" aria-label="Search"
                     aria-describedby="searchph" <?php echo "value = $search_value" ?>>
                 <button class="input-group-text btn btn-outline-secondary rounded-end-1"
                     type="submit" id="searchph">
@@ -113,15 +113,15 @@
                             </div>
                             <div class='d-flex border-top'>
                               <small class='w-50 text-center border-end py-2'>
-                                <a class='btn btn-sm text-center' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
+                                <a class='btn btn-sm btn-info text-center' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
                               </small>
-                              <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST' class=''>
-                                <button type='submit' class=''>
-                                  <small class='w-50 text-center py-2'>
-                                    Add to cart
-                                  </small>
-                                </button>
-                              </form>
+                              <small class='w-50 text-center border-end py-2'>
+                                <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST' class=''>
+                                  <button class='btn btn-sm btn-success text-center ' type='submit'>                                
+                                  <i class='bi bi-cart me-0 me-md-2'></i>
+                                  <span class='d-none d-md-inline-block'>Add to cart</span>
+                                  </button>
+                                </form>
                               </small>
                             </div>
                           </div>
