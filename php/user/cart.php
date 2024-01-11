@@ -52,7 +52,6 @@
                     <li class="breadcrumb-item active" aria-current="page">Cart</li>
                 </ol>
             </nav>
-
             <section class="container">
                 <div>
                     <p class="fs-2 fw-bold">Shopping cart <small class="fw-light"></small></p>
@@ -102,12 +101,15 @@
                 //         $result = mysqli_query($conn, $sql);
                 //     }
                 // }else{
-                  $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, p.product_img, c.quantity, p.product_price, c.created_at FROM cart c 
-                  JOIN users u ON c.user_id = u.user_id
-                  JOIN products p ON c.product_id = p.product_id
-                  -- ORDER BY c.cart_id
-                  WHERE c.user_id = $user_id LIMIT $offset, $items_per_page";
+                  $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, p.product_img, c.quantity, p.product_price, c.created_at 
+                    FROM cart c 
+                    JOIN users u ON c.user_id = u.user_id
+                    JOIN products p ON c.product_id = p.product_id
+                    WHERE c.user_id = $user_id 
+                    ORDER BY c.cart_id
+                    LIMIT $offset, $items_per_page";
                   $result = mysqli_query($conn, $sql);
+          
                 // }
   
                 $total_page=ceil($rows/$items_per_page);

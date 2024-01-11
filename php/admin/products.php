@@ -48,12 +48,12 @@
                 <article class="p-3">
                     <section class="d-flex justify-content-center align-items-center">
                         <div class="container-fluid">
-                            <span aria-label="breadcrumb">
+                            <!-- <span aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Products</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Products</li>
                                 </ol>
-                            </span>
+                            </span> -->
                             <div class="card shadow mt-2">
                                 <div class="card-header py-3">
                                     <div class="d-flex justify-content-between align-items-center">

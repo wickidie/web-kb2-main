@@ -1,3 +1,7 @@
+<?php
+    require 'session-users.inc.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-target="dark">
 
@@ -40,7 +44,7 @@
 
     <main class="container p-3">
         <article class="rounded-3">
-            <nav aria-label="breadcrumb">
+            <!-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-chevron p-3">
                     <li class="breadcrumb-item">
                         <a class="link-body-emphasis" href="landing-page.php">
@@ -60,7 +64,7 @@
                         ?>
                     </li>
                 </ol>
-            </nav>
+            </nav> -->
             <section class="pb-3">
 
                 <?php
@@ -77,18 +81,21 @@
                                     <div class="col-md-6">
                                         <h1 class="display-5 fw-bolder">' . $row["product_name"] . '</h1>
                                         <div class="fs-5 mb-5">
-                                            <span>$' . $row["product_price"] . '</span>
+                                            <span>Rp' . number_format($row['product_price'], 2, ',', '.') . '</span>
                                         </div>
                                         <p class="lead">
                                         ' . $row["product_description"] . '
                                         </p>
                                         <div class="d-flex">
-                                            <input class="form-control form-control-sm text-center me-3" id="inputQuantity"
-                                                type="number" value="1" style="max-width: 5rem" />
-                                            <button class="btn btn-outline-secondary flex-shrink-0" type="button">
-                                                <i class="bi-cart me-1"></i>
-                                                Add to cart
-                                            </button>
+                                            <form action="cart-add.php?product_id=' . $product_id .  '"method="POST">' . 
+                                                // <input class="form-control form-control-sm text-center me-3" id="inputQuantity" min="1"
+                                                //     type="number" value="1" style="max-width: 5rem" />
+                                                '<button type="submit" class="btn btn-outline-secondary flex-shrink-0" type="button" location>
+                                                    <i class="bi-cart me-1"></i>
+                                                    Add to cart
+                                                </button>
+
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
