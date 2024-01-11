@@ -28,7 +28,14 @@
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <nav class="d-none d-md-flex flex-column bg-body-tertiary col-auto justify-content-between min-vh-100 p-xl-2 p-1"
+        <?php
+                require 'sidebar-admin.inc.php';
+            ?>
+            <main class="col justify-content-center">
+                <?php
+                    require  'header-admin.inc.php';
+                ?>
+            <!-- <nav class="d-none d-md-flex flex-column bg-body-tertiary col-auto justify-content-between min-vh-100 p-xl-2 p-1"
                 id="sidebar">
                 <div class="pt-2">
                     <div class="d-flex justify-content-center align-items-center mb-3">
@@ -113,9 +120,9 @@
                         </div>
                     </div>
                 </div>
-            </nav>
+            </nav> -->
             <div class="col justify-content-center p-0">
-                <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between px-md-4 px-3">
+                <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between px-md-4 px-3">
                     <div class="navbar-brand">
                         <span><i class="bi bi-list cursor" id="icon-toggle"></i></span>
                     </div>
@@ -176,7 +183,7 @@
                             </li>
                         </ul>
                     </div>
-                </nav>
+                </nav> -->
                 <main class="p-3">
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="container">

@@ -62,7 +62,7 @@ CREATE TABLE transaction_details (
 
 CREATE TABLE cart (
     cart_id int PRIMARY KEY,
-    created_at DATE,
+    created_at DATETIME,
     user_id int,
     quantity int,
     product_id int,
