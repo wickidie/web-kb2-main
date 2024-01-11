@@ -30,7 +30,7 @@
     ?>
 
     <main class="container p-3">
-      <article class="rounded-3">
+      <!-- <article class="rounded-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb breadcrumb-chevron p-3">
             <li class="breadcrumb-item">
@@ -38,13 +38,13 @@
                 <i class="bi bi-house-door-fill" width="16" height="16"></i>
                 <span class="visually-hidden">Home</span>
               </a>
-            </li>
+            </li> -->
             <!-- <li class="breadcrumb-item active">
               <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Cart</a>
             </li> -->
-            <li class="breadcrumb-item active" aria-current="page">Cart</li>
+            <!-- <li class="breadcrumb-item active" aria-current="page">Cart</li>
           </ol>
-        </nav>
+        </nav> -->
 
         <section class="container">
           <div>
@@ -93,12 +93,15 @@
                 //         $result = mysqli_query($conn, $sql);
                 //     }
                 // }else{
-                  $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, p.product_img, c.quantity, p.product_price, c.created_at FROM cart c 
-                  JOIN users u ON c.user_id = u.user_id
-                  JOIN products p ON c.product_id = p.product_id
-                  -- ORDER BY c.cart_id
-                  WHERE c.user_id = $user_id LIMIT $offset, $items_per_page";
+                  $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, p.product_img, c.quantity, p.product_price, c.created_at 
+                    FROM cart c 
+                    JOIN users u ON c.user_id = u.user_id
+                    JOIN products p ON c.product_id = p.product_id
+                    WHERE c.user_id = $user_id 
+                    ORDER BY c.cart_id
+                    LIMIT $offset, $items_per_page";
                   $result = mysqli_query($conn, $sql);
+          
                 // }
   
                 $total_page=ceil($rows/$items_per_page);

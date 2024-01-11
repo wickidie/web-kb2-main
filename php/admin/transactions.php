@@ -48,12 +48,12 @@
                 <article class="p-3">
                     <section class="d-flex justify-content-center align-items-center">
                         <div class="container-fluid">
-                            <span aria-label="breadcrumb">
+                            <!-- <span aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Transactions</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Transactions</li>
                                 </ol>
-                            </span>
+                            </span> -->
                             <div class="card shadow mt-2">
                                 <div class="card-header py-3">
                                     <div class="d-flex justify-content-between align-items-center">
@@ -104,7 +104,9 @@
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
-                                                $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
+                                                $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 
+                                                ORDER BY t.transaction_id 
+                                                LIMIT $offset, $items_per_page";
                                                 $result = mysqli_query($conn, $sql);
                                             }
                                             

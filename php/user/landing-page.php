@@ -1,3 +1,7 @@
+<?php
+    require 'session-users.inc.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-target="dark">
 

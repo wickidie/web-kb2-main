@@ -40,7 +40,7 @@
 
     <main class="container p-3 mb-auto">
       <article class="rounded-3">
-        <nav aria-label="breadcrumb">
+        <!-- <nav aria-label="breadcrumb">
           <ol class="breadcrumb breadcrumb-chevron p-3">
             <li class="breadcrumb-item">
               <a class="link-body-emphasis" href="landing_page.html">
@@ -50,7 +50,7 @@
             </li>
             <li class="breadcrumb-item active" aria-current="page">Products</li>
           </ol>
-        </nav>
+        </nav> -->
         <section class="container">
         <form method="GET" class="w-100">
             <div class="input-group my-2">
@@ -115,8 +115,8 @@
                               <small class='w-50 text-center border-end py-2'>
                                 <a class='text-body' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
                               </small>
-                              <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
-                                <button type='submit'>
+                              <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST' class=''>
+                                <button type='submit' class=''>
                                   <small class='w-50 text-center py-2'>
                                     Add to cart
                                   </small>
