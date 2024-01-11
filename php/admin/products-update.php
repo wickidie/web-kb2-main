@@ -23,7 +23,6 @@
     $old_image = $img_location . $product_img['product_img'];
 
     if (unlink($old_image)) {
-
     }else{
         echo "No Image Found";
     }

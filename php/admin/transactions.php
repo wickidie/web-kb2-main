@@ -86,7 +86,7 @@
                                             <tbody>
                                                 <?php
                                             $items_per_page = 10;
-                                            $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id";
+                                            $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id";
                                             $result = mysqli_query($conn, $sql);
                                             $rows = mysqli_num_rows($result);
                                             $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -94,17 +94,17 @@
                                             
                                             if (isset($_GET['search'])) {
                                                 if (!empty($_GET['search'])) {
-                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
                                                     $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%'";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
-                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
-                                                $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 
+                                                $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 
                                                 ORDER BY t.transaction_id 
                                                 LIMIT $offset, $items_per_page";
                                                 $result = mysqli_query($conn, $sql);
@@ -125,18 +125,20 @@
                                                     echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
                                                     echo "<td>" . $row['username'] . "</td>";
                                                     echo "<td>";
-                                                    echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>Payment</button>";
+                                                    if (empty($row['payment'])) {
+                                                        echo "<a class='btn btn-danger btn-sm'>Call Debt Collector</button>";
+                                                    }else{
+                                                        echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>Payment</button>";
+                                                    }
                                                     echo "</td>";
                                                     echo "<td>";
                                                     echo "
                                                     <form action='transaction-update-status.php' method=post>
                                                     <select name='status'>
-                                                        <option value='Status'>" . $row['status'] . "</option>
-                                                        <option value='Valid'>Valid</option>
-                                                        <option value='Invalid'>Invalid</option>
-                                                        <option value='Pending'>Pending</option>
-                                                        <option value='Delivering'>Delivering</option>
-                                                        <option value='Delivered'>Delivered</option>
+                                                    <option value='Status'>" . $row['status'] . "</option>
+                                                    <option value='Valid'>Valid</option>
+                                                    <option value='Invalid'>Invalid</option>
+                                                    <option value='Pending'>Pending</option>
                                                     </select>";
                                                     echo "<input type='hidden' name='transaction_id' value='" . $row['transaction_id'] . "'/>
                                                     <button class='btn btn-primary btn-sm' type='submit'>Update status</button>
@@ -145,11 +147,11 @@
                                                     echo "<tr>";
                                                 }
                                             } else {
-                                            echo "<tr>";
-                                            echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
-                                            echo "<tr>";
+                                                echo "<tr>";
+                                                echo "<td colspan='7' class='text-center'>" . "0 results" . "</td>";
+                                                echo "<tr>";
                                             }
-
+                                            
                                             mysqli_close($conn);
                                         ?>
                                             </tbody>
