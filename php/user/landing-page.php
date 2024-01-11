@@ -202,8 +202,8 @@
                                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
                                 $offset = ($current_page - 1) * $items_per_page;
                                 
-                                    $sql = "SELECT * FROM products WHERE 1 ORDER BY sold ASC LIMIT $offset, $items_per_page";
-                                    $result = mysqli_query($conn, $sql);
+                                $sql = "SELECT * FROM products WHERE 1 ORDER BY sold ASC LIMIT $offset, $items_per_page";
+                                $result = mysqli_query($conn, $sql);
                                 
                                 $total_page = ceil($rows/$items_per_page);
                                 $previous = $current_page - 1;

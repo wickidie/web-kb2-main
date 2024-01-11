@@ -40,17 +40,6 @@
 
     <main class="container p-3 mb-auto">
       <article class="rounded-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb breadcrumb-chevron p-3">
-            <li class="breadcrumb-item">
-              <a class="link-body-emphasis" href="landing_page.html">
-                <i class="bi bi-house-door-fill" width="16" height="16"></i>
-                <span class="visually-hidden">Home</span>
-              </a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">Products</li>
-          </ol>
-        </nav>
         <section class="container">
         <form method="GET" class="w-100">
             <div class="input-group my-2">
@@ -73,12 +62,14 @@
                                                     <th scope="col">Transaction Total</th>
                                                     <th scope="col">Username</th>
                                                     <th scope="col">Status</th>
+                                                    <th scope="col">Payment</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                
             <?php
               $items_per_page = 10;
-              $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id";
+              $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id";
               $result = mysqli_query($conn, $sql);
               $rows = mysqli_num_rows($result);
               $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -86,17 +77,17 @@
               
               if (isset($_GET['search'])) {
                   if (!empty($_GET['search'])) {
-                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page";
+                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
                       $sql = "SELECT * FROM transactions where transaction_id like '%$search_value%'";
                       $result_total = mysqli_query($conn, $sql);
                       $rows = mysqli_num_rows($result_total);
                   }else{
-                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
+                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
                   }
               }else{
-                  $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
+                  $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
                   $result = mysqli_query($conn, $sql);
               }
               
@@ -108,12 +99,45 @@
                 while($row = mysqli_fetch_assoc($result)) {
                   $formattedDate = date('d-m-Y', strtotime($row['transaction_date']));
                                                     echo "<tr>";
-                                                    $c++;
                                                     echo "<td>" . $row['transaction_id'] . "</td>";
                                                     echo "<td>" . $formattedDate . "</td>";
                                                     echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
                                                     echo "<td>" . $row['username'] . "</td>";
-                                                    echo "<td>" . $row['status'] . "</td>";
+                                                    echo "<td>";
+                                                    if ($row['status'] == 'Pending') {
+                                                        echo $row['status'];
+                                                        echo '<form action="transactions-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">';
+                                                        echo '<div class="col mb-3">';
+                                                        echo '<button type="submit" class="btn btn-danger">Cancel</button>';
+                                                        echo '</div>';
+                                                        echo '</form>';
+                                                    }else{
+                                                        echo $row['status'];
+                                                    }
+                                                    echo "</td>";
+                                                    echo "<td>";
+                                                    if (empty($row['payment'])) {
+                                                        echo '<form action="payment-add.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">';
+                                                        echo '<div class="col mb-3">';
+                                                        echo '<input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required>';
+                                                        echo '<button type="submit" class="btn btn-primary">Upload</button>';
+                                                        echo '</div>';
+                                                        echo '</form>';
+                                                    }else{
+                                                        echo '<form action="payment-update.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">';
+                                                        echo '<div class="col mb-3">';
+                                                        echo '<input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required>';
+                                                        echo '<button type="submit" class="btn btn-warning">Update</button>';
+                                                        echo '</div>';
+                                                        echo '</form>';
+                                                        echo '<form action="payment-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">';
+                                                        echo '<div class="col mb-3">';
+                                                        echo '<button type="submit" class="btn btn-danger">Delete</button>';
+                                                        echo '</div>';
+                                                        echo '</form>';
+                                                        echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>" . $row['payment'] . "</button>";
+                                                    }
+                                                    echo "</td>";
                                                     echo "<tr>";
                 } 
             } else {
@@ -123,6 +147,7 @@
             }
 
             ?>
+            </form>
               </tbody>
             </table>
           </div>

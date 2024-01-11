@@ -1,5 +1,5 @@
 <?php
-    require 'session-admin.inc.php';
+    require 'session-users.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
@@ -36,12 +36,9 @@
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-        <?php
-                include_once 'sidebar-admin.inc.php';
-            ?>
             <main class="col justify-content-center">
                 <?php
-                    include_once 'header-admin.inc.php';
+                    include_once 'header.inc.php';
                 ?>
                 <main class="container-fluid p-3 align-items-center h-75">
                     <div class="h-100">
