@@ -68,10 +68,11 @@
                                         <table class="table table-hover table-striped" id="myTable">
                                             <thead>
                                             <tr>
-                                                    <th scope="col">Product Name</th>
-                                                    <th scope="col">Quantity</th>
-                                                    <th scope="col">Product Price</th>
-                                                </tr>
+                                                <th scope="col">Transaction Detail Id</th>
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Product Price</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
             <?php
@@ -86,13 +87,16 @@
               
               if (isset($_GET['search'])) {
                   if (!empty($_GET['search'])) {
-                      $sql = "SELECT * FROM transaction_details where transaction_detail_id like '%$search_value%' LIMIT $offset, $items_per_page";
+                      $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
+                      JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%' LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
-                      $sql = "SELECT * FROM transaction_details where transaction_detail_id like '%$search_value%'";
+                      $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
+                      JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%'";
                       $result_total = mysqli_query($conn, $sql);
                       $rows = mysqli_num_rows($result_total);
                   }else{
-                      $sql = "SELECT transaction_detail_id, transaction_id, product_id, quantity, product_price FROM transaction_details WHERE 1 LIMIT $offset, $items_per_page";
+                      $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
+                      JOIN products p ON td.product_id = p.product_id WHERE 1 LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
                   }
               }else{
@@ -108,6 +112,7 @@
               if (mysqli_num_rows($result) > 0) {
                   while($row = mysqli_fetch_assoc($result)) {
                       echo "<tr>";
+                      echo "<td>" . $row['transaction_detail_id'] . "</td>";
                       echo "<td>" . $row['product_name'] . "</td>";
                       echo "<td>" . number_format($row['quantity'], 0, ',', '.') . "</td>";
                       echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";

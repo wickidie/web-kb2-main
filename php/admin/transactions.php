@@ -135,8 +135,8 @@
                                                         <option value='Pending'>Pending</option>
                                                         <option value='Delivering'>Delivering</option>
                                                         <option value='Delivered'>Delivered</option>
-                                                    </select>
-                                                    <input type='hidden' name='transaction_id' value='" . $row['transaction_id'] . "'/>
+                                                    </select>";
+                                                    echo "<input type='hidden' name='transaction_id' value='" . $row['transaction_id'] . "'/>
                                                     <button class='btn btn-primary btn-sm' type='submit'>Update status</button>
                                                     </form>";
                                                     echo "</td>";

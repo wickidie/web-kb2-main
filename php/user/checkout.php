@@ -1,18 +1,33 @@
 <?php
     require 'session-users.inc.php';
     
+    $quantity_count = $_POST['quantity_count'];
     $quantity = $_POST['quantity'];
+
+    echo $quantity . "</p>";
+
+
+    for ($i=0; $i < $quantity_count; $i++) { 
+        $cart = $_POST['quantity'][$i];
+        echo $cart . "</p>";
+        echo "<p>asda" . $i  . "</p>";
+
+
+    }
     
+    echo $quantity_count;
     
     // cart update
     $sqlUpdateCart = "SELECT c.cart_id, c.quantity, p.product_id FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id";
     $result = mysqli_query($conn, $sqlUpdateCart);
     if (mysqli_num_rows($result) > 0) {
+        $c = 0;
         while($row = mysqli_fetch_assoc($result)) {
             $cart_id = $row['cart_id'];
             
-            $sql_update = "UPDATE `cart` SET `quantity`= $quantity";
+            $sql_update = "UPDATE `cart` SET `quantity`= $quantity[$c] WHERE cart_id = $cart_id";
             mysqli_query($conn, $sql_update);
+            $c++;
         }
     }
     
@@ -49,27 +64,51 @@
         }
     }
     
-    // input data to transaction details
-    $sqlTransactionDetails = "SELECT c.cart_id, c.created_at, c.user_id, c.quantity, c.product_id, p.product_price FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id;";
+
+    // input data to transaction details + update sold
+    $sqlTransactionDetails = "SELECT c.cart_id, c.created_at, c.user_id, c.quantity, c.product_id, p.product_price, p.sold FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id;";
     $result = mysqli_query($conn, $sqlTransactionDetails);
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
-            $quantity = $row['quantity'];
+            $q = $row['quantity'];
             $product_price = $row['product_price'];
             $product_id = $row['product_id'];
+            $numSold = $row['sold'];
 
-            $sql_insert = "INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES ($quantity, $product_price, $transaction_id, $product_id)";
+            $sql_insert = "INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES ($q, $product_price, $transaction_id, $product_id)";
             mysqli_query($conn, $sql_insert);
+
+
+            $numSold+=$q;
+
+            $sqlSold = "UPDATE `products` SET `sold`= $numSold WHERE product_id = $product_id";
+            mysqli_query($conn, $sqlSold);
+
+        }
+
+    }
+
+    // update purchase
+    $sqlUser = "SELECT `purchase` FROM `users` WHERE user_id = $user_id";
+    $result = mysqli_query($conn, $sqlUser);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $numPurchase = $row['purchase'];
+
+            $numPurchase+=1;
+
+            $sqlPurchase = "UPDATE `users` SET `purchase`= $numPurchase WHERE user_id = $user_id";
+            mysqli_query($conn, $sqlPurchase);
         }
     }
 
-    // empty the cart after checking out
-    $sql = "SELECT * FROM cart WHERE user_id = $user_id;";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        $truncate = "DELETE FROM `cart` WHERE user_id = $user_id;";
-        mysqli_query($conn, $truncate);
-    }
+    // // empty the cart after checking out
+    // $sql = "SELECT * FROM cart WHERE user_id = $user_id;";
+    // $result = mysqli_query($conn, $sql);
+    // if (mysqli_num_rows($result) > 0) {
+    //     $truncate = "DELETE FROM `cart` WHERE user_id = $user_id;";
+    //     mysqli_query($conn, $truncate);
+    // }
 
     mysqli_close($conn) ;
 ?>

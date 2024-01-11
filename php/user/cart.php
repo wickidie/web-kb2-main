@@ -115,9 +115,10 @@
                 $next = $current_page + 1;
   
                 $total = 0;
-  
+                $c = 1;
                 if (mysqli_num_rows($result) > 0) {
-                  $c = $offset + 1;
+                  $c += 1;
+                  echo     "<input type='hidden' class='quantity form-control-sm mt-3' id='quantity' onchange='updateSubTotal()' name='quantity_count' placeholder='Quantity' aria-label='Search' aria-describedby='searchph' value='" . $c . "' min='1' />";
                   while ($row = mysqli_fetch_assoc($result)) {
   
                     echo "<div class='card-body'>";
@@ -129,9 +130,7 @@
                     echo "<small>IDR " . number_format($row['product_price'], 2, ',', '.') . "<input class='price' id='price' type=hidden value='" . $row['product_price'] . "'></small>";
                     echo "</li>";
                     echo "<li class='col order-4 order-sm-3 text-start text-md-end text-xl-center'>";
-                    echo "<form class='' action='' method='post'>";
-                    echo     "<input type='number' class='quantity form-control-sm mt-3' id='quantity' onchange='updateSubTotal()' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph' value='" . $row['quantity'] . "' min='1' />";
-                    echo "</form>";
+                    echo  "<input type='number' class='quantity form-control-sm mt-3' id='quantity' onchange='updateSubTotal()' name='quantity[]' placeholder='Quantity' aria-label='Search' aria-describedby='searchph' value='" . $row['quantity'] . "' min='1' />";
                     echo  "</li>";
                     echo  "<li class='col order-3 order-sm-4 text-center'>";
                     echo    "<p class='col mt-3'><span class='sub_total' id='sub_total'>IDR " . number_format($row['product_price'], 2, ',', '.') . "</span></p>";
@@ -240,6 +239,5 @@
 
     updateSubTotal();
     </script>
-</body>
-
+  </body>
 </html>
