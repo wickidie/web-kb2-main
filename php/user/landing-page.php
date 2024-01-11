@@ -50,15 +50,15 @@
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <!-- https://picsum.photos/id/250/1850/890 -->
-                            <img src="../../asset/img/product/prod11-2.jpg" alt="" class="img-fluid" />
+                            <img src="../../asset/img/product/Vinta_backpack_carousel.jpg" alt="" class="img-fluid" />
                         </div>
                         <div class="carousel-item">
                             <!-- https://picsum.photos/id/454/1850/890 -->
-                            <img src="../../asset/img/product/prod12-2.jpg" alt="" class="img-fluid" />
+                            <img src="../../asset/img/product/F250GT_carousel.jpg" alt="" class="img-fluid" />
                         </div>
                         <div class="carousel-item">
                             <!-- https://picsum.photos/id/531/1850/890 -->
-                            <img src="../../asset/img/product/prod13-2.jpg" alt="" class="img-fluid" />
+                            <img src="../../asset/img/product/Z750_carousel.jpg" alt="" class="img-fluid" />
                         </div>
                         <!-- <div class="carousel-item">
                 <img src="../../asset/img/product/2000.jpeg" alt="" class="img-fluid rounded-4" />
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     <?php
-              $items_per_page = 2;
+              $items_per_page = 3;
               $sql = "SELECT * FROM products";
               $result = mysqli_query($conn, $sql);
               $rows = mysqli_num_rows($result);
@@ -113,9 +113,9 @@
                 while($row = mysqli_fetch_assoc($result)) {
                   echo "<div class='col-6 col-md-4 col-xl-3 p-2'>
                           <div class='card'>
-                            <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Sale</div>
+                            <!-- <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Sale</div> -->
                             <figure class='card-img m-0'>
-                              <img src='../../asset/img/product/" . $row["product_img"] . "' alt='product01' class='figure-img img-fluid rounded-2' />
+                              <img src='../../asset/img/product/" . $row["product_img"] . "' alt='".$row["product_img"]."' class='figure-img img-fluid rounded-2 rounded-bottom-0' />
                             </figure>
                             <div class='card-body text-center'>
                               <div class='card-title'>
@@ -150,37 +150,6 @@
             }
 
             ?>
-                    <div class="col col-equal-height-e col-lg-3 p-1">
-                        <div class="card pointer">
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                New</div>
-                            <figure class="card-img m-0">
-                                <img src="../../asset/img/product/prod01.jpg" alt="product01"
-                                    class="figure-img img-fluid rounded-2" />
-                            </figure>
-                            <div class="card-body text-center">
-                                <div class="card-title">
-                                    <h4 class="card-title fw-semibold">Product 2</h4>
-                                </div>
-                                <div class="card-text">
-                                    <small>
-                                        <span class="text-muted text-decoration-line-through">Rp15.000</span>
-                                        Rp20.000
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="d-flex border-top">
-                                <small class="w-50 text-center border-end py-2">
-                                    <a class="text-body" href="#"><i class="bi bi-eye me-0 me-md-2"></i><span
-                                            class="d-none d-md-inline-block">View details</span></a>
-                                </small>
-                                <small class="w-50 text-center py-2">
-                                    <a class="text-body" href="#"><i class="bi bi-cart me-0 me-md-2"></i><span
-                                            class="d-none d-md-inline-block">Add to cart</span></a>
-                                </small>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -194,7 +163,7 @@
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                             <!-- product1 -->
                             <?php
-                                $items_per_page = 6;
+                                $items_per_page = 4;
                                 $sql = "SELECT * FROM products";
                                 $result = mysqli_query($conn, $sql);
                                 $rows = mysqli_num_rows($result);
@@ -202,7 +171,7 @@
                                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
                                 $offset = ($current_page - 1) * $items_per_page;
                                 
-                                $sql = "SELECT * FROM products WHERE 1 ORDER BY sold ASC LIMIT $offset, $items_per_page";
+                                $sql = "SELECT * FROM products WHERE product_price < 1000000  ORDER BY sold ASC LIMIT $offset, $items_per_page";
                                 $result = mysqli_query($conn, $sql);
                                 
                                 $total_page = ceil($rows/$items_per_page);
@@ -213,9 +182,9 @@
                                     while($row = mysqli_fetch_assoc($result)) {
                                     echo "<div class='col-6 col-md-4 col-xl-3 p-2'>
                                             <div class='card'>
-                                                <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Sale</div>
-                                                <figure class='card-img m-0'>
-                                                <img src='../../asset/img/product/" . $row["product_img"] . "' alt='product01' class='figure-img img-fluid rounded-2' />
+                                            <!-- <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Sale</div> -->
+                                                <figure class='card-img img-product m-0'>
+                                                <img src='../../asset/img/product/" . $row["product_img"] . "' alt='product01' class='figure-img img-fluid rounded-2 rounded-bottom-0' />
                                                 </figure>
                                                 <div class='card-body text-center'>
                                                 <div class='card-title'>

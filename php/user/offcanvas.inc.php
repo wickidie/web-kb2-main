@@ -14,15 +14,15 @@
  <div class='offcanvas-body'>
      <div>
          <ul class='nav flex-column'>
-             <li class='nav-item'>
-                 <a href='#' class='nav-link'>Home</a>
-             </li>
-             <li class='nav-item'>
-                 <a href='products.html' class='nav-link'>Products</a>
-             </li>
-             <li class='nav-item'>
-                 <a href='about.html' class='nav-link'>About</a>
-             </li>
+         <li class='nav-item'>
+         <a href='landing-page.php' class='nav-link'>Home</a>
+       </li>
+       <li class='nav-item'>
+         <a href='products.php' class='nav-link'>Products</a>
+       </li>
+       <li class='nav-item'>
+         <a href='about.php' class='nav-link'>About</a>
+       </li>
          </ul>
      </div>
  </div>

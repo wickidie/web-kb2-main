@@ -44,27 +44,6 @@
 
     <main class="container p-3">
         <article class="rounded-3">
-            <!-- <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-chevron p-3">
-                    <li class="breadcrumb-item">
-                        <a class="link-body-emphasis" href="landing-page.php">
-                            <i class="bi bi-house-door-fill" width="16" height="16"></i>
-                            <span class="visually-hidden">Home</span>
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active">
-                        <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Product</a>
-                    </li>
-
-                    <li class="breadcrumb-item active" aria-current="page">
-                        <?php
-                            $ProductName = mysqli_query($conn, $sql);
-                            $row = mysqli_fetch_assoc($ProductName);
-                            echo $row['product_name'];
-                        ?>
-                    </li>
-                </ol>
-            </nav> -->
             <section class="pb-3">
 
                 <?php

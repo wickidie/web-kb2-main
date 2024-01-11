@@ -38,20 +38,6 @@
 
     <main class="container p-3">
         <article class="rounded-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-chevron p-3">
-                    <li class="breadcrumb-item">
-                        <a class="link-body-emphasis" href="landing-page.php">
-                            <i class="bi bi-house-door-fill" width="16" height="16"></i>
-                            <span class="visually-hidden">Home</span>
-                        </a>
-                    </li>
-                    <!-- <li class="breadcrumb-item active">
-              <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Cart</a>
-            </li> -->
-                    <li class="breadcrumb-item active" aria-current="page">Cart</li>
-                </ol>
-            </nav>
             <section class="container">
                 <div>
                     <p class="fs-2 fw-bold">Shopping cart <small class="fw-light"></small></p>
@@ -241,5 +227,6 @@
 
     updateSubTotal();
     </script>
-  </body>
+</body>
+
 </html>
