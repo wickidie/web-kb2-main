@@ -1,20 +1,24 @@
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
-('user', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);
+('john_doe', md5('password1'), 'john.doe@email.com', 'John', 'Doe', '123 Main St', '1234567890', 0);
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
-('user1', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);
+('jane_smith', md5('password2'), 'jane.smith@email.com', 'Jane', 'Smith', '456 Oak St', '9876543210', 0);
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
-('user2', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);
+('alice_wonder', md5('password3'), 'alice.wonder@email.com', 'Alice', 'Wonder', '789 Elm St', '2345678901', 0);
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
-('user3', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);
+('bob_marley', md5('password4'), 'bob.marley@email.com', 'Bob', 'Marley', '101 Pine St', '8765432109', 0);
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
-('user4', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);
+('charlie_brown', md5('password5'), 'charlie.brown@email.com', 'Charlie', 'Brown', '202 Walnut St', '3456789012', 0);
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
-('user5', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);
+('diana_prince', md5('password6'), 'diana.prince@email.com', 'Diana', 'Prince', '303 Oak St', '6789012345', 0);
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
-('user6', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);
+('edward_cullen', md5('password7'), 'edward.cullen@email.com', 'Edward', 'Cullen', '404 Cedar St', '1234567890', 0);
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
-('user7', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);
+('fiona_apple', md5('password8'), 'fiona.apple@email.com', 'Fiona', 'Apple', '505 Maple St', '9876543210', 0);
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
-('user8', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);
+('george_lucas', md5('password9'), 'george.lucas@email.com', 'George', 'Lucas', '606 Birch St', '2345678901', 0);
 INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
-('user9', md5('users'), 'user@gmail.com', 'userFname', 'userLname', 'userAddress', '08123456789', 0);
+('harry_potter', md5('password10'), 'harry.potter@email.com', 'Harry', 'Potter', '707 Pine St', '8765432109', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('irene_adler', md5('password11'), 'irene.adler@email.com', 'Irene', 'Adler', '808 Elm St', '3456789012', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('james_bond', md5('password12'), 'james.bond@email.com', 'James', 'Bond', '909 Walnut St', '6789012345', 0);
