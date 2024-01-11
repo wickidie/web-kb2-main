@@ -75,7 +75,7 @@
             $product_id = $row['product_id'];
             $numSold = $row['sold'];
 
-            $sql_insert = "INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES ($quantity, $product_price, $transaction_id, $product_id)";
+            $sql_insert = "INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES ($q, $product_price, $transaction_id, $product_id)";
             mysqli_query($conn, $sql_insert);
 
 
@@ -83,6 +83,7 @@
 
             $sqlSold = "UPDATE `products` SET `sold`= $numSold WHERE product_id = $product_id";
             mysqli_query($conn, $sqlSold);
+
         }
 
     }

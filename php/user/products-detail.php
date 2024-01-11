@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cart</title>
+    <title>Product Details</title>
     <link rel="icon" href="../../asset/img/logo/tokaku_logo.svg" type="image/x-icon" />
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
@@ -22,7 +22,6 @@
         rel="stylesheet" />
     <!-- CSS -->
     <link rel="stylesheet" href="../../css/user/style.css" />
-    <link rel="stylesheet" href="../../css/user/product.css" />
     <!-- Javascript -->
     <script defer type="text/javascript" src="../../js/theme.js"></script>
     <script defer type="text/javascript" src="../../js/page.js"></script>
@@ -34,6 +33,13 @@
 <body class="background">
     <?php 
       include_once 'header.inc.php';
+      
+      $product_id = $_GET['product_id'];
+      $sql = "SELECT * FROM products WHERE product_id = $product_id";
+      $result = mysqli_query($conn, $sql);
+      $rows = mysqli_num_rows($result);
+
+
     ?>
 
     <main class="container p-3">
@@ -41,7 +47,7 @@
             <!-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-chevron p-3">
                     <li class="breadcrumb-item">
-                        <a class="link-body-emphasis" href="landing_page.html">
+                        <a class="link-body-emphasis" href="landing-page.php">
                             <i class="bi bi-house-door-fill" width="16" height="16"></i>
                             <span class="visually-hidden">Home</span>
                         </a>
@@ -49,14 +55,19 @@
                     <li class="breadcrumb-item active">
                         <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Product</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Product name</li>
+
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <?php
+                            $ProductName = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_assoc($ProductName);
+                            echo $row['product_name'];
+                        ?>
+                    </li>
                 </ol>
             </nav> -->
             <section class="pb-3">
 
-            <?php
-                $product_id = $_GET['product_id'];
-
+                <?php
                 $sql = "SELECT * FROM products WHERE product_id = $product_id";
                 $result = mysqli_query($conn, $sql);
                 $rows = mysqli_num_rows($result);
@@ -96,65 +107,18 @@
                     echo "<tr>";
                 }
             ?>
-                
+
             </section>
-            </article>
+        </article>
     </main>
 
-    <!-- offcanvas menu -->
-    <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample"
-        aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header pt-4">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                <div class="d-flex ms-2 justify-content-center align-items-center">
-                    <img src="../../asset/img/logo/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-                    <span class="fs-4 ms-2 align-bottom"> Tokaku </span>
-                </div>
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a href="landing_page.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="products.html" class="nav-link">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link">About</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <?php 
+    include_once 'offcanvas.inc.php';
+    ?>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="row align-items-center g-0 border-top py-2">
-                <!-- Desc -->
-                <div class="col-md-6 col-12 text-center text-md-start">
-                    <span>©
-                        <span id="copyright">
-                            <script>
-                            document.getElementById("copyright").appendChild(document.createTextNode(new Date()
-                                .getFullYear()));
-                            </script>
-                        </span>Tokaku. All Rights Reserved.</span>
-                </div>
-                <!-- Links -->
-                <div class="col-12 col-md-6">
-                    <nav class="nav nav-footer justify-content-center justify-content-md-end">
-                        <a class="nav-link" href="#">Privacy</a>
-                        <a class="nav-link" href="#">Terms </a>
-                        <a class="nav-link" href="#">Feedback</a>
-                        <a class="nav-link" href="#">Support</a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?php 
+    include_once 'footer.inc.php';
+    ?>
 </body>
 
 </html>

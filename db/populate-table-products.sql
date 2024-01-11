@@ -20,3 +20,7 @@ INSERT INTO products (product_name, product_description, product_price, product_
 ('prod07', 'prod07Desc', 140000, 'prod03.jpg', 2, 0);
 INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
 ('prod08', 'prod08Desc', 15800, 'prod04.jpg', 3, 0);
+INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
+('prod09', 'prod07Desc', 140000, 'prod03.jpg', 2, 0);
+INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
+('prod10', 'prod08Desc', 15800, 'prod04.jpg', 3, 0);

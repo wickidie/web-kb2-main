@@ -68,6 +68,7 @@
                                         <table class="table table-hover table-striped" id="myTable">
                                             <thead>
                                                 <tr>
+                                                    <th scope="col">Transaction ID</th>
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Transaction Total</th>
                                                     <th scope="col">Username</th>
@@ -108,6 +109,7 @@
                   $formattedDate = date('d-m-Y', strtotime($row['transaction_date']));
                                                     echo "<tr>";
                                                     $c++;
+                                                    echo "<td>" . $row['transaction_id'] . "</td>";
                                                     echo "<td>" . $formattedDate . "</td>";
                                                     echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
                                                     echo "<td>" . $row['username'] . "</td>";

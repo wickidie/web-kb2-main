@@ -87,6 +87,7 @@
                                                     <th scope="col">Price</th>
                                                     <th scope="col">Image</th>
                                                     <th scope="col">Category</th>
+                                                    <th scope="col">Sold</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
@@ -103,17 +104,17 @@
                                             if (isset($_GET['search'])) {
                                                 $search_value = $_GET['search'];
                                                 if (!empty($_GET['search'])) {
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%' LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%' LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%'";
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%'";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
-                                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 LIMIT $offset, $items_per_page";
+                                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 LIMIT $offset, $items_per_page";
                                                 $result = mysqli_query($conn, $sql);
                                             }
                                             
@@ -132,6 +133,7 @@
                                                     echo "<td>" . $row['product_description'] . "</td>";
                                                     echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";
                                                     echo "<td>" . $row['category_name'] . "</td>";
+                                                    echo "<td>" . $row['sold'] . "</td>";
                                                     echo "<td> 
                                                     <a href='products-detail.php?product_id=" . $row["product_id"] . "'>
                                                     <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
