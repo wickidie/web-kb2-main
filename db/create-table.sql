@@ -24,7 +24,7 @@ CREATE TABLE product_category (
 CREATE TABLE products (
     product_id int PRIMARY KEY,
     product_name VARCHAR(255),
-    product_description VARCHAR(255),
+    product_description VARCHAR(1024),
     product_price DECIMAL(10, 2),
     product_img VARCHAR(255),
     category_id int,
