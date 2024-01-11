@@ -65,7 +65,7 @@
         </form>
           <div class="row justify-content-center align-items-center">
             <?php
-              $items_per_page = 2;
+              $items_per_page = 4;
               $sql = "SELECT * FROM products";
               $result = mysqli_query($conn, $sql);
               $rows = mysqli_num_rows($result);
