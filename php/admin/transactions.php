@@ -136,25 +136,6 @@
                                                         <option value='Delivering'>Delivering</option>
                                                         <option value='Delivered'>Delivered</option>
                                                     </select>";
-                                                    echo "<select class='col mb-3' name='category'>"; 
-                                                        $sql = "SELECT * FROM transactions";
-                                                        $result = mysqli_query($conn, $sql);
-
-                                                        while($status = mysqli_fetch_assoc($result)) {
-                                                            if ($status['status'] == $row['status']) {
-                                                                echo "<option value=" .  $row['status'] . ">" . $row['status'] . "</option>";
-                                                            }
-                                                        }
-
-                                                        $sql = "SELECT * FROM transactions";
-                                                        $result = mysqli_query($conn, $sql);
-                                                        
-                                                        while($status = mysqli_fetch_assoc($result)) {
-                                                            if ($status['status'] != $row['status']) {
-                                                                echo "<option value=" .  $status['status'] . ">" . $status['status'] . "</option>";
-                                                            }
-                                                        }
-                                                    echo "</select>";
                                                     echo "<input type='hidden' name='transaction_id' value='" . $row['transaction_id'] . "'/>
                                                     <button class='btn btn-primary btn-sm' type='submit'>Update status</button>
                                                     </form>";

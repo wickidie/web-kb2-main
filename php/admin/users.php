@@ -75,6 +75,7 @@
                                                     <th scope="col">Full Name</th>
                                                     <th scope="col">Address</th>
                                                     <th scope="col">Phone Number</th>
+                                                    <th scope="col">Purchase</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
@@ -96,11 +97,11 @@
                                                             $result_total = mysqli_query($conn, $sql);
                                                             $rows = mysqli_num_rows($result_total);
                                                         }else{
-                                                            $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users WHERE 1 LIMIT $offset, $items_per_page";
+                                                            $sql = "SELECT * FROM users WHERE 1 LIMIT $offset, $items_per_page";
                                                             $result = mysqli_query($conn, $sql);
                                                         }
                                                     }else{
-                                                        $sql = "SELECT user_id, username, password, email, first_name, last_name, address, phone_number FROM users WHERE 1 LIMIT $offset, $items_per_page";
+                                                        $sql = "SELECT * FROM users WHERE 1 LIMIT $offset, $items_per_page";
                                                         $result = mysqli_query($conn, $sql);
                                                     }
                                                     
@@ -119,6 +120,7 @@
                                                             echo "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
                                                             echo "<td>" . $row['address'] . "</td>";
                                                             echo "<td>" . $row['phone_number'] . "</td>";
+                                                            echo "<td>" . $row['purchase'] . "</td>";
                                                             echo "<td> 
                                                             <a href='users-detail.php?user_id=" . $row["user_id"] . "'>
                                                             <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
