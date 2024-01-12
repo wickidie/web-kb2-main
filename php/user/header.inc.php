@@ -5,7 +5,7 @@
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);    
     $username = $row['username'] ?? 'please login';
-    $email = $row['username'] ?? 'please login';
+    $email = $row['email'] ?? 'please login';
     echo '<header class="container-fluid p-3">
     <nav class="navbar navbar-expand-lg bg-transparant justify-content-between px-md-3 px-2 rounded-3">
       <!-- <div>

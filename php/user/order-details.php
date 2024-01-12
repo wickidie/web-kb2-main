@@ -39,36 +39,45 @@
     ?>
 
     <main class="container p-3 mb-auto">
-        <article class="rounded-3">
-            <section class="container">
-                <div class="d-flex justify-content-between align-items-center">
-                    <form method="GET" class="w-25">
-                        <div class="input-group my-2">
-                            <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                                placeholder="Search for transaction_id" aria-label="Search" aria-describedby="searchph"
-                                <?php echo "value = $search_value" ?>>
-                            <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
-                                id="searchph">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                    <button class="btn btn-outline-secondary" onclick="window.print()">Print</button>
-                </div>
-
-                <div class="row justify-content-center align-items-center">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped" id="myTable">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Transaction Detail Id</th>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Product Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+      <article class="rounded-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb breadcrumb-chevron p-3">
+            <li class="breadcrumb-item">
+              <a class="link-body-emphasis" href="landing_page.html">
+                <i class="bi bi-house-door-fill" width="16" height="16"></i>
+                <span class="visually-hidden">Home</span>
+              </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Products</li>
+          </ol>
+        </nav>
+        <section class="container">
+        <form method="GET" class="w-100">
+            <div class="input-group my-2">
+                <input type="text" class="form-control form-control-sm" id="myInput"
+                    name="search" placeholder="Search for transaction_detail_id" aria-label="Search"
+                    aria-describedby="searchph" <?php echo "value = $search_value" ?>>
+                <button class="input-group-text btn btn-outline-secondary rounded-end-1"
+                    type="submit" id="searchph">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+          <div class="row justify-content-center align-items-center">
+          <div class="table-responsive">
+                                        <table class="table table-hover table-striped" id="myTable">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Transaction Id</th>
+                                                <th scope="col">Transaction Detail Id</th>
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Product Price</th>
+                                                <th scope="col">Total</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+            <?php
               $items_per_page = 10;
               $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
                       JOIN products p ON td.product_id = p.product_id";
@@ -81,20 +90,20 @@
               if (isset($_GET['search'])) {
                   if (!empty($_GET['search'])) {
                       $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                      JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%' LIMIT $offset, $items_per_page";
+                      JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%' ORDER BY transaction_id DESC  LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
                       $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                      JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%'";
+                      JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%' ORDER BY transaction_id DESC ";
                       $result_total = mysqli_query($conn, $sql);
                       $rows = mysqli_num_rows($result_total);
                   }else{
                       $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                      JOIN products p ON td.product_id = p.product_id WHERE 1 LIMIT $offset, $items_per_page";
+                      JOIN products p ON td.product_id = p.product_id WHERE 1 ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
                   }
               }else{
                   $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                  JOIN products p ON td.product_id = p.product_id WHERE 1 LIMIT $offset, $items_per_page";
+                  JOIN products p ON td.product_id = p.product_id WHERE 1 ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                   $result = mysqli_query($conn, $sql);
               }
               
@@ -105,10 +114,12 @@
               if (mysqli_num_rows($result) > 0) {
                   while($row = mysqli_fetch_assoc($result)) {
                       echo "<tr>";
+                      echo "<td>" . $row['transaction_id'] . "</td>";
                       echo "<td>" . $row['transaction_detail_id'] . "</td>";
                       echo "<td>" . $row['product_name'] . "</td>";
                       echo "<td>" . number_format($row['quantity'], 0, ',', '.') . "</td>";
                       echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";
+                      echo "<td>IDR " . number_format($row['quantity'] * $row['product_price'], 2, ',', '.') . "</td>";
                       echo "<tr>";
                   }
               } else {

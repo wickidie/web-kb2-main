@@ -77,17 +77,17 @@
               
               if (isset($_GET['search'])) {
                   if (!empty($_GET['search'])) {
-                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page";
+                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
-                      $sql = "SELECT * FROM transactions where transaction_id like '%$search_value%'";
+                      $sql = "SELECT * FROM transactions where transaction_id like '%$search_value%' ORDER BY transaction_id DESC ";
                       $result_total = mysqli_query($conn, $sql);
                       $rows = mysqli_num_rows($result_total);
                   }else{
-                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
+                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
                   }
               }else{
-                  $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
+                  $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                   $result = mysqli_query($conn, $sql);
               }
               
@@ -98,13 +98,26 @@
               if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
                   $formattedDate = date('d-m-Y', strtotime($row['transaction_date']));
+                                                    $id =  $row['transaction_id'];
+                                                    $time = $row['transaction_date'];
+                                                    $timeVal = "SELECT TIMEDIFF(CURRENT_TIMESTAMP, '$time') AS time_diff";
+                                                    $res = mysqli_query($conn, $timeVal);
+                                                    $a = "";
+                                                    while($x = mysqli_fetch_assoc($res)) {
+                                                        $a = $x['time_diff'];
+                                                        if ((int)substr($a, 0, 2) >= 48) {
+                                                            $updateStatus = "UPDATE `transactions` SET `status`='Invalid' WHERE transaction_id = $id";
+                                                            mysqli_query($conn, $updateStatus);
+                                                        }
+                                                    };
+
                                                     echo "<tr>";
                                                     echo "<td>" . $row['transaction_id'] . "</td>";
                                                     echo "<td>" . $formattedDate . "</td>";
                                                     echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
                                                     echo "<td>" . $row['username'] . "</td>";
                                                     echo "<td>";
-                                                    if ($row['status'] == 'Pending') {
+                                                    if ($row['status'] == 'Pending' || $row['status'] == 'Invalid') {
                                                         echo $row['status'];
                                                         echo '<form action="transactions-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">';
                                                         echo '<div class="col mb-3">';
@@ -124,18 +137,22 @@
                                                         echo '</div>';
                                                         echo '</form>';
                                                     }else{
-                                                        echo '<form action="payment-update.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">';
-                                                        echo '<div class="col mb-3">';
-                                                        echo '<input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required>';
-                                                        echo '<button type="submit" class="btn btn-warning">Update</button>';
-                                                        echo '</div>';
-                                                        echo '</form>';
-                                                        echo '<form action="payment-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">';
-                                                        echo '<div class="col mb-3">';
-                                                        echo '<button type="submit" class="btn btn-danger">Delete</button>';
-                                                        echo '</div>';
-                                                        echo '</form>';
-                                                        echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>" . $row['payment'] . "</button>";
+                                                        if ($row['status'] == 'Valid') {
+                                                            echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>" . $row['payment'] . "</button>";
+                                                        }else{
+                                                            echo '<form action="payment-update.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">';
+                                                            echo '<div class="col mb-3">';
+                                                            echo '<input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required>';
+                                                            echo '<button type="submit" class="btn btn-warning">Update</button>';
+                                                            echo '</div>';
+                                                            echo '</form>';
+                                                            echo '<form action="payment-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">';
+                                                            echo '<div class="col mb-3">';
+                                                            echo '<button type="submit" class="btn btn-danger">Delete</button>';
+                                                            echo '</div>';
+                                                            echo '</form>';
+                                                            echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>" . $row['payment'] . "</button>";
+                                                        }
                                                     }
                                                     echo "</td>";
                                                     echo "<tr>";
