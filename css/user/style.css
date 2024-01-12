@@ -43,6 +43,10 @@ main {
   min-height: calc(100vh - 200px);
 }
 
+.img-product {
+  width: 269px;
+  height: 269px;
+}
 .form-floating a {
   right: 50px;
   position: absolute;

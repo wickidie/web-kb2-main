@@ -50,15 +50,15 @@
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <!-- https://picsum.photos/id/250/1850/890 -->
-                            <img src="../../asset/img/product/prod11-2.jpg" alt="" class="img-fluid" />
+                            <img src="../../asset/img/product/Vinta_backpack_carousel.jpg" alt="" class="img-fluid" />
                         </div>
                         <div class="carousel-item">
                             <!-- https://picsum.photos/id/454/1850/890 -->
-                            <img src="../../asset/img/product/prod12-2.jpg" alt="" class="img-fluid" />
+                            <img src="../../asset/img/product/F250GT_carousel.jpg" alt="" class="img-fluid" />
                         </div>
                         <div class="carousel-item">
                             <!-- https://picsum.photos/id/531/1850/890 -->
-                            <img src="../../asset/img/product/prod13-2.jpg" alt="" class="img-fluid" />
+                            <img src="../../asset/img/product/Z750_carousel.jpg" alt="" class="img-fluid" />
                         </div>
                         <!-- <div class="carousel-item">
                 <img src="../../asset/img/product/2000.jpeg" alt="" class="img-fluid rounded-4" />
@@ -115,7 +115,7 @@
                           <div class='card'>
                             <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>New</div>
                             <figure class='card-img m-0'>
-                              <img src='../../asset/img/product/" . $row["product_img"] . "' alt='product01' class='figure-img img-fluid rounded-2' />
+                              <img src='../../asset/img/product/" . $row["product_img"] . "' alt='".$row["product_img"]."' class='figure-img img-fluid rounded-2 rounded-bottom-0' />
                             </figure>
                             <div class='card-body text-center'>
                               <div class='card-title'>
@@ -170,7 +170,7 @@
 
                                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
                                 $offset = ($current_page - 1) * $items_per_page;
-                                
+
                                 $sql = "SELECT * FROM products WHERE 1 ORDER BY sold DESC LIMIT $offset, $items_per_page";
                                 $result = mysqli_query($conn, $sql);
                                 
