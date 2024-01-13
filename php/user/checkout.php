@@ -43,7 +43,7 @@
     }
 
     // buying, add to transactions or checking out
-    $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `status`,`user_id`) VALUES (CURRENT_DATE(), $transaction_total, 'Pending', $user_id);";
+    $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `status`,`user_id`) VALUES (CURRENT_TIMESTAMP, $transaction_total, 'Pending', $user_id);";
     
     if (mysqli_query($conn, $sql)) {
         echo "              

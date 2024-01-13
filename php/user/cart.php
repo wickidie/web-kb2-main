@@ -38,20 +38,20 @@
 
     <main class="container p-3">
         <article class="rounded-3">
-            <nav aria-label="breadcrumb">
+            <!-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-chevron p-3">
                     <li class="breadcrumb-item">
                         <a class="link-body-emphasis" href="landing-page.php">
                             <i class="bi bi-house-door-fill" width="16" height="16"></i>
                             <span class="visually-hidden">Home</span>
                         </a>
-                    </li>
+                    </li> -->
                     <!-- <li class="breadcrumb-item active">
               <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Cart</a>
             </li> -->
-                    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                    <!-- <li class="breadcrumb-item active" aria-current="page">Cart</li>
                 </ol>
-            </nav>
+            </nav> -->
             <section class="container">
                 <div>
                     <p class="fs-2 fw-bold">Shopping cart <small class="fw-light"></small></p>
@@ -129,13 +129,13 @@
                     echo "<li class='col order-2 text-start text-wrap p-0'>";
   
                     echo "<p class='mt-3'>" . $row['product_name'] . "</p>";
-                    echo "<small>IDR " . number_format($row['product_price'], 2, ',', '.') . "<input class='price' id='price' type=hidden value='" . $row['product_price'] . "'></small>";
+                    echo "<small>Rp " . number_format($row['product_price'], 2, ',', '.') . "<input class='price' id='price' type=hidden value='" . $row['product_price'] . "'></small>";
                     echo "</li>";
                     echo "<li class='col order-4 order-sm-3 text-start text-md-end text-xl-center'>";
                     echo  "<input type='number' class='quantity form-control-sm mt-3' id='quantity' onchange='updateSubTotal()' name='quantity[]' placeholder='Quantity' aria-label='Search' aria-describedby='searchph' value='" . $row['quantity'] . "' min='1' />";
                     echo  "</li>";
                     echo  "<li class='col order-3 order-sm-4 text-center'>";
-                    echo    "<p class='col mt-3'><span class='sub_total' id='sub_total'>IDR " . number_format($row['product_price'], 2, ',', '.') . "</span></p>";
+                    echo    "<p class='col mt-3'><span class='sub_total' id='sub_total'>Rp" . number_format($row['product_price'], 2, ',', '.') . "</span></p>";
                     // $total += ($row['product_price'] * $row['quantity']);
                     echo  "</li>";
                     echo  "<li class='col order-5 text-center d-none d-xl-inline-block'>";

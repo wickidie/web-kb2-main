@@ -36,7 +36,7 @@ CREATE TABLE products (
 
 CREATE TABLE transactions ( 
     transaction_id int PRIMARY KEY,
-    transaction_date DATE,
+    transaction_date DATETIME,
     transaction_total DECIMAL(10, 2),
     status VARCHAR(255),
     payment VARCHAR(255),
