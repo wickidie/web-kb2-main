@@ -17,9 +17,11 @@
             <div>
                 <ul class='nav align-items-center'>
                     <li class='nav-item mx-2'>
-                        <a href='#' class='pe-auto'>
-                            <i class='bi bi-moon-stars' id='themeToggle'></i>
-                        </a>
+                    <a href='#' class='pe-auto'>
+                    <div class='form-check form-check-reverse form-switch'>
+                      <input class='form-check-input' type='checkbox' id='themeToggle' checked />
+                    </div>
+                  </a>
                     </li>
                     <li class='nav-item dropdown mx-2'>
                         <a href='#' class='' data-bs-toggle='dropdown' aria-expanded='false'>

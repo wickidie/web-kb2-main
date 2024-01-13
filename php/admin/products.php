@@ -81,14 +81,14 @@
                                         <table class="table table-hover table-striped" id="myTable">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Product ID</th>
+                                                    <th style="width: 2rem;" scope="col">#</th>
                                                     <th scope="col">Name</th>
                                                     <th scope="col">Description</th>
-                                                    <th scope="col">Price</th>
+                                                    <th style="width: 30%" scope="col">Price</th>
                                                     <th scope="col">Image</th>
                                                     <th scope="col">Category</th>
                                                     <th scope="col">Sold</th>
-                                                    <th scope="col">Action</th>
+                                                    <th style="width: 10%;" scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -127,7 +127,7 @@
                                                 while($row = mysqli_fetch_assoc($result)) {
                                                     echo "<tr>";
                                                     $c++;
-                                                    echo "<td>" . $row['product_id'] . "</td>";
+                                                    echo "<td style='width: 2rem;'>" . $row['product_id'] . "</td>";
                                                     echo "<td>" . "<img src='../../asset/img/product/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
                                                     echo "<td>" . $row['product_name'] . "</td>";
                                                     echo "<td>" . $row['product_description'] . "</td>";
@@ -141,12 +141,12 @@
                                                     <i class='bi bi-pencil-square'></i></a> &nbsp;
                                                     <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
                                                     <i class='bi bi-trash-fill'></i></a>
-                                                    <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
+                                                    <!--<form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
                                                         <input type='number' class='form-control-sm' id='quantity' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph'>
                                                         <button type='submit'> 
                                                             <i class='bi bi-cart'></i>
                                                         </button>
-                                                    </form></td>";
+                                                    </form>--></td>";
                                                     echo "<tr>";
                                                 }
                                             } else {
