@@ -1,3 +1,4 @@
+INSERT INTO `product_category`(`category_name`) VALUES ('Other');
 INSERT INTO `product_category`(`category_name`) VALUES ('Camera');
 INSERT INTO `product_category`(`category_name`) VALUES ('SD Card');
 INSERT INTO `product_category`(`category_name`) VALUES ('Scale Model Car');

@@ -103,16 +103,16 @@
                             
                             <div class='d-flex border-top'>
                               <small class='w-50 text-center border-end py-2'>
-                                  <a class='btn btn-sm text-center' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
+                                <a class='btn btn-sm btn-info text-center' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
                               </small>
-                              <small class='w-50 text-center py-2'>
-                              <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
-                                  <button class='btn btn-sm text-center ' type='submit'>                                
+                              <small class='w-50 text-center border-end py-2'>
+                                <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST' class=''>
+                                  <button class='btn btn-sm btn-success text-center ' type='submit'>                                
                                   <i class='bi bi-cart me-0 me-md-2'></i>
                                   <span class='d-none d-md-inline-block'>Add to cart</span>
                                   </button>
-                              </form>
-                            </small>
+                                </form>
+                              </small>
                             </div>
                           </div>
                         </div>";

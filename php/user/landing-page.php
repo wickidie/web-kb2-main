@@ -9,7 +9,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page</title>
-    <link rel="icon" href="../../asset/img/logo/tokaku_logo.svg" type="image/x-icon" />
+    <link rel="icon" href="../../asset/img/icon/tokaku_logo.svg" type="image/x-icon" />
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -90,7 +90,7 @@
                     <div class="col col-equal-height-e col-lg-3 p-1">
                         <h1>Check Out <br />Latest Product</h1>
                         <div>
-                            <a class="btn btn-lg btn-outline-secondary" href="products.php">View All</a>
+                            <a class="btn btn-lg btn-warning" href="products.php">View All</a>
                         </div>
                     </div>
                     <?php
@@ -113,7 +113,7 @@
                 while($row = mysqli_fetch_assoc($result)) {
                   echo "<div class='col-6 col-md-4 col-xl-3 p-2'>
                           <div class='card'>
-                            <!-- <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Sale</div> -->
+                            <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>New</div>
                             <figure class='card-img m-0'>
                               <img src='../../asset/img/product/" . $row["product_img"] . "' alt='".$row["product_img"]."' class='figure-img img-fluid rounded-2 rounded-bottom-0' />
                             </figure>
@@ -129,11 +129,11 @@
                             </div>
                             <div class='d-flex border-top'>
                               <small class='w-50 text-center border-end py-2'>
-                                <a class='btn btn-sm text-center' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
+                                <a class='btn btn-sm btn-info text-center' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
                               </small>
                               <small class='w-50 text-center py-2'>
                               <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
-                                <button class='btn btn-sm text-center ' type='submit'>                                
+                                <button class='btn btn-sm btn-success text-center ' type='submit'>                                
                                   <i class='bi bi-cart me-0 me-md-2'></i>
                                   <span class='d-none d-md-inline-block'>Add to cart</span>
                                 </button>
@@ -170,8 +170,8 @@
 
                                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
                                 $offset = ($current_page - 1) * $items_per_page;
-                                
-                                $sql = "SELECT * FROM products WHERE product_price < 1000000  ORDER BY sold ASC LIMIT $offset, $items_per_page";
+
+                                $sql = "SELECT * FROM products WHERE 1 ORDER BY sold DESC LIMIT $offset, $items_per_page";
                                 $result = mysqli_query($conn, $sql);
                                 
                                 $total_page = ceil($rows/$items_per_page);
@@ -182,9 +182,9 @@
                                     while($row = mysqli_fetch_assoc($result)) {
                                     echo "<div class='col-6 col-md-4 col-xl-3 p-2'>
                                             <div class='card'>
-                                            <!-- <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Sale</div> -->
-                                                <figure class='card-img img-product m-0'>
-                                                <img src='../../asset/img/product/" . $row["product_img"] . "' alt='product01' class='figure-img img-fluid rounded-2 rounded-bottom-0' />
+                                                <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Best Seller</div>
+                                                <figure class='card-img m-0'>
+                                                <img src='../../asset/img/product/" . $row["product_img"] . "' alt='product01' class='figure-img img-fluid rounded-2' />
                                                 </figure>
                                                 <div class='card-body text-center'>
                                                 <div class='card-title'>
@@ -198,11 +198,11 @@
                                                 </div>
                                                 <div class='d-flex border-top'>
                                                 <small class='w-50 text-center border-end py-2'>
-                                                    <a class='btn btn-sm text-center' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
+                                                    <a class='btn btn-sm btn-info text-center' href='products-detail.php?product_id=" . $row["product_id"] . "'><i class='bi bi-eye me-0 me-md-2'></i><span class='d-none d-md-inline-block'>View details</span></a>
                                                 </small>
                                                 <small class='w-50 text-center py-2'>
                                                 <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
-                                                    <button class='btn btn-sm text-center ' type='submit'>                                
+                                                    <button class='btn btn-sm btn-success text-center ' type='submit'>                                
                                                     <i class='bi bi-cart me-0 me-md-2'></i>
                                                     <span class='d-none d-md-inline-block'>Add to cart</span>
                                                     </button>
@@ -223,7 +223,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <a href="products.php" class="btn btn-outline-secondary w-50" type="submit">View All</a>
+                    <a href="products.php" class="btn btn-warning w-50" type="submit">View All</a>
                 </div>
             </section>
         </article>

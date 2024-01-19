@@ -43,7 +43,7 @@
     }
 
     // buying, add to transactions or checking out
-    $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `status`,`user_id`) VALUES (CURRENT_DATE(), $transaction_total, 'Pending', $user_id);";
+    $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `status`,`user_id`) VALUES (CURRENT_TIMESTAMP, $transaction_total, 'Pending', $user_id);";
     
     if (mysqli_query($conn, $sql)) {
         echo "              
@@ -101,6 +101,8 @@
             mysqli_query($conn, $sqlPurchase);
         }
     }
+
+    
 
     // // empty the cart after checking out
     // $sql = "SELECT * FROM cart WHERE user_id = $user_id;";

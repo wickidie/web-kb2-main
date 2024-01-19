@@ -94,18 +94,18 @@
                                             
                                             if (isset($_GET['search'])) {
                                                 if (!empty($_GET['search'])) {
-                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page ORDER BY t.transaction_id DESC";
                                                     $result = mysqli_query($conn, $sql);
-                                                    $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%'";
+                                                    $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%' ORDER BY t.transaction_id DESC";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
-                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page ORDER BY t.transaction_id DESC";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
                                                 $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 
-                                                ORDER BY t.transaction_id 
+                                                ORDER BY t.transaction_id DESC
                                                 LIMIT $offset, $items_per_page";
                                                 $result = mysqli_query($conn, $sql);
                                             }
