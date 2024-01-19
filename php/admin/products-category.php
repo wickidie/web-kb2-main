@@ -81,9 +81,9 @@
                                         <table class="table table-hover table-striped" id="myTable">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Product Category ID</th>
-                                                    <th scope="col">Product Category Name</th>
-                                                    <th scope="col">Action</th>
+                                                    <th style="width: 10%;" scope="col">Category ID</th>
+                                                    <th scope="col">Category Name</th>
+                                                    <th style="width: 10%;" scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -122,7 +122,7 @@
                                                 while($row = mysqli_fetch_assoc($result)) {
                                                     echo "<tr>";
                                                     $c++;
-                                                    echo "<td>" . $row['category_id'] . "</td>";
+                                                    echo "<td class='text-center'>" . $row['category_id'] . "</td>";
                                                     echo "<td>" . $row['category_name'] . "</td>";
                                                     echo "<td> 
                                                     <a href='category-update-form.php?category_id=" . $row["category_id"] . "'>

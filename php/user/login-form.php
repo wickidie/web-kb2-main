@@ -36,24 +36,11 @@
 <body>
     <main class="h-100 background">
         <header>
-            <nav class="navbar justify-content-between align-items-baseline p-0">
-                <div aria-label="breadcrumb">
-                    <ol class="breadcrumb breadcrumb-chevron p-3">
-                        <li class="breadcrumb-item">
-                            <a class="link-body-emphasis" href="landing-page.php">
-                                <i class="bi bi-person-fill" width="16" height="16"></i>
-                                <span class="visually-hidden">Home</span>
-                            </a>
-                        </li>
-                        <!-- <li class="breadcrumb-item active">
-                                      <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Cart</a>
-                                    </li> -->
-                        <li class="breadcrumb-item active" aria-current="page">Login</li>
-                    </ol>
-                </div>
-
+            <nav class="navbar align-items-baseline p-0">
                 <a href="#" class="p-3 pe-auto">
-                    <i class="bi bi-moon-stars" id="themeToggle"></i>
+                    <div class="form-check form-check-reverse form-switch">
+                        <input class="form-check-input" type="checkbox" id="themeToggle" checked />
+                    </div>
                 </a>
             </nav>
         </header>

@@ -48,12 +48,6 @@
                 <article class="p-3">
                     <section class="d-flex justify-content-center align-items-center">
                         <div class="container-fluid">
-                            <!-- <span aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Products</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Products</li>
-                                </ol>
-                            </span> -->
                             <div class="card shadow mt-2">
                                 <div class="card-header py-3">
                                     <div class="d-flex justify-content-between align-items-center">
@@ -81,14 +75,14 @@
                                         <table class="table table-hover table-striped" id="myTable">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Product ID</th>
+                                                    <th style="width: 9%" scope="col">Product ID</th>
                                                     <th scope="col">Name</th>
                                                     <th scope="col">Image</th>
                                                     <th scope="col">Description</th>
-                                                    <th scope="col">Price</th>
+                                                    <th style="width: 15%" scope="col">Price</th>
                                                     <th scope="col">Category</th>
                                                     <th scope="col">Sold</th>
-                                                    <th scope="col">Action</th>
+                                                    <th style="width: 8%;" scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -127,9 +121,9 @@
                                                 while($row = mysqli_fetch_assoc($result)) {
                                                     echo "<tr>";
                                                     $c++;
-                                                    echo "<td>" . $row['product_id'] . "</td>";
-                                                    echo "<td>" . "<img src='../../asset/img/product/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
+                                                    echo "<td class='text-center'>" . $row['product_id'] . "</td>";
                                                     echo "<td>" . $row['product_name'] . "</td>";
+                                                    echo "<td>" . "<img src='../../asset/img/product/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
                                                     echo "<td>" . $row['product_description'] . "</td>";
                                                     echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";
                                                     echo "<td>" . $row['category_name'] . "</td>";
@@ -141,12 +135,12 @@
                                                     <i class='bi bi-pencil-square'></i></a> &nbsp;
                                                     <a href='products-delete.php?product_id=" . $row['product_id'] . "'>
                                                     <i class='bi bi-trash-fill'></i></a>
-                                                    <form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
+                                                    <!--<form action='cart-add.php?product_id=" . $row["product_id"] . "'method='POST'>
                                                         <input type='number' class='form-control-sm' id='quantity' name='quantity' placeholder='Quantity' aria-label='Search' aria-describedby='searchph'>
                                                         <button type='submit'> 
                                                             <i class='bi bi-cart'></i>
                                                         </button>
-                                                    </form></td>";
+                                                    </form>--></td>";
                                                     echo "<tr>";
                                                 }
                                             } else {
