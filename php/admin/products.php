@@ -75,14 +75,14 @@
                                         <table class="table table-hover table-striped" id="myTable">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 2rem;" scope="col">#</th>
+                                                    <th style="width: 9%" scope="col">Product ID</th>
                                                     <th scope="col">Name</th>
                                                     <th scope="col">Image</th>
                                                     <th scope="col">Description</th>
                                                     <th style="width: 15%" scope="col">Price</th>
                                                     <th scope="col">Category</th>
                                                     <th scope="col">Sold</th>
-                                                    <th style="width: 10%;" scope="col">Action</th>
+                                                    <th style="width: 8%;" scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -121,7 +121,7 @@
                                                 while($row = mysqli_fetch_assoc($result)) {
                                                     echo "<tr>";
                                                     $c++;
-                                                    echo "<td style='width: 2rem;'>" . $row['product_id'] . "</td>";
+                                                    echo "<td class='text-center'>" . $row['product_id'] . "</td>";
                                                     echo "<td>" . $row['product_name'] . "</td>";
                                                     echo "<td>" . "<img src='../../asset/img/product/" . $row['product_img'] . "' class=' rounded' width='80px' height='80px'". "</td>";
                                                     echo "<td>" . $row['product_description'] . "</td>";

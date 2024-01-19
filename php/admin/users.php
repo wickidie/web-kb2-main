@@ -76,7 +76,7 @@
                                                     <th scope="col">Address</th>
                                                     <th scope="col">Phone Number</th>
                                                     <th scope="col">Purchase</th>
-                                                    <th scope="col">Action</th>
+                                                    <th style="width: 10%;" scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -114,13 +114,13 @@
                                                         while($row = mysqli_fetch_assoc($result)) {
                                                             echo "<tr>";
                                                             $c++;
-                                                            echo "<td>" . $row['user_id'] . "</td>";
+                                                            echo "<td class='text-center'>" . $row['user_id'] . "</td>";
                                                             echo "<td>" . $row['username'] . "</td>";
                                                             echo "<td>" . $row['password'] . "</td>";
                                                             echo "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
                                                             echo "<td>" . $row['address'] . "</td>";
                                                             echo "<td>" . $row['phone_number'] . "</td>";
-                                                            echo "<td>" . $row['purchase'] . "</td>";
+                                                            echo "<td class='text-center'>" . $row['purchase'] . "</td>";
                                                             echo "<td> 
                                                             <a href='users-detail.php?user_id=" . $row["user_id"] . "'>
                                                             <i class='bi bi-file-earmark-person-fill'></i></a> &nbsp;
