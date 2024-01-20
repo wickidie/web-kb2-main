@@ -40,17 +40,6 @@
 
     <main class="container p-3 mb-auto">
       <article class="rounded-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb breadcrumb-chevron p-3">
-            <li class="breadcrumb-item">
-              <a class="link-body-emphasis" href="landing_page.html">
-                <i class="bi bi-house-door-fill" width="16" height="16"></i>
-                <span class="visually-hidden">Home</span>
-              </a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">Products</li>
-          </ol>
-        </nav>
         <section class="container">
         <form method="GET" class="w-100">
             <div class="input-group my-2">

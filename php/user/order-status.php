@@ -61,6 +61,7 @@
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Transaction Total</th>
                                                     <th scope="col">Username</th>
+                                                    <th scope="col">Time Left</th>
                                                     <th scope="col">Status</th>
                                                     <th scope="col">Payment</th>
                                                 </tr>
@@ -116,6 +117,7 @@
                                                     echo "<td>" . $formattedDate . "</td>";
                                                     echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
                                                     echo "<td>" . $row['username'] . "</td>";
+                                                    echo "<td>" . $a . "/48:00:00</td>";
                                                     echo "<td>";
                                                     if ($row['status'] == 'Pending' || $row['status'] == 'Invalid') {
                                                         echo $row['status'];

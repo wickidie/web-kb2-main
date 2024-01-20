@@ -23,7 +23,7 @@ INSERT INTO products (product_name, product_description, product_price, product_
 INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
 ('Scale 1:43 Ferrari 250 Gt California Spyder', 'Rare Scale 1:43 Ferrari 250 Gt California Spyder Black \n Made of high-quality materials, this scale model is durable, meant for collectors not a toy.', 500000, 'F250GT_display.jpg', 3, 0);
 INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
-('Scale 1:43 Zastava 750', 'Rare Scale 1:43 Zastava White \n Made of high-quality materials, this scale model is durable, meant for collectors not a toy.', 500000, 'Z750_display', 3, 0);
+('Scale 1:43 Zastava 750', 'Rare Scale 1:43 Zastava White \n Made of high-quality materials, this scale model is durable, meant for collectors not a toy.', 500000, 'Z750_display.jpg', 3, 0);
 
 INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
 ('Vinta Backpack - Green Leather', 'The VINTA S-Series Travel Camera Backpack injects functional style into your photography shoots with its sleek and versatile design. The pack fits a full-frame DSLR camera, along with three to five lenses, and up to a 15" laptop. Customizable dividers and a FIELD PACK provide handy organization, and can be removed to convert the pack into a travel bag if desired. Stylish and durable, the VINTA S-Series Travel Camera Backpack is a smart choice for urban and travel use.', 3900000, 'Vinta_backpack_display.jpg', 4, 0);
