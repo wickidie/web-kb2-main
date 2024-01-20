@@ -34,7 +34,10 @@ a,
 }
 
 .bi.icon {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
+}
+.bi .bi.icon-xl {
+  font-size: 2.5rem;
 }
 
 .bi {
@@ -45,38 +48,4 @@ a,
 .logo {
   font-family: "Kalnia", serif;
   font-weight: 500;
-}
-
-.dashboard-icon {
-  padding: 8px 10px 6px;
-
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.dashboard-icon-primary {
-  background: rgba(13, 110, 253, 0.25);
-}
-
-.dashboard-icon-success {
-  background: rgba(25, 135, 84, 0.25);
-}
-
-.dashboard-icon-danger {
-  background: rgba(220, 53, 69, 0.25);
-}
-
-.dashboard-icon-warning {
-  background: rgba(255, 193, 7, 0.25);
-}
-
-.dashboard-icon-indigo {
-  background: rgba(102, 16, 242, 0.25);
-}
-
-.dashboard-icon-cyan {
-  background: rgba(13, 202, 240, 0.2);
 }

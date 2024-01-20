@@ -29,7 +29,7 @@
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-        <?php
+            <?php
                 require 'sidebar-admin.inc.php';
             ?>
             <main class="col justify-content-center">
@@ -130,27 +130,27 @@
                                             mysqli_close($conn);
 
                                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                            <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
-                                            <span aria-hidden="true">&laquo First</span>
-                                        </a>
-                                    </li>
-                                    <?php 
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
+                                                <span aria-hidden="true">&laquo First</span>
+                                            </a>
+                                        </li>
+                                        <?php 
                                         for($x=1;$x<=$total_page;$x++){
                                             ?>
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                            <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
-                                        </a>
-                                    </li>
-                                    <?php
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                                            </a>
+                                        </li>
+                                        <?php
                                         }
                                     ?>
                                     <li class="page-item">
@@ -165,10 +165,12 @@
                                 <button class="btn btn-primary btn-sm" type="submit">Checkout</button>
                             </form> -->
                         </div>
-                    </div>
-                </main>
-            </div>
+                    </main>
+                </div>
         </div>
+        <?php
+        include_once 'offcanvas-admin.inc.php';
+    ?>
 </body>
 
 </html>
