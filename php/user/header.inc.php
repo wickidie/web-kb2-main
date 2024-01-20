@@ -4,8 +4,8 @@
     $sql = "SELECT * FROM users WHERE user_id = '$user_id'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);    
-    $username = $row['username'] ?? 'please login';
-    $email = $row['email'] ?? 'please login';
+    $username = $row['username'] ?? 'sign in';
+    $email = $row['email'] ?? 'sign in';
     echo '<header class="container-fluid p-3">
     <nav class="navbar navbar-expand-lg bg-transparant justify-content-between px-md-3 px-2 rounded-3">
       <!-- <div>
@@ -20,7 +20,7 @@
       </div>
       <div class="d-flex py-1 px-2 align-items-center">
         <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-        <span class="fs-4 ms-2 align-bottom logo d-none d-md-inline-block"> Tokaku </span>
+        <span class="fs-4 ms-2 align-bottom logo"> Tokaku </span>
       </div>
       <div class="d-none d-md-inline-block">
         <ul class="nav align-items-center">
@@ -42,7 +42,7 @@
               <i class="bi bi-search"></i>
             </a>
           </li>
-          <li class="nav-item dropdown mx-2 d-none d-md-inline-block">
+          <li class="nav-item dropdown mx-2">
             <a href="#" class="pe-auto" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-person"></i>
             </a>
@@ -92,12 +92,14 @@
           <div class="modal-dialog" style="margin-top: 0px">
             <div class="modal-content">
               <div class="modal-body" id="exampleModalLabel">
-                <form class="d-flex form-floating align-items-center" role="search" style="height: 3rem">
-                  <input class="form-control me-2" type="search" id="search" placeholder="Search" aria-label="Search" />
-                  <a href="#">
-                    <i class="bi bi-search"></i>
-                  </a>
-                  <label for="search">Search</label>
+                <form class="d-flex align-items-center" role="search" style="height: 3rem">
+                <div class="input-group mx-2">
+                  <input class="form-control" type="search" id="search" placeholder="Search" aria-label="Search" />
+                    <a href="products.php" class="input-group-text btn btn-outline-secondary rounded-end-1"
+                        type="submit" id="searchph">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </div>
                   <button class="btn btn-close" data-bs-dismiss="modal" aria-label="Close" type="submit"></button>
                 </form>
               </div>

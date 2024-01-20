@@ -39,36 +39,36 @@
     ?>
 
     <main class="container p-3 mb-auto">
-      <article class="rounded-3">
-        <section class="container">
-        <form method="GET" class="w-100">
-            <div class="input-group my-2">
-                <input type="text" class="form-control form-control-sm" id="myInput"
-                    name="search" placeholder="Search for transaction_id" aria-label="Search"
-                    aria-describedby="searchph" <?php echo "value = $search_value" ?>>
-                <button class="input-group-text btn btn-outline-secondary rounded-end-1"
-                    type="submit" id="searchph">
-                    <i class="bi bi-search"></i>
-                </button>
-            </div>
-        </form>
-          <div class="row justify-content-center align-items-center">
-          <div class="table-responsive">
-                                        <table class="table table-hover table-striped" id="myTable">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Transaction ID</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Transaction Total</th>
-                                                    <th scope="col">Username</th>
-                                                    <th scope="col">Time Left</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Payment</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                
-            <?php
+        <article class="rounded-3">
+            <section class="container">
+                <form method="GET" class="w-100">
+                    <div class="input-group my-2">
+                        <input type="text" class="form-control form-control-sm" id="myInput" name="search"
+                            placeholder="Search for transaction_id" aria-label="Search" aria-describedby="searchph"
+                            <?php echo "value = $search_value" ?>>
+                        <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
+                            id="searchph">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="row justify-content-center align-items-center">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Transaction ID</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Transaction Total</th>
+                                    <!-- <th scope="col">Username</th> -->
+                                    <th scope="col">Time Left</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Payment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php
               $user_id = $_SESSION['user_id'];
               $items_per_page = 10;
               $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE t.user_id = $user_id";
@@ -117,55 +117,70 @@
                                                     echo "<td>" . $row['transaction_id'] . "</td>";
                                                     echo "<td>" . $formattedDate . "</td>";
                                                     echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
-                                                    echo "<td>" . $row['username'] . "</td>";
-                                                    echo "<td>" . $a . "/48:00:00</td>";
+                                                    // echo "<td>" . $row['username'] . "</td>";
+                                                    echo "<td>" . $a . "48:00:00</td>";
                                                     echo "<td>";
                                                     if ($row['status'] == 'Pending' || $row['status'] == 'Invalid') {
-                                                        echo $row['status'];
-                                                        echo '<form action="transactions-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">';
-                                                        echo '<div class="col mb-3">';
-                                                        echo '<button type="submit" class="btn btn-danger">Cancel</button>';
-                                                        echo '</div>';
-                                                        echo '</form>';
+                                                        echo '<div class=">
+                                                        <form action="transactions-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">'
+                                                        . $row['status'] . 
+                                                        '<button type="submit" class="btn btn-danger btn-sm ms-3"><i class="bi bi-x-lg"></i></button>
+                                                        </form></div>';
                                                     }else{
-                                                        echo $row['status'];
-                                                        echo '<form action="invoice.php" method="POST">';
-                                                        echo '<div class="col mb-3">';
-                                                        echo '<input type="hidden"  name="transaction_id" id="transaction_id" value="' . $row['transaction_id'] . '">';
-                                                        echo '<button type="submit" class="btn btn-success">Invoice</button>';
-                                                        echo '</div>';
-                                                        echo '</form>';
+                                                        echo '<div class="3">
+                                                        <form action="invoice.php" method="POST">'
+                                                        . $row['status'] .
+                                                        '<input class="form-control form-control-sm d-none" name="transaction_id" id="transaction_id" value="' . $row['transaction_id'] . '">
+                                                        <button type="submit" class="btn btn-success"><i class="bi bi-printer   "></i></button>
+                                                        </form>
+                                                        </div>';
                                                     }
                                                     echo "</td>";
                                                     echo "<td>";
                                                     if (empty($row['payment'])) {
                                                         echo '<form action="payment-add.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">';
-                                                        echo '<div class="col mb-3">';
-                                                        echo '<input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required>';
-                                                        echo '<button type="submit" class="btn btn-primary">Upload</button>';
+                                                        echo '<div class="row mb-3">';
+                                                        echo '<div class="col-auto"><input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required></div>';
+                                                        echo '<div class="col-auto"><button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-upload"></i></button></div>';
                                                         echo '</div>';
                                                         echo '</form>';
                                                     }else{
                                                         if ($row['status'] != 'Invalid' && $row['status'] != 'Pending') {
-                                                            echo '<div class="row mb-3">';
-                                                            echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>" . $row['payment'] . "</button>";
+                                                            echo '<div class="row mb-3">
+                                                            <a href="payment.php?transaction_id=' . $row['transaction_id'] . '" class="btn btn-primary btn-sm">' . $row['payment'] . '</button>';
                                                             if ($row['status'] == 'Delivering') {
-                                                                echo "<a href='order-received.php?transaction_id=" . $row['transaction_id'] . "&status=Received" . "' class='btn btn-warning btn-sm'>I Received My Order</button>";
+                                                                echo "<a href='order-received.php?transaction_id=" . $row['transaction_id'] . "&status=Received" . "' class='btn btn-warning btn-sm mt-3'>I Received My Order</button>";
                                                             }
                                                             echo '</div>';
                                                         }else{
-                                                            echo '<form action="payment-update.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">';
-                                                            echo '<div class="col mb-3">';
-                                                            echo '<input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required>';
-                                                            echo '<button type="submit" class="btn btn-warning">Update</button>';
-                                                            echo '</div>';
-                                                            echo '</form>';
-                                                            echo '<form action="payment-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">';
-                                                            echo '<div class="col mb-3">';
-                                                            echo '<button type="submit" class="btn btn-danger">Delete</button>';
-                                                            echo '</div>';
-                                                            echo '</form>';
-                                                            echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>" . $row['payment'] . "</button>";
+                                                            // echo '<div class="row mb-3">
+                                                            // <form action="payment-update.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">
+                                                            // <div class="col mb-3">
+                                                            // <input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required>
+                                                            // <button type="submit" class="btn btn-warning">Update</button></div></form>
+                                                            // <form action="payment-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">
+                                                            // <div class="col mb-3">
+                                                            // <button type="submit" class="btn btn-danger">Delete</button>
+                                                            // </div></form>';
+                                                            echo '
+                                                            <div class="mb-2"><a href="payment.php?transaction_id=' . $row["transaction_id"] . '" class="btn btn-primary btn-sm"><span class="text-wrap">' . $row["payment"] . '</span></a></div>
+                                                            <div class="row">
+                                                            <div class="col-auto">
+                                                              <form action="payment-update.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">
+                                                                <div class="row mb-3">
+                                                                  <div class="col"><input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required /></div>
+                                                                  <div class="col-auto"><button type="submit" class="btn btn-warning btn-sm"><i class="bi bi-arrow-clockwise"></i></button></div>
+                                                                </div>
+                                                              </form>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                              <form action="payment-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">
+                                                                <div class="">
+                                                                  <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                                                </div>
+                                                              </form>
+                                                            </div>
+                                                          </div>';
                                                         }
                                                     }
                                                     echo "</td>";
@@ -178,48 +193,44 @@
             }
 
             ?>
-            </form>
-              </tbody>
-            </table>
-          </div>
-          <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center m-0">
-                <li class="page-item">
-                    <a class="page-link"
-                        <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
-                        <span aria-hidden="true">&laquo</span>
-                    </a>
-                </li>
-                <?php 
+                                </form>
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center m-0">
+                            <li class="page-item">
+                                <a class="page-link"
+                                    <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
+                                    <span aria-hidden="true">&laquo</span>
+                                </a>
+                            </li>
+                            <?php 
             for($x=1;$x<=$total_page;$x++){
                 ?>
-                <li class="page-item">
-                    <a class="page-link"
-                        <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
-                    </a>
-                </li>
-                <?php
+                            <li class="page-item">
+                                <a class="page-link"
+                                    <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                                </a>
+                            </li>
+                            <?php
             }
         ?>
-                <li class="page-item">
-                    <a class="page-link"
-                        <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
-                        <span aria-hidden="true">&raquo</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        </section>
-      </article>
-      <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header pt-4">
-          <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-            <div class="d-flex ms-2 justify-content-center align-items-center">
-              <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-              <span class="fs-4 ms-2 align-bottom"> Tokaku </span>
-            </div>
-        </div>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
+                                    <span aria-hidden="true">&raquo</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+            </section>
+        </article>
     </main>
+
+    <?php 
+    include_once 'offcanvas.inc.php';
+    ?>
 
     <?php 
     include_once 'footer.inc.php';

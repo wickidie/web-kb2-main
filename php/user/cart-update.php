@@ -11,7 +11,7 @@
         if (unlink($img_path)) {
             echo "              
             <script type='text/javascript'>
-            alert('Cart ID $cart_id has been updated');
+            // alert('Cart ID $cart_id has been updated');
             location='cart.php';
             </script>";
         }else{

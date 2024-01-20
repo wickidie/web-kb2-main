@@ -37,7 +37,7 @@
         if (mysqli_query($conn, $sql)) {
             echo "              
             <script type='text/javascript'>
-            alert('Your payment has been added!');
+            // alert('Your payment has been added!');
             location='order-status.php';
             </script>";
         } else {

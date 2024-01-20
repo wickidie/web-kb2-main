@@ -5,7 +5,7 @@
  <div class='offcanvas-header pt-4'>
      <h5 class='offcanvas-title' id='offcanvasExampleLabel'>
          <div class='d-flex ms-2 justify-content-center align-items-center'>
-             <img src='../../asset/img/logo/tokaku_logo.svg' alt='TOKAKU' width='32' height='32' />
+             <img src='../../asset/img/icon/tokaku_logo.svg' alt='TOKAKU' width='32' height='32' />
              <span class='fs-4 ms-2 align-bottom'> Tokaku </span>
          </div>
      </h5>

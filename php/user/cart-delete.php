@@ -8,7 +8,7 @@
     if (mysqli_query($conn, $sql)) {
         echo "              
         <script type='text/javascript'>
-        alert('Cart ID $cart_id has been deleted');
+        // alert('Cart ID $cart_id has been deleted');
         location='cart.php';
         </script>";
     } else {

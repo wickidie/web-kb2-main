@@ -37,31 +37,76 @@
     ?>
 
     <main class="container p-3">
-        <article class="rounded-3">
-            <section class="container">
-                <div>
-                    <p class="fs-2 fw-bold">Invoice<small class="fw-light"></small></p>
-                </div>
-
-
-                <form action="" method="post">
-                    <div class="card shadow-lg border-0">
-
-                        <div class="card-header bg-transparent">
-                            <ul class="row justify-content-between align-items-center list-unstyled m-0">
-                                <!-- <li class="col text-center"><span>product_id</span></li> -->
-                                <li class="col text-center"><span>Product</span></li>
-                                <li class="col text-center"><span></span></li>
-                                <li class="col text-center"><span></span></li>
-                                <!-- <li class="col d-none d-md-inline-block"><span class="">Product Name</span></li> -->
-                                <li class="col d-none d-sm-inline-block text-center text-md-start"><span>Quantity</span></li>
-                                <li class="col text-center"><span></span></li>
-                                <li class="col text-center text-md-start"><span>SubTotal</span></li>
-                                </li>
-                            </ul>
+        <article class="card rounded-3">
+            <section class="card-body">
+                <div class="card-header">
+                    <div class="row d-flex justify-content-between align-items-baseline">
+                        <div class="col">
+                            <p class="fs-2 fw-bold"><strong>Invoice</strong></p>
                         </div>
+                        <div class="col-auto">
+                            <button class="btn btn-secondary shadow text-capitalize" onclick="window.print()"><i
+                                    class="bi bi-printer"></i>&nbspPrint</button>
+                            <a class="btn btn-secondary shadow text-capitalize"><i
+                                    class="bi bi-file-earmark-pdf text-danger"></i>&nbspExport</a>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                    $transaction_id = $_POST['transaction_id'];
+                    $sql = "SELECT * FROM transactions t
+                    JOIN users u ON t.user_id = u.user_id
+                    WHERE transaction_id = $transaction_id";
+                    $result = mysqli_query($conn, $sql);
 
-                        <?php
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<div class="card-body">
+                            <div class="row">
+                                <div class="col-xl-8">
+                                    <ul class="list-unstyled">
+                                        <li class="text-muted">To: <span style="color: #5d9fc5">'. $row['username'] .'</span></li>
+                                        <li class="text-muted">'. $row['address'] .'</li>
+                                        <li class="text-muted"><i class="bi bi-telephone">&nbsp'. $row['phone_number'] .'</i>9</li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-4">
+                                    <p class="text-muted m-0">Invoice</p>
+                                    <ul class="list-unstyled">
+                                        <li class="text-muted"><i class="fas fa-circle" style="color: #84b0ca"></i> <span
+                                                class="fw-bold">ID:</span>#' . $row['transaction_id'] . '</li>
+                                        <li class="text-muted"><i class="fas fa-circle" style="color: #84b0ca"></i> <span
+                                                class="fw-bold">Creation Date: </span>' . $row['transaction_date'] . '</li>
+                                    </ul>
+                                </div>
+                            </div>';
+                        }
+                    }
+                ?>
+
+
+
+                <div class="card-body">
+                    <form action="" method="post">
+                        <div class="card shadow-lg border-0">
+
+                            <div class="card-header bg-transparent">
+                                <ul class="row justify-content-between align-items-center list-unstyled m-0">
+                                    <!-- <li class="col text-center"><span>product_id</span></li> -->
+                                    <li class="col text-center"><span>Product</span></li>
+                                    <li class="col text-center"><span></span></li>
+                                    <li class="col text-center"><span></span></li>
+                                    <!-- <li class="col d-none d-md-inline-block"><span class="">Product Name</span></li> -->
+                                    <li class="col d-none d-sm-inline-block text-center text-md-start">
+                                        <span>Quantity</span>
+                                    </li>
+                                    <li class="col text-center"><span></span></li>
+                                    <li class="col text-center text-md-start"><span>SubTotal</span></li>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <?php
                             $transaction_id = $_POST['transaction_id'];
 
                 $sql = "SELECT * FROM transaction_details td
@@ -90,41 +135,25 @@
                     echo  "</li>";
                     echo "</ul>";
                     echo  "</div>";
-                    echo "<hr />";
+                    echo "<hr/>";
                   }
                 }
   
               ?>
 
-                        <div class="card-footer text-center bg-transparent">
-                            <ul class="row justify-content-between align-items-center list-unstyled m-0">
-                                <li class="col">
-                                    <h4 class='total'>Total</h4>
-                                </li>
-                                <li class="col">
-                                    <h5 class='total' id="total"></h5>
-                                </li>
-                            </ul>
-                            <button type="submit" class="btn btn-primary w-100" onclick="window.print()"> Print Invoice</button>
-                            <?php
-                                $transaction_id = $_POST['transaction_id'];
-                                $sql = "SELECT * FROM transactions t
-                                JOIN users u ON t.user_id = u.user_id
-                                WHERE transaction_id = $transaction_id";
-                                $result = mysqli_query($conn, $sql);
-
-                                if (mysqli_num_rows($result) > 0) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "Transaction ID : " . $row['transaction_id'] . "<br>";
-                                        echo "Transaction Date : " . $row['transaction_date'] . "<br>";
-                                        echo "Username : " . $row['username'] . "<br>";
-                                        echo "User ID : " . $row['user_id'] . "<br>";
-                                    }
-                                  }
-                            ?>
+                            <div class="card-footer border-top-0 text-center bg-transparent">
+                                <ul class="row justify-content-between align-items-center list-unstyled m-0">
+                                    <li class="col">
+                                        <h4 class='total'>Total</h4>
+                                    </li>
+                                    <li class="col">
+                                        <h5 class='total' id="total"></h5>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </section>
         </article>
     </main>
@@ -138,7 +167,10 @@
     ?>
 
     <script>
-    let currency = new Intl.NumberFormat('en-US', {style: 'currency',currency: 'IDR',});
+    let currency = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'IDR',
+    });
     var price = document.getElementsByClassName('price');
     var quantity = document.getElementsByClassName('quantity');
     var sub_total = document.getElementsByClassName('sub_total');
