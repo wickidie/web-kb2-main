@@ -28,14 +28,14 @@
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-        <?php
+            <?php
                 require 'sidebar-admin.inc.php';
             ?>
             <main class="col justify-content-center">
                 <?php
                     require  'header-admin.inc.php';
                 ?>
-            <!-- <nav class="d-none d-md-flex flex-column bg-body-tertiary col-auto justify-content-between min-vh-100 p-xl-2 p-1"
+                <!-- <nav class="d-none d-md-flex flex-column bg-body-tertiary col-auto justify-content-between min-vh-100 p-xl-2 p-1"
                 id="sidebar">
                 <div class="pt-2">
                     <div class="d-flex justify-content-center align-items-center mb-3">
@@ -121,8 +121,8 @@
                     </div>
                 </div>
             </nav> -->
-            <div class="col justify-content-center p-0">
-                <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between px-md-4 px-3">
+                <div class="col justify-content-center p-0">
+                    <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between px-md-4 px-3">
                     <div class="navbar-brand">
                         <span><i class="bi bi-list cursor" id="icon-toggle"></i></span>
                     </div>
@@ -184,34 +184,35 @@
                         </ul>
                     </div>
                 </nav> -->
-                <main class="p-3">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <div class="container">
-                            <form method="GET">
-                                <div class="input-group my-2">
-                                    <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                                        placeholder="Search by user_id" aria-label="Search" aria-describedby="searchph">
-                                    <button class="input-group-text btn btn-secondary rounded-end-1" type="submit"
-                                        id="searchph">
-                                        <i class="bi bi-search"></i>
-                                    </button>
-                                </div>
-                            </form>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped" id="myTable">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Cart ID</th>
-                                            <th scope="col">User ID</th>
-                                            <th scope="col">Username</th>
-                                            <th scope="col">Product Name</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Product Price</th>
-                                            <th scope="col">Created At</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
+                    <main class="p-3">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="container">
+                                <form method="GET">
+                                    <div class="input-group my-2">
+                                        <input type="text" class="form-control form-control-sm" id="myInput"
+                                            name="search" placeholder="Search by user_id" aria-label="Search"
+                                            aria-describedby="searchph">
+                                        <button class="input-group-text btn btn-secondary rounded-end-1" type="submit"
+                                            id="searchph">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped" id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Cart ID</th>
+                                                <th scope="col">User ID</th>
+                                                <th scope="col">Username</th>
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Product Price</th>
+                                                <th scope="col">Created At</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
                                             $items_per_page = 10;
                                             $search_value = '';
                                             $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
@@ -277,45 +278,48 @@
                                             mysqli_close($conn);
 
                                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                            <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
-                                            <span aria-hidden="true">&laquo First</span>
-                                        </a>
-                                    </li>
-                                    <?php 
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
+                                                <span aria-hidden="true">&laquo First</span>
+                                            </a>
+                                        </li>
+                                        <?php 
                                         for($x=1;$x<=$total_page;$x++){
                                             ?>
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                            <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
-                                        </a>
-                                    </li>
-                                    <?php
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                                            </a>
+                                        </li>
+                                        <?php
                                         }
                                     ?>
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                            <?php if($current_page < $total_page) { echo "href='products.php?search=$search_value&page=$total_page'"; } ?>>
-                                            <span aria-hidden="true">Last &raquo</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <form action="transactions-add.php" method="POST">
-                                <button class="btn btn-primary btn-sm" type="submit">Checkout</button>
-                            </form>
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                <?php if($current_page < $total_page) { echo "href='products.php?search=$search_value&page=$total_page'"; } ?>>
+                                                <span aria-hidden="true">Last &raquo</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <form action="transactions-add.php" method="POST">
+                                    <button class="btn btn-primary btn-sm" type="submit">Checkout</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </main>
-            </div>
+                    </main>
+                </div>
         </div>
+        <?php
+        include_once 'offcanvas-admin.inc.php';
+    ?>
 </body>
 
 </html>

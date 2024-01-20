@@ -189,10 +189,11 @@
                 </article>
             </main>
         </div>
-        <?php
-            include_once 'android-sidebar-admin.inc.php';
-        ?>
+
     </div>
+    <?php
+        include_once 'offcanvas-admin.inc.php';
+    ?>
 </body>
 
 </html>
