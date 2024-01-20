@@ -16,7 +16,7 @@
                 <!-- Links -->
                 <div class="col-12 col-md-6">
                     <nav class="nav nav-footer justify-content-center justify-content-md-end">
-                        <a class="nav-link" href="#">Contact us</a>
+                        <a class="nav-link" href="https://github.com/wickidie/web-kb2-main">Contact us</a>
                         <img class="" src="https://cdn3.emoji.gg/emojis/2589-pepe4k.gif" width="35" height="35" alt="Image Description" />
                     </nav>
                 </div>
