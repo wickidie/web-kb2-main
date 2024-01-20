@@ -69,8 +69,9 @@
                                             <tbody>
                                                 
             <?php
+              $user_id = $_SESSION['user_id'];
               $items_per_page = 10;
-              $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id";
+              $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE t.user_id = $user_id";
               $result = mysqli_query($conn, $sql);
               $rows = mysqli_num_rows($result);
               $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -78,17 +79,17 @@
               
               if (isset($_GET['search'])) {
                   if (!empty($_GET['search'])) {
-                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
+                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' AND t.user_id = $user_id ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
-                      $sql = "SELECT * FROM transactions where transaction_id like '%$search_value%' ORDER BY transaction_id DESC ";
+                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' AND t.user_id = $user_id ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                       $result_total = mysqli_query($conn, $sql);
                       $rows = mysqli_num_rows($result_total);
                   }else{
-                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
+                      $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE t.user_id = $user_id ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
                   }
               }else{
-                  $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
+                  $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE t.user_id = $user_id ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                   $result = mysqli_query($conn, $sql);
               }
               
@@ -128,6 +129,12 @@
                                                         echo '</form>';
                                                     }else{
                                                         echo $row['status'];
+                                                        echo '<form action="invoice.php" method="POST">';
+                                                        echo '<div class="col mb-3">';
+                                                        echo '<input type="hidden"  name="transaction_id" id="transaction_id" value="' . $row['transaction_id'] . '">';
+                                                        echo '<button type="submit" class="btn btn-success">Invoice</button>';
+                                                        echo '</div>';
+                                                        echo '</form>';
                                                     }
                                                     echo "</td>";
                                                     echo "<td>";

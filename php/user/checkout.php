@@ -44,19 +44,20 @@
 
     // buying, add to transactions or checking out
     $sql = "INSERT INTO `transactions`(`transaction_date`, `transaction_total`, `status`,`user_id`) VALUES (CURRENT_TIMESTAMP, $transaction_total, 'Pending', $user_id);";
-    
-    if (mysqli_query($conn, $sql)) {
-        echo "              
-        <script type='text/javascript'>
-        alert('Item has been purchased');
-        location='cart.php';
-        </script>";
-    } else {
-        echo "Error buying record: " . mysqli_error($conn);
-    }
+    mysqli_query($conn, $sql);
+
+    // if () {
+    //     echo "              
+    //     <script type='text/javascript'>
+    //     alert('Item has been purchased');
+    //     location='cart.php';
+    //     </script>";
+    // } else {
+    //     echo "Error buying record: " . mysqli_error($conn);
+    // }
     
     // getting transaction_id to input to transaction details
-    $sqlTransactionId = "SELECT transaction_id FROM transactions;";
+    $sqlTransactionId = "SELECT transaction_id FROM transactions ORDER BY transaction_id ASC;";
     $result = mysqli_query($conn, $sqlTransactionId);
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
@@ -110,7 +111,18 @@
     // if (mysqli_num_rows($result) > 0) {
     //     $truncate = "DELETE FROM `cart` WHERE user_id = $user_id;";
     //     mysqli_query($conn, $truncate);
+    // echo "              
+    //     <script type='text/javascript'>
+    //     alert('Item has been purchased');
+    //     location='cart.php';
+    //     </script>";
     // }
+
+    echo "              
+        <script type='text/javascript'>
+        alert('Item has been purchased');
+        location='cart.php';
+        </script>";
 
     mysqli_close($conn) ;
 ?>

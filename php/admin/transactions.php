@@ -86,7 +86,7 @@
                                             <tbody>
                                                 <?php
                                             $items_per_page = 10;
-                                            $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id";
+                                            $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id ORDER BY t.transaction_id DESC";
                                             $result = mysqli_query($conn, $sql);
                                             $rows = mysqli_num_rows($result);
                                             $current_page = isset($_GET['page']) ? $_GET['page'] : 1;

@@ -97,22 +97,25 @@
                                             if (isset($_GET['search'])) {
                                                 if (!empty($_GET['search'])) {
                                                     $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                                                JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%' LIMIT $offset, $items_per_page";
+                                                JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%' 
+                                                ORDER BY td.transaction_detail_id DESC
+                                                LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
                                                     $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                                                JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%'";
+                                                JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%'
+                                                ORDER BY td.transaction_detail_id DESC";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
                                                     $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                                                    JOIN products p ON td.product_id = p.product_id WHERE 1 LIMIT $offset, $items_per_page";
+                                                    JOIN products p ON td.product_id = p.product_id WHERE 1 
+                                                    ORDER BY td.transaction_detail_id DESC
+                                                    LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
                                                 $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                                                JOIN products p ON td.product_id = p.product_id WHERE 1 
-                                                ORDER BY td.transaction_detail_id
-                                                LIMIT $offset, $items_per_page";
+                                                JOIN products p ON td.product_id = p.product_id  ORDER BY td.transaction_detail_id DESC LIMIT $offset, $items_per_page";
                                                 $result = mysqli_query($conn, $sql);
                                             }
                                             

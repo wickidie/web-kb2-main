@@ -228,23 +228,24 @@
                                                 if (!empty($_GET['search'])) {
                                                     $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
                                                     JOIN users u ON c.user_id = u.user_id
-                                                    JOIN products p ON c.product_id = p.product_id WHERE c.user_id like '%$search_value%' LIMIT $offset, $items_per_page";
+                                                    JOIN products p ON c.product_id = p.product_id WHERE c.user_id like '%$search_value%' ORDER BY c.cart_id DESC LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
                                                     $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
                                                     JOIN users u ON c.user_id = u.user_id
-                                                    JOIN products p ON c.product_id = p.product_id WHERE c.user_id like '%$search_value%'";
+                                                    JOIN products p ON c.product_id = p.product_id WHERE c.user_id like '%$search_value%' ORDER BY c.cart_id DESC";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
                                                     $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
                                                     JOIN users u ON c.user_id = u.user_id
-                                                    JOIN products p ON c.product_id = p.product_id LIMIT $offset, $items_per_page";
+                                                    JOIN products p ON c.product_id = p.product_id ORDER BY c.cart_id DESC LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
                                                 $sql = "SELECT c.cart_id, c.user_id, u.username, p.product_id, p.product_name, c.quantity, p.product_price, c.created_at FROM cart c 
                                                 JOIN users u ON c.user_id = u.user_id
-                                                JOIN products p ON c.product_id = p.product_id;";
+                                                JOIN products p ON c.product_id = p.product_id
+                                                ORDER BY c.cart_id DESC;";
                                                 $result = mysqli_query($conn, $sql);
                                             }
                                             
