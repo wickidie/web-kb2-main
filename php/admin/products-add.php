@@ -11,7 +11,7 @@
     $file_ext = explode('.', $file_name);
     $file_ext = strtolower(end($file_ext));
     echo $file_ext;
-    $upload_location = "../asset/product/";
+    $upload_location = "../../asset/img/product/";
 
     $allowed_ext = array('jpg', 'jpeg', 'png');
     $max_size = 10000000; // In Byte
@@ -37,8 +37,8 @@
             $price = $_POST['price'];
             $cat = $_POST['category'];
             
-            $sql = "INSERT INTO products (product_name, product_description, product_price, product_img, category_id)
-            VALUES ('$name', '$desc', '$price', '$file_name', '$cat')";
+            $sql = "INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold)
+            VALUES ('$name', '$desc', '$price', '$file_name', '$cat', 0)";
 
             if (mysqli_query($conn, $sql)) {
                 echo "              
