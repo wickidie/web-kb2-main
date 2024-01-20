@@ -96,7 +96,7 @@
                                                 if (!empty($_GET['search'])) {
                                                     $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, u.address, payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page ORDER BY t.transaction_id DESC";
                                                     $result = mysqli_query($conn, $sql);
-                                                    $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%' ORDER BY t.transaction_id DESC";
+                                                    $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%' ORDER BY transaction_id DESC";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
