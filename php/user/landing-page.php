@@ -30,13 +30,21 @@
 
 <?php
     include_once 'db-connect.inc.php';
+    session_start();
     $user_id = $_SESSION['user_id'] ?? null;
-    $sql = "SELECT * FROM users WHERE user_id = '$user_id'";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);    
-    $username = $row['username'] ?? 'please login';
-    $email = $row['email'] ?? 'please login';
-    $stateLog = ($user_id !== null) ? 'Sign Out' : 'Log In';
+    $username = "Guest";
+    $email = "please login";
+
+    if ($user_id !== null) {
+
+      $sql = "SELECT * FROM users WHERE user_id = '$user_id'";
+      $result = mysqli_query($conn, $sql);
+      $row = mysqli_fetch_assoc($result);
+      $username = $row['username'];
+      $email = $row['email'];
+
+    }
+
 
     echo '<header class="container-fluid p-3">
     <nav class="navbar navbar-expand-lg bg-transparant justify-content-between px-md-3 px-2 rounded-3">
@@ -110,11 +118,10 @@
               </li>
               <li>';
               if ($user_id !== null) {
-
                   echo '<a class="dropdown-item" href="logout.php"><small>Sign out</small></a>';
                 } else {
+                  echo $user_id;
                   echo '<a class="dropdown-item" href="login-form.php"><small>Log In</small></a>';
-
               }
               echo '</li>
             </ul>

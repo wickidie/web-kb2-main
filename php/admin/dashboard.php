@@ -53,30 +53,6 @@
                     <section class="d-flex flex-column justify-content-center align-items-center">
                         <div class="container-fluid flex-grow-1 mt-3">
                             <div class="row">
-<<<<<<< HEAD
-
-                                <div class="col-lg-8 mb-4 order-0">
-                                    <div class="card shadow">
-                                        <div class="d-flex align-items-end row">
-                                            <div class="col-sm-7">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-primary">Total Sales! 🎉</h5>
-                                                    <?php
-                                                        $sql = "SELECT sold FROM products";
-                                                        $result = mysqli_query($conn, $sql);
-                                                        $itemSold = 0;
-
-                                                        if (mysqli_num_rows($result) > 0) {
-                                                            while($row = mysqli_fetch_assoc($result)) {
-                                                                $itemSold += $row['sold'];
-                                                            } 
-                                                        }
-                                                        echo "<p class='mb-4'>We Sold <span class='fw-bold'>" . $itemSold . "</span> items until now.</p>"
-                                                    ?>
-
-                                                    <!-- <a href="javascript:;" class="btn btn-sm btn-outline-primary">View
-                                                        Badges</a> -->
-=======
                                 <!-- Earnings (Monthly) Card Example -->
                                 <div class="col-xl-3 col-md-6 mb-4">
                                     <div class="card shadow h-100 py-2">
@@ -84,9 +60,21 @@
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
                                                     <div class=" fw-bold text-primary text-uppercase mb-1">
-                                                        Products sold</div>
-                                                    <div class="h5 mb-0 fw-bold">40 <small>products</small></div>
->>>>>>> ac493c8b9aaf33ef7678ccc9e57afd0f694d6b5e
+                                                        Products Sold</div>
+                                                        <?php
+                                                            $sql = "SELECT sold FROM products";
+                                                            $result = mysqli_query($conn, $sql);
+                                                            $totalSold = 0;
+
+                                                            if (mysqli_num_rows($result) > 0) {
+                                                                while($row = mysqli_fetch_assoc($result)) {
+                                                                    $totalSold += $row['sold'];
+                                                                } 
+                                                            }
+    
+
+                                                        ?>
+                                                    <div class="h5 mb-0 fw-bold"><?php echo $totalSold?> <small>products</small></div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <i class="bi bi-cart-check text-secondary fs-1"></i>
@@ -96,69 +84,6 @@
                                     </div>
                                 </div>
 
-<<<<<<< HEAD
-
-                                <div class="col-lg-4 col-md-4 order-1">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-6 mb-4">
-                                            <div class="card shadow">
-                                                <div class="card-body">
-                                                    <div
-                                                        class="card-title d-flex align-items-start justify-content-between">
-                                                        <div class="flex-shrink-0">
-                                                            <span class="dashboard-icon dashboard-icon-success">
-                                                                <i class="bi bi-person icon"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="dropdown">
-                                                            <span type="button" id="cardOpt3" data-bs-toggle="dropdown"
-                                                                aria-haspopup="true" aria-expanded="true">
-                                                                <i class="bi bi-three-dots-vertical icon"></i>
-                                                            </span>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="cardOpt3">
-                                                                <a class="dropdown-item" href="javascript:void(0);">View
-                                                                    More</a>
-                                                                <a class="dropdown-item"
-                                                                    href="javascript:void(0);">Delete</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <span class="fw-semibold d-block mb-1">Total Users</span>
-                                                    <?php
-                                                        $sql = "SELECT * FROM users";
-                                                        $result = mysqli_query($conn, $sql);
-                                                        $rows = mysqli_num_rows($result);
-                                                        echo "<h3 class='card-title mb-2'>" . $rows . " users</h3>";
-                                                    ?>
-                                                    <!-- <small class="text-success fw-semibold"><i
-                                                            class="bx bx-up-arrow-alt"></i> +72.80%</small> -->
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-12 col-6 mb-4">
-                                            <div class="card shadow">
-                                                <div class="card-body">
-                                                    <div
-                                                        class="card-title d-flex align-items-start justify-content-between">
-                                                        <div class="avatar flex-shrink-0">
-                                                            <span class="dashboard-icon dashboard-icon-cyan">
-                                                                <i class="bi bi-wallet icon"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="dropdown">
-                                                            <span type="button" id="cardOpt3" data-bs-toggle="dropdown"
-                                                                aria-haspopup="true" aria-expanded="false">
-                                                                <i class="bi bi-three-dots-vertical"></i>
-                                                            </span>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="cardOpt3">
-                                                                <a class="dropdown-item" href="javascript:void(0);">View
-                                                                    More</a>
-                                                                <a class="dropdown-item"
-                                                                    href="javascript:void(0);">Delete</a>
-=======
                                 <!-- Earnings (Monthly) Card Example -->
                                 <div class="col-xl-3 col-md-6 mb-4">
                                     <div class="card shadow h-100 py-2">
@@ -167,8 +92,13 @@
                                                 <div class="col mr-2">
                                                     <div class=" fw-bold text-success text-uppercase mb-1">
                                                         Active Users</div>
-                                                    <div class="h5 mb-0 fw-bold ">10
-                                                        <small>users</small>
+                                                        <?php
+                                                            $sql = "SELECT * FROM users";
+                                                            $result = mysqli_query($conn, $sql);
+                                                            $rows = mysqli_num_rows($result);
+                                                            echo '<div class="h5 mb-0 fw-bold ">' . $rows . '
+                                                                <small>users</small>';
+                                                        ?>  
                                                     </div>
                                                 </div>
                                                 <div class="col-auto">
@@ -188,11 +118,21 @@
                                                     <div class="fw-bold text-info text-uppercase mb-1">
                                                         Earning
                                                     </div>
-                                                    <div class="h5 mb-0 fw-bold">$40,000 </div>
+                                                    <?php
+                                                            $sql = "SELECT transaction_total FROM transactions";
+                                                            $result = mysqli_query($conn, $sql);
+                                                            $earnings = 0;
+
+                                                            if (mysqli_num_rows($result) > 0) {
+                                                                while($row = mysqli_fetch_assoc($result)) {
+                                                                    $earnings += $row['transaction_total'];
+                                                                } 
+                                                            }
+                                                            echo '<div class="h5 mb-0 fw-bold">Rp' . number_format($earnings, 2, ',', '.') . '</div>';
+                                                        ?> 
                                                     <!-- <div class="row no-gutters align-items-center">
                                                         <div class="col-auto">
                                                             <div class="h5 mb-0 mr-3 fw-bold">50%
->>>>>>> ac493c8b9aaf33ef7678ccc9e57afd0f694d6b5e
                                                             </div>
                                                         </div>
                                                         <div class="col">
@@ -220,75 +160,31 @@
                                                 <div class="col mr-2">
                                                     <div class=" fw-bold text-warning text-uppercase mb-1">
                                                         Pending Transactions</div>
-                                                    <div class="h5 mb-0 fw-bold ">2
-                                                        <small>transaction</small>
-                                                    </div>
-<<<<<<< HEAD
-                                                    <span class="d-block mb-1">Products</span>
-                                                    <?php
-                                                        $sql = "SELECT purchase FROM users";
-                                                        $result = mysqli_query($conn, $sql);
-                                                        $rows = mysqli_num_rows($result);
-                                                        echo "<h3 class='card-title mb-2'>" . $rows . " products</h3>";
-                                                    ?>
+
+                                                        <?php
+                                                            $sql = "SELECT status FROM transactions";
+                                                            $result = mysqli_query($conn, $sql);
+                                                            $pendingCount = 0;
+
+                                                            if (mysqli_num_rows($result) > 0) {
+                                                                while($row = mysqli_fetch_assoc($result)) {
+                                                                    if ($row['status'] == "Pending") {
+                                                                        $pendingCount++;
+                                                                    }
+                                                                } 
+                                                            }
+                                                            echo  '<div class="h5 mb-0 fw-bold ">' . $pendingCount . ' 
+                                                                <small>transaction</small>
+                                                            </div>';
+         
+                                                        ?> 
                                                     <!-- <small class="text-success fw-semibold"><i
                                                             class="bx bx-up-arrow-alt"></i> +72.80%</small> -->
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-6 col-md-12 col-6 mb-4">
-                                            <div class="card shadow">
-                                                <div class="card-body">
-                                                    <div
-                                                        class="card-title d-flex align-items-start justify-content-between">
-                                                        <div class="avatar flex-shrink-0">
-                                                            <span class="dashboard-icon dashboard-icon-cyan">
-                                                                <i class="bi bi-wallet icon"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="dropdown">
-                                                            <span type="button" id="cardOpt3" data-bs-toggle="dropdown"
-                                                                aria-haspopup="true" aria-expanded="false">
-                                                                <i class="bi bi-three-dots-vertical"></i>
-                                                            </span>
-                                                            <div class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="cardOpt3">
-                                                                <a class="dropdown-item" href="javascript:void(0);">View
-                                                                    More</a>
-                                                                <a class="dropdown-item"
-                                                                    href="javascript:void(0);">Delete</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <span class="d-block mb-1">Top Buyers</span>
-                                                    <?php
-                                                        $sql = "SELECT * FROM users";
-                                                        $result = mysqli_query($conn, $sql);
-                                                        $topBuyers = 0;
-                                                        $topBuyersName = 0;
 
-                                                        if (mysqli_num_rows($result) > 0) {
-                                                            while($row = mysqli_fetch_assoc($result)) {
-                                                                if ($topBuyers < $row['purchase']) {
-                                                                    $topBuyers = $row['purchase'];
-                                                                    $topBuyersName = $row['username'];
-                                                                }
-                                                            } 
-                                                        }
-
-                                                        echo "<h3 class='card-title mb-2'>" . $topBuyersName . "</h3>";
-                                                    ?>
-                                                    <!-- <small class="text-success fw-semibold"><i
-                                                            class="bx bx-up-arrow-alt"></i> +72.80%</small> -->
-=======
-                                                </div>
-                                                <div class="col-auto">
-                                                    <i class="bi bi-envelope-exclamation text-secondary fs-1 "></i>
->>>>>>> ac493c8b9aaf33ef7678ccc9e57afd0f694d6b5e
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -323,7 +219,7 @@
                                     <div class="card shadow">
                                         <div class="card-header">
                                             <i class="bi bi-bag-check me-1"></i>
-                                            Best Seller
+                                            Most Sales
                                         </div>
                                         <div class="card-body pb-0">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -351,73 +247,30 @@
                                                 <table id="example" class="table table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Position</th>
-                                                            <th>Office</th>
-                                                            <th>Age</th>
-                                                            <th>Start date</th>
-                                                            <th>Action</th>
+                                                            <th>Product Name</th>
+                                                            <th>Product Price</th>
+                                                            <th>Sold</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Herrod Chandler</td>
-                                                            <td>Sales Assistant</td>
-                                                            <td>San Francisco</td>
-                                                            <td>59</td>
-                                                            <td>2012-08-06</td>
-                                                            <td>$137,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Hermione Butler</td>
-                                                            <td>Regional Director</td>
-                                                            <td>London</td>
-                                                            <td>47</td>
-                                                            <td>2011-03-21</td>
-                                                            <td>$356,250</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Lael Greer</td>
-                                                            <td>Systems Administrator</td>
-                                                            <td>London</td>
-                                                            <td>21</td>
-                                                            <td>2009-02-27</td>
-                                                            <td>$103,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Jonas Alexander</td>
-                                                            <td>Developer</td>
-                                                            <td>San Francisco</td>
-                                                            <td>30</td>
-                                                            <td>2010-07-14</td>
-                                                            <td>$86,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Shad Decker</td>
-                                                            <td>Regional Director</td>
-                                                            <td>Edinburgh</td>
-                                                            <td>51</td>
-                                                            <td>2008-11-13</td>
-                                                            <td>$183,000</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Michael Bruce</td>
-                                                            <td>Javascript Developer</td>
-                                                            <td>Singapore</td>
-                                                            <td>29</td>
-                                                            <td>2011-06-27</td>
-                                                            <td>$183,000</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Donna Snider</td>
-                                                            <td>Customer Support</td>
-                                                            <td>New York</td>
-                                                            <td>27</td>
-                                                            <td>2011-01-25</td>
-                                                            <td>$112,000</td>
-                                                        </tr>
+                                                        <?php
+
+                                                            $sql = "SELECT * FROM products ORDER BY sold DESC";
+                                                            $result = mysqli_query($conn, $sql);
+
+                                                            if (mysqli_num_rows($result) > 0) {
+                                                                while($row = mysqli_fetch_assoc($result)) {
+                                                                    echo "<tr>";
+                                                                    echo "<td>" . $row['product_name'] . "</td>";
+                                                                    echo "<td>Rp" . number_format($row['product_price'], 2, ',', '.') . "</td>";
+                                                                    echo "<td>" . $row['sold'] . "</td>";
+                                                                    echo "</tr>";
+                                                                }
+                                                            }
+
+                                                        ?>
                                                     </tbody>
-                                                    <tfoot>
+                                                    <!-- <tfoot>
                                                         <tr>
                                                             <th>Name</th>
                                                             <th>Position</th>
@@ -426,7 +279,7 @@
                                                             <th>Start date</th>
                                                             <th>Action</th>
                                                         </tr>
-                                                    </tfoot>
+                                                    </tfoot> -->
                                                 </table>
                                             </div>
                                         </div>
@@ -436,7 +289,7 @@
                                     <div class="card shadow">
                                         <div class="card-header">
                                             <i class="bi bi-person-lines-fill me-1"></i>
-                                            Top buyers
+                                            Top Buyers
                                         </div>
                                         <div class="card-body pb-0">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -464,73 +317,32 @@
                                                 <table id="example" class="table table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Position</th>
-                                                            <th>Office</th>
-                                                            <th>Age</th>
-                                                            <th>Start date</th>
-                                                            <th>Action</th>
+                                                            <th>Username</th>
+                                                            <th>E-Mail</th>
+                                                            <th>First Name</th>
+                                                            <th>Purchase</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Herrod Chandler</td>
-                                                            <td>Sales Assistant</td>
-                                                            <td>San Francisco</td>
-                                                            <td>59</td>
-                                                            <td>2012-08-06</td>
-                                                            <td>$137,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Hermione Butler</td>
-                                                            <td>Regional Director</td>
-                                                            <td>London</td>
-                                                            <td>47</td>
-                                                            <td>2011-03-21</td>
-                                                            <td>$356,250</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Lael Greer</td>
-                                                            <td>Systems Administrator</td>
-                                                            <td>London</td>
-                                                            <td>21</td>
-                                                            <td>2009-02-27</td>
-                                                            <td>$103,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Jonas Alexander</td>
-                                                            <td>Developer</td>
-                                                            <td>San Francisco</td>
-                                                            <td>30</td>
-                                                            <td>2010-07-14</td>
-                                                            <td>$86,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Shad Decker</td>
-                                                            <td>Regional Director</td>
-                                                            <td>Edinburgh</td>
-                                                            <td>51</td>
-                                                            <td>2008-11-13</td>
-                                                            <td>$183,000</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Michael Bruce</td>
-                                                            <td>Javascript Developer</td>
-                                                            <td>Singapore</td>
-                                                            <td>29</td>
-                                                            <td>2011-06-27</td>
-                                                            <td>$183,000</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Donna Snider</td>
-                                                            <td>Customer Support</td>
-                                                            <td>New York</td>
-                                                            <td>27</td>
-                                                            <td>2011-01-25</td>
-                                                            <td>$112,000</td>
-                                                        </tr>
+                                                    <?php
+
+                                                        $sql = "SELECT * FROM users ORDER BY purchase DESC";
+                                                        $result = mysqli_query($conn, $sql);
+
+                                                        if (mysqli_num_rows($result) > 0) {
+                                                            while($row = mysqli_fetch_assoc($result)) {
+                                                                echo "<tr>";
+                                                                echo "<td>" . $row['username'] . "</td>";
+                                                                echo "<td>" . $row['email'] . "</td>";
+                                                                echo "<td>" . $row['first_name'] . "</td>";
+                                                                echo "<td>" . $row['purchase'] . "</td>";
+                                                                echo "</tr>";
+                                                            }
+                                                        }
+
+                                                    ?>
                                                     </tbody>
-                                                    <tfoot>
+                                                    <!-- <tfoot>
                                                         <tr>
                                                             <th>Name</th>
                                                             <th>Position</th>
@@ -539,7 +351,7 @@
                                                             <th>Start date</th>
                                                             <th>Action</th>
                                                         </tr>
-                                                    </tfoot>
+                                                    </tfoot> -->
                                                 </table>
                                             </div>
                                         </div>
