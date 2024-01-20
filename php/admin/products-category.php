@@ -48,17 +48,11 @@
                 <article class="p-3">
                     <section class="d-flex justify-content-center align-items-center">
                         <div class="container-fluid">
-                            <!-- <span aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Products</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Products</li>
-                                </ol>
-                            </span> -->
                             <div class="card shadow mt-2">
                                 <div class="card-header py-3">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="">
-                                            <a href="products-form.php" class="btn btn-sm btn-outline-secondary">
+                                            <a href="category-form.php" class="btn btn-sm btn-outline-secondary">
                                                 <i class="bi bi-plus-lg icon"></i>
                                                 <span class="d-none d-md-inline-block">Add category</span>
                                             </a>
@@ -66,7 +60,7 @@
                                         <form method="GET">
                                             <div class="input-group my-2">
                                                 <input type="text" class="form-control form-control-sm" id="myInput"
-                                                    name="search" placeholder="Search" aria-label="Search"
+                                                    name="search" placeholder="Search for name" aria-label="Search"
                                                     aria-describedby="searchph" <?php echo "value = $search_value" ?>>
                                                 <button class="input-group-text btn btn-outline-secondary rounded-end-1"
                                                     type="submit" id="searchph">
@@ -99,17 +93,17 @@
                                             if (isset($_GET['search'])) {
                                                 $search_value = $_GET['search'];
                                                 if (!empty($_GET['search'])) {
-                                                    $sql = "SELECT * FROM product_category";
+                                                    $sql = "SELECT * FROM product_category where category_name like '%$search_value%' ORDER BY category_id DESC";
                                                     $result = mysqli_query($conn, $sql);
-                                                    $sql = "SELECT * FROM product_category";
+                                                    $sql = "SELECT * FROM product_category where category_name like '%$search_value%' ORDER BY category_id DESC";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
-                                                    $sql = "SELECT * FROM product_category";
+                                                    $sql = "SELECT * FROM product_category ORDER BY category_id DESC";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
-                                                $sql = "SELECT * FROM product_category";
+                                                $sql = "SELECT * FROM product_category ORDER BY category_id DESC    ";
                                                 $result = mysqli_query($conn, $sql);
                                             }
                                             

@@ -86,7 +86,7 @@
                                             <tbody>
                                                 <?php
                                             $items_per_page = 10;
-                                            $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id ORDER BY t.transaction_id DESC";
+                                            $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, u.address, payment FROM transactions t JOIN users u ON t.user_id = u.user_id ORDER BY t.transaction_id DESC";
                                             $result = mysqli_query($conn, $sql);
                                             $rows = mysqli_num_rows($result);
                                             $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -94,17 +94,17 @@
                                             
                                             if (isset($_GET['search'])) {
                                                 if (!empty($_GET['search'])) {
-                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page ORDER BY t.transaction_id DESC";
+                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, u.address, payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page ORDER BY t.transaction_id DESC";
                                                     $result = mysqli_query($conn, $sql);
-                                                    $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%' ORDER BY t.transaction_id DESC";
+                                                    $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%' ORDER BY transaction_id DESC";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
-                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page ORDER BY t.transaction_id DESC";
+                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, u.address, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page ORDER BY t.transaction_id DESC";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
-                                                $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 
+                                                $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, u.address, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 
                                                 ORDER BY t.transaction_id DESC
                                                 LIMIT $offset, $items_per_page";
                                                 $result = mysqli_query($conn, $sql);
@@ -126,7 +126,7 @@
                                                     echo "<td>" . $row['username'] . "</td>";
                                                     echo "<td>";
                                                     if (empty($row['payment'])) {
-                                                        echo "<a class='btn btn-danger btn-sm'>Call Debt Collector</button>";
+                                                        echo "<a href='https://wa.me/6281993669316?text=Hello sir, the username (" . $row['username'] . ") hasn`t pay their (IDR " . number_format($row['transaction_total'], 2, ',', '.') . ") bill yet. Please raid their house on this location (" . $row['address'] . "). Good luck and Be carefull o7.' class='btn btn-danger btn-sm'>Call Debt Collector</button>";
                                                     }else{
                                                         echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>Payment</button>";
                                                     }
@@ -139,6 +139,8 @@
                                                     <option value='Valid'>Valid</option>
                                                     <option value='Invalid'>Invalid</option>
                                                     <option value='Pending'>Pending</option>
+                                                    <option value='Delivering'>Delivering</option>
+                                                    <option value='Received'>Received</option>
                                                     </select>";
                                                     echo "<input type='hidden' name='transaction_id' value='" . $row['transaction_id'] . "'/>
                                                     <button class='btn btn-primary btn-sm' type='submit'>Update status</button>

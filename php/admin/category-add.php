@@ -1,6 +1,8 @@
 <?php
     require 'session-admin.inc.php';
     
+    $category_name = $_POST['category_name'];
+
     if (isset($category_name)) {
         if ($category_name != "") {
             $sql = "INSERT INTO `product_category`(`category_name`)

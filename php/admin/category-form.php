@@ -36,8 +36,8 @@
                 </div>
                 <div class="justify-content-center justify-content-sm-end">
                     <div class="text-end">
-                        <button class="btn btn-danger" onclick="history.back()">Discard</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button class="btn btn-danger" onclick="history.back()">Cancel</button>
                     </div>
                 </div>
             </form>

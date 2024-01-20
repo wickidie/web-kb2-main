@@ -146,8 +146,13 @@
                                                         echo '</div>';
                                                         echo '</form>';
                                                     }else{
-                                                        if ($row['status'] == 'Valid') {
+                                                        if ($row['status'] != 'Invalid' && $row['status'] != 'Pending') {
+                                                            echo '<div class="row mb-3">';
                                                             echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>" . $row['payment'] . "</button>";
+                                                            if ($row['status'] == 'Delivering') {
+                                                                echo "<a href='order-received.php?transaction_id=" . $row['transaction_id'] . "&status=Received" . "' class='btn btn-warning btn-sm'>I Received My Order</button>";
+                                                            }
+                                                            echo '</div>';
                                                         }else{
                                                             echo '<form action="payment-update.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">';
                                                             echo '<div class="col mb-3">';

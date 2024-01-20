@@ -91,17 +91,17 @@
                                                     
                                                     if (isset($_GET['search'])) {
                                                         if (!empty($_GET['search'])) {
-                                                            $sql = "SELECT * FROM users where username like '%$search_value%' LIMIT $offset, $items_per_page";
+                                                            $sql = "SELECT * FROM users where username like '%$search_value%' ORDER BY user_id DESC LIMIT $offset, $items_per_page";
                                                             $result = mysqli_query($conn, $sql);
-                                                            $sql = "SELECT * FROM users where username like '%$search_value%'";
+                                                            $sql = "SELECT * FROM users where username like '%$search_value%' ORDER BY user_id DESC";
                                                             $result_total = mysqli_query($conn, $sql);
                                                             $rows = mysqli_num_rows($result_total);
                                                         }else{
-                                                            $sql = "SELECT * FROM users WHERE 1 LIMIT $offset, $items_per_page";
+                                                            $sql = "SELECT * FROM users ORDER BY user_id DESC LIMIT $offset, $items_per_page";
                                                             $result = mysqli_query($conn, $sql);
                                                         }
                                                     }else{
-                                                        $sql = "SELECT * FROM users WHERE 1 LIMIT $offset, $items_per_page";
+                                                        $sql = "SELECT * FROM users ORDER BY user_id DESC LIMIT $offset, $items_per_page";
                                                         $result = mysqli_query($conn, $sql);
                                                     }
                                                     

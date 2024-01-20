@@ -10,8 +10,8 @@
                 $password = md5($_POST['password']);
                 $email = $_POST['email'];
                 
-                $sql = "INSERT INTO users (username, password, email, first_name, last_name, address, phone_number)
-                VALUES ('$username', '$password', '$email', 'unset', 'unset', 'unset', 'unset')";
+                $sql = "INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase)
+                VALUES ('$username', '$password', '$email', 'unset', 'unset', 'unset', 'unset', 0)";
 
                 if (mysqli_query($conn, $sql)) {
                     echo "              
