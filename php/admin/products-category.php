@@ -48,17 +48,11 @@
                 <article class="p-3">
                     <section class="d-flex justify-content-center align-items-center">
                         <div class="container-fluid">
-                            <!-- <span aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Products</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Products</li>
-                                </ol>
-                            </span> -->
                             <div class="card shadow mt-2">
                                 <div class="card-header py-3">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="">
-                                            <a href="products-form.php" class="btn btn-sm btn-outline-secondary">
+                                            <a href="category-form.php" class="btn btn-sm btn-outline-secondary">
                                                 <i class="bi bi-plus-lg icon"></i>
                                                 <span class="d-none d-md-inline-block">Add category</span>
                                             </a>
@@ -66,7 +60,7 @@
                                         <form method="GET">
                                             <div class="input-group my-2">
                                                 <input type="text" class="form-control form-control-sm" id="myInput"
-                                                    name="search" placeholder="Search" aria-label="Search"
+                                                    name="search" placeholder="Search for name" aria-label="Search"
                                                     aria-describedby="searchph" <?php echo "value = $search_value" ?>>
                                                 <button class="input-group-text btn btn-outline-secondary rounded-end-1"
                                                     type="submit" id="searchph">
@@ -99,17 +93,17 @@
                                             if (isset($_GET['search'])) {
                                                 $search_value = $_GET['search'];
                                                 if (!empty($_GET['search'])) {
-                                                    $sql = "SELECT * FROM product_category";
+                                                    $sql = "SELECT * FROM product_category where category_name like '%$search_value%' ORDER BY category_id DESC";
                                                     $result = mysqli_query($conn, $sql);
-                                                    $sql = "SELECT * FROM product_category";
+                                                    $sql = "SELECT * FROM product_category where category_name like '%$search_value%' ORDER BY category_id DESC";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
-                                                    $sql = "SELECT * FROM product_category";
+                                                    $sql = "SELECT * FROM product_category ORDER BY category_id DESC";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
-                                                $sql = "SELECT * FROM product_category";
+                                                $sql = "SELECT * FROM product_category ORDER BY category_id DESC    ";
                                                 $result = mysqli_query($conn, $sql);
                                             }
                                             
@@ -178,63 +172,9 @@
             </main>
         </div>
 
-        <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample"
-            aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header pt-4">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                    <div class="d-flex ms-2 justify-content-center align-items-center">
-                        <img src="../asset/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-                        <span class="fs-4 ms-2 align-bottom"> Tokaku </span>
-                    </div>
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="nav flex-column justify-content-center">
-                    <li class="nav-item py-2 py-sm-0">
-                        <a href="#" class="nav-link">
-                            <i class="bi bi-house"></i>
-                            <span class="fs-6 ms-2"> Dashboard </span>
-                        </a>
-                    </li>
-                    <li class="nav-item py-2 py-sm-0 align-items-center">
-                        <a href="#" class="nav-link">
-                            <i class="bi bi-table"></i>
-                            <span class="fs-6 ms-2 collapsed" id="transactions" data-bs-toggle="collapse"
-                                data-bs-target="#dashboard-collapse"> Transactions </span>
-                        </a>
-                        <div class="collapse" id="dashboard-collapse">
-                            <ul class="btn-toggle-nav list-unstyled align-items-center">
-                                <li class="py-2 ms-3">
-                                    <a href="transactions.php">
-                                        <i class="bi bi-card-text"></i>
-                                        <small>Transactions</small>
-                                    </a>
-                                </li>
-                                <li class="py-2 ms-3">
-                                    <a href="transaction-details.php">
-                                        <i class="bi bi-card-list"></i>
-                                        <small>Transactions details</small>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item py-2 py-sm-0">
-                        <a href="products.php" class="nav-link">
-                            <i class="bi bi-grid"></i>
-                            <span class="fs-6 ms-2"> Products </span>
-                        </a>
-                    </li>
-                    <li class="nav-item py-2 py-sm-0">
-                        <a href="users.php" class="nav-link">
-                            <i class="bi bi-person-circle"></i>
-                            <span class="fs-6 ms-2"> Users </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <?php
+        include_once 'offcanvas-admin.inc.php';
+    ?>
     </div>
 </body>
 

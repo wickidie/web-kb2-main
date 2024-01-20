@@ -60,7 +60,7 @@
                                         <form method="GET">
                                             <div class="input-group my-2">
                                                 <input type="text" class="form-control form-control-sm" id="myInput"
-                                                    name="search" placeholder="Search" aria-label="Search"
+                                                    name="search" placeholder="Search for name" aria-label="Search"
                                                     aria-describedby="searchph" <?php echo "value = $search_value" ?>>
                                                 <button class="input-group-text btn btn-outline-secondary rounded-end-1"
                                                     type="submit" id="searchph">
@@ -98,17 +98,17 @@
                                             if (isset($_GET['search'])) {
                                                 $search_value = $_GET['search'];
                                                 if (!empty($_GET['search'])) {
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name lORDER BY product_id ASC ike '%$search_value%' LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%' ORDER BY product_id DESC LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name ORDER BY product_id ASC like '%$search_value%'";
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%' ORDER BY product_id DESC";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 ORDER BY product_id ASC LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 ORDER BY product_id DESC LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
-                                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 ORDER BY product_id ASC LIMIT $offset, $items_per_page";
+                                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 ORDER BY product_id DESC LIMIT $offset, $items_per_page";
                                                 $result = mysqli_query($conn, $sql);
                                             }
                                             
@@ -189,10 +189,11 @@
                 </article>
             </main>
         </div>
-        <?php
-            include_once 'android-sidebar-admin.inc.php';
-        ?>
+
     </div>
+    <?php
+        include_once 'offcanvas-admin.inc.php';
+    ?>
 </body>
 
 </html>

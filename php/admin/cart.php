@@ -1,6 +1,7 @@
 <?php
     require 'session-admin.inc.php';
 
+    $search_value = $_GET['search'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
@@ -28,169 +29,21 @@
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-        <?php
+            <?php
                 require 'sidebar-admin.inc.php';
             ?>
             <main class="col justify-content-center">
                 <?php
                     require  'header-admin.inc.php';
                 ?>
-            <!-- <nav class="d-none d-md-flex flex-column bg-body-tertiary col-auto justify-content-between min-vh-100 p-xl-2 p-1"
-                id="sidebar">
-                <div class="pt-2">
-                    <div class="d-flex justify-content-center align-items-center mb-3">
-                        <i class="bi bi-exclude logo"></i>
-                        <span class="d-none fs-5 ms-2 mobile" id="logo">
-                            Kuis besar
-                        </span>
-                    </div>
-                    <ul class="nav nav-pills flex-column justify-content-center align-items-center" id="sidebar1">
-                        <li class="nav-item py-2 py-sm-0">
-                            <a href="dashboard.php" class="nav-link">
-                                <i class="bi bi-house"></i>
-                                <span class="d-none fs-6 ms-2 mobile" id="dashboard">
-                                    Dashboard
-                                </span>
-                            </a>
-                        </li>
-                        <li class="nav-item py-2 py-sm-0 align-items-center dropend" id="dropend">
-                            <a class="nav-link active">
-                                <i class="bi bi-table"></i>
-                                <span class="d-none fs-6 ms-2 collapsed mobile" id="transactions"
-                                    data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
-                                    aria-expanded="false">
-                                    Transactions
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item active" href="#"><small>Transactions</small>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="transaction-details.php">
-                                        <small>Transactions details</small>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="collapse" id="dashboard-collapse">
-                                <ul class="btn-toggle-nav list-unstyled align-items-center">
-                                    <li class="py-2 ms-3 ">
-                                        <a href="#" class="active">
-                                            <i class="bi bi-card-text"></i>
-                                            <small>Transactions</small>
-                                        </a>
-                                    </li>
-                                    <li class="py-2 ms-3">
-                                        <a href="transaction-details.php">
-                                            <i class="bi bi-card-list"></i>
-                                            <small>Transactions details</small>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item py-2 py-sm-0">
-                            <a href="products.php" class="nav-link">
-                                <i class="bi bi-grid"></i>
-                                <span class="d-none fs-6 ms-2 mobile" id="products">
-                                    Products
-                                </span>
-                            </a>
-                        </li>
-                        <li class="nav-item py-2 py-sm-0">
-                            <a href="users.php" class="nav-link">
-                                <i class="bi bi-person-circle"></i>
-                                <span class="d-none fs-6 ms-2 mobile" id="users">
-                                    Users
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="pb-2">
-                    <div class="nav flex-column justify-content-center align-items-center" id="sidebar2">
-                        <div class="nav-item py-2 py-sm-0">
-                            <a class="nav-link" href="logout.php">
-                                <i class="bi bi-box-arrow-left"></i>
-                                <span class="d-none fs-6 ms-2 mobile" id="logout">
-                                    Log out
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </nav> -->
             <div class="col justify-content-center p-0">
-                <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between px-md-4 px-3">
-                    <div class="navbar-brand">
-                        <span><i class="bi bi-list cursor" id="icon-toggle"></i></span>
-                    </div>
-                    <div>
-                        <ul class="nav align-items-center">
-                            <li class="nav-item mx-2">
-                                <a class="">
-                                    <i class="bi cursor" id="themeToggle"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item mx-2">
-                                <a href="#" class="">
-                                    <i class="bi bi-bell"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown mx-2">
-                                <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="https://github.com/mdo.png" alt="" width="35" height="35"
-                                        class="rounded-circle">
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end text-small shadow">
-                                    <li>
-                                        <div class="d-flex align-items-center px-3">
-                                            <div class="">
-                                                <img class="rounded-circle" src="https://github.com/mdo.png" width="35"
-                                                    height="35" alt="Image Description">
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <p class="mb-0 fw-bold"><small>
-                                                        <?php 
-                                                            $getUsername = "SELECT username FROM admin WHERE admin_id = '$admin_id'";
-                                                            $username = mysqli_query($conn, $getUsername);
-                                                            $row = mysqli_fetch_assoc($username);
-
-                                                            echo"<strong>". $row['username'] . "</strong>";
-                                                        ?>
-                                                    </small></p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"><small>Profile</small>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <small>Settings</small>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="logout.php"><small>Sign out</small></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </nav> -->
                 <main class="p-3">
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="container">
                             <form method="GET">
                                 <div class="input-group my-2">
                                     <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                                        placeholder="Search by user_id" aria-label="Search" aria-describedby="searchph">
+                                        placeholder="Search by user_id" aria-label="Search" aria-describedby="searchph" <?php echo "value = $search_value" ?>>
                                     <button class="input-group-text btn btn-secondary rounded-end-1" type="submit"
                                         id="searchph">
                                         <i class="bi bi-search"></i>
@@ -277,27 +130,27 @@
                                             mysqli_close($conn);
 
                                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                            <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
-                                            <span aria-hidden="true">&laquo First</span>
-                                        </a>
-                                    </li>
-                                    <?php 
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
+                                                <span aria-hidden="true">&laquo First</span>
+                                            </a>
+                                        </li>
+                                        <?php 
                                         for($x=1;$x<=$total_page;$x++){
                                             ?>
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                            <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
-                                        </a>
-                                    </li>
-                                    <?php
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                                            </a>
+                                        </li>
+                                        <?php
                                         }
                                     ?>
                                     <li class="page-item">
@@ -308,14 +161,16 @@
                                     </li>
                                 </ul>
                             </nav>
-                            <form action="transactions-add.php" method="POST">
+                            <!-- <form action="transactions-add.php" method="POST">
                                 <button class="btn btn-primary btn-sm" type="submit">Checkout</button>
-                            </form>
+                            </form> -->
                         </div>
-                    </div>
-                </main>
-            </div>
+                    </main>
+                </div>
         </div>
+        <?php
+        include_once 'offcanvas-admin.inc.php';
+    ?>
 </body>
 
 </html>

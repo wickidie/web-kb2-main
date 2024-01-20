@@ -86,7 +86,7 @@
                                             <tbody>
                                                 <?php
                                             $items_per_page = 10;
-                                            $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id ORDER BY t.transaction_id DESC";
+                                            $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, u.address, payment FROM transactions t JOIN users u ON t.user_id = u.user_id ORDER BY t.transaction_id DESC";
                                             $result = mysqli_query($conn, $sql);
                                             $rows = mysqli_num_rows($result);
                                             $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -94,17 +94,17 @@
                                             
                                             if (isset($_GET['search'])) {
                                                 if (!empty($_GET['search'])) {
-                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page ORDER BY t.transaction_id DESC";
+                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, u.address, payment FROM transactions t JOIN users u ON t.user_id = u.user_id where transaction_date like '%$search_value%' LIMIT $offset, $items_per_page ORDER BY t.transaction_id DESC";
                                                     $result = mysqli_query($conn, $sql);
-                                                    $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%' ORDER BY t.transaction_id DESC";
+                                                    $sql = "SELECT * FROM transactions where transaction_date like '%$search_value%' ORDER BY transaction_id DESC";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
-                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page ORDER BY t.transaction_id DESC";
+                                                    $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, u.address, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 LIMIT $offset, $items_per_page ORDER BY t.transaction_id DESC";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
-                                                $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 
+                                                $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, u.address, payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE 1 
                                                 ORDER BY t.transaction_id DESC
                                                 LIMIT $offset, $items_per_page";
                                                 $result = mysqli_query($conn, $sql);
@@ -126,7 +126,7 @@
                                                     echo "<td>" . $row['username'] . "</td>";
                                                     echo "<td>";
                                                     if (empty($row['payment'])) {
-                                                        echo "<a class='btn btn-danger btn-sm'>Call Debt Collector</button>";
+                                                        echo "<a href='https://wa.me/6281993669316?text=Hello sir, the username (" . $row['username'] . ") hasn`t pay their (IDR " . number_format($row['transaction_total'], 2, ',', '.') . ") bill yet. Please raid their house on this location (" . $row['address'] . "). Good luck and Be carefull o7.' class='btn btn-danger btn-sm'>Call Debt Collector</button>";
                                                     }else{
                                                         echo "<a href='payment.php?transaction_id=" . $row['transaction_id'] . "' class='btn btn-primary btn-sm'>Payment</button>";
                                                     }
@@ -139,6 +139,8 @@
                                                     <option value='Valid'>Valid</option>
                                                     <option value='Invalid'>Invalid</option>
                                                     <option value='Pending'>Pending</option>
+                                                    <option value='Delivering'>Delivering</option>
+                                                    <option value='Received'>Received</option>
                                                     </select>";
                                                     echo "<input type='hidden' name='transaction_id' value='" . $row['transaction_id'] . "'/>
                                                     <button class='btn btn-primary btn-sm' type='submit'>Update status</button>
@@ -194,74 +196,19 @@
                 </article>
             </main>
         </div>
-
-        <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample"
-            aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header pt-4">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                    <div class="d-flex ms-2 justify-content-center align-items-center">
-                        <img src="../asset/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-                        <span class="fs-4 ms-2 align-bottom"> Tokaku </span>
-                    </div>
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="nav flex-column justify-content-center">
-                    <li class="nav-item py-2 py-sm-0">
-                        <a href="#" class="nav-link">
-                            <i class="bi bi-house"></i>
-                            <span class="fs-6 ms-2"> Dashboard </span>
-                        </a>
-                    </li>
-                    <li class="nav-item py-2 py-sm-0 align-items-center">
-                        <a href="#" class="nav-link">
-                            <i class="bi bi-table"></i>
-                            <span class="fs-6 ms-2 collapsed" id="transactions" data-bs-toggle="collapse"
-                                data-bs-target="#dashboard-collapse"> Transactions </span>
-                        </a>
-                        <div class="collapse" id="dashboard-collapse">
-                            <ul class="btn-toggle-nav list-unstyled align-items-center">
-                                <li class="py-2 ms-3">
-                                    <a href="transactions.php">
-                                        <i class="bi bi-card-text"></i>
-                                        <small>Transactions</small>
-                                    </a>
-                                </li>
-                                <li class="py-2 ms-3">
-                                    <a href="transaction-details.php">
-                                        <i class="bi bi-card-list"></i>
-                                        <small>Transactions details</small>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item py-2 py-sm-0">
-                        <a href="products.php" class="nav-link">
-                            <i class="bi bi-grid"></i>
-                            <span class="fs-6 ms-2"> Products </span>
-                        </a>
-                    </li>
-                    <li class="nav-item py-2 py-sm-0">
-                        <a href="users.php" class="nav-link">
-                            <i class="bi bi-person-circle"></i>
-                            <span class="fs-6 ms-2"> Users </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </div>
+    <?php
+        include_once 'offcanvas-admin.inc.php';
+    ?>
 </body>
 <!-- Payment modal -->
 <div class="modal modal-fade" id="PaymentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="margin-top: 0px;">
         <div class="modal-content">
-        <div class="modal-body" id="exampleModalLabel">
-            <img src="../../asset/img/payment/Pepe_Business_flip.png" alt="">
-        </div>            
-        <button id="close" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close" type="submit"></button>
+            <div class="modal-body" id="exampleModalLabel">
+                <img src="../../asset/img/payment/Pepe_Business_flip.png" alt="">
+            </div>
+            <button id="close" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close" type="submit"></button>
         </div>
     </div>
 </div>
@@ -277,19 +224,20 @@ var span = document.getElementById("close");
 
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
-  modal.style.display = "block";
+    modal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
-  modal.style.display = "none";
+    modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }
 </script>
+
 </html>

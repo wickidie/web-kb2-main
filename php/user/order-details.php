@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Order Status</title>
+    <title>Order Detail</title>
     <link rel="icon" href="../../asset/img/icon/tokaku_logo.svg" type="image/x-icon" />
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
@@ -79,20 +79,28 @@
               if (isset($_GET['search'])) {
                   if (!empty($_GET['search'])) {
                       $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                      JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%' ORDER BY transaction_id DESC  LIMIT $offset, $items_per_page";
+                      INNER JOIN products p ON td.product_id = p.product_id 
+                      INNER JOIN transactions t ON td.transaction_id = t.transaction_id
+                      WHERE transaction_detail_id like '%$search_value%' AND user_id = $user_id ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
                       $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                      JOIN products p ON td.product_id = p.product_id where transaction_detail_id like '%$search_value%' ORDER BY transaction_id DESC ";
+                      INNER JOIN products p ON td.product_id = p.product_id 
+                      INNER JOIN transactions t ON td.transaction_id = t.transaction_id
+                      WHERE transaction_detail_id like '%$search_value%' AND user_id = $user_id ORDER BY transaction_id DESC";
                       $result_total = mysqli_query($conn, $sql);
                       $rows = mysqli_num_rows($result_total);
                   }else{
                       $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                      JOIN products p ON td.product_id = p.product_id WHERE 1 ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
+                      INNER JOIN products p ON td.product_id = p.product_id 
+                      INNER JOIN transactions t ON td.transaction_id = t.transaction_id
+                      WHERE transaction_detail_id like '%$search_value%' AND user_id = $user_id ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                       $result = mysqli_query($conn, $sql);
                   }
               }else{
                   $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
-                  JOIN products p ON td.product_id = p.product_id WHERE 1 ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
+                  INNER JOIN products p ON td.product_id = p.product_id 
+                INNER JOIN transactions t ON td.transaction_id = t.transaction_id
+                WHERE transaction_detail_id like '%$search_value%' AND user_id = $user_id ORDER BY transaction_id DESC LIMIT $offset, $items_per_page";
                   $result = mysqli_query($conn, $sql);
               }
               

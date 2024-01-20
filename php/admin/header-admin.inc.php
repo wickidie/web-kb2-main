@@ -50,14 +50,6 @@
                                 <hr class='dropdown-divider' />
                             </li>
                             <li>
-                                <a class='dropdown-item' href='#'><small>Profile</small> </a>
-                            </li>
-                            <li>
-                                <a class='dropdown-item' href='#'>
-                                    <small>Settings</small>
-                                </a>
-                            </li>
-                            <li>
                                 <hr class='dropdown-divider' />
                             </li>
                             <li>
