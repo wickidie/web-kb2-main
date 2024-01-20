@@ -19,7 +19,7 @@
     $result = mysqli_query($conn, $sql);
     $product_img = mysqli_fetch_assoc($result);
     
-    $img_location = "../asset/product/";
+    $img_location = "../../asset/img/product/";
     $old_image = $img_location . $product_img['product_img'];
 
     if (unlink($old_image)) {
