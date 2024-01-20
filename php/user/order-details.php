@@ -39,28 +39,19 @@
     ?>
 
     <main class="container p-3 mb-auto">
-        <article class="rounded-3">
-            <section class="container-fluid">
-                <div class="d-flex justify-content-between align-items-center">
-                    <form method="GET">
-                        <div class="input-group my-2">
-                            <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                                placeholder="Search for transaction_detail_id" aria-label="Search"
-                                aria-describedby="searchph" <?php echo "value = $search_value" ?>>
-                            <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
-                                id="searchph">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                    <div class="">
-                        <a href="products-form.php" class="btn btn-sm btn-outline-secondary">
-                            <i class="bi bi-printer icon"></i>
-                            <span class="d-none d-sm-inline-block"> Print invoice</span>
-                        </a>
+        <article class="card rounded-3">
+            <section class="card-body">
+                <form method="GET" class="w-100">
+                    <div class="input-group my-2">
+                        <input type="text" class="form-control form-control-sm" id="myInput" name="search"
+                            placeholder="Search for transaction_detail_id" aria-label="Search"
+                            aria-describedby="searchph" <?php echo "value = $search_value" ?>>
+                        <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
+                            id="searchph">
+                            <i class="bi bi-search"></i>
+                        </button>
                     </div>
-                </div>
-
+                </form>
                 <div class="row justify-content-center align-items-center">
                     <div class="table-responsive">
                         <table class="table table-hover table-striped" id="myTable">
