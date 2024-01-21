@@ -38,35 +38,42 @@
     include_once 'header.inc.php';
     ?>
 
-    <main class="container p-3 mb-auto">
-        <article class="card rounded-3">
-            <section class="card-body">
-                <form method="GET" class="w-100">
-                    <div class="input-group my-2">
-                        <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                            placeholder="Search for transaction_detail_id" aria-label="Search"
-                            aria-describedby="searchph" <?php echo "value = $search_value" ?>>
-                        <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
-                            id="searchph">
-                            <i class="bi bi-search"></i>
-                        </button>
+    <main class="container-fluid p-3 mb-auto">
+        <article>
+            <section class="container">
+                <div>
+                    <p class="fs-2 fw-bold">Order details<small class="fw-light"></small></p>
+                </div>
+                <div class="card shadow p-0">
+                    <div class="card-header">
+                        <form method="GET" class="w-100">
+                            <div class="input-group my-2">
+                                <input type="text" class="form-control form-control-sm" id="myInput" name="search"
+                                    placeholder="Search for transaction_detail_id" aria-label="Search"
+                                    aria-describedby="searchph" <?php echo "value = $search_value" ?>>
+                                <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
+                                    id="searchph">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </form>
-                <div class="row justify-content-center align-items-center">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped" id="myTable">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Transaction Id</th>
-                                    <th scope="col">Transaction Detail Id</th>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Product Price</th>
-                                    <th scope="col">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+                    <div class="card-body">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Transaction Id</th>
+                                            <th scope="col">Transaction Detail Id</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Product Price</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
               $items_per_page = 10;
               $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
                       JOIN products p ON td.product_id = p.product_id";
@@ -126,36 +133,41 @@
               }
 
             ?>
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center m-0">
-                            <li class="page-item">
-                                <a class="page-link"
-                                    <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
-                                    <span aria-hidden="true">&laquo</span>
-                                </a>
-                            </li>
-                            <?php 
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center m-0">
+                                <li class="page-item">
+                                    <a class="page-link"
+                                        <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
+                                        <span aria-hidden="true">&laquo</span>
+                                    </a>
+                                </li>
+                                <?php 
             for($x=1;$x<=$total_page;$x++){
                 ?>
-                            <li class="page-item">
-                                <a class="page-link"
-                                    <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
-                                </a>
-                            </li>
-                            <?php
+                                <li class="page-item">
+                                    <a class="page-link"
+                                        <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                                    </a>
+                                </li>
+                                <?php
             }
         ?>
-                            <li class="page-item">
-                                <a class="page-link"
-                                    <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
-                                    <span aria-hidden="true">&raquo</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                        <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
+                                        <span aria-hidden="true">&raquo</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
             </section>
         </article>
     </main>

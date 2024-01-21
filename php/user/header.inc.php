@@ -3,7 +3,8 @@
     $user_id = $_SESSION['user_id'] ?? null;
     $sql = "SELECT * FROM users WHERE user_id = '$user_id'";
     $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);    
+    $row = mysqli_fetch_assoc($result);   
+    $user_id = $row['user_id'] ?? null; 
     $username = $row['username'] ?? 'sign in';
     $email = $row['email'] ?? 'sign in';
     echo '<header class="container-fluid p-3">
@@ -20,7 +21,7 @@
       </div>
       <div class="d-flex py-1 px-2 align-items-center">
         <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-        <span class="fs-4 ms-2 align-bottom logo"> Tokaku </span>
+        <a href="landing-page.php" class="fs-4 ms-2 align-bottom logo"> Tokaku </a>
       </div>
       <div class="d-none d-md-inline-block">
         <ul class="nav align-items-center">
@@ -62,7 +63,7 @@
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <a class="dropdown-item" href="profile.php"><small>Profile</small></a>
+                <a class="dropdown-item" href="profile.php?user_id='. $user_id.'"><small>Profile</small></a>
               </li>
               <li>
                 <a class="dropdown-item" href="#" id="themeToggle"><small>Change Theme</small></a>

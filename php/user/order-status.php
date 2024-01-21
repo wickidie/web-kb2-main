@@ -33,42 +33,50 @@
     </script>
 </head>
 
-<body class="bg-img background">
+<body>
     <?php 
     include_once 'header.inc.php';
     ?>
 
-    <main class="container p-3 mb-auto">
-        <article class="rounded-3">
+    <main class="container-fluid p-3 mb-auto">
+        <article>
             <section class="container">
-                <form method="GET" class="w-100">
-                    <div class="input-group my-2">
-                        <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                            placeholder="Search for transaction_id" aria-label="Search" aria-describedby="searchph"
-                            <?php echo "value = $search_value" ?>>
-                        <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
-                            id="searchph">
-                            <i class="bi bi-search"></i>
-                        </button>
+                <div>
+                    <p class="fs-2 fw-bold">Order status <small class="fw-light"></small></p>
+                </div>
+                <div class="card shadow p-0">
+                    <div class="card-header">
+                        <form method="GET" class="w-100">
+                            <div class="input-group my-2">
+                                <input type="text" class="form-control form-control-sm" id="myInput" name="search"
+                                    placeholder="Search for transaction_id" aria-label="Search"
+                                    aria-describedby="searchph" <?php echo "value = $search_value" ?>>
+                                <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
+                                    id="searchph">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </form>
-                <div class="row justify-content-center align-items-center">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped" id="myTable">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Transaction ID</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Transaction Total</th>
-                                    <!-- <th scope="col">Username</th> -->
-                                    <th scope="col">Time Left</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Payment</th>
-                                </tr>
-                            </thead>
-                            <tbody>
 
-                                <?php
+                    <div class="card-body">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Transaction ID</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Transaction Total</th>
+                                            <!-- <th scope="col">Username</th> -->
+                                            <th scope="col">Time Left</th>
+                                            <th scope="col">Status</th>
+                                            <th class="" scope="col">Payment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php
               $user_id = $_SESSION['user_id'];
               $items_per_page = 10;
               $sql = "SELECT t.transaction_id, t.transaction_date, t.transaction_total, t.status, t.user_id, u.username, t.payment FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE t.user_id = $user_id";
@@ -147,9 +155,9 @@
                                                     }else{
                                                         if ($row['status'] != 'Invalid' && $row['status'] != 'Pending') {
                                                             echo '<div class="row mb-3">
-                                                            <a href="payment.php?transaction_id=' . $row['transaction_id'] . '" class="btn btn-primary btn-sm">' . $row['payment'] . '</button>';
+                                                            <div class="col"><a href="payment.php?transaction_id=' . $row['transaction_id'] . '" class="btn btn-primary btn-sm">' . $row['payment'] . '</button></div>';
                                                             if ($row['status'] == 'Delivering') {
-                                                                echo "<a href='order-received.php?transaction_id=" . $row['transaction_id'] . "&status=Received" . "' class='btn btn-warning btn-sm mt-3'>I Received My Order</button>";
+                                                                echo "<div class='col'><a href='order-received.php?transaction_id=" . $row['transaction_id'] . "&status=Received" . "' class='btn btn-warning btn-sm'>I Received My Order</button></div>";
                                                             }
                                                             echo '</div>';
                                                         }else{
@@ -193,37 +201,44 @@
             }
 
             ?>
-                                </form>
-                            </tbody>
-                        </table>
+                                        </form>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
                     </div>
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center m-0">
-                            <li class="page-item">
-                                <a class="page-link"
-                                    <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
-                                    <span aria-hidden="true">&laquo</span>
-                                </a>
-                            </li>
-                            <?php 
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center m-0">
+                                <li class="page-item">
+                                    <a class="page-link"
+                                        <?php if($current_page > 1){ echo "href='products.php?search=$search_value&?page=1'"; } ?>>
+                                        <span aria-hidden="true">&laquo</span>
+                                    </a>
+                                </li>
+                                <?php 
             for($x=1;$x<=$total_page;$x++){
                 ?>
-                            <li class="page-item">
-                                <a class="page-link"
-                                    <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
-                                </a>
-                            </li>
-                            <?php
+                                <li class="page-item">
+                                    <a class="page-link"
+                                        <?php echo "href='?search=$search_value&page=$x'"?>><?php echo $x; ?>
+                                    </a>
+                                </li>
+                                <?php
             }
         ?>
-                            <li class="page-item">
-                                <a class="page-link"
-                                    <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
-                                    <span aria-hidden="true">&raquo</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                        <?php if($current_page < $total_page) { echo "href='products.php??search=$search_value&page=$total_page'"; } ?>>
+                                        <span aria-hidden="true">&raquo</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
             </section>
         </article>
     </main>
