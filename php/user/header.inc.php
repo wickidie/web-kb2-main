@@ -62,6 +62,9 @@
                 <hr class="dropdown-divider" />
               </li>
               <li>
+                <a class="dropdown-item" href="profile.php"><small>Profile</small></a>
+              </li>
+              <li>
                 <a class="dropdown-item" href="#" id="themeToggle"><small>Change Theme</small></a>
               </li>
               <li>
