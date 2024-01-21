@@ -1,7 +1,0 @@
--- louis' ver
-
-INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES (100, 32123, (SELECT transaction_id FROM transactions WHERE transaction_id = 2), (SELECT product_id FROM products WHERE product_id = 1));
-INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES (100, 32123, (SELECT transaction_id FROM transactions WHERE transaction_id = 3), (SELECT product_id FROM products WHERE product_id = 2));
-INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES (100, 32123, (SELECT transaction_id FROM transactions WHERE transaction_id = 4), (SELECT product_id FROM products WHERE product_id = 3));
-INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES (100, 32123, (SELECT transaction_id FROM transactions WHERE transaction_id = 5), (SELECT product_id FROM products WHERE product_id = 3));
-INSERT INTO `transaction_details`(`quantity`, `product_price`, `transaction_id`, `product_id`) VALUES (100, 32123, (SELECT transaction_id FROM transactions WHERE transaction_id = 6), (SELECT product_id FROM products WHERE product_id = 3));

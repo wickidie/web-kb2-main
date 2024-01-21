@@ -188,28 +188,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xl-6">
-                                    <div class="card mb-4">
-                                        <div class="card-header">
-                                            <i class="bi bi-graph-up me-1"></i>
-                                            Product sold
-                                        </div>
-                                        <div class="card-body"><canvas id="myAreaChart" width="100%"
-                                                height="40"></canvas></div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="card mb-4">
-                                        <div class="card-header">
-                                            <i class="bi bi-bar-chart me-1"></i>
-                                            Top Selling Product
-                                        </div>
-                                        <div class="card-body"><canvas id="myBarChart" width="100%"
-                                                height="40"></canvas></div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </section>
                     <section class="d-flex flex-column justify-content-center align-items-center">
@@ -224,18 +203,7 @@
                                         <div class="card-body pb-0">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="col-12 col-md-12">
-                                                    <form method="GET">
-                                                        <div class="input-group my-2">
-                                                            <input type="text" class="form-control form-control-sm"
-                                                                id="myInput" name="search" placeholder="Search"
-                                                                aria-label="Search" aria-describedby="searchph" />
-                                                            <button
-                                                                class="input-group-text btn btn-secondary rounded-end-1"
-                                                                type="submit" id="searchph">
-                                                                <i class="bi bi-search"></i>
-                                                            </button>
-                                                        </div>
-                                                    </form>
+                                                    
                                                 </div>
                                                 <!-- <div class="col-3 col-xs-1 col-sm-2 col-md-1">
                         <a href="products-form.php" class="btn btn-secondary">Export</a>
@@ -255,7 +223,7 @@
                                                     <tbody>
                                                         <?php
 
-                                                            $sql = "SELECT * FROM products ORDER BY sold DESC";
+                                                            $sql = "SELECT * FROM products ORDER BY sold DESC LIMIT 5";
                                                             $result = mysqli_query($conn, $sql);
 
                                                             if (mysqli_num_rows($result) > 0) {
@@ -291,27 +259,6 @@
                                             <i class="bi bi-person-lines-fill me-1"></i>
                                             Top Buyers
                                         </div>
-                                        <div class="card-body pb-0">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="col-12 col-md-12">
-                                                    <form method="GET">
-                                                        <div class="input-group my-2">
-                                                            <input type="text" class="form-control form-control-sm"
-                                                                id="myInput" name="search" placeholder="Search"
-                                                                aria-label="Search" aria-describedby="searchph" />
-                                                            <button
-                                                                class="input-group-text btn btn-secondary rounded-end-1"
-                                                                type="submit" id="searchph">
-                                                                <i class="bi bi-search"></i>
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <!-- <div class="col-3 col-xs-1 col-sm-2 col-md-1">
-                        <a href="products-form.php" class="btn btn-secondary">Export</a>
-                      </div> -->
-                                            </div>
-                                        </div>
                                         <div class="card-body pt-0">
                                             <div class="table-responsive">
                                                 <table id="example" class="table table-striped">
@@ -326,7 +273,7 @@
                                                     <tbody>
                                                     <?php
 
-                                                        $sql = "SELECT * FROM users ORDER BY purchase DESC";
+                                                        $sql = "SELECT * FROM users ORDER BY purchase DESC LIMIT 5";
                                                         $result = mysqli_query($conn, $sql);
 
                                                         if (mysqli_num_rows($result) > 0) {
@@ -359,115 +306,6 @@
                                 </div>
                             </div>
                             <div class="card shadow">
-                                <div class="card-header">
-                                    <i class="bi bi-table me-1"></i>
-                                    Tabel alternatif kalau ga mau pakai yg tabel kiri kanan
-                                </div>
-                                <div class="card-body pb-0">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="col-12 col-md-12">
-                                            <form method="GET">
-                                                <div class="input-group my-2">
-                                                    <input type="text" class="form-control form-control-sm" id="myInput"
-                                                        name="search" placeholder="Search" aria-label="Search"
-                                                        aria-describedby="searchph" />
-                                                    <button class="input-group-text btn btn-secondary rounded-end-1"
-                                                        type="submit" id="searchph">
-                                                        <i class="bi bi-search"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <!-- <div class="col-3 col-xs-1 col-sm-2 col-md-1">
-                        <a href="products-form.php" class="btn btn-secondary">Export</a>
-                      </div> -->
-                                    </div>
-                                </div>
-                                <div class="card-body pt-0">
-                                    <div class="table-responsive">
-                                        <table id="example" class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Position</th>
-                                                    <th>Office</th>
-                                                    <th>Age</th>
-                                                    <th>Start date</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Herrod Chandler</td>
-                                                    <td>Sales Assistant</td>
-                                                    <td>San Francisco</td>
-                                                    <td>59</td>
-                                                    <td>2012-08-06</td>
-                                                    <td>$137,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Hermione Butler</td>
-                                                    <td>Regional Director</td>
-                                                    <td>London</td>
-                                                    <td>47</td>
-                                                    <td>2011-03-21</td>
-                                                    <td>$356,250</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Lael Greer</td>
-                                                    <td>Systems Administrator</td>
-                                                    <td>London</td>
-                                                    <td>21</td>
-                                                    <td>2009-02-27</td>
-                                                    <td>$103,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Jonas Alexander</td>
-                                                    <td>Developer</td>
-                                                    <td>San Francisco</td>
-                                                    <td>30</td>
-                                                    <td>2010-07-14</td>
-                                                    <td>$86,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Shad Decker</td>
-                                                    <td>Regional Director</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>51</td>
-                                                    <td>2008-11-13</td>
-                                                    <td>$183,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Michael Bruce</td>
-                                                    <td>Javascript Developer</td>
-                                                    <td>Singapore</td>
-                                                    <td>29</td>
-                                                    <td>2011-06-27</td>
-                                                    <td>$183,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Donna Snider</td>
-                                                    <td>Customer Support</td>
-                                                    <td>New York</td>
-                                                    <td>27</td>
-                                                    <td>2011-01-25</td>
-                                                    <td>$112,000</td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Position</th>
-                                                    <th>Office</th>
-                                                    <th>Age</th>
-                                                    <th>Start date</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </section>
                 </article>

@@ -47,7 +47,7 @@
         <div class="d-flex flex-column justify-content-center align-items-center h-75">
             <img src="../../asset/img/icon/tokaku_logo.svg" class="mb-3" alt="" />
             <h2><b>Login User</b></h2>
-            <form class="needs-validation w-25" action="/KB2/php/user/users-login.php" method="post" novalidate>
+            <form class="needs-validation w-25" action="users-login.php" method="post" novalidate>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="usernameph">
                         <i class="bi bi-person-circle"></i>

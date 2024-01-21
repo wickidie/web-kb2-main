@@ -100,91 +100,96 @@
               if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
                   $formattedDate = date('d-m-Y', strtotime($row['transaction_date']));
-                                                    $id =  $row['transaction_id'];
-                                                    $time = $row['transaction_date'];
-                                                    $timeVal = "SELECT TIMEDIFF(CURRENT_TIMESTAMP, '$time') AS time_diff";
-                                                    $res = mysqli_query($conn, $timeVal);
-                                                    $a = "";
-                                                    while($x = mysqli_fetch_assoc($res)) {
-                                                        $a = $x['time_diff'];
-                                                        if ((int)substr($a, 0, 2) >= 48) {
-                                                            $updateStatus = "UPDATE `transactions` SET `status`='Invalid' WHERE transaction_id = $id";
-                                                            mysqli_query($conn, $updateStatus);
-                                                        }
-                                                    };
+                    $id =  $row['transaction_id'];
+                    $time = $row['transaction_date'];
+                    $timeVal = "SELECT TIMEDIFF(CURRENT_TIMESTAMP, '$time') AS time_diff";
+                    $res = mysqli_query($conn, $timeVal);
+                    $a = "";
+                    while($x = mysqli_fetch_assoc($res)) {
+                        $a = $x['time_diff'];
+                        if ((int)substr($a, 0, 2) >= 48) {
+                            $updateStatus = "UPDATE `transactions` SET `status`='Invalid' WHERE transaction_id = $id";
+                            mysqli_query($conn, $updateStatus);
+                        }
+                    };
 
-                                                    echo "<tr>";
-                                                    echo "<td>" . $row['transaction_id'] . "</td>";
-                                                    echo "<td>" . $formattedDate . "</td>";
-                                                    echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
-                                                    // echo "<td>" . $row['username'] . "</td>";
-                                                    echo "<td>" . $a . "48:00:00</td>";
-                                                    echo "<td>";
-                                                    if ($row['status'] == 'Pending' || $row['status'] == 'Invalid') {
-                                                        echo '<div class=">
-                                                        <form action="transactions-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">'
-                                                        . $row['status'] . 
-                                                        '<button type="submit" class="btn btn-danger btn-sm ms-3"><i class="bi bi-x-lg"></i></button>
-                                                        </form></div>';
-                                                    }else{
-                                                        echo '<div class="3">
-                                                        <form action="invoice.php" method="POST">'
-                                                        . $row['status'] .
-                                                        '<input class="form-control form-control-sm d-none" name="transaction_id" id="transaction_id" value="' . $row['transaction_id'] . '">
-                                                        <button type="submit" class="btn btn-success"><i class="bi bi-printer   "></i></button>
-                                                        </form>
-                                                        </div>';
-                                                    }
-                                                    echo "</td>";
-                                                    echo "<td>";
-                                                    if (empty($row['payment'])) {
-                                                        echo '<form action="payment-add.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">';
-                                                        echo '<div class="row mb-3">';
-                                                        echo '<div class="col-auto"><input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required></div>';
-                                                        echo '<div class="col-auto"><button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-upload"></i></button></div>';
-                                                        echo '</div>';
-                                                        echo '</form>';
-                                                    }else{
-                                                        if ($row['status'] != 'Invalid' && $row['status'] != 'Pending') {
-                                                            echo '<div class="row mb-3">
-                                                            <a href="payment.php?transaction_id=' . $row['transaction_id'] . '" class="btn btn-primary btn-sm">' . $row['payment'] . '</button>';
-                                                            if ($row['status'] == 'Delivering') {
-                                                                echo "<a href='order-received.php?transaction_id=" . $row['transaction_id'] . "&status=Received" . "' class='btn btn-warning btn-sm mt-3'>I Received My Order</button>";
-                                                            }
-                                                            echo '</div>';
-                                                        }else{
-                                                            // echo '<div class="row mb-3">
-                                                            // <form action="payment-update.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">
-                                                            // <div class="col mb-3">
-                                                            // <input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required>
-                                                            // <button type="submit" class="btn btn-warning">Update</button></div></form>
-                                                            // <form action="payment-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">
-                                                            // <div class="col mb-3">
-                                                            // <button type="submit" class="btn btn-danger">Delete</button>
-                                                            // </div></form>';
-                                                            echo '
-                                                            <div class="mb-2"><a href="payment.php?transaction_id=' . $row["transaction_id"] . '" class="btn btn-primary btn-sm"><span class="text-wrap">' . $row["payment"] . '</span></a></div>
-                                                            <div class="row">
-                                                            <div class="col-auto">
-                                                              <form action="payment-update.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">
-                                                                <div class="row mb-3">
-                                                                  <div class="col"><input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required /></div>
-                                                                  <div class="col-auto"><button type="submit" class="btn btn-warning btn-sm"><i class="bi bi-arrow-clockwise"></i></button></div>
-                                                                </div>
-                                                              </form>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                              <form action="payment-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">
-                                                                <div class="">
-                                                                  <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                                                                </div>
-                                                              </form>
-                                                            </div>
-                                                          </div>';
-                                                        }
-                                                    }
-                                                    echo "</td>";
-                                                    echo "<tr>";
+                    echo "<tr>";
+                    echo "<td>" . $row['transaction_id'] . "</td>";
+                    echo "<td>" . $formattedDate . "</td>";
+                    echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
+                    // echo "<td>" . $row['username'] . "</td>";
+                    if ($row['status'] == 'Pending' || $row['status'] == 'Invalid') {
+                        echo "<td>" . $a . "/48:00:00</td>";
+                    }else{
+                        echo "<td>None</td>";
+
+                    }
+                    echo "<td>";
+                    if ($row['status'] == 'Pending' || $row['status'] == 'Invalid') {
+                        echo '
+                        <form action="transactions-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">'
+                        . $row['status'] . 
+                        '<button type="submit" class="btn btn-danger btn-sm ms-3"><i class="bi bi-x-lg"></i></button>
+                        </form></div>';
+                    }else{
+                        echo '<div class="3">
+                        <form action="invoice.php" method="POST">'
+                        . $row['status'] .
+                        '<input class="form-control form-control-sm d-none" name="transaction_id" id="transaction_id" value="' . $row['transaction_id'] . '">
+                        <button type="submit" class="btn btn-success"><i class="bi bi-printer   "></i></button>
+                        </form>
+                        </div>';
+                    }
+                    echo "</td>";
+                    echo "<td>";
+                    if (empty($row['payment'])) {
+                        echo '<form action="payment-add.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">';
+                        echo '<div class="row mb-3">';
+                        echo '<div class="col-auto"><input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required></div>';
+                        echo '<div class="col-auto"><button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-upload"></i></button></div>';
+                        echo '</div>';
+                        echo '</form>';
+                    }else{
+                        if ($row['status'] != 'Invalid' && $row['status'] != 'Pending') {
+                            echo '<div class="row mb-3">
+                            <a href="payment.php?transaction_id=' . $row['transaction_id'] . '" class="btn btn-primary btn-sm">' . $row['payment'] . '</button>';
+                            if ($row['status'] == 'Delivering') {
+                                echo "<a href='order-received.php?transaction_id=" . $row['transaction_id'] . "&status=Received" . "' class='btn btn-warning btn-sm mt-3'>I Received My Order</button>";
+                            }
+                            echo '</div>';
+                        }else{
+                            // echo '<div class="row mb-3">
+                            // <form action="payment-update.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">
+                            // <div class="col mb-3">
+                            // <input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required>
+                            // <button type="submit" class="btn btn-warning">Update</button></div></form>
+                            // <form action="payment-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">
+                            // <div class="col mb-3">
+                            // <button type="submit" class="btn btn-danger">Delete</button>
+                            // </div></form>';
+                            echo '
+                            <div class="mb-2"><a href="payment.php?transaction_id=' . $row["transaction_id"] . '" class="btn btn-primary btn-sm"><span class="text-wrap">' . $row["payment"] . '</span></a></div>
+                            <div class="row">
+                            <div class="col-auto">
+                                <form action="payment-update.php?transaction_id=' . $row['transaction_id'] . '" method="POST" enctype="multipart/form-data">
+                                <div class="row mb-3">
+                                    <div class="col"><input class="form-control form-control-sm" id="image" type="file" name="image" placeholder="Upload media" required /></div>
+                                    <div class="col-auto"><button type="submit" class="btn btn-warning btn-sm"><i class="bi bi-arrow-clockwise"></i></button></div>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="col-auto">
+                                <form action="payment-delete.php?transaction_id=' . $row['transaction_id'] . '" method="POST">
+                                <div class="">
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                </div>
+                                </form>
+                            </div>
+                            </div>';
+                        }
+                    }
+                    echo "</td>";
+                    echo "<tr>";
                 } 
             } else {
                 echo "<tr>";
