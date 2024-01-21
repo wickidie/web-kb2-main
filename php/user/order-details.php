@@ -39,34 +39,34 @@
     ?>
 
     <main class="container p-3 mb-auto">
-      <article class="rounded-3">
-        <section class="container">
-        <form method="GET" class="w-100">
-            <div class="input-group my-2">
-                <input type="text" class="form-control form-control-sm" id="myInput"
-                    name="search" placeholder="Search for transaction_detail_id" aria-label="Search"
-                    aria-describedby="searchph" <?php echo "value = $search_value" ?>>
-                <button class="input-group-text btn btn-outline-secondary rounded-end-1"
-                    type="submit" id="searchph">
-                    <i class="bi bi-search"></i>
-                </button>
-            </div>
-        </form>
-          <div class="row justify-content-center align-items-center">
-          <div class="table-responsive">
-                                        <table class="table table-hover table-striped" id="myTable">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">Transaction Id</th>
-                                                <th scope="col">Transaction Detail Id</th>
-                                                <th scope="col">Product Name</th>
-                                                <th scope="col">Quantity</th>
-                                                <th scope="col">Product Price</th>
-                                                <th scope="col">Total</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-            <?php
+        <article class="card rounded-3">
+            <section class="card-body">
+                <form method="GET" class="w-100">
+                    <div class="input-group my-2">
+                        <input type="text" class="form-control form-control-sm" id="myInput" name="search"
+                            placeholder="Search for transaction_detail_id" aria-label="Search"
+                            aria-describedby="searchph" <?php echo "value = $search_value" ?>>
+                        <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
+                            id="searchph">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="row justify-content-center align-items-center">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Transaction Id</th>
+                                    <th scope="col">Transaction Detail Id</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Product Price</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
               $items_per_page = 10;
               $sql = "SELECT td.transaction_detail_id, td.transaction_id, td.product_id, p.product_name, td.quantity, td.product_price FROM transaction_details td 
                       JOIN products p ON td.product_id = p.product_id";
@@ -158,16 +158,10 @@
                     </nav>
             </section>
         </article>
-        <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample"
-            aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header pt-4">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                    <div class="d-flex ms-2 justify-content-center align-items-center">
-                        <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-                        <span class="fs-4 ms-2 align-bottom"> Tokaku </span>
-                    </div>
-            </div>
     </main>
+    <?php 
+    include_once 'offcanvas.inc.php';
+    ?>
 
     <?php 
     include_once 'footer.inc.php';

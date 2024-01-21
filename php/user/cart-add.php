@@ -8,7 +8,7 @@
     if (mysqli_query($conn, $sql)) {
         echo "              
         <script type='text/javascript'>
-        alert('Product ID $product_id has been added to cart');
+        // alert('Product ID $product_id has been added to cart');
         location='products.php';
         </script>";
     } else {

@@ -52,7 +52,8 @@
                                 <!-- <li class="col text-center"><span>product_id</span></li> -->
                                 <li class="col text-center"><span>Product</span></li>
                                 <!-- <li class="col d-none d-md-inline-block"><span class="">Product Name</span></li> -->
-                                <li class="col d-none d-sm-inline-block text-center text-md-start"><span>Quantity</span></li>
+                                <li class="col d-none d-sm-inline-block text-center text-md-start"><span>Quantity</span>
+                                </li>
                                 <li class="col text-center text-md-start"><span>SubTotal</span></li>
                                 <!-- <li class="col d-none d-xl-inline-block"><span class="">Action</span> -->
                                 </li>
@@ -118,13 +119,13 @@
                     echo  "<a type='button' class='btn btn-danger w-100 d-inline-block d-xl-none mt-3'> Remove <i class='bi bi-trash'></i></a>";
                     echo "</div>";
                     echo  "</div>";
-                    echo "<hr />";
+                    echo "<hr/>";
                   }
                 }
   
               ?>
 
-                        <div class="card-footer text-center bg-transparent">
+                        <div class="card-footer border-top-0 text-center bg-transparent">
                             <ul class="row justify-content-between align-items-center list-unstyled m-0">
                                 <li class="col">
                                     <h4 class='total'>Total</h4>
@@ -150,7 +151,10 @@
     ?>
 
     <script>
-    let currency = new Intl.NumberFormat('en-US', {style: 'currency',currency: 'IDR',});
+    let currency = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'IDR',
+    });
     var price = document.getElementsByClassName('price');
     var quantity = document.getElementsByClassName('quantity');
     var sub_total = document.getElementsByClassName('sub_total');
