@@ -1,3 +1,11 @@
+<?php
+  session_start();
+  include_once 'db-connect.inc.php';
+  include_once 'web-kb2.inc.php';
+  $user_id = $_SESSION['user_id'] ?? null;
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" data-bs-target="dark">
 
@@ -29,9 +37,6 @@
 <body class="">
 
 <?php
-    include_once 'db-connect.inc.php';
-    session_start();
-    $user_id = $_SESSION['user_id'] ?? null;
     $username = "Guest";
     $email = "please login";
 
@@ -100,6 +105,9 @@
               </li>
               <li>
                 <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" href="profile.php?user_id='. $user_id.'"><small>Profile</small></a>
               </li>
               <li>
                 <a class="dropdown-item" href="#" id="themeToggle"><small>Change Theme</small></a>
