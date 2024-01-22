@@ -7,7 +7,7 @@
         echo "              
         <script type='text/javascript'>
         alert('You must login first');
-        location='login-form.php';
+        location='php/user/login-form.php';
         </script>";
     }
 ?>

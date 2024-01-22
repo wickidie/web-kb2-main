@@ -60,8 +60,21 @@
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
                                                     <div class=" fw-bold text-primary text-uppercase mb-1">
-                                                        Products sold</div>
-                                                    <div class="h5 mb-0 fw-bold">40 <small>products</small></div>
+                                                        Products Sold</div>
+                                                        <?php
+                                                            $sql = "SELECT sold FROM products";
+                                                            $result = mysqli_query($conn, $sql);
+                                                            $totalSold = 0;
+
+                                                            if (mysqli_num_rows($result) > 0) {
+                                                                while($row = mysqli_fetch_assoc($result)) {
+                                                                    $totalSold += $row['sold'];
+                                                                } 
+                                                            }
+    
+
+                                                        ?>
+                                                    <div class="h5 mb-0 fw-bold"><?php echo $totalSold?> <small>products</small></div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <i class="bi bi-cart-check text-secondary fs-1"></i>
@@ -79,8 +92,13 @@
                                                 <div class="col mr-2">
                                                     <div class=" fw-bold text-success text-uppercase mb-1">
                                                         Active Users</div>
-                                                    <div class="h5 mb-0 fw-bold ">10
-                                                        <small>users</small>
+                                                        <?php
+                                                            $sql = "SELECT * FROM users";
+                                                            $result = mysqli_query($conn, $sql);
+                                                            $rows = mysqli_num_rows($result);
+                                                            echo '<div class="h5 mb-0 fw-bold ">' . $rows . '
+                                                                <small>users</small>';
+                                                        ?>  
                                                     </div>
                                                 </div>
                                                 <div class="col-auto">
@@ -100,7 +118,18 @@
                                                     <div class="fw-bold text-info text-uppercase mb-1">
                                                         Earning
                                                     </div>
-                                                    <div class="h5 mb-0 fw-bold">$40,000 </div>
+                                                    <?php
+                                                            $sql = "SELECT transaction_total FROM transactions";
+                                                            $result = mysqli_query($conn, $sql);
+                                                            $earnings = 0;
+
+                                                            if (mysqli_num_rows($result) > 0) {
+                                                                while($row = mysqli_fetch_assoc($result)) {
+                                                                    $earnings += $row['transaction_total'];
+                                                                } 
+                                                            }
+                                                            echo '<div class="h5 mb-0 fw-bold">Rp' . number_format($earnings, 2, ',', '.') . '</div>';
+                                                        ?> 
                                                     <!-- <div class="row no-gutters align-items-center">
                                                         <div class="col-auto">
                                                             <div class="h5 mb-0 mr-3 fw-bold">50%
@@ -131,40 +160,35 @@
                                                 <div class="col mr-2">
                                                     <div class=" fw-bold text-warning text-uppercase mb-1">
                                                         Pending Transactions</div>
-                                                    <div class="h5 mb-0 fw-bold ">2
-                                                        <small>transaction</small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <i class="bi bi-envelope-exclamation text-secondary fs-1 "></i>
+
+                                                        <?php
+                                                            $sql = "SELECT status FROM transactions";
+                                                            $result = mysqli_query($conn, $sql);
+                                                            $pendingCount = 0;
+
+                                                            if (mysqli_num_rows($result) > 0) {
+                                                                while($row = mysqli_fetch_assoc($result)) {
+                                                                    if ($row['status'] == "Pending") {
+                                                                        $pendingCount++;
+                                                                    }
+                                                                } 
+                                                            }
+                                                            echo  '<div class="h5 mb-0 fw-bold ">' . $pendingCount . ' 
+                                                                <small>transaction</small>
+                                                            </div>';
+         
+                                                        ?> 
+                                                    <!-- <small class="text-success fw-semibold"><i
+                                                            class="bx bx-up-arrow-alt"></i> +72.80%</small> -->
                                                 </div>
                                             </div>
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xl-6">
-                                    <div class="card mb-4">
-                                        <div class="card-header">
-                                            <i class="bi bi-graph-up me-1"></i>
-                                            Product sold
-                                        </div>
-                                        <div class="card-body"><canvas id="myAreaChart" width="100%"
-                                                height="40"></canvas></div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="card mb-4">
-                                        <div class="card-header">
-                                            <i class="bi bi-bar-chart me-1"></i>
-                                            Top Selling Product
-                                        </div>
-                                        <div class="card-body"><canvas id="myBarChart" width="100%"
-                                                height="40"></canvas></div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </section>
                     <section class="d-flex flex-column justify-content-center align-items-center">
@@ -174,23 +198,12 @@
                                     <div class="card shadow">
                                         <div class="card-header">
                                             <i class="bi bi-bag-check me-1"></i>
-                                            Best Seller
+                                            Most Sales
                                         </div>
                                         <div class="card-body pb-0">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="col-12 col-md-12">
-                                                    <form method="GET">
-                                                        <div class="input-group my-2">
-                                                            <input type="text" class="form-control form-control-sm"
-                                                                id="myInput" name="search" placeholder="Search"
-                                                                aria-label="Search" aria-describedby="searchph" />
-                                                            <button
-                                                                class="input-group-text btn btn-secondary rounded-end-1"
-                                                                type="submit" id="searchph">
-                                                                <i class="bi bi-search"></i>
-                                                            </button>
-                                                        </div>
-                                                    </form>
+                                                    
                                                 </div>
                                                 <!-- <div class="col-3 col-xs-1 col-sm-2 col-md-1">
                         <a href="products-form.php" class="btn btn-secondary">Export</a>
@@ -202,73 +215,30 @@
                                                 <table id="example" class="table table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Position</th>
-                                                            <th>Office</th>
-                                                            <th>Age</th>
-                                                            <th>Start date</th>
-                                                            <th>Action</th>
+                                                            <th>Product Name</th>
+                                                            <th>Product Price</th>
+                                                            <th>Sold</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Herrod Chandler</td>
-                                                            <td>Sales Assistant</td>
-                                                            <td>San Francisco</td>
-                                                            <td>59</td>
-                                                            <td>2012-08-06</td>
-                                                            <td>$137,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Hermione Butler</td>
-                                                            <td>Regional Director</td>
-                                                            <td>London</td>
-                                                            <td>47</td>
-                                                            <td>2011-03-21</td>
-                                                            <td>$356,250</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Lael Greer</td>
-                                                            <td>Systems Administrator</td>
-                                                            <td>London</td>
-                                                            <td>21</td>
-                                                            <td>2009-02-27</td>
-                                                            <td>$103,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Jonas Alexander</td>
-                                                            <td>Developer</td>
-                                                            <td>San Francisco</td>
-                                                            <td>30</td>
-                                                            <td>2010-07-14</td>
-                                                            <td>$86,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Shad Decker</td>
-                                                            <td>Regional Director</td>
-                                                            <td>Edinburgh</td>
-                                                            <td>51</td>
-                                                            <td>2008-11-13</td>
-                                                            <td>$183,000</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Michael Bruce</td>
-                                                            <td>Javascript Developer</td>
-                                                            <td>Singapore</td>
-                                                            <td>29</td>
-                                                            <td>2011-06-27</td>
-                                                            <td>$183,000</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Donna Snider</td>
-                                                            <td>Customer Support</td>
-                                                            <td>New York</td>
-                                                            <td>27</td>
-                                                            <td>2011-01-25</td>
-                                                            <td>$112,000</td>
-                                                        </tr>
+                                                        <?php
+
+                                                            $sql = "SELECT * FROM products ORDER BY sold DESC LIMIT 5";
+                                                            $result = mysqli_query($conn, $sql);
+
+                                                            if (mysqli_num_rows($result) > 0) {
+                                                                while($row = mysqli_fetch_assoc($result)) {
+                                                                    echo "<tr>";
+                                                                    echo "<td>" . $row['product_name'] . "</td>";
+                                                                    echo "<td>Rp" . number_format($row['product_price'], 2, ',', '.') . "</td>";
+                                                                    echo "<td>" . $row['sold'] . "</td>";
+                                                                    echo "</tr>";
+                                                                }
+                                                            }
+
+                                                        ?>
                                                     </tbody>
-                                                    <tfoot>
+                                                    <!-- <tfoot>
                                                         <tr>
                                                             <th>Name</th>
                                                             <th>Position</th>
@@ -277,7 +247,7 @@
                                                             <th>Start date</th>
                                                             <th>Action</th>
                                                         </tr>
-                                                    </tfoot>
+                                                    </tfoot> -->
                                                 </table>
                                             </div>
                                         </div>
@@ -287,101 +257,39 @@
                                     <div class="card shadow">
                                         <div class="card-header">
                                             <i class="bi bi-person-lines-fill me-1"></i>
-                                            Top buyers
-                                        </div>
-                                        <div class="card-body pb-0">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="col-12 col-md-12">
-                                                    <form method="GET">
-                                                        <div class="input-group my-2">
-                                                            <input type="text" class="form-control form-control-sm"
-                                                                id="myInput" name="search" placeholder="Search"
-                                                                aria-label="Search" aria-describedby="searchph" />
-                                                            <button
-                                                                class="input-group-text btn btn-secondary rounded-end-1"
-                                                                type="submit" id="searchph">
-                                                                <i class="bi bi-search"></i>
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <!-- <div class="col-3 col-xs-1 col-sm-2 col-md-1">
-                        <a href="products-form.php" class="btn btn-secondary">Export</a>
-                      </div> -->
-                                            </div>
+                                            Top Buyers
                                         </div>
                                         <div class="card-body pt-0">
                                             <div class="table-responsive">
                                                 <table id="example" class="table table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Position</th>
-                                                            <th>Office</th>
-                                                            <th>Age</th>
-                                                            <th>Start date</th>
-                                                            <th>Action</th>
+                                                            <th>Username</th>
+                                                            <th>E-Mail</th>
+                                                            <th>First Name</th>
+                                                            <th>Purchase</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Herrod Chandler</td>
-                                                            <td>Sales Assistant</td>
-                                                            <td>San Francisco</td>
-                                                            <td>59</td>
-                                                            <td>2012-08-06</td>
-                                                            <td>$137,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Hermione Butler</td>
-                                                            <td>Regional Director</td>
-                                                            <td>London</td>
-                                                            <td>47</td>
-                                                            <td>2011-03-21</td>
-                                                            <td>$356,250</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Lael Greer</td>
-                                                            <td>Systems Administrator</td>
-                                                            <td>London</td>
-                                                            <td>21</td>
-                                                            <td>2009-02-27</td>
-                                                            <td>$103,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Jonas Alexander</td>
-                                                            <td>Developer</td>
-                                                            <td>San Francisco</td>
-                                                            <td>30</td>
-                                                            <td>2010-07-14</td>
-                                                            <td>$86,500</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Shad Decker</td>
-                                                            <td>Regional Director</td>
-                                                            <td>Edinburgh</td>
-                                                            <td>51</td>
-                                                            <td>2008-11-13</td>
-                                                            <td>$183,000</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Michael Bruce</td>
-                                                            <td>Javascript Developer</td>
-                                                            <td>Singapore</td>
-                                                            <td>29</td>
-                                                            <td>2011-06-27</td>
-                                                            <td>$183,000</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Donna Snider</td>
-                                                            <td>Customer Support</td>
-                                                            <td>New York</td>
-                                                            <td>27</td>
-                                                            <td>2011-01-25</td>
-                                                            <td>$112,000</td>
-                                                        </tr>
+                                                    <?php
+
+                                                        $sql = "SELECT * FROM users ORDER BY purchase DESC LIMIT 5";
+                                                        $result = mysqli_query($conn, $sql);
+
+                                                        if (mysqli_num_rows($result) > 0) {
+                                                            while($row = mysqli_fetch_assoc($result)) {
+                                                                echo "<tr>";
+                                                                echo "<td>" . $row['username'] . "</td>";
+                                                                echo "<td>" . $row['email'] . "</td>";
+                                                                echo "<td>" . $row['first_name'] . "</td>";
+                                                                echo "<td>" . $row['purchase'] . "</td>";
+                                                                echo "</tr>";
+                                                            }
+                                                        }
+
+                                                    ?>
                                                     </tbody>
-                                                    <tfoot>
+                                                    <!-- <tfoot>
                                                         <tr>
                                                             <th>Name</th>
                                                             <th>Position</th>
@@ -390,7 +298,7 @@
                                                             <th>Start date</th>
                                                             <th>Action</th>
                                                         </tr>
-                                                    </tfoot>
+                                                    </tfoot> -->
                                                 </table>
                                             </div>
                                         </div>
@@ -398,115 +306,6 @@
                                 </div>
                             </div>
                             <div class="card shadow">
-                                <div class="card-header">
-                                    <i class="bi bi-table me-1"></i>
-                                    Tabel alternatif kalau ga mau pakai yg tabel kiri kanan
-                                </div>
-                                <div class="card-body pb-0">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="col-12 col-md-12">
-                                            <form method="GET">
-                                                <div class="input-group my-2">
-                                                    <input type="text" class="form-control form-control-sm" id="myInput"
-                                                        name="search" placeholder="Search" aria-label="Search"
-                                                        aria-describedby="searchph" />
-                                                    <button class="input-group-text btn btn-secondary rounded-end-1"
-                                                        type="submit" id="searchph">
-                                                        <i class="bi bi-search"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <!-- <div class="col-3 col-xs-1 col-sm-2 col-md-1">
-                        <a href="products-form.php" class="btn btn-secondary">Export</a>
-                      </div> -->
-                                    </div>
-                                </div>
-                                <div class="card-body pt-0">
-                                    <div class="table-responsive">
-                                        <table id="example" class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Position</th>
-                                                    <th>Office</th>
-                                                    <th>Age</th>
-                                                    <th>Start date</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Herrod Chandler</td>
-                                                    <td>Sales Assistant</td>
-                                                    <td>San Francisco</td>
-                                                    <td>59</td>
-                                                    <td>2012-08-06</td>
-                                                    <td>$137,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Hermione Butler</td>
-                                                    <td>Regional Director</td>
-                                                    <td>London</td>
-                                                    <td>47</td>
-                                                    <td>2011-03-21</td>
-                                                    <td>$356,250</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Lael Greer</td>
-                                                    <td>Systems Administrator</td>
-                                                    <td>London</td>
-                                                    <td>21</td>
-                                                    <td>2009-02-27</td>
-                                                    <td>$103,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Jonas Alexander</td>
-                                                    <td>Developer</td>
-                                                    <td>San Francisco</td>
-                                                    <td>30</td>
-                                                    <td>2010-07-14</td>
-                                                    <td>$86,500</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Shad Decker</td>
-                                                    <td>Regional Director</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>51</td>
-                                                    <td>2008-11-13</td>
-                                                    <td>$183,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Michael Bruce</td>
-                                                    <td>Javascript Developer</td>
-                                                    <td>Singapore</td>
-                                                    <td>29</td>
-                                                    <td>2011-06-27</td>
-                                                    <td>$183,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Donna Snider</td>
-                                                    <td>Customer Support</td>
-                                                    <td>New York</td>
-                                                    <td>27</td>
-                                                    <td>2011-01-25</td>
-                                                    <td>$112,000</td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Position</th>
-                                                    <th>Office</th>
-                                                    <th>Age</th>
-                                                    <th>Start date</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </section>
                 </article>

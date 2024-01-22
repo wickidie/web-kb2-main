@@ -54,7 +54,7 @@ CREATE TABLE transaction_details (
     product_id int,
     FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id)
         ON UPDATE CASCADE
-        ON DELETE SET NULL,
+        ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(product_id) 
         ON UPDATE CASCADE
         ON DELETE SET NULL

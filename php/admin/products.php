@@ -88,7 +88,7 @@
                                             <tbody>
                                                 <?php
                                             $items_per_page = 10;
-                                            $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id";
+                                            $sql = "SELECT product_id, product_name, product_description, product_price, product_img, c.category_name, c.category_id FROM products p JOIN product_category c ON p.category_id = c.category_id";
                                             $result = mysqli_query($conn, $sql);
                                             $rows = mysqli_num_rows($result);
 
@@ -98,17 +98,17 @@
                                             if (isset($_GET['search'])) {
                                                 $search_value = $_GET['search'];
                                                 if (!empty($_GET['search'])) {
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%' ORDER BY product_id DESC LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name, c.category_id FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%' ORDER BY product_id DESC LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%' ORDER BY product_id DESC";
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name, c.category_id FROM products p JOIN product_category c ON p.category_id = c.category_id where product_name like '%$search_value%' ORDER BY product_id DESC";
                                                     $result_total = mysqli_query($conn, $sql);
                                                     $rows = mysqli_num_rows($result_total);
                                                 }else{
-                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 ORDER BY product_id DESC LIMIT $offset, $items_per_page";
+                                                    $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name, c.category_id FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 ORDER BY product_id DESC LIMIT $offset, $items_per_page";
                                                     $result = mysqli_query($conn, $sql);
                                                 }
                                             }else{
-                                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 ORDER BY product_id DESC LIMIT $offset, $items_per_page";
+                                                $sql = "SELECT product_id, product_name, product_description, product_price, product_img, sold, c.category_name, c.category_id FROM products p JOIN product_category c ON p.category_id = c.category_id WHERE 1 ORDER BY product_id DESC LIMIT $offset, $items_per_page";
                                                 $result = mysqli_query($conn, $sql);
                                             }
                                             
