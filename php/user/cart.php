@@ -116,7 +116,7 @@
                     echo  "</li>";
                     echo "</ul>";
                     echo "<div class=''>";
-                    echo  "<a type='button' class='btn btn-danger w-100 d-inline-block d-xl-none mt-3'> Remove <i class='bi bi-trash'></i></a>";
+                    echo  "<a type='button' href='cart-delete.php?cart_id=" . $row['cart_id'] . "' class='btn btn-danger w-100 d-inline-block d-xl-none mt-3'> Remove <i class='bi bi-trash'></i></a>";
                     echo "</div>";
                     echo  "</div>";
                     echo "<hr/>";

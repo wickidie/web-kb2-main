@@ -44,7 +44,7 @@
                 <form method="GET" class="w-100">
                     <div class="input-group my-2">
                         <input type="text" class="form-control form-control-sm" id="myInput" name="search"
-                            placeholder="Search for user" aria-label="Search" aria-describedby="searchph"
+                            placeholder="Search for product name" aria-label="Search" aria-describedby="searchph"
                             <?php echo "value = $search_value" ?>>
                         <button class="input-group-text btn btn-outline-secondary rounded-end-1" type="submit"
                             id="searchph">

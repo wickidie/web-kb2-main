@@ -4,18 +4,18 @@
     $quantity_count = $_POST['quantity_count'];
     $quantity = $_POST['quantity'];
 
-    echo $quantity . "</p>";
+    // echo $quantity . "</p>";
 
 
     for ($i=0; $i < $quantity_count; $i++) { 
         $cart = $_POST['quantity'][$i];
-        echo $cart . "</p>";
-        echo "<p>asda" . $i  . "</p>";
+        // echo $cart . "</p>";
+        // echo "<p>asda" . $i  . "</p>";
 
 
     }
     
-    echo $quantity_count;
+    // echo $quantity_count;
     
     // cart update
     $sqlUpdateCart = "SELECT c.cart_id, c.quantity, p.product_id FROM cart c JOIN products p ON c.product_id = p.product_id WHERE user_id = $user_id";
