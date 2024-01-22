@@ -85,7 +85,8 @@
                     ?>
                 </div>
                 <div class='text-center btn-group w-100'>
-                    <button type='submit' class='btn btn-primary' name='product_id' <?php echo "value='$product_id'"?> >Update</button>
+                    <button type='submit' class='btn btn-primary' name='product_id'
+                        <?php echo "value='$product_id'"?>>Update</button>
                     <button type='submit' class='btn btn-danger' onclick='history.back()'>Close</button>
                 </div>
             </form>
