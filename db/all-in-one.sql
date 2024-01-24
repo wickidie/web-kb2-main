@@ -1,3 +1,102 @@
+CREATE TABLE admin (
+    admin_id int PRIMARY KEY,
+    username VARCHAR(255),
+    password CHAR(32)
+);
+
+CREATE TABLE users (
+    user_id int PRIMARY KEY,
+    username VARCHAR(255),
+    password CHAR(32),
+    email VARCHAR(255),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    address VARCHAR(255),
+    phone_number VARCHAR(255),
+    purchase int
+);
+
+CREATE TABLE product_category (
+    category_id int PRIMARY KEY,
+    category_name VARCHAR(255)
+);
+
+CREATE TABLE products (
+    product_id int PRIMARY KEY,
+    product_name VARCHAR(255),
+    product_description VARCHAR(1024),
+    product_price DECIMAL(16, 2),
+    product_img VARCHAR(255),
+    category_id int,
+    sold int,
+    FOREIGN KEY (category_id) REFERENCES product_category(category_id) 
+        ON UPDATE CASCADE 
+        ON DELETE SET NULL
+);
+
+CREATE TABLE transactions ( 
+    transaction_id int PRIMARY KEY,
+    transaction_date DATETIME,
+    transaction_total DECIMAL(16, 2),
+    status VARCHAR(255),
+    payment VARCHAR(255),
+    user_id int,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) 
+        ON UPDATE CASCADE 
+        ON DELETE SET NULL
+);
+
+CREATE TABLE transaction_details (
+    transaction_detail_id int PRIMARY KEY,
+    quantity int,
+    product_price DECIMAL(16, 2),
+    transaction_id int,
+    product_id int,
+    FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) 
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+);
+
+CREATE TABLE cart (
+    cart_id int PRIMARY KEY,
+    created_at DATETIME,
+    user_id int,
+    quantity int,
+    product_id int,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) 
+        ON UPDATE CASCADE 
+        ON DELETE SET NULL,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) 
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+);
+
+ALTER TABLE admin
+    MODIFY admin_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE users
+    MODIFY user_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE products
+    MODIFY product_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE transactions
+    MODIFY transaction_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE transaction_details
+    MODIFY transaction_detail_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE cart
+    MODIFY cart_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+    
+ALTER TABLE product_category
+    MODIFY category_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+INSERT INTO `admin`(`username`, `password`) VALUES ('admin',md5('admin'));
+
 INSERT INTO `product_category`(`category_name`) VALUES ('Other');
 INSERT INTO `product_category`(`category_name`) VALUES ('Camera');
 INSERT INTO `product_category`(`category_name`) VALUES ('SD Card');
@@ -31,3 +130,28 @@ INSERT INTO products (product_name, product_description, product_price, product_
 ('Everyday Backpack - Black', 'A visually and functionally simpler version of Peak Design iconic Everyday Backpack, the Everyday Backpack Zip&apos;s ultra-clean aesthetic makes it ideal for discreet urban everyday or photo carry 100% recycled 400D weatherproof shell keeps everything safe. Expandable side pockets for water bottles or tripod. 2 stowable cinch straps let you carry more externally. All-custom hardware, minimal dangling straps.', 3000000, 'Everyday_backpack.webp', 5, 0);
 INSERT INTO products (product_name, product_description, product_price, product_img, category_id, sold) VALUES
 ('Bodypack Paris 2.0 High', 'Gear up with Bodypack PARIS 2.0 HIGH! This is a laptop backpack that is equipped with a padded 15 inch laptop sleeve so you can bring your laptop securely with ease. It also has multiple additional sockets an compartments to put your stationary, charger, or other necessities to support your productivity. It has a polished look to be worn daily, giving a mix of functionality and style.', 600000, 'Bodypack_Paris.webp', 5, 0);
+
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('john_doe', md5('password1'), 'john.doe@email.com', 'John', 'Doe', '123 Main St', '1234567890', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('jane_smith', md5('password2'), 'jane.smith@email.com', 'Jane', 'Smith', '456 Oak St', '9876543210', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('alice_wonder', md5('password3'), 'alice.wonder@email.com', 'Alice', 'Wonder', '789 Elm St', '2345678901', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('bob_marley', md5('password4'), 'bob.marley@email.com', 'Bob', 'Marley', '101 Pine St', '8765432109', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('charlie_brown', md5('password5'), 'charlie.brown@email.com', 'Charlie', 'Brown', '202 Walnut St', '3456789012', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('diana_prince', md5('password6'), 'diana.prince@email.com', 'Diana', 'Prince', '303 Oak St', '6789012345', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('edward_cullen', md5('password7'), 'edward.cullen@email.com', 'Edward', 'Cullen', '404 Cedar St', '1234567890', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('fiona_apple', md5('password8'), 'fiona.apple@email.com', 'Fiona', 'Apple', '505 Maple St', '9876543210', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('george_lucas', md5('password9'), 'george.lucas@email.com', 'George', 'Lucas', '606 Birch St', '2345678901', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('harry_potter', md5('password10'), 'harry.potter@email.com', 'Harry', 'Potter', '707 Pine St', '8765432109', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('irene_adler', md5('password11'), 'irene.adler@email.com', 'Irene', 'Adler', '808 Elm St', '3456789012', 0);
+INSERT INTO users (username, password, email, first_name, last_name, address, phone_number, purchase) VALUES
+('james_bond', md5('password12'), 'james.bond@email.com', 'James', 'Bond', '909 Walnut St', '6789012345', 0);

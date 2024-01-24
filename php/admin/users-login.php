@@ -11,7 +11,7 @@
                 $user_id = mysqli_query($conn, $getUserId);
                 $row = mysqli_fetch_assoc($user_id);
                 $_SESSION['admin_id'] = $row['admin_id'];
-                header('Location: users.php');
+                header('Location: dashboard.php');
             } else {
                     echo "              
                     <script type='text/javascript'>
