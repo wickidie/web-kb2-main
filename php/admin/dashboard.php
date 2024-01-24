@@ -59,8 +59,13 @@
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
-                                                    <div class=" fw-bold text-primary text-uppercase mb-1">
-                                                        Products Sold</div>
+                                                    <div class=" fw-bold text-primary text-uppercase mb-1">Products Sold
+                                                    <button type="button" class="btn btn-link" data-bs-toggle="dropdown"><span class="bi bi-three-dots-vertical"></span></button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item text-capitalize" href="products.php">View</a></li>
+                                                        <li><a class="dropdown-item text-capitalize" href="earnings.php" target="_blank">Print</a></li>
+                                                    </ul>
+                                                        </div>
                                                         <?php
                                                             $sql = "SELECT sold FROM products";
                                                             $result = mysqli_query($conn, $sql);
@@ -316,6 +321,16 @@
     <?php
         include_once 'offcanvas-admin.inc.php';
     ?>
+
+<script>
+                $(document).ready(function(){
+                    $("#btnPrint").on("click",function(){
+                        printJS({
+                            printable: 'print-area',
+                            type: 'html'});
+                    })
+                })
+</script>
 </body>
 
 </html>
