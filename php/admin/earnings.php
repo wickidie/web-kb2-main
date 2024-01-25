@@ -117,7 +117,7 @@
                                                     echo "<tr>";
                                                     $c++;
                                                     echo "<td class='text-center'>" . $row['product_name'] . "</td>";
-                                                    echo "<td>Rp" .  number_format($row['product_price'], 2, ',', '.') . "</td>";
+                                                    echo "<td>IDR " .  number_format($row['product_price'], 2, ',', '.') . "</td>";
                                                     echo "<td>" . $row['sold'] . "</td>";
                                                     echo "<td>Rp" . number_format($row['product_price'] * $row['quantity'], 2, ',', '.') . "</td>";
                                                     $total += $row['product_price'] * $row['quantity'];

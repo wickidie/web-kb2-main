@@ -6,22 +6,45 @@
 
     if (isset($month) && isset($month)) {
         if ($month == '' && $status == '') {
-            $sql = "SELECT * FROM transactions";
+            $sql = "SELECT p.product_name, c.category_name, p.product_price, td.quantity FROM transaction_details td
+            JOIN products p ON td.product_id = p.product_id
+            JOIN transactions t ON td.transaction_id = t.transaction_id
+            JOIN product_category c ON p.category_id = c.category_id
+            ORDER BY td.quantity DESC";
         }else{
             if ($status == '') {
-                $sql = "SELECT * FROM transactions t 
-                WHERE MONTH(transaction_date) = $month";
+                $sql = "SELECT p.product_name, c.category_name, p.product_price, td.quantity FROM transaction_details td
+                JOIN products p ON td.product_id = p.product_id
+                JOIN transactions t ON td.transaction_id = t.transaction_id
+                JOIN product_category c ON p.category_id = c.category_id
+                WHERE MONTH(t.transaction_date) = $month
+                ORDER BY td.quantity DESC
+                LIMIT 3";
             }else if ($month == '') {
-                $sql = "SELECT * FROM transactions t 
-                WHERE status = '$status'";
+                $sql = "SELECT p.product_name, c.category_name, p.product_price, td.quantity FROM transaction_details td
+                JOIN products p ON td.product_id = p.product_id
+                JOIN transactions t ON td.transaction_id = t.transaction_id
+                JOIN product_category c ON p.category_id = c.category_id
+                WHERE status = '$status'
+                ORDER BY td.quantity DESC
+                LIMIT 3";
             }else{
-                $sql = "SELECT * FROM transactions t 
-                WHERE MONTH(transaction_date) = $month 
-                AND status = '$status'";
+                $sql = "SELECT p.product_name, c.category_name, p.product_price, td.quantity FROM transaction_details td
+                JOIN products p ON td.product_id = p.product_id
+                JOIN transactions t ON td.transaction_id = t.transaction_id
+                JOIN product_category c ON p.category_id = c.category_id
+                WHERE MONTH(t.transaction_date) = $month 
+                AND status = '$status'
+                ORDER BY td.quantity DESC
+                LIMIT 3";
             }
         }
     }else{
-        $sql = "SELECT * FROM transactions";
+        $sql = "SELECT p.product_name, c.category_name, p.product_price, td.quantity FROM transaction_details td
+        JOIN products p ON td.product_id = p.product_id
+        JOIN transactions t ON td.transaction_id = t.transaction_id
+        JOIN product_category c ON p.category_id = c.category_id
+        ORDER BY td.quantity DESC";
     }
     $result = mysqli_query($conn, $sql);
     $rows = mysqli_num_rows($result);
@@ -39,7 +62,7 @@
 <head>
 <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Monthly Transactions</title>
+    <title>Top Sold</title>
 
     <link rel="icon" href="../../asset/img/icon/tokaku_logo.svg" type="image/x-icon" />
 
@@ -100,7 +123,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <form action="monthly-transactions.php" method="GET">
+                    <form action="top-sold.php" method="GET">
                     <label for="month">Month</label>
                         <select id="month" name="month">
                             <option value="<?php if ($month == 'All') {
@@ -147,10 +170,10 @@
                                         <table class="table table-hover table-striped" id="myTable">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Transaction ID</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Transaction Total</th>
+                                                    <th scope="col">Product Name</th>
+                                                    <th scope="col">Product Category</th>
+                                                    <th scope="col">Product Price</th>
+                                                    <th scope="col">Sold</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -159,16 +182,15 @@
 
                                             if (mysqli_num_rows($result) > 0) {
                                                 while($row = mysqli_fetch_assoc($result)) {
-                                                    $formattedDate = date('d-m-Y', strtotime($row['transaction_date']));
                                                     echo "<tr>";
-                                                    echo "<td>" . $row['transaction_id'] . "</td>";
-                                                    echo "<td>" . $formattedDate . "</td>";
-                                                    echo "<td>" . $row['status'] . "</td>";
-                                                    echo "<td>IDR " . number_format($row['transaction_total'], 2, ',', '.') . "</td>";
-                                                    echo "<input type='hidden' class='transaction' value='" . $row['transaction_total'] . "'>";
+                                                    echo "<td>" . $row['product_name'] . "</td>";
+                                                    echo "<td>" . $row['category_name'] . "</td>";
+                                                    echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";
+                                                    echo "<td>" . $row['quantity'] . "</td>";
+                                                    echo "<input type='hidden' class='quantity' value='" . $row['quantity'] . "'>";
                                                     echo "<tr>";
                                                 }
-                                                echo "<td colspan='3' class='total text-center text-uppercase'><b>Total Earnings<b></td>";
+                                                echo "<td colspan='3' class='total text-center text-uppercase'><b>Total Sold By Month<b></td>";
                                                 echo "<td class='total' id='total'></td>";
                                             } else {
                                             echo "<tr>";
@@ -190,24 +212,20 @@
             class="bi bi-file-earmark-pdf text-danger"></i>&nbspExport</a></button>
         </div>
     <script>
-        let currency = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'IDR',
-        });
-        var transaction = document.getElementsByClassName('transaction');
+        var quantity = document.getElementsByClassName('quantity');
         var total = document.getElementById('total');
         var sum = 0;
 
-        console.log(transaction);
+        console.log(quantity);
         console.log(total);
 
         sum = 0;
-        for (i = 0; i < transaction.length; i++) {
-            var temp = Number(transaction[i].value)
+        for (i = 0; i < quantity.length; i++) {
+            var temp = Number(quantity[i].value)
             sum = sum + temp;
             console.log(sum)
         }
-        total.innerText = currency.format(sum);
+        total.innerText = sum;
         console.log(total);
 
         document
@@ -216,7 +234,7 @@
             const invoiceElement = document.getElementById("productsSold");
             const options = {
             margin: 1,
-            filename: "monthly-transaction.pdf",
+            filename: "top-3-sold.pdf",
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
