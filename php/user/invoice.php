@@ -205,10 +205,11 @@
         }
     });
     document.getElementById('downloadPdf').addEventListener('click', function() {
-        const invoiceElement = document.getElementById('invoice');
-        const options = {
+        var date = new Date();
+        var invoiceElement = document.getElementById('invoice');
+        var options = {
             margin: 0.2,
-            filename: 'invoice.pdf',
+            filename: 'invoice_' + date.toISOString() + '.pdf',
             image: {
                 type: 'jpeg',
                 quality: 1
