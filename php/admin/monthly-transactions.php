@@ -36,8 +36,9 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Monthly Transactions</title>
 
@@ -55,15 +56,15 @@
         href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,600;0,700;1,300&family=Kalnia:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
 
-        
-        <!-- CSS -->
-        <link rel="stylesheet" href="../../css/admin/style.css" />
-        
-        <!-- Javascript -->
-        <script defer type="text/javascript" src="../../js/theme.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/admin/style.css" />
+
+    <!-- Javascript -->
+    <script defer type="text/javascript" src="../../js/theme.js"></script>
     <script defer type="text/javascript" src="../../js/page.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous">
-        </script>
+    </script>
     <script defer src="../../js/chart/area.js"></script>
     <script defer src="../../js/chart/bar.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -75,23 +76,24 @@
 
 
     <style>
-        @media print{
-            .buttonPrint {
-                display: none;
-            }
+    @media print {
+        .buttonPrint {
+            display: none;
         }
+    }
     </style>
 </head>
+
 <body>
 
-<main class="container p-3" >
+    <main class="container p-3">
         <article class="card rounded-3" id="productsSold">
             <section class="card-body">
                 <div class="card-header">
                     <div class="row d-flex justify-content-between align-items-baseline">
                         <div class="col">
-                        <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-                        <a href="landing-page.php" class="fs-4 ms-2 align-bottom logo"> Tokaku </a>
+                            <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
+                            <a href="landing-page.php" class="fs-4 ms-2 align-bottom logo"> Tokaku </a>
                         </div>
                         <div class="col-xl-3">
                             <p class="fs-2 fw-bold"><strong>Transactions</strong></p>
@@ -101,7 +103,7 @@
 
                 <div class="table-responsive">
                     <form action="monthly-transactions.php" method="GET">
-                    <label for="month">Month</label>
+                        <label for="month">Month</label>
                         <select id="month" name="month">
                             <option value="<?php if ($month == 'All') {
                                 echo "";
@@ -122,39 +124,39 @@
                             <option value="10">10</option>
                             <option value="11">11</option>
                             <option value="12">12</option>
-                    </select> 
-                    <label for="status">Status</label>
+                        </select>
+                        <label for="status">Status</label>
                         <select id="status" name="status">
-                        <option value='<?php if ($status == 'All') {
+                            <option value='<?php if ($status == 'All') {
                                 echo "";
                             }else{
                                 echo $status;
                             } 
                             ?>'><?php echo $status; ?></option>
-                        <option value=''>All</option>
-                        <option value='Valid'>Valid</option>
-                        <option value='Invalid'>Invalid</option>
-                        <option value='Pending'>Pending</option>
-                        <option value='Delivering'>Delivering</option>
-                        <option value='Received'>Received</option>
-                    </select> 
-                    <!-- <label for="year">Year</label>
+                            <option value=''>All</option>
+                            <option value='Valid'>Valid</option>
+                            <option value='Invalid'>Invalid</option>
+                            <option value='Pending'>Pending</option>
+                            <option value='Delivering'>Delivering</option>
+                            <option value='Received'>Received</option>
+                        </select>
+                        <!-- <label for="year">Year</label>
                         <select id="year" name="year">
                             <option value="2023">2023</option>
                             <option value="2024">2024</option>
                     </select>  -->
-                    <button type="submit">Query</button>
-                                        <table class="table table-hover table-striped" id="myTable">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Transaction ID</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Transaction Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
+                        <button type="submit">Query</button>
+                        <table class="table table-hover table-striped" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Transaction ID</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Transaction Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
    
 
                                             if (mysqli_num_rows($result) > 0) {
@@ -179,20 +181,20 @@
                                             mysqli_close($conn);
 
                                             ?>
-                                            </tbody>
-                                        </table>
-                                    </form>
-                                </div>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
             </section>
         </article>
         <div class="col-auto text-center mt-3">
-            <button class="btn" id="downloadPdf"><a class="btn btn-secondary shadow text-capitalize" ><i
-            class="bi bi-file-earmark-pdf text-danger"></i>&nbspExport</a></button>
+            <button class="btn" id="downloadPdf"><a class="btn btn-secondary shadow text-capitalize"><i
+                        class="bi bi-file-earmark-pdf text-danger"></i>&nbspExport</a></button>
         </div>
-    <script>
+        <script>
         let currency = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'IDR',
+            style: 'currency',
+            currency: 'IDR',
         });
         var transaction = document.getElementsByClassName('transaction');
         var total = document.getElementById('total');
@@ -211,20 +213,30 @@
         console.log(total);
 
         document
-        .getElementById("downloadPdf")
-        .addEventListener("click", function () {
-            const invoiceElement = document.getElementById("productsSold");
-            const options = {
-            margin: 1,
-            filename: "products-sold.pdf",
-            image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-            };
+            .getElementById("downloadPdf")
+            .addEventListener("click", function() {
+                const invoiceElement = document.getElementById("productsSold");
+                const options = {
+                    margin: 1,
+                    filename: "products-sold.pdf",
+                    image: {
+                        type: "jpeg",
+                        quality: 0.98
+                    },
+                    html2canvas: {
+                        scale: 2
+                    },
+                    jsPDF: {
+                        unit: "in",
+                        format: "letter",
+                        orientation: "portrait"
+                    },
+                };
 
-            // Then call html2pdf with the element and options
-            html2pdf().from(invoiceElement).set(options).save();
-        });
-    </script>
-    </body>
+                // Then call html2pdf with the element and options
+                html2pdf().from(invoiceElement).set(options).save();
+            });
+        </script>
+</body>
+
 </html>

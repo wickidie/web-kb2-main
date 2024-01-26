@@ -33,21 +33,43 @@
 
 </head>
 
-<body>
+<body class="">
     <main class="container p-3">
         <!-- id="print-area" -->
-        <article class="container rounded-3" id="invoice">
+        <article class="rounded-3 mb-5" id="invoice">
             <section class="card">
                 <div class="card-header">
-                    <div class="row d-flex justify-content-between align-items-center">
-                        <div class="col-auto ">
-                            <img src="../../asset/img/icon/tokaku_logo.svg" alt="TOKAKU" width="32" height="32" />
-                            <a href="landing-page.php" class="fs-4 ms-2 align-bottom logo"> Tokaku </a>
-                        </div>
-                        <div class="col-auto">
-                            <p class="fs-2 fw-bold m-0"><strong>Invoice</strong></p>
-                        </div>
+                    <div class="row d-flex justify-content-between align-items-center p-0">
+                        <?php
+                    $transaction_id = $_POST['transaction_id'];
+                    $sql = "SELECT * FROM transactions t
+                    JOIN users u ON t.user_id = u.user_id
+                    WHERE transaction_id = $transaction_id";
+                    $result = mysqli_query($conn, $sql);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '
+                            
+                                    <div class="col">
+                                        <ul class="list-unstyled">
+                                        <p class="fs-2 fw-bold m-0"><strong>Invoice</strong></p>
+                                        </ul>
+                                    </div>
+                                    <div class="col-auto">
+                                        <ul class="list-unstyled">
+                                            <li class="text-muted"><i class="fas fa-circle" style="color: #84b0ca"></i> <span
+                                                    class="fw-bold">ID:</span>#' . $row['transaction_id'] . '</li>
+                                            <li class="text-muted"><i class="fas fa-circle" style="color: #84b0ca"></i> <span
+                                                    class="fw-bold">Creation Date: </span>' . $row['transaction_date'] . '</li>
+                                        </ul>
+                                    </div>';
+                        }
+                    }
+                ?>
                     </div>
+
+                </div>
                 </div>
                 <?php
                     $transaction_id = $_POST['transaction_id'];
@@ -60,23 +82,13 @@
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo '<div class="card-body" >
                             <div class="card-body p-1">
-                                <div class="row align-items-center justify-content-center">
-                                    <div class="col">
-                                        <ul class="list-unstyled">
-                                            <li class="text-muted">To: <span style="color: #5d9fc5">'. $row['username'] .'</span></li>
-                                            <li class="text-muted">'. $row['address'] .'</li>
-                                            <li class="text-muted"><i class="bi bi-telephone">&nbsp'. $row['phone_number'] .'</i>9</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-auto">
-                                        <ul class="list-unstyled">
-                                            <li class="text-muted"><i class="fas fa-circle" style="color: #84b0ca"></i> <span
-                                                    class="fw-bold">ID:</span>#' . $row['transaction_id'] . '</li>
-                                            <li class="text-muted"><i class="fas fa-circle" style="color: #84b0ca"></i> <span
-                                                    class="fw-bold">Creation Date: </span>' . $row['transaction_date'] . '</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            <div class="">
+                                <ul class="list-unstyled">
+                                    <li class="text-muted">To: <span style="color: #5d9fc5">'. $row['username'] .'</span></li>
+                                    <li class="text-muted">'. $row['address'] .'</li>
+                                    <li class="text-muted"><i class="bi bi-telephone">&nbsp'. $row['phone_number'] .'</i>9</li>
+                                </ul>
+                            </div>
                             </div>';
                         }
                     }
@@ -147,16 +159,20 @@
                                     </li>
                                 </ul>
                             </div>
+
                         </div>
                     </form>
+
                 </div>
             </section>
-            <div class="d-flex justify-content-center mt-4">
-                <button class="btn btn-secondary shadow text-capitalize" type="button" id="downloadPdf"><i
-                        class="bi bi-file-earmark-pdf text-danger"></i>&nbspExport</button>
-            </div>
+
         </article>
+        <div class="text-center data-html2canvas-ignore mb-auto">
+            <button class="btn btn-secondary shadow text-capitalize" type="button" id="downloadPdf"><i
+                    class="bi bi-file-earmark-pdf text-danger"></i>&nbspExport</button>
+        </div>
     </main>
+
 
     <script>
     let currency = new Intl.NumberFormat('en-US', {
