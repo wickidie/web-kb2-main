@@ -2,6 +2,11 @@ body {
   font-family: "Jost", sans-serif;
 }
 
+.logo {
+  font-family: "Kalnia", serif;
+  font-weight: 500;
+}
+
 .sidebar {
   width: 14rem;
 }

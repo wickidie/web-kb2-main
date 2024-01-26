@@ -55,18 +55,14 @@
                             <div class="row">
                                 <!-- Earnings (Monthly) Card Example -->
                                 <div class="col-xl-3 col-md-6 mb-4">
-                                    <div class="card shadow h-100 py-2">
+                                    <div class="card shadow h-100">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
                                                     <div class=" fw-bold text-primary text-uppercase mb-1">Products Sold
-                                                    <button type="button" class="btn btn-link" data-bs-toggle="dropdown"><span class="bi bi-three-dots-vertical"></span></button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item text-capitalize" href="products.php">View</a></li>
-                                                        <li><a class="dropdown-item text-capitalize" href="earnings.php" target="_blank">Print</a></li>
-                                                    </ul>
-                                                        </div>
-                                                        <?php
+
+                                                    </div>
+                                                    <?php
                                                             $sql = "SELECT sold FROM products";
                                                             $result = mysqli_query($conn, $sql);
                                                             $totalSold = 0;
@@ -79,51 +75,62 @@
     
 
                                                         ?>
-                                                    <div class="h5 mb-0 fw-bold"><?php echo $totalSold?> <small>products</small></div>
+                                                    <div class="h5 mb-0 fw-bold"><?php echo $totalSold?>
+                                                        <small>products</small>
+                                                    </div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <i class="bi bi-cart-check text-secondary fs-1"></i>
+                                                </div>
+                                                <div class="col-auto d-flex align-items-start p-0">
+                                                    <button type="button" class="btn btn-link"
+                                                        data-bs-toggle="dropdown"><span
+                                                            class="bi bi-three-dots-vertical"></span></button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item text-capitalize"
+                                                                href="products.php">View</a></li>
+                                                        <li><a class="dropdown-item text-capitalize" href="earnings.php"
+                                                                target="_blank">Print</a></li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Earnings (Monthly) Card Example -->
                                 <div class="col-xl-3 col-md-6 mb-4">
-                                    <div class="card shadow h-100 py-2">
+                                    <div class="card shadow h-100 ">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
                                                     <div class=" fw-bold text-success text-uppercase mb-1">
                                                         Active Users</div>
-                                                        <?php
+                                                    <?php
                                                             $sql = "SELECT * FROM users";
                                                             $result = mysqli_query($conn, $sql);
                                                             $rows = mysqli_num_rows($result);
                                                             echo '<div class="h5 mb-0 fw-bold ">' . $rows . '
                                                                 <small>users</small>';
-                                                        ?>  
-                                                    </div>
+                                                        ?>
                                                 </div>
-                                                <div class="col-auto">
-                                                    <i class="bi bi-person text-secondary fs-1"></i>
-                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="bi bi-person text-secondary fs-1"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Earnings (Monthly) Card Example -->
-                                <div class="col-xl-3 col-md-6 mb-4">
-                                    <div class="card shadow h-100 py-2">
-                                        <div class="card-body">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col mr-2">
-                                                    <div class="fw-bold text-info text-uppercase mb-1">
-                                                        Earning
-                                                    </div>
-                                                    <?php
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card shadow h-100 ">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="fw-bold text-info text-uppercase mb-1">
+                                                    Earning
+                                                </div>
+                                                <?php
                                                             $sql = "SELECT transaction_total FROM transactions";
                                                             $result = mysqli_query($conn, $sql);
                                                             $earnings = 0;
@@ -134,8 +141,8 @@
                                                                 } 
                                                             }
                                                             echo '<div class="h5 mb-0 fw-bold">Rp' . number_format($earnings, 2, ',', '.') . '</div>';
-                                                        ?> 
-                                                    <!-- <div class="row no-gutters align-items-center">
+                                                        ?>
+                                                <!-- <div class="row no-gutters align-items-center">
                                                         <div class="col-auto">
                                                             <div class="h5 mb-0 mr-3 fw-bold">50%
                                                             </div>
@@ -148,15 +155,14 @@
                                                             </div>
                                                         </div>
                                                     </div> -->
-                                                </div>
-                                                <div class="col-auto">
-                                                    <i class="bi bi-cash fs-1 text-secondary"></i>
-                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="bi bi-cash fs-1 text-secondary"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
                                 <!-- Pending Requests Card Example -->
                                 <div class="col-xl-3 col-md-6 mb-4">
                                     <div class="card shadow h-100 py-2">
@@ -186,20 +192,15 @@
                                                             echo  '<div class="h5 mb-0 fw-bold ">' . $pendingCount . ' 
                                                                 <small>transaction</small>
                                                             </div>';
-         
                                                         ?> 
                                                     <!-- <small class="text-success fw-semibold"><i
                                                             class="bx bx-up-arrow-alt"></i> +72.80%</small> -->
-                                                    
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </section>
                     <section class="d-flex flex-column justify-content-center align-items-center">
@@ -219,7 +220,7 @@
                                         <div class="card-body pb-0">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="col-12 col-md-12">
-                                                    
+
                                                 </div>
                                                 <!-- <div class="col-3 col-xs-1 col-sm-2 col-md-1">
                         <a href="products-form.php" class="btn btn-secondary">Export</a>
@@ -287,7 +288,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <?php
+                                                        <?php
 
                                                         $sql = "SELECT * FROM users ORDER BY purchase DESC LIMIT 5";
                                                         $result = mysqli_query($conn, $sql);
@@ -322,7 +323,7 @@
                                 </div>
                             </div>
                             <div class="card shadow">
-                        </div>
+                            </div>
                     </section>
                 </article>
 
@@ -333,15 +334,16 @@
         include_once 'offcanvas-admin.inc.php';
     ?>
 
-<script>
-                $(document).ready(function(){
-                    $("#btnPrint").on("click",function(){
-                        printJS({
-                            printable: 'print-area',
-                            type: 'html'});
-                    })
-                })
-</script>
+    <script>
+    $(document).ready(function() {
+        $("#btnPrint").on("click", function() {
+            printJS({
+                printable: 'print-area',
+                type: 'html'
+            });
+        })
+    })
+    </script>
 </body>
 
 </html>
