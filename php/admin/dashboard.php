@@ -163,15 +163,21 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card shadow h-100 ">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class=" fw-bold text-warning text-uppercase mb-1">
-                                                    Pending Transactions</div>
-                                                <?php
+                                <!-- Pending Requests Card Example -->
+                                <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class=" fw-bold text-warning text-uppercase mb-1">
+                                                        Pending Transactions
+                                                        <button type="button" class="btn btn-link" data-bs-toggle="dropdown"><span class="bi bi-three-dots-vertical"></span></button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item text-capitalize" href="transactions.php">View</a></li>
+                                                            <li><a class="dropdown-item text-capitalize" href="monthly-transactions.php?" target="_blank">Print</a></li>
+                                                        </ul>
+                                                    </div>
+                                                        <?php
                                                             $sql = "SELECT status FROM transactions";
                                                             $result = mysqli_query($conn, $sql);
                                                             $pendingCount = 0;
@@ -186,23 +192,10 @@
                                                             echo  '<div class="h5 mb-0 fw-bold ">' . $pendingCount . ' 
                                                                 <small>transaction</small>
                                                             </div>';
-                                                        ?>
-
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="bi bi-cart-check text-secondary fs-1"></i>
-                                            </div>
-                                            <div class="col-auto">
-                                                <button type="button" class="btn btn-link"
-                                                    data-bs-toggle="dropdown"><span
-                                                        class="bi bi-three-dots-vertical"></span></button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item text-capitalize"
-                                                            href="transactions.php">View</a></li>
-                                                    <li><a class="dropdown-item text-capitalize"
-                                                            href="monthly-transactions.php?" target="_blank">Print</a>
-                                                    </li>
-                                                </ul>
+                                                        ?> 
+                                                    <!-- <small class="text-success fw-semibold"><i
+                                                            class="bx bx-up-arrow-alt"></i> +72.80%</small> -->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -218,6 +211,11 @@
                                         <div class="card-header">
                                             <i class="bi bi-bag-check me-1"></i>
                                             Most Sales
+                                            <button type="button" class="btn btn-link" data-bs-toggle="dropdown"><span class="bi bi-three-dots-vertical"></span></button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item text-capitalize" href="products.php">View</a></li>
+                                                            <li><a class="dropdown-item text-capitalize" href="top-sold.php" target="_blank">Print</a></li>
+                                                        </ul>
                                         </div>
                                         <div class="card-body pb-0">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -249,7 +247,7 @@
                                                                 while($row = mysqli_fetch_assoc($result)) {
                                                                     echo "<tr>";
                                                                     echo "<td>" . $row['product_name'] . "</td>";
-                                                                    echo "<td>Rp" . number_format($row['product_price'], 2, ',', '.') . "</td>";
+                                                                    echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";
                                                                     echo "<td>" . $row['sold'] . "</td>";
                                                                     echo "</tr>";
                                                                 }

@@ -63,7 +63,7 @@
                         <a href="landing-page.php" class="fs-4 ms-2 align-bottom logo"> Tokaku </a>
                         </div>
                         <div class="col-xl-3">
-                            <p class="fs-2 fw-bold"><strong>Products Sold</strong></p>
+                            <p class="fs-2 fw-bold"><strong>Total Earnings</strong></p>
                         </div>
 
                     </div>
@@ -117,7 +117,7 @@
                                                     echo "<tr>";
                                                     $c++;
                                                     echo "<td class='text-center'>" . $row['product_name'] . "</td>";
-                                                    echo "<td>Rp" .  number_format($row['product_price'], 2, ',', '.') . "</td>";
+                                                    echo "<td>IDR " .  number_format($row['product_price'], 2, ',', '.') . "</td>";
                                                     echo "<td>" . $row['sold'] . "</td>";
                                                     echo "<td>Rp" . number_format($row['product_price'] * $row['quantity'], 2, ',', '.') . "</td>";
                                                     $total += $row['product_price'] * $row['quantity'];
@@ -150,7 +150,7 @@
             const invoiceElement = document.getElementById("productsSold");
             const options = {
             margin: 1,
-            filename: "products-sold.pdf",
+            filename: "earnings_"  + (date.getMonth()+1) + "_" + date.getFullYear() + '.pdf',
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: "in", format: "letter", orientation: "portrait" },

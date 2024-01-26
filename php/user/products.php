@@ -96,7 +96,7 @@
                               </div>
                               <div class='card-text'>
                                 <small>
-                                  Rp" . number_format($row['product_price'], 2, ',', '.') . "
+                                  IDR " . number_format($row['product_price'], 2, ',', '.') . "
                                 </small>
                               </div>
                             </div>
