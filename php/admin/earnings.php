@@ -144,16 +144,18 @@
             class="bi bi-file-earmark-pdf text-danger"></i>&nbspExport</a></button>
         </div>
     <script>
+        var date = new Date();
+
         document
         .getElementById("downloadPdf")
         .addEventListener("click", function () {
             const invoiceElement = document.getElementById("productsSold");
             const options = {
             margin: 1,
-            filename: "earnings_"  + (date.getMonth()+1) + "_" + date.getFullYear() + '.pdf',
+            filename: "earnings_" + (date.getMonth()+1) + "_" + date.getFullYear() + ".pdf",
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: { scale: 2 },
-            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+            jsPDF: { unit: "in", format: "letter", orientation: "landscape" },
             };
 
             // Then call html2pdf with the element and options

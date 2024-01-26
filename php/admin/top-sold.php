@@ -93,8 +93,8 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
     <!-- html2pdf -->
-    <script src="print.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script defer src="print.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 
     <style>
@@ -228,6 +228,8 @@
         total.innerText = sum;
         console.log(total);
 
+        var date = new Date();
+
         document
         .getElementById("downloadPdf")
         .addEventListener("click", function () {
@@ -237,7 +239,7 @@
             filename: "best_seller_"  + (date.getMonth()+1) + "_" + date.getFullYear() + '.pdf',
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: { scale: 2 },
-            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+            jsPDF: { unit: "in", format: "letter", orientation: "landscape" },
             };
 
             // Then call html2pdf with the element and options

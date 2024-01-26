@@ -209,13 +209,17 @@
                                 <div class="col-xl-6">
                                     <div class="card shadow">
                                         <div class="card-header">
+                                            <div class="d-flex justify-content-between">
+                                            <div class="m-0">
                                             <i class="bi bi-bag-check me-1"></i>
                                             Most Sales
-                                            <button type="button" class="btn btn-link" data-bs-toggle="dropdown"><span class="bi bi-three-dots-vertical"></span></button>
+                                            </div>
+                                            <button type="button" class="btn btn-link p-0" data-bs-toggle="dropdown"><span class="bi bi-three-dots-vertical"></span></button>
                                                         <ul class="dropdown-menu">
                                                             <li><a class="dropdown-item text-capitalize" href="products.php">View</a></li>
                                                             <li><a class="dropdown-item text-capitalize" href="top-sold.php" target="_blank">Print</a></li>
                                                         </ul>
+                                            </div>
                                         </div>
                                         <div class="card-body pb-0">
                                             <div class="d-flex justify-content-between align-items-center">
