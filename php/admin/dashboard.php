@@ -164,13 +164,13 @@
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
                                                     <div class=" fw-bold text-warning text-uppercase mb-1">
-                                                        Pending Transactions</div>
+                                                        Pending Transactions
                                                         <button type="button" class="btn btn-link" data-bs-toggle="dropdown"><span class="bi bi-three-dots-vertical"></span></button>
                                                         <ul class="dropdown-menu">
                                                             <li><a class="dropdown-item text-capitalize" href="transactions.php">View</a></li>
                                                             <li><a class="dropdown-item text-capitalize" href="monthly-transactions.php?" target="_blank">Print</a></li>
                                                         </ul>
-
+                                                    </div>
                                                         <?php
                                                             $sql = "SELECT status FROM transactions";
                                                             $result = mysqli_query($conn, $sql);
@@ -190,6 +190,7 @@
                                                         ?> 
                                                     <!-- <small class="text-success fw-semibold"><i
                                                             class="bx bx-up-arrow-alt"></i> +72.80%</small> -->
+                                                    
                                                 </div>
                                             </div>
                                         </div>

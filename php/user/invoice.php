@@ -209,7 +209,7 @@
         var invoiceElement = document.getElementById('invoice');
         var options = {
             margin: 0.2,
-            filename: 'invoice_' + date.toISOString() + '.pdf',
+            filename: 'invoice_'  + (date.getDate()) + "_" + (date.getMonth()+1) + "_" + date.getFullYear() + '.pdf',
             image: {
                 type: 'jpeg',
                 quality: 1

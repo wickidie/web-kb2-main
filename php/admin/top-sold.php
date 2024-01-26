@@ -108,7 +108,7 @@
 <body>
 
 <main class="container p-3" >
-        <article class="card rounded-3" id="productsSold">
+        <article class="card rounded-3" id="topSold">
             <section class="card-body">
                 <div class="card-header">
                     <div class="row d-flex justify-content-between align-items-baseline">
@@ -117,7 +117,7 @@
                         <a href="landing-page.php" class="fs-4 ms-2 align-bottom logo"> Tokaku </a>
                         </div>
                         <div class="col-xl-3">
-                            <p class="fs-2 fw-bold"><strong>Transactions</strong></p>
+                            <p class="fs-3 fw-bold"><strong>Monthly Best Seller</strong></p>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                             <option value="11">11</option>
                             <option value="12">12</option>
                     </select> 
-                    <label for="status">Status</label>
+                    <!-- <label for="status">Status</label>
                         <select id="status" name="status">
                         <option value='<?php if ($status == 'All') {
                                 echo "";
@@ -160,7 +160,7 @@
                         <option value='Pending'>Pending</option>
                         <option value='Delivering'>Delivering</option>
                         <option value='Received'>Received</option>
-                    </select> 
+                    </select>  -->
                     <!-- <label for="year">Year</label>
                         <select id="year" name="year">
                             <option value="2023">2023</option>
@@ -231,10 +231,10 @@
         document
         .getElementById("downloadPdf")
         .addEventListener("click", function () {
-            const invoiceElement = document.getElementById("productsSold");
+            const invoiceElement = document.getElementById("topSold");
             const options = {
             margin: 1,
-            filename: "top-3-sold.pdf",
+            filename: "best_seller_"  + (date.getMonth()+1) + "_" + date.getFullYear() + '.pdf',
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: "in", format: "letter", orientation: "portrait" },

@@ -94,7 +94,7 @@
                         <a href="landing-page.php" class="fs-4 ms-2 align-bottom logo"> Tokaku </a>
                         </div>
                         <div class="col-xl-3">
-                            <p class="fs-2 fw-bold"><strong>Transactions</strong></p>
+                            <p class="fs-3 fw-bold"><strong>Monthly Transactions</strong></p>
                         </div>
                     </div>
                 </div>
@@ -209,17 +209,18 @@
         }
         total.innerText = currency.format(sum);
         console.log(total);
-
-        document
+        
+        var date = new Date();
+        document    
         .getElementById("downloadPdf")
         .addEventListener("click", function () {
             const invoiceElement = document.getElementById("productsSold");
             const options = {
-            margin: 1,
-            filename: "monthly-transaction.pdf",
-            image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+            margin: 0.2,
+            filename: "monthly_transaction_"  + (date.getMonth()+1) + "_" + date.getFullYear() + '.pdf',
+            image: { type: "jpeg", quality: 1 },
+            html2canvas: { scale: 1 },
+            jsPDF: { unit: "in", format: "letter", orientation: "landscape" },
             };
 
             // Then call html2pdf with the element and options
