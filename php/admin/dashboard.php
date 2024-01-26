@@ -209,6 +209,11 @@
                                         <div class="card-header">
                                             <i class="bi bi-bag-check me-1"></i>
                                             Most Sales
+                                            <button type="button" class="btn btn-link" data-bs-toggle="dropdown"><span class="bi bi-three-dots-vertical"></span></button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item text-capitalize" href="products.php">View</a></li>
+                                                            <li><a class="dropdown-item text-capitalize" href="top-sold.php" target="_blank">Print</a></li>
+                                                        </ul>
                                         </div>
                                         <div class="card-body pb-0">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -240,7 +245,7 @@
                                                                 while($row = mysqli_fetch_assoc($result)) {
                                                                     echo "<tr>";
                                                                     echo "<td>" . $row['product_name'] . "</td>";
-                                                                    echo "<td>Rp" . number_format($row['product_price'], 2, ',', '.') . "</td>";
+                                                                    echo "<td>IDR " . number_format($row['product_price'], 2, ',', '.') . "</td>";
                                                                     echo "<td>" . $row['sold'] . "</td>";
                                                                     echo "</tr>";
                                                                 }
